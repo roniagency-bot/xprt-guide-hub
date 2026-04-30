@@ -6,13 +6,12 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-border bg-ink text-primary-foreground">
       <div className="container-prose grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="rounded-xl bg-background/95 p-4 inline-block">
-            <img
-              src={xprtLogo}
-              alt="XPRT Insurance — A Roni Rivers Agency"
-              className="h-16 w-auto"
-            />
-          </div>
+          <img
+            src={xprtLogo}
+            alt="XPRT Insurance — A Roni Rivers Agency"
+            className="h-20 w-auto"
+          />
+        </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-foreground/70">
             Independent agency licensed in Nevada & Colorado. Personal, commercial, bonds,
             and dealership coverage — explained clearly, structured correctly.
