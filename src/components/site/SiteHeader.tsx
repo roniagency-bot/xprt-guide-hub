@@ -3,15 +3,49 @@ import { useState } from "react";
 import { Menu, X, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const NAV = [
-  { to: "/services/personal", label: "Personal" },
-  { to: "/services/commercial", label: "Commercial" },
-  { to: "/services/bonds", label: "Bonds" },
-  { to: "/services/dealership", label: "Dealership" },
-  { to: "/faq", label: "Knowledge Base" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+type NavItem =
+  | { kind: "static"; to: "/faq" | "/about" | "/contact"; label: string }
+  | { kind: "category"; category: string; label: string };
+
+const NAV: readonly NavItem[] = [
+  { kind: "category", category: "personal", label: "Personal" },
+  { kind: "category", category: "commercial", label: "Commercial" },
+  { kind: "category", category: "bonds", label: "Bonds" },
+  { kind: "category", category: "dealership", label: "Dealership" },
+  { kind: "static", to: "/faq", label: "Knowledge Base" },
+  { kind: "static", to: "/about", label: "About" },
+  { kind: "static", to: "/contact", label: "Contact" },
 ] as const;
+
+function NavLinkItem({
+  item,
+  className,
+  onClick,
+}: {
+  item: NavItem;
+  className?: string;
+  onClick?: () => void;
+}) {
+  const activeProps = { className: "text-foreground bg-accent" };
+  if (item.kind === "static") {
+    return (
+      <Link to={item.to} className={className} activeProps={activeProps} onClick={onClick}>
+        {item.label}
+      </Link>
+    );
+  }
+  return (
+    <Link
+      to="/services/$category"
+      params={{ category: item.category }}
+      className={className}
+      activeProps={activeProps}
+      onClick={onClick}
+    >
+      {item.label}
+    </Link>
+  );
+}
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
