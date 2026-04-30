@@ -11,7 +11,6 @@ export function SiteFooter() {
             alt="XPRT Insurance — A Roni Rivers Agency"
             className="h-20 w-auto"
           />
-        </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-foreground/70">
             Independent agency licensed in Nevada & Colorado. Personal, commercial, bonds,
             and dealership coverage — explained clearly, structured correctly.
