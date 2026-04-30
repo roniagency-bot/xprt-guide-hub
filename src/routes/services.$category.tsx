@@ -70,7 +70,7 @@ function CategoryHub() {
           {services.length === 0 && (
             <p className="text-muted-foreground">More services coming soon. Book a review to discuss your needs.</p>
           )}
-          {services.map((s) => (
+          {services.map((s: any) => (
             <Link
               key={s.id}
               to="/services/$category/$slug"
@@ -91,7 +91,7 @@ function CategoryHub() {
         <Section tone="cream">
           <SectionHeading eyebrow="Free guides" title="Educational resources" />
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {lead_magnets.map((lm) => (
+            {lead_magnets.map((lm: any) => (
               <Link
                 key={lm.id}
                 to="/offers/$slug"

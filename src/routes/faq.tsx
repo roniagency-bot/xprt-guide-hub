@@ -47,15 +47,15 @@ function FaqHub() {
           <p className="text-muted-foreground">More articles coming soon.</p>
         )}
         <div className="space-y-16">
-          {categories.map((cat) => {
-            const catItems = items.filter((i) => i.category_id === cat.id);
+          {categories.map((cat: any) => {
+            const catItems = items.filter((i: any) => i.category_id === cat.id);
             if (catItems.length === 0) return null;
             return (
               <div key={cat.id}>
                 <SectionHeading eyebrow={cat.name_en} title={cat.description_en ?? cat.name_en} />
                 <div className="mt-8 space-y-8">
                   {STAGE_ORDER.map((stage) => {
-                    const stageItems = catItems.filter((i) => i.funnel_stage === stage);
+                    const stageItems = catItems.filter((i: any) => i.funnel_stage === stage);
                     if (stageItems.length === 0) return null;
                     return (
                       <div key={stage}>
@@ -63,7 +63,7 @@ function FaqHub() {
                           {STAGE_LABEL[stage]}
                         </p>
                         <ul className="grid gap-3 md:grid-cols-2">
-                          {stageItems.map((f) => (
+                          {stageItems.map((f: any) => (
                             <li key={f.id}>
                               <Link
                                 to="/faq/$slug"

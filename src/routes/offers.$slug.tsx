@@ -49,7 +49,7 @@ function OfferPage() {
           )}
           {lm.bullets_en?.length > 0 && (
             <ul className="mt-8 space-y-3">
-              {lm.bullets_en.map((b) => (
+              {lm.bullets_en.map((b: string) => (
                 <li key={b} className="flex items-start gap-3 text-base">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                   <span className="text-foreground">{b}</span>

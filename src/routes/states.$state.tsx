@@ -59,7 +59,7 @@ function StateHub() {
         <SectionHeading eyebrow="State rules & notes" title={`What ${cfg.name} requires`} />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {rules.length === 0 && <p className="text-muted-foreground">More state notes coming soon.</p>}
-          {rules.map((r) => (
+          {rules.map((r: any) => (
             <div key={r.id} className="rounded-xl border border-border bg-card p-7 shadow-elegant">
               <h3 className="font-display text-xl">{r.topic}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.body_en}</p>

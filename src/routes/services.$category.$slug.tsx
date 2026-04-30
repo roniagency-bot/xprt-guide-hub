@@ -34,7 +34,7 @@ export const Route = createFileRoute("/services/$category/$slug")({
     if (loaderData.faqs.length > 0) {
       jsonLd.push(
         faqPageJsonLd(
-          loaderData.faqs.map((f) => ({ question: f.question_en, answer: f.short_answer_en })),
+          loaderData.faqs.map((f: any) => ({ question: f.question_en, answer: f.short_answer_en })),
         ),
       );
     }
@@ -141,7 +141,7 @@ function ServicePage() {
           />
           <div className="mt-10">
             <FaqAccordion
-              items={faqs.map((f) => ({
+              items={faqs.map((f: any) => ({
                 slug: f.slug,
                 question: f.question_en,
                 short_answer: f.short_answer_en,

@@ -71,7 +71,7 @@ function FaqDetail() {
           <article className="prose prose-lg max-w-none lg:col-span-8">
             {faq.long_answer_en && (
               <div className="space-y-5 text-base leading-relaxed text-foreground/85 md:text-lg">
-                {faq.long_answer_en.split("\n\n").map((p, i) => (
+                {faq.long_answer_en.split("\n\n").map((p: string, i: number) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
@@ -94,7 +94,7 @@ function FaqDetail() {
             <aside className="lg:col-span-4">
               <h2 className="font-display text-xl">Related questions</h2>
               <ul className="mt-4 space-y-3">
-                {related.map((r) => (
+                {related.map((r: any) => (
                   <li key={r.id}>
                     <Link
                       to="/faq/$slug"
