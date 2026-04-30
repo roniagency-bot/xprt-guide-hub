@@ -64,20 +64,17 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              activeProps={{ className: "text-foreground bg-accent" }}
+            <NavLinkItem
+              key={item.label}
+              item={item}
               className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-            >
-              {item.label}
-            </Link>
+            />
           ))}
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
           <Button asChild variant="ghost" size="sm">
-            <Link to="/services/personal">Get Quote</Link>
+            <Link to="/services/$category" params={{ category: "personal" }}>Get Quote</Link>
           </Button>
           <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link to="/book">Book a Review</Link>
@@ -99,18 +96,16 @@ export function SiteHeader() {
         <div className="border-t border-border bg-background lg:hidden">
           <nav className="container-prose flex flex-col gap-1 py-4" aria-label="Mobile">
             {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
+              <NavLinkItem
+                key={item.label}
+                item={item}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-2.5 text-base text-foreground hover:bg-accent"
-              >
-                {item.label}
-              </Link>
+              />
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
               <Button asChild variant="outline">
-                <Link to="/services/personal" onClick={() => setOpen(false)}>Get Quote</Link>
+                <Link to="/services/$category" params={{ category: "personal" }} onClick={() => setOpen(false)}>Get Quote</Link>
               </Button>
               <Button asChild className="bg-primary text-primary-foreground">
                 <Link to="/book" onClick={() => setOpen(false)}>Book a Review</Link>
