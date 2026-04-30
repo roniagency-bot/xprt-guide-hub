@@ -69,8 +69,9 @@ function HomePage() {
           <div className="flex flex-col justify-center lg:col-span-6 fade-in-up">
             <Eyebrow>Nevada & Colorado · Independent Agency</Eyebrow>
             <h1 className="mt-5 text-balance text-4xl leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
-              Strategic protection,
-              <span className="block text-muted-foreground italic">explained clearly.</span>
+              Most policies look fine
+              <span className="text-muted-foreground">…</span>
+              <span className="block italic text-muted-foreground">until you actually need them.</span>
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
               Personal insurance, commercial coverage, bonds, and dealership programs — built
