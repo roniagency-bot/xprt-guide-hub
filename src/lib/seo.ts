@@ -4,7 +4,7 @@
  */
 
 const SITE_URL = "https://www.xprtinsurance.com";
-const ORG_NAME = "XPRT Insurance";
+const ORG_NAME = "XPRT Insurance, A Roni Rivers Agemcy";
 
 export const SITE = {
   url: SITE_URL,
@@ -73,12 +73,7 @@ export const orgJsonLd = () => ({
     { "@type": "State", name: "Colorado" },
   ],
   knowsLanguage: ["en", "es"],
-  serviceType: [
-    "Personal Insurance",
-    "Commercial Insurance",
-    "Surety Bonds",
-    "Dealership Insurance",
-  ],
+  serviceType: ["Personal Insurance", "Commercial Insurance", "Surety Bonds", "Dealership Insurance"],
 });
 
 export const breadcrumbJsonLd = (items: { name: string; path: string }[]) => ({
