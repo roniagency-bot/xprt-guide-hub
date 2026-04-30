@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { fetchAllSlugs } from "@/server/content.server";
 import { SITE } from "@/lib/seo";
 
-export const Route = createFileRoute("/sitemap[.]xml")({
+export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
