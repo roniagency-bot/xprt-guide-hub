@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, Phone, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Section, Eyebrow } from "@/components/site/Section";
+import { Calendar, Phone, Mail } from "lucide-react";
+import { Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { pageHead } from "@/lib/seo";
 
@@ -44,32 +43,34 @@ function Book() {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="tel:+17020000000">
-                  <Phone className="mr-1.5 h-4 w-4" /> Call to book
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/contact">Send us a message</Link>
-              </Button>
-            </div>
+            <p className="mt-10 text-sm text-muted-foreground">
+              Use the scheduler on the right to pick a time — it only takes a few seconds.
+            </p>
           </div>
 
           <div className="lg:col-span-6">
-            <div className="rounded-2xl border border-dashed border-border bg-card p-10 text-center shadow-elegant">
-              <Calendar className="mx-auto h-10 w-10 text-gold" />
+            <p className="mb-4 text-center text-sm font-medium text-foreground md:text-base">
+              Choose a time that works for you — takes less than 30 seconds.
+            </p>
+            <div className="rounded-2xl border border-border bg-card p-10 text-center shadow-elegant ring-1 ring-gold/20">
+              <Calendar className="mx-auto h-12 w-12 text-gold" />
               <h2 className="mt-5 font-display text-2xl">Scheduler will appear here</h2>
               <p className="mt-3 text-muted-foreground">
                 Embed your Calendly or Cal.com link in this card. Replace this placeholder with the
                 provided embed snippet when ready.
               </p>
-              <p className="mt-5 text-sm text-muted-foreground">
-                In the meantime, calls go straight to our team.
-              </p>
-              <Link to="/faq" className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-gold">
-                Read while you wait <ArrowRight className="h-4 w-4" />
+            </div>
+
+            <div className="mt-6 rounded-lg border border-border/60 bg-background/50 px-5 py-4 text-center text-sm text-muted-foreground">
+              Prefer not to schedule online? You can also{" "}
+              <a href="tel:+17020000000" className="inline-flex items-center gap-1 font-medium text-foreground hover:text-gold">
+                <Phone className="h-3.5 w-3.5" /> call us
+              </a>{" "}
+              or{" "}
+              <Link to="/contact" className="inline-flex items-center gap-1 font-medium text-foreground hover:text-gold">
+                <Mail className="h-3.5 w-3.5" /> send a message
               </Link>
+              .
             </div>
           </div>
         </div>
