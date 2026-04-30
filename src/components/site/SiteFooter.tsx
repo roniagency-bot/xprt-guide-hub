@@ -1,16 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { ShieldCheck } from "lucide-react";
+import xprtLogo from "@/assets/xprt-logo.png";
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-ink text-primary-foreground">
       <div className="container-prose grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-md bg-background/10">
-              <ShieldCheck className="h-5 w-5 text-gold" strokeWidth={2.2} />
-            </span>
-            <span className="font-display text-2xl">XPRT Insurance</span>
+          <div className="rounded-xl bg-background/95 p-4 inline-block">
+            <img
+              src={xprtLogo}
+              alt="XPRT Insurance — A Roni Rivers Agency"
+              className="h-16 w-auto"
+            />
           </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-foreground/70">
             Independent agency licensed in Nevada & Colorado. Personal, commercial, bonds,
