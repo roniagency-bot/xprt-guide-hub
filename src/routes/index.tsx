@@ -116,10 +116,13 @@ function HomePage() {
                 <p className="mt-2 text-sm leading-relaxed text-primary-foreground/80">
                   Quickly understand what your policy covers, what it doesn't, and where most people are exposed.
                 </p>
+                <p className="mt-3 text-[11px] uppercase tracking-[0.18em] text-primary-foreground/60">
+                  Review this before your next renewal or claim
+                </p>
                 <Link
                   to="/offers/$slug"
                   params={{ slug: "homeowners-cheat-sheet" }}
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
+                  className="mt-1.5 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
                 >
                   Get the cheat sheet →
                 </Link>
