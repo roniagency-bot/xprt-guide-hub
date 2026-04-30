@@ -43,16 +43,9 @@ function Book() {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="tel:+17020000000">
-                  <Phone className="mr-1.5 h-4 w-4" /> Call to book
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/contact">Send us a message</Link>
-              </Button>
-            </div>
+            <p className="mt-10 text-sm text-muted-foreground">
+              Use the scheduler on the right to pick a time — it only takes a few seconds.
+            </p>
           </div>
 
           <div className="lg:col-span-6">
