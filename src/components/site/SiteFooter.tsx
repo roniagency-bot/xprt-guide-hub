@@ -24,10 +24,10 @@ export function SiteFooter() {
         <div>
           <h4 className="font-display text-sm uppercase tracking-widest text-gold">Coverage</h4>
           <ul className="mt-4 space-y-2 text-sm text-primary-foreground/80">
-            <li><Link to="/services/personal" className="hover:text-gold">Personal</Link></li>
-            <li><Link to="/services/commercial" className="hover:text-gold">Commercial</Link></li>
-            <li><Link to="/services/bonds" className="hover:text-gold">Bonds</Link></li>
-            <li><Link to="/services/dealership" className="hover:text-gold">Dealership (NV)</Link></li>
+            <li><Link to="/services/$category" params={{ category: "personal" }} className="hover:text-gold">Personal</Link></li>
+            <li><Link to="/services/$category" params={{ category: "commercial" }} className="hover:text-gold">Commercial</Link></li>
+            <li><Link to="/services/$category" params={{ category: "bonds" }} className="hover:text-gold">Bonds</Link></li>
+            <li><Link to="/services/$category" params={{ category: "dealership" }} className="hover:text-gold">Dealership (NV)</Link></li>
           </ul>
         </div>
 
@@ -36,8 +36,8 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2 text-sm text-primary-foreground/80">
             <li><Link to="/about" className="hover:text-gold">About</Link></li>
             <li><Link to="/faq" className="hover:text-gold">Knowledge Base</Link></li>
-            <li><Link to="/states/nevada" className="hover:text-gold">Nevada</Link></li>
-            <li><Link to="/states/colorado" className="hover:text-gold">Colorado</Link></li>
+            <li><Link to="/states/$state" params={{ state: "nevada" }} className="hover:text-gold">Nevada</Link></li>
+            <li><Link to="/states/$state" params={{ state: "colorado" }} className="hover:text-gold">Colorado</Link></li>
             <li><Link to="/contact" className="hover:text-gold">Contact</Link></li>
             <li><Link to="/book" className="hover:text-gold">Book a Review</Link></li>
           </ul>
