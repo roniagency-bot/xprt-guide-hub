@@ -53,14 +53,14 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="container-prose flex h-16 items-center justify-between gap-6 md:h-20">
+      <div className="container-prose flex h-20 items-center justify-between gap-8 md:h-24">
         <Link to="/" className="flex items-center" aria-label="XPRT Insurance — A Roni Rivers Agency">
           <img
             src={xprtLogo}
             alt="XPRT Insurance — A Roni Rivers Agency"
-            className="h-12 w-auto md:h-14"
-            width={220}
-            height={56}
+            className="block h-16 w-auto md:h-20"
+            width={260}
+            height={80}
           />
         </Link>
 
