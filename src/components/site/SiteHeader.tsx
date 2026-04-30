@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, ShieldCheck } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import xprtLogo from "@/assets/xprt-logo.png";
 
 type NavItem =
   | { kind: "static"; to: "/faq" | "/about" | "/contact"; label: string }
@@ -53,13 +54,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="container-prose flex h-16 items-center justify-between gap-6 md:h-20">
-        <Link to="/" className="group flex items-center gap-2.5" aria-label="XPRT Insurance home">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground shadow-elegant">
-            <ShieldCheck className="h-5 w-5 text-gold" strokeWidth={2.2} />
-          </span>
-          <span className="font-display text-xl tracking-tight md:text-2xl">
-            XPRT <span className="text-muted-foreground">Insurance</span>
-          </span>
+        <Link to="/" className="flex items-center" aria-label="XPRT Insurance — A Roni Rivers Agency">
+          <img
+            src={xprtLogo}
+            alt="XPRT Insurance — A Roni Rivers Agency"
+            className="h-12 w-auto md:h-14"
+            width={220}
+            height={56}
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
