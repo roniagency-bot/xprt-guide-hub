@@ -239,8 +239,8 @@ function HomePage() {
             >
               <span className="text-xs uppercase tracking-[0.2em] text-gold">{o.tag}</span>
               <h3 className="mt-3 font-display text-2xl leading-tight">{o.title}</h3>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium">
-                Download free <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold">
+                Get the guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
           ))}
