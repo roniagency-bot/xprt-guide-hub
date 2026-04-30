@@ -48,7 +48,8 @@ const SERVICES = [
     title: "Bonds",
     description: "Surety, license & permit, contractor, and court bonds. Our specialty.",
     to: "/services/bonds",
-    badge: "Specialty",
+    badge: "Our Specialty",
+    featured: true,
   },
   {
     icon: Car,
