@@ -111,17 +111,17 @@ function HomePage() {
                   <Sparkles className="h-3.5 w-3.5" /> Featured guide
                 </div>
                 <p className="mt-2 font-display text-2xl leading-tight">
-                  Homeowners Insurance Cheat Sheet
+                  Download the 1-page guide most homeowners wish they had before filing a claim
                 </p>
-                <p className="mt-1.5 text-sm text-primary-foreground/80">
-                  The 1-page guide every homeowner should read before renewal.
+                <p className="mt-2 text-sm leading-relaxed text-primary-foreground/80">
+                  Quickly understand what your policy covers, what it doesn't, and where most people are exposed.
                 </p>
                 <Link
                   to="/offers/$slug"
                   params={{ slug: "homeowners-cheat-sheet" }}
                   className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
                 >
-                  Get the cheat sheet <ArrowRight className="h-4 w-4" />
+                  Get the cheat sheet →
                 </Link>
               </div>
             </div>
