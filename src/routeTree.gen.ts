@@ -9,38 +9,218 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
+import { Route as StatesStateRouteImport } from './routes/states.$state'
+import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
+import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
+import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
+import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
+  id: '/thank-you/$slug',
+  path: '/thank-you/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatesStateRoute = StatesStateRouteImport.update({
+  id: '/states/$state',
+  path: '/states/$state',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
+  id: '/services/$category',
+  path: '/services/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersSlugRoute = OffersSlugRouteImport.update({
+  id: '/offers/$slug',
+  path: '/offers/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqSlugRoute = FaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServicesCategoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/offers/$slug': typeof OffersSlugRoute
+  '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/states/$state': typeof StatesStateRoute
+  '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/services/$category/$slug': typeof ServicesCategorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/offers/$slug': typeof OffersSlugRoute
+  '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/states/$state': typeof StatesStateRoute
+  '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/services/$category/$slug': typeof ServicesCategorySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/offers/$slug': typeof OffersSlugRoute
+  '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/states/$state': typeof StatesStateRoute
+  '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/services/$category/$slug': typeof ServicesCategorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/book'
+    | '/contact'
+    | '/faq'
+    | '/sitemap.xml'
+    | '/faq/$slug'
+    | '/offers/$slug'
+    | '/services/$category'
+    | '/states/$state'
+    | '/thank-you/$slug'
+    | '/services/$category/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/book'
+    | '/contact'
+    | '/faq'
+    | '/sitemap.xml'
+    | '/faq/$slug'
+    | '/offers/$slug'
+    | '/services/$category'
+    | '/states/$state'
+    | '/thank-you/$slug'
+    | '/services/$category/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/book'
+    | '/contact'
+    | '/faq'
+    | '/sitemap.xml'
+    | '/faq/$slug'
+    | '/offers/$slug'
+    | '/services/$category'
+    | '/states/$state'
+    | '/thank-you/$slug'
+    | '/services/$category/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BookRoute: typeof BookRoute
+  ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  OffersSlugRoute: typeof OffersSlugRoute
+  ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
+  StatesStateRoute: typeof StatesStateRoute
+  ThankYouSlugRoute: typeof ThankYouSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,21 +228,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/thank-you/$slug': {
+      id: '/thank-you/$slug'
+      path: '/thank-you/$slug'
+      fullPath: '/thank-you/$slug'
+      preLoaderRoute: typeof ThankYouSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/states/$state': {
+      id: '/states/$state'
+      path: '/states/$state'
+      fullPath: '/states/$state'
+      preLoaderRoute: typeof StatesStateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$category': {
+      id: '/services/$category'
+      path: '/services/$category'
+      fullPath: '/services/$category'
+      preLoaderRoute: typeof ServicesCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers/$slug': {
+      id: '/offers/$slug'
+      path: '/offers/$slug'
+      fullPath: '/offers/$slug'
+      preLoaderRoute: typeof OffersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/$slug': {
+      id: '/faq/$slug'
+      path: '/$slug'
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof FaqSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/services/$category/$slug': {
+      id: '/services/$category/$slug'
+      path: '/$slug'
+      fullPath: '/services/$category/$slug'
+      preLoaderRoute: typeof ServicesCategorySlugRouteImport
+      parentRoute: typeof ServicesCategoryRoute
+    }
   }
 }
 
+interface FaqRouteChildren {
+  FaqSlugRoute: typeof FaqSlugRoute
+}
+
+const FaqRouteChildren: FaqRouteChildren = {
+  FaqSlugRoute: FaqSlugRoute,
+}
+
+const FaqRouteWithChildren = FaqRoute._addFileChildren(FaqRouteChildren)
+
+interface ServicesCategoryRouteChildren {
+  ServicesCategorySlugRoute: typeof ServicesCategorySlugRoute
+}
+
+const ServicesCategoryRouteChildren: ServicesCategoryRouteChildren = {
+  ServicesCategorySlugRoute: ServicesCategorySlugRoute,
+}
+
+const ServicesCategoryRouteWithChildren =
+  ServicesCategoryRoute._addFileChildren(ServicesCategoryRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BookRoute: BookRoute,
+  ContactRoute: ContactRoute,
+  FaqRoute: FaqRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  OffersSlugRoute: OffersSlugRoute,
+  ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
+  StatesStateRoute: StatesStateRoute,
+  ThankYouSlugRoute: ThankYouSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
