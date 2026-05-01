@@ -40,7 +40,12 @@ function ThankYou() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <a href={lm.asset_url ?? "#"} target="_blank" rel="noopener noreferrer">
+            <a
+              href={lm.asset_url ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
               <Download className="mr-1.5 h-4 w-4" /> Download {lm.title_en}
             </a>
           </Button>

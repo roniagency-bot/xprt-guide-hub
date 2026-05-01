@@ -21,6 +21,7 @@ import { Route as ServicesCategoryRouteImport } from './routes/services.$categor
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
+import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -82,6 +83,11 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ServicesCategoryRoute,
 } as any)
+const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
+  id: '/api/public/downloads/$slug',
+  path: '/api/public/downloads/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/states/$state'
     | '/thank-you/$slug'
     | '/services/$category/$slug'
+    | '/api/public/downloads/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/states/$state'
     | '/thank-you/$slug'
     | '/services/$category/$slug'
+    | '/api/public/downloads/$slug'
   id:
     | '__root__'
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/states/$state'
     | '/thank-you/$slug'
     | '/services/$category/$slug'
+    | '/api/public/downloads/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
+  ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -270,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCategorySlugRouteImport
       parentRoute: typeof ServicesCategoryRoute
     }
+    '/api/public/downloads/$slug': {
+      id: '/api/public/downloads/$slug'
+      path: '/api/public/downloads/$slug'
+      fullPath: '/api/public/downloads/$slug'
+      preLoaderRoute: typeof ApiPublicDownloadsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -305,6 +325,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
+  ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
