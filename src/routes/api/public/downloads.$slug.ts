@@ -1,13 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
+// Importing the PDF as a URL ensures it is bundled and served from a host
+// that does NOT require auth (unlike /downloads/* on preview hosts).
+import homeownersCheatSheet from "@/assets/downloads/homeowners-cheat-sheet.pdf?url";
 
-// Map of allowed lead-magnet slugs to the file in public/downloads/.
-// Serving via /api/public/* bypasses the preview auth gate so emailed
-// links and direct downloads work for end users.
-const FILES: Record<string, { file: string; downloadName: string }> = {
+const FILES: Record<string, { url: string; downloadName: string }> = {
   "homeowners-cheat-sheet": {
-    file: "homeowners-cheat-sheet.pdf",
+    url: homeownersCheatSheet,
     downloadName: "XPRT-Homeowners-Insurance-Cheat-Sheet.pdf",
   },
 };
@@ -15,15 +13,23 @@ const FILES: Record<string, { file: string; downloadName: string }> = {
 export const Route = createFileRoute("/api/public/downloads/$slug")({
   server: {
     handlers: {
-      GET: async ({ params }) => {
+      GET: async ({ params, request }) => {
         const entry = FILES[params.slug];
         if (!entry) {
           return new Response("Not found", { status: 404 });
         }
         try {
-          const filePath = path.join(process.cwd(), "public", "downloads", entry.file);
-          const data = await readFile(filePath);
-          return new Response(new Uint8Array(data), {
+          // Fetch the bundled asset from the same origin and re-stream it
+          // with a clean Content-Disposition so browsers download it nicely.
+          const origin = new URL(request.url).origin;
+          const assetUrl = entry.url.startsWith("http")
+            ? entry.url
+            : `${origin}${entry.url}`;
+          const upstream = await fetch(assetUrl);
+          if (!upstream.ok) {
+            return new Response("File unavailable", { status: 502 });
+          }
+          return new Response(upstream.body, {
             status: 200,
             headers: {
               "Content-Type": "application/pdf",
