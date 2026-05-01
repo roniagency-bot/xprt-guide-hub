@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, Phone, Mail } from "lucide-react";
+import { useEffect } from "react";
+import { Phone, Mail } from "lucide-react";
 import { Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { pageHead } from "@/lib/seo";
