@@ -74,3 +74,25 @@ function Book() {
     </>
   );
 }
+
+function GHLBookingEmbed() {
+  useEffect(() => {
+    const SRC = "https://link.xprtinsurance.com/js/form_embed.js";
+    if (document.querySelector(`script[src="${SRC}"]`)) return;
+    const script = document.createElement("script");
+    script.src = SRC;
+    script.type = "text/javascript";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <iframe
+      src="https://link.xprtinsurance.com/widget/booking/gdCQpOEIBzTvMZs419sO"
+      style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "720px" }}
+      scrolling="no"
+      id="gdCQpOEIBzTvMZs419sO_1777664456604"
+      title="Book a free coverage review"
+    />
+  );
+}
