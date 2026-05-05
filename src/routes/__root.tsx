@@ -37,6 +37,15 @@ export const Route = createRootRoute({
         content:
           "Independent insurance agency licensed in Nevada and Colorado. Personal, commercial, bonds, and dealership coverage — explained clearly.",
       },
+      { property: "og:title", content: "XPRT Insurance — Nevada & Colorado" },
+      { name: "twitter:title", content: "XPRT Insurance — Nevada & Colorado" },
+      { name: "description", content: "XPRT Digital Elevate builds a modern, bilingual insurance agency website for XPRT Insurance." },
+      { property: "og:description", content: "XPRT Digital Elevate builds a modern, bilingual insurance agency website for XPRT Insurance." },
+      { name: "twitter:description", content: "XPRT Digital Elevate builds a modern, bilingual insurance agency website for XPRT Insurance." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a8fa5706-3525-4883-b2ad-0315b28047af/id-preview-03747146--62ce6ba1-da11-4b33-bfe7-65e55ddf1873.lovable.app-1777931819664.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a8fa5706-3525-4883-b2ad-0315b28047af/id-preview-03747146--62ce6ba1-da11-4b33-bfe7-65e55ddf1873.lovable.app-1777931819664.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
