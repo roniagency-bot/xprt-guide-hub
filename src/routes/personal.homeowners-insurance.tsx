@@ -105,12 +105,12 @@ function HomeownersHub() {
           <div className="flex flex-col justify-center lg:col-span-6 fade-in-up">
             <Eyebrow>Personal · Homeowners</Eyebrow>
             <h1 className="mt-5 text-balance text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-              Know what your homeowners policy covers — before it matters.
+              Homeowners Insurance in Nevada & Colorado — know what your policy covers before it matters.
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Clear, practical homeowners insurance guidance for Nevada and Colorado homeowners.
-              Understand your coverage, identify gaps, and know what to review before renewal or a
-              claim.
+              Practical, educational homeowners insurance guidance for Nevada and Colorado homeowners —
+              from Las Vegas and Reno to Denver and the Front Range. Understand your coverage, identify
+              gaps, and know what to review before renewal or a claim.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
