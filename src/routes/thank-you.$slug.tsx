@@ -101,7 +101,7 @@ function ThankYou() {
                 While you're here — common homeowners questions
               </h2>
               <ul className="mt-8 grid gap-3">
-                {faqs.map((f) => (
+                {faqs.map((f: { slug: string; question_en: string; short_answer_en: string }) => (
                   <li key={f.slug}>
                     <Link
                       to="/faq/$slug"
