@@ -1,4 +1,3 @@
-import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -10,7 +9,6 @@ import {
   PlayCircle,
   Sparkles,
   Calendar,
-  RefreshCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -18,6 +16,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
+import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/hero-home.jpg";
