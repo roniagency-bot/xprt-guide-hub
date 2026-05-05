@@ -32,20 +32,21 @@ export const Route = createFileRoute("/personal/homeowners-insurance")({
   },
   head: ({ loaderData }) => {
     const path = "/personal/homeowners-insurance";
-    const title = "Homeowners Insurance — Nevada & Colorado | XPRT Insurance";
+    const title = "Homeowners Insurance in Nevada & Colorado | XPRT Insurance";
     const description =
-      "Clear, practical homeowners insurance guidance for Nevada and Colorado homeowners. Understand your coverage, identify gaps, and know what to review before renewal or a claim.";
+      "Understand what homeowners insurance covers, what it may exclude, and how to review your policy before renewal or a claim. Licensed in Nevada and Colorado.";
     const jsonLd: Record<string, unknown>[] = [
+      orgJsonLd(),
       breadcrumbJsonLd([
         { name: "Home", path: "/" },
         { name: "Personal", path: "/services/personal" },
         { name: "Homeowners Insurance", path },
       ]),
       serviceJsonLd({
-        name: "Homeowners Insurance",
+        name: "Homeowners Insurance — Nevada & Colorado",
         description,
         path,
-        areaServed: ["NV", "CO"],
+        areaServed: ["Nevada", "Colorado"],
       }),
     ];
     if (loaderData?.page?.faqs?.length) {
