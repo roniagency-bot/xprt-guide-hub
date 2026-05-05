@@ -274,15 +274,15 @@ function HomeownersHub() {
       </Section>
 
       {/* QUIZ */}
-      <Section tone="cream">
+      <Section id="quiz" tone="cream">
         <SectionHeading
           align="center"
-          eyebrow="Interactive"
-          title="5-question coverage check"
-          intro="A 90-second self-assessment. No email required. See where your homeowners policy may have gaps before your next renewal."
+          eyebrow="Interactive quiz"
+          title="Are You Properly Covered?"
+          intro="Answer a few quick questions to see what areas of your homeowners policy may need a closer look."
         />
         <div className="mx-auto mt-12 max-w-3xl">
-          <Quiz />
+          <HomeownersQuiz cheatSheetSlug="homeowners-cheat-sheet" />
         </div>
       </Section>
 
