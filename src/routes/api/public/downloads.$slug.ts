@@ -1,11 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-// Importing the PDF as a URL ensures it is bundled and served from a host
-// that does NOT require auth (unlike /downloads/* on preview hosts).
-import homeownersCheatSheet from "@/assets/downloads/homeowners-cheat-sheet.pdf?url";
+import homeownersCheatSheetB64 from "@/assets/downloads/homeowners-cheat-sheet.pdf.base64";
 
-const FILES: Record<string, { url: string; downloadName: string }> = {
+function b64ToBytes(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const len = bin.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+const FILES: Record<string, { bytes: Uint8Array; downloadName: string }> = {
   "homeowners-cheat-sheet": {
-    url: homeownersCheatSheet,
+    bytes: b64ToBytes(homeownersCheatSheetB64),
     downloadName: "XPRT-Homeowners-Insurance-Cheat-Sheet.pdf",
   },
 };
@@ -13,34 +19,19 @@ const FILES: Record<string, { url: string; downloadName: string }> = {
 export const Route = createFileRoute("/api/public/downloads/$slug")({
   server: {
     handlers: {
-      GET: async ({ params, request }) => {
+      GET: async ({ params }) => {
         const entry = FILES[params.slug];
         if (!entry) {
           return new Response("Not found", { status: 404 });
         }
-        try {
-          // Fetch the bundled asset from the same origin and re-stream it
-          // with a clean Content-Disposition so browsers download it nicely.
-          const origin = new URL(request.url).origin;
-          const assetUrl = entry.url.startsWith("http")
-            ? entry.url
-            : `${origin}${entry.url}`;
-          const upstream = await fetch(assetUrl);
-          if (!upstream.ok) {
-            return new Response("File unavailable", { status: 502 });
-          }
-          return new Response(upstream.body, {
-            status: 200,
-            headers: {
-              "Content-Type": "application/pdf",
-              "Content-Disposition": `inline; filename="${entry.downloadName}"`,
-              "Cache-Control": "public, max-age=3600",
-            },
-          });
-        } catch (err) {
-          console.error("download failed", err);
-          return new Response("File unavailable", { status: 500 });
-        }
+        return new Response(entry.bytes as BodyInit, {
+          status: 200,
+          headers: {
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `inline; filename="${entry.downloadName}"`,
+            "Cache-Control": "public, max-age=3600",
+          },
+        });
       },
     },
   },
