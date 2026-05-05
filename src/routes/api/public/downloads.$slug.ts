@@ -9,10 +9,17 @@ function b64ToBytes(b64: string): Uint8Array {
   return bytes;
 }
 
+const cheatSheetBytes = b64ToBytes(homeownersCheatSheetB64);
+
 const FILES: Record<string, { bytes: Uint8Array; downloadName: string }> = {
   "homeowners-cheat-sheet": {
-    bytes: b64ToBytes(homeownersCheatSheetB64),
+    bytes: cheatSheetBytes,
     downloadName: "XPRT-Homeowners-Insurance-Cheat-Sheet.pdf",
+  },
+  // Ebook placeholder — serves the cheat-sheet bytes until the full ebook PDF is uploaded.
+  "homeowners-ebook": {
+    bytes: cheatSheetBytes,
+    downloadName: "XPRT-Complete-Homeowners-Coverage-Guide.pdf",
   },
 };
 
