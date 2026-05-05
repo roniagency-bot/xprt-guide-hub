@@ -1,13 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-// Import the PDF bytes directly so the file is bundled into the Worker
-// and we don't depend on runtime fetches to static asset hosts (which
-// fail on Cloudflare Workers in production).
-// @ts-expect-error - Vite handles ?arraybuffer imports for binary assets
-import homeownersCheatSheetBuf from "@/assets/downloads/homeowners-cheat-sheet.pdf?arraybuffer";
+import homeownersCheatSheetB64 from "@/assets/downloads/homeowners-cheat-sheet.pdf.base64";
 
-const FILES: Record<string, { bytes: ArrayBuffer; downloadName: string }> = {
+function b64ToBytes(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const len = bin.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+const FILES: Record<string, { bytes: Uint8Array; downloadName: string }> = {
   "homeowners-cheat-sheet": {
-    bytes: homeownersCheatSheetBuf as ArrayBuffer,
+    bytes: b64ToBytes(homeownersCheatSheetB64),
     downloadName: "XPRT-Homeowners-Insurance-Cheat-Sheet.pdf",
   },
 };
