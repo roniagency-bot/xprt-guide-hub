@@ -70,20 +70,36 @@ function CategoryHub() {
           {services.length === 0 && (
             <p className="text-muted-foreground">More services coming soon. Book a review to discuss your needs.</p>
           )}
-          {services.map((s: any) => (
-            <Link
-              key={s.id}
-              to="/services/$category/$slug"
-              params={{ category: category.slug, slug: s.slug }}
-              className="group flex flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
-            >
-              <h3 className="font-display text-2xl leading-tight">{s.name_en}</h3>
-              {s.hero_sub_en && <p className="mt-3 text-sm text-muted-foreground">{s.hero_sub_en}</p>}
-              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium">
-                Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          ))}
+          {services.map((s: any) => {
+            const isPersonal = category.slug === "personal";
+            const className =
+              "group flex flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift";
+            const inner = (
+              <>
+                <h3 className="font-display text-2xl leading-tight">{s.name_en}</h3>
+                {s.hero_sub_en && (
+                  <p className="mt-3 text-sm text-muted-foreground">{s.hero_sub_en}</p>
+                )}
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </>
+            );
+            return isPersonal ? (
+              <a key={s.id} href={`/personal/${s.slug}`} className={className}>
+                {inner}
+              </a>
+            ) : (
+              <Link
+                key={s.id}
+                to="/services/$category/$slug"
+                params={{ category: category.slug, slug: s.slug }}
+                className={className}
+              >
+                {inner}
+              </Link>
+            );
+          })}
         </div>
       </Section>
 

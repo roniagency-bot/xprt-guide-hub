@@ -18,6 +18,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
 import { Route as StatesStateRouteImport } from './routes/states.$state'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
+import { Route as PersonalRentersInsuranceRouteImport } from './routes/personal.renters-insurance'
+import { Route as PersonalLandlordInsuranceRouteImport } from './routes/personal.landlord-insurance'
+import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/personal.homeowners-insurance'
+import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
@@ -69,6 +73,29 @@ const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
   path: '/services/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PersonalRentersInsuranceRoute =
+  PersonalRentersInsuranceRouteImport.update({
+    id: '/personal/renters-insurance',
+    path: '/personal/renters-insurance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PersonalLandlordInsuranceRoute =
+  PersonalLandlordInsuranceRouteImport.update({
+    id: '/personal/landlord-insurance',
+    path: '/personal/landlord-insurance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PersonalHomeownersInsuranceRoute =
+  PersonalHomeownersInsuranceRouteImport.update({
+    id: '/personal/homeowners-insurance',
+    path: '/personal/homeowners-insurance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PersonalAutoInsuranceRoute = PersonalAutoInsuranceRouteImport.update({
+  id: '/personal/auto-insurance',
+  path: '/personal/auto-insurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OffersSlugRoute = OffersSlugRouteImport.update({
   id: '/offers/$slug',
   path: '/offers/$slug',
@@ -105,6 +132,10 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
+  '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
+  '/personal/homeowners-insurance': typeof PersonalHomeownersInsuranceRoute
+  '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
+  '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
@@ -121,6 +152,10 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
+  '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
+  '/personal/homeowners-insurance': typeof PersonalHomeownersInsuranceRoute
+  '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
+  '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
@@ -138,6 +173,10 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
+  '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
+  '/personal/homeowners-insurance': typeof PersonalHomeownersInsuranceRoute
+  '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
+  '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
@@ -156,6 +195,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
+    | '/personal/auto-insurance'
+    | '/personal/homeowners-insurance'
+    | '/personal/landlord-insurance'
+    | '/personal/renters-insurance'
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
@@ -172,6 +215,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
+    | '/personal/auto-insurance'
+    | '/personal/homeowners-insurance'
+    | '/personal/landlord-insurance'
+    | '/personal/renters-insurance'
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
@@ -188,6 +235,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
+    | '/personal/auto-insurance'
+    | '/personal/homeowners-insurance'
+    | '/personal/landlord-insurance'
+    | '/personal/renters-insurance'
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
@@ -204,6 +255,10 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   OffersSlugRoute: typeof OffersSlugRoute
+  PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
+  PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
+  PersonalLandlordInsuranceRoute: typeof PersonalLandlordInsuranceRoute
+  PersonalRentersInsuranceRoute: typeof PersonalRentersInsuranceRoute
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
@@ -276,6 +331,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/personal/renters-insurance': {
+      id: '/personal/renters-insurance'
+      path: '/personal/renters-insurance'
+      fullPath: '/personal/renters-insurance'
+      preLoaderRoute: typeof PersonalRentersInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personal/landlord-insurance': {
+      id: '/personal/landlord-insurance'
+      path: '/personal/landlord-insurance'
+      fullPath: '/personal/landlord-insurance'
+      preLoaderRoute: typeof PersonalLandlordInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personal/homeowners-insurance': {
+      id: '/personal/homeowners-insurance'
+      path: '/personal/homeowners-insurance'
+      fullPath: '/personal/homeowners-insurance'
+      preLoaderRoute: typeof PersonalHomeownersInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personal/auto-insurance': {
+      id: '/personal/auto-insurance'
+      path: '/personal/auto-insurance'
+      fullPath: '/personal/auto-insurance'
+      preLoaderRoute: typeof PersonalAutoInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/offers/$slug': {
       id: '/offers/$slug'
       path: '/offers/$slug'
@@ -343,6 +426,10 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   OffersSlugRoute: OffersSlugRoute,
+  PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
+  PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
+  PersonalLandlordInsuranceRoute: PersonalLandlordInsuranceRoute,
+  PersonalRentersInsuranceRoute: PersonalRentersInsuranceRoute,
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
