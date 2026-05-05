@@ -17,7 +17,6 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
-import { LeadCaptureForm } from "@/components/site/LeadCaptureForm";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, canonical } from "@/lib/seo";
