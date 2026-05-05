@@ -21,6 +21,7 @@ import { Route as ServicesCategoryRouteImport } from './routes/services.$categor
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -83,6 +84,12 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ServicesCategoryRoute,
 } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
   id: '/api/public/downloads/$slug',
   path: '/api/public/downloads/$slug',
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +126,7 @@ export interface FileRoutesByTo {
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +143,7 @@ export interface FileRoutesById {
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/thank-you/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
+    | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/thank-you/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
+    | '/lovable/email/queue/process'
   id:
     | '__root__'
     | '/'
@@ -181,6 +193,7 @@ export interface FileRouteTypes {
     | '/thank-you/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
+    | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -195,6 +208,7 @@ export interface RootRouteChildren {
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -283,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCategorySlugRouteImport
       parentRoute: typeof ServicesCategoryRoute
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/downloads/$slug': {
       id: '/api/public/downloads/$slug'
       path: '/api/public/downloads/$slug'
@@ -326,6 +347,7 @@ const rootRouteChildren: RootRouteChildren = {
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
