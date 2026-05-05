@@ -18,7 +18,7 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
-import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, canonical } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/hero-home.jpg";
 
 export const Route = createFileRoute("/personal/homeowners-insurance")({
@@ -32,20 +32,21 @@ export const Route = createFileRoute("/personal/homeowners-insurance")({
   },
   head: ({ loaderData }) => {
     const path = "/personal/homeowners-insurance";
-    const title = "Homeowners Insurance — Nevada & Colorado | XPRT Insurance";
+    const title = "Homeowners Insurance in Nevada & Colorado | XPRT Insurance";
     const description =
-      "Clear, practical homeowners insurance guidance for Nevada and Colorado homeowners. Understand your coverage, identify gaps, and know what to review before renewal or a claim.";
+      "Understand what homeowners insurance covers, what it may exclude, and how to review your policy before renewal or a claim. Licensed in Nevada and Colorado.";
     const jsonLd: Record<string, unknown>[] = [
+      orgJsonLd(),
       breadcrumbJsonLd([
         { name: "Home", path: "/" },
         { name: "Personal", path: "/services/personal" },
         { name: "Homeowners Insurance", path },
       ]),
       serviceJsonLd({
-        name: "Homeowners Insurance",
+        name: "Homeowners Insurance — Nevada & Colorado",
         description,
         path,
-        areaServed: ["NV", "CO"],
+        areaServed: ["Nevada", "Colorado"],
       }),
     ];
     if (loaderData?.page?.faqs?.length) {
@@ -104,12 +105,12 @@ function HomeownersHub() {
           <div className="flex flex-col justify-center lg:col-span-6 fade-in-up">
             <Eyebrow>Personal · Homeowners</Eyebrow>
             <h1 className="mt-5 text-balance text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-              Know what your homeowners policy covers — before it matters.
+              Homeowners Insurance in Nevada & Colorado — know what your policy covers before it matters.
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Clear, practical homeowners insurance guidance for Nevada and Colorado homeowners.
-              Understand your coverage, identify gaps, and know what to review before renewal or a
-              claim.
+              Practical, educational homeowners insurance guidance for Nevada and Colorado homeowners —
+              from Las Vegas and Reno to Denver and the Front Range. Understand your coverage, identify
+              gaps, and know what to review before renewal or a claim.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
@@ -350,6 +351,67 @@ function HomeownersHub() {
           </div>
         </Section>
       )}
+
+      {/* STATE GUIDES + E-E-A-T */}
+      <Section id="state-guides">
+        <SectionHeading
+          eyebrow="Local guidance"
+          title="Homeowners insurance by state"
+          intro="Coverage needs differ by region. Wildfire exposure on the Front Range, hail in Denver, wind and roof age in Las Vegas, and rebuild-cost inflation across both states all change what a good policy looks like."
+        />
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <Link
+            to="/states/$state"
+            params={{ state: "nevada" }}
+            className="group rounded-2xl border border-border bg-card p-7 shadow-sm transition hover:shadow-lift"
+          >
+            <h3 className="font-display text-2xl">Nevada homeowners</h3>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Las Vegas, Henderson, North Las Vegas, Reno, and Sparks. Roof age, wind, and rebuild
+              cost are the most common review points we see.
+            </p>
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+              Nevada coverage guide <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+          <Link
+            to="/states/$state"
+            params={{ state: "colorado" }}
+            className="group rounded-2xl border border-border bg-card p-7 shadow-sm transition hover:shadow-lift"
+          >
+            <h3 className="font-display text-2xl">Colorado homeowners</h3>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Denver, Aurora, Colorado Springs, Boulder, and the Front Range. Hail, wildfire
+              exposure, and roof endorsements drive most of our policy reviews.
+            </p>
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+              Colorado coverage guide <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+          {[
+            { label: "Licensed in Nevada & Colorado", icon: ShieldCheck },
+            { label: "Independent agency", icon: HomeIcon },
+            { label: "Bilingual service (EN/ES)", icon: BookOpen },
+            { label: "Educational coverage reviews", icon: Calendar },
+          ].map(({ label, icon: Icon }) => (
+            <div key={label} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
+              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+              <span className="text-sm text-foreground">{label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 rounded-xl border border-border bg-muted/40 p-5 text-xs leading-relaxed text-muted-foreground">
+          <strong className="text-foreground">Educational disclaimer.</strong> This page is for
+          educational purposes only and does not constitute insurance advice, a quote, or an offer
+          of coverage. Actual coverage depends on your specific policy terms, carrier, endorsements,
+          underwriting, and applicable Nevada or Colorado law. Always review your declarations page
+          and speak with a licensed advisor before making changes. To request a personalized review,{" "}
+          <Link to="/book" className="underline underline-offset-2">book a free coverage review</Link>{" "}
+          or browse our <Link to="/faq" className="underline underline-offset-2">homeowners FAQ</Link>.
+        </p>
+      </Section>
 
       {/* FINAL CTA */}
       <CTASection
