@@ -18,17 +18,19 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { LeadCaptureForm } from "@/components/site/LeadCaptureForm";
+import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/hero-home.jpg";
 
 export const Route = createFileRoute("/personal/homeowners-insurance")({
   loader: async () => {
-    const [page, cheatSheet] = await Promise.all([
+    const [page, cheatSheet, ebook] = await Promise.all([
       getServicePage({ data: { slug: "homeowners-insurance" } }),
       getLeadMagnet({ data: { slug: "homeowners-cheat-sheet" } }),
+      getLeadMagnet({ data: { slug: "homeowners-ebook" } }),
     ]);
-    return { page, cheatSheet };
+    return { page, cheatSheet, ebook };
   },
   head: ({ loaderData }) => {
     const path = "/personal/homeowners-insurance";
