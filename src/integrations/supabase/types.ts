@@ -434,6 +434,57 @@ export type Database = {
           },
         ]
       }
+      quiz_submissions: {
+        Row: {
+          answers: Json
+          category_tag: string | null
+          consent: boolean
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          page_url: string | null
+          phone: string | null
+          quiz_slug: string
+          result_type: string
+          score: number
+          source_path: string | null
+          state: string | null
+        }
+        Insert: {
+          answers?: Json
+          category_tag?: string | null
+          consent?: boolean
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          page_url?: string | null
+          phone?: string | null
+          quiz_slug: string
+          result_type: string
+          score?: number
+          source_path?: string | null
+          state?: string | null
+        }
+        Update: {
+          answers?: Json
+          category_tag?: string | null
+          consent?: boolean
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          page_url?: string | null
+          phone?: string | null
+          quiz_slug?: string
+          result_type?: string
+          score?: number
+          source_path?: string | null
+          state?: string | null
+        }
+        Relationships: []
+      }
       service_categories: {
         Row: {
           created_at: string
