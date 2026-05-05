@@ -86,9 +86,9 @@ function CategoryHub() {
               </>
             );
             return isPersonal ? (
-              <Link key={s.id} to="/personal/$slug" params={{ slug: s.slug }} className={className}>
+              <a key={s.id} href={`/personal/${s.slug}`} className={className}>
                 {inner}
-              </Link>
+              </a>
             ) : (
               <Link
                 key={s.id}
