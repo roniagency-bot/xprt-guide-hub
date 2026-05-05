@@ -20,6 +20,7 @@ import { Route as StatesStateRouteImport } from './routes/states.$state'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
 import { Route as PersonalRentersInsuranceRouteImport } from './routes/personal.renters-insurance'
 import { Route as PersonalLandlordInsuranceRouteImport } from './routes/personal.landlord-insurance'
+import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/personal.homeowners-insurance'
 import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
@@ -84,6 +85,12 @@ const PersonalLandlordInsuranceRoute =
     path: '/personal/landlord-insurance',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PersonalHomeownersInsuranceRoute =
+  PersonalHomeownersInsuranceRouteImport.update({
+    id: '/personal/homeowners-insurance',
+    path: '/personal/homeowners-insurance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PersonalAutoInsuranceRoute = PersonalAutoInsuranceRouteImport.update({
   id: '/personal/auto-insurance',
   path: '/personal/auto-insurance',
@@ -126,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
+  '/personal/homeowners-insurance': typeof PersonalHomeownersInsuranceRoute
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
@@ -145,6 +153,7 @@ export interface FileRoutesByTo {
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
+  '/personal/homeowners-insurance': typeof PersonalHomeownersInsuranceRoute
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
@@ -165,6 +174,7 @@ export interface FileRoutesById {
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
+  '/personal/homeowners-insurance': typeof PersonalHomeownersInsuranceRoute
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
+    | '/personal/homeowners-insurance'
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
+    | '/personal/homeowners-insurance'
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
@@ -224,6 +236,7 @@ export interface FileRouteTypes {
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
+    | '/personal/homeowners-insurance'
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
@@ -243,6 +256,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
+  PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
   PersonalLandlordInsuranceRoute: typeof PersonalLandlordInsuranceRoute
   PersonalRentersInsuranceRoute: typeof PersonalRentersInsuranceRoute
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
@@ -331,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PersonalLandlordInsuranceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/personal/homeowners-insurance': {
+      id: '/personal/homeowners-insurance'
+      path: '/personal/homeowners-insurance'
+      fullPath: '/personal/homeowners-insurance'
+      preLoaderRoute: typeof PersonalHomeownersInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/personal/auto-insurance': {
       id: '/personal/auto-insurance'
       path: '/personal/auto-insurance'
@@ -406,6 +427,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
+  PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
   PersonalLandlordInsuranceRoute: PersonalLandlordInsuranceRoute,
   PersonalRentersInsuranceRoute: PersonalRentersInsuranceRoute,
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
