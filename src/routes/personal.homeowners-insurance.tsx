@@ -196,7 +196,7 @@ function Quiz() {
 }
 
 function HomeownersHub() {
-  const { page, cheatSheet } = Route.useLoaderData();
+  const { page, cheatSheet, ebook } = Route.useLoaderData();
   const faqs = (page?.faqs ?? []).map((f: any) => ({
     slug: f.slug,
     question: f.question_en,
