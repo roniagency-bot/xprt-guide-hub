@@ -285,13 +285,14 @@ function HomeownersHub() {
       <Section id="cheat-sheet" tone="cream">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <Eyebrow>Free download</Eyebrow>
+            <Eyebrow>Free download · Resource 1</Eyebrow>
             <h2 className="mt-4 text-balance font-display text-4xl leading-tight md:text-5xl">
-              The Homeowners Insurance Cheat Sheet
+              Homeowners Insurance Cheat Sheet
             </h2>
             <p className="mt-5 text-pretty text-base text-muted-foreground md:text-lg">
-              A one-page advisor's guide to the policy you already own (or are about to buy).
-              Skim it before your next renewal, claim, or quote.
+              Download the quick 2-page guide that shows what most homeowners policies include,
+              what is not automatically covered, and the gaps that cause the biggest surprises
+              during a claim.
             </p>
             <ul className="mt-8 space-y-3">
               {(cheatSheet?.bullets_en ?? [
@@ -315,15 +316,18 @@ function HomeownersHub() {
                   <FileText className="h-5 w-5" />
                 </span>
                 <div>
-                  <h3 className="font-display text-xl leading-tight">Get the cheat sheet</h3>
-                  <p className="text-xs text-muted-foreground">Delivered instantly — no spam.</p>
+                  <h3 className="font-display text-xl leading-tight">Get the Cheat Sheet</h3>
+                  <p className="text-xs text-muted-foreground">2-page PDF · delivered instantly.</p>
                 </div>
               </div>
               <div className="mt-6">
-                <LeadCaptureForm
+                <HomeownersLeadForm
                   leadMagnetId={cheatSheet?.id}
                   leadMagnetSlug="homeowners-cheat-sheet"
-                  categoryTag="homeowners-cheat-sheet"
+                  resourceName="Homeowners Insurance Cheat Sheet"
+                  thankYouSlug="homeowners-cheat-sheet"
+                  ctaLabel="Get the Cheat Sheet"
+                  leadSource="homeowners-cheat-sheet"
                 />
               </div>
             </div>
@@ -332,49 +336,50 @@ function HomeownersHub() {
       </Section>
 
       {/* EBOOK LEAD MAGNET */}
-      <Section>
+      <Section id="ebook">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="order-2 lg:order-1 lg:col-span-5">
-            <div className="rounded-2xl border-2 border-gold/40 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift md:p-10">
-              <span className="grid h-12 w-12 place-items-center rounded-lg bg-primary text-primary-foreground">
-                <BookOpen className="h-6 w-6" />
-              </span>
-              <p className="mt-6 font-display text-3xl leading-tight">
-                "The Homeowners Coverage Playbook"
-              </p>
-              <p className="mt-3 text-sm uppercase tracking-[0.2em] text-gold">Ebook · Coming soon</p>
-              <p className="mt-5 text-base text-muted-foreground">
-                A 30-page guide written for Nevada and Colorado homeowners — covering rebuild cost,
-                wildfire exposure, water claims, liability layering, and how to read a declarations
-                page like an underwriter.
-              </p>
-              <Button asChild className="mt-7 w-full bg-primary text-primary-foreground hover:bg-primary/90" size="lg">
-                <a href="#cheat-sheet">
-                  Join the waitlist via the cheat sheet
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
-                </a>
-              </Button>
+            <div className="sticky top-24 rounded-2xl border-2 border-gold/40 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift md:p-8">
+              <div className="flex items-center gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary text-primary-foreground">
+                  <BookOpen className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-display text-xl leading-tight">Get the Ebook</h3>
+                  <p className="text-xs text-muted-foreground">Full coverage guide · PDF.</p>
+                </div>
+              </div>
+              <div className="mt-6">
+                <HomeownersLeadForm
+                  leadMagnetId={ebook?.id}
+                  leadMagnetSlug="homeowners-ebook"
+                  resourceName="Complete Homeowners Coverage Guide"
+                  thankYouSlug="homeowners-ebook"
+                  ctaLabel="Get the Ebook"
+                  leadSource="homeowners-ebook"
+                />
+              </div>
             </div>
           </div>
           <div className="order-1 lg:order-2 lg:col-span-7">
-            <Eyebrow>Deeper dive</Eyebrow>
+            <Eyebrow>Free download · Resource 2</Eyebrow>
             <h2 className="mt-4 text-balance font-display text-4xl leading-tight md:text-5xl">
-              When you're ready to go deeper than a cheat sheet.
+              Complete Homeowners Coverage Guide
             </h2>
             <p className="mt-5 text-pretty text-base text-muted-foreground md:text-lg">
-              Our upcoming ebook walks you through the structure of a homeowners policy the way an
-              advisor would — section by section, endorsement by endorsement, with real Nevada and
-              Colorado examples.
+              Want the deeper version? Download the full guide to better understand coverage
+              limits, exclusions, endorsements, rebuild cost, liability, and renewal review
+              questions.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {[
-                "Rebuild cost vs. market value math",
-                "Wildfire & wildfire-prone-zone underwriting",
-                "Water damage: what's covered, what isn't",
+              {(ebook?.bullets_en ?? [
+                "Coverage limits explained line-by-line",
+                "Exclusions most homeowners miss",
+                "Endorsements that close real gaps",
+                "Rebuild cost vs market value math",
                 "Liability stacking & umbrella playbook",
-                "How to read your declarations page",
-                "Renewal & claims-time checklists",
-              ].map((b) => (
+                "Renewal review question list",
+              ]).map((b: string) => (
                 <li key={b} className="flex items-start gap-3 text-sm">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                   <span className="text-foreground">{b}</span>
