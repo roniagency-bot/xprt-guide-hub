@@ -24,7 +24,7 @@ export const Route = createFileRoute("/api/public/downloads/$slug")({
         if (!entry) {
           return new Response("Not found", { status: 404 });
         }
-        return new Response(entry.bytes, {
+        return new Response(entry.bytes as BodyInit, {
           status: 200,
           headers: {
             "Content-Type": "application/pdf",
