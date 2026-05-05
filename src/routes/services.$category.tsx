@@ -70,11 +70,15 @@ function CategoryHub() {
           {services.length === 0 && (
             <p className="text-muted-foreground">More services coming soon. Book a review to discuss your needs.</p>
           )}
-          {services.map((s: any) => (
+          {services.map((s: any) => {
+            const isPersonal = category.slug === "personal";
+            const linkProps = isPersonal
+              ? ({ to: "/personal/$slug", params: { slug: s.slug } } as const)
+              : ({ to: "/services/$category/$slug", params: { category: category.slug, slug: s.slug } } as const);
+            return (
             <Link
               key={s.id}
-              to="/services/$category/$slug"
-              params={{ category: category.slug, slug: s.slug }}
+              {...linkProps}
               className="group flex flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
             >
               <h3 className="font-display text-2xl leading-tight">{s.name_en}</h3>
