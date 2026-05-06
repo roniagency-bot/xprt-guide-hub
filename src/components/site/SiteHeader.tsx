@@ -1,50 +1,112 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import xprtLogo from "@/assets/xprt-logo.png";
 
+type SubItem = { to: string; label: string; description?: string };
+
 type NavItem =
   | { kind: "static"; to: "/faq" | "/about" | "/contact"; label: string }
-  | { kind: "category"; category: string; label: string };
+  | { kind: "category"; category: string; label: string; subitems: SubItem[] };
 
 const NAV: readonly NavItem[] = [
-  { kind: "category", category: "personal", label: "Personal" },
-  { kind: "category", category: "commercial", label: "Commercial" },
-  { kind: "category", category: "bonds", label: "Bonds" },
-  { kind: "category", category: "dealership", label: "Dealership" },
+  {
+    kind: "category",
+    category: "personal",
+    label: "Personal",
+    subitems: [
+      { to: "/personal/homeowners-insurance", label: "Homeowners", description: "Dwelling, contents, liability" },
+      { to: "/personal/auto-insurance", label: "Auto", description: "Liability, collision, UM/UIM" },
+      { to: "/personal/renters-insurance", label: "Renters", description: "Contents and liability" },
+      { to: "/personal/landlord-insurance", label: "Landlord", description: "Rental dwelling coverage" },
+    ],
+  },
+  {
+    kind: "category",
+    category: "commercial",
+    label: "Commercial",
+    subitems: [
+      { to: "/services/commercial/general-liability", label: "General Liability" },
+      { to: "/services/commercial/workers-compensation", label: "Workers' Comp" },
+      { to: "/services/commercial/commercial-auto", label: "Commercial Auto" },
+      { to: "/services/commercial/business-owners-policy", label: "Business Owners Policy" },
+    ],
+  },
+  {
+    kind: "category",
+    category: "bonds",
+    label: "Bonds",
+    subitems: [
+      { to: "/services/bonds/surety-bonds", label: "Surety Bonds" },
+      { to: "/services/bonds/license-permit-bonds", label: "License & Permit" },
+      { to: "/services/bonds/contractor-bonds", label: "Contractor Bonds" },
+      { to: "/services/bonds/court-bonds", label: "Court Bonds" },
+    ],
+  },
+  {
+    kind: "category",
+    category: "dealership",
+    label: "Dealership",
+    subitems: [
+      { to: "/services/dealership/garage-liability", label: "Garage Liability" },
+      { to: "/services/dealership/dealer-open-lot", label: "Dealer Open Lot" },
+      { to: "/services/dealership/dealer-bonds", label: "Dealer Bonds" },
+    ],
+  },
   { kind: "static", to: "/faq", label: "Knowledge Base" },
   { kind: "static", to: "/about", label: "About" },
   { kind: "static", to: "/contact", label: "Contact" },
 ] as const;
 
-function NavLinkItem({
-  item,
-  className,
-  onClick,
-}: {
-  item: NavItem;
-  className?: string;
-  onClick?: () => void;
-}) {
-  const activeProps = { className: "text-foreground bg-accent" };
-  if (item.kind === "static") {
-    return (
-      <Link to={item.to} className={className} activeProps={activeProps} onClick={onClick}>
-        {item.label}
-      </Link>
-    );
-  }
+function CategoryDropdown({ item }: { item: Extract<NavItem, { kind: "category" }> }) {
+  const [open, setOpen] = useState(false);
   return (
-    <Link
-      to="/services/$category"
-      params={{ category: item.category }}
-      className={className}
-      activeProps={activeProps}
-      onClick={onClick}
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
     >
-      {item.label}
-    </Link>
+      <Link
+        to="/services/$category"
+        params={{ category: item.category }}
+        className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        activeProps={{ className: "text-foreground bg-accent" }}
+      >
+        {item.label}
+        <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+      </Link>
+      {open && (
+        <div className="absolute left-0 top-full z-50 w-72 pt-2">
+          <div className="overflow-hidden rounded-xl border border-border bg-popover shadow-lift">
+            <ul className="py-2">
+              {item.subitems.map((s) => (
+                <li key={s.to}>
+                  <Link
+                    to={s.to as any}
+                    className="block px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-accent"
+                  >
+                    <div className="font-medium">{s.label}</div>
+                    {s.description && (
+                      <div className="text-xs text-muted-foreground">{s.description}</div>
+                    )}
+                  </Link>
+                </li>
+              ))}
+              <li className="mt-1 border-t border-border">
+                <Link
+                  to="/services/$category"
+                  params={{ category: item.category }}
+                  className="block px-4 py-2.5 text-xs uppercase tracking-[0.18em] text-gold hover:bg-accent"
+                >
+                  View all {item.label} →
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -65,13 +127,20 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {NAV.map((item) => (
-            <NavLinkItem
-              key={item.label}
-              item={item}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-            />
-          ))}
+          {NAV.map((item) =>
+            item.kind === "category" ? (
+              <CategoryDropdown key={item.label} item={item} />
+            ) : (
+              <Link
+                key={item.label}
+                to={item.to}
+                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                activeProps={{ className: "text-foreground bg-accent" }}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
@@ -97,14 +166,42 @@ export function SiteHeader() {
       {open && (
         <div className="border-t border-border bg-background lg:hidden">
           <nav className="container-prose flex flex-col gap-1 py-4" aria-label="Mobile">
-            {NAV.map((item) => (
-              <NavLinkItem
-                key={item.label}
-                item={item}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2.5 text-base text-foreground hover:bg-accent"
-              />
-            ))}
+            {NAV.map((item) =>
+              item.kind === "category" ? (
+                <div key={item.label} className="py-1">
+                  <Link
+                    to="/services/$category"
+                    params={{ category: item.category }}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent"
+                  >
+                    {item.label}
+                  </Link>
+                  <ul className="ml-3 border-l border-border pl-3">
+                    {item.subitems.map((s) => (
+                      <li key={s.to}>
+                        <Link
+                          to={s.to as any}
+                          onClick={() => setOpen(false)}
+                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                        >
+                          {s.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2.5 text-base text-foreground hover:bg-accent"
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
               <Button asChild variant="outline">
                 <Link to="/services/$category" params={{ category: "personal" }} onClick={() => setOpen(false)}>Get Quote</Link>
