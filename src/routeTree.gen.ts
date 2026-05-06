@@ -25,6 +25,7 @@ import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.aut
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
+import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
@@ -111,6 +112,11 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ServicesCategoryRoute,
 } as any)
+const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
+  id: '/homeowners/$slug',
+  path: '/homeowners/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
     | '/lovable/email/queue/process'
@@ -222,6 +232,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
     | '/lovable/email/queue/process'
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
     | '/lovable/email/queue/process'
@@ -380,6 +392,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCategorySlugRouteImport
       parentRoute: typeof ServicesCategoryRoute
     }
+    '/faq/homeowners/$slug': {
+      id: '/faq/homeowners/$slug'
+      path: '/homeowners/$slug'
+      fullPath: '/faq/homeowners/$slug'
+      preLoaderRoute: typeof FaqHomeownersSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
       path: '/lovable/email/queue/process'
@@ -399,10 +418,12 @@ declare module '@tanstack/react-router' {
 
 interface FaqRouteChildren {
   FaqSlugRoute: typeof FaqSlugRoute
+  FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
 }
 
 const FaqRouteChildren: FaqRouteChildren = {
   FaqSlugRoute: FaqSlugRoute,
+  FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
 }
 
 const FaqRouteWithChildren = FaqRoute._addFileChildren(FaqRouteChildren)
