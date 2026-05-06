@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as AboutRouteImport } from './routes/about'
@@ -34,6 +35,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -55,9 +61,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqIndexRoute = FaqIndexRouteImport.update({
-  id: '/faq/',
-  path: '/faq/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => FaqRoute,
 } as any)
 const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
   id: '/thank-you/$slug',
@@ -103,9 +109,9 @@ const OffersSlugRoute = OffersSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqSlugRoute = FaqSlugRouteImport.update({
-  id: '/faq/$slug',
-  path: '/faq/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FaqRoute,
 } as any)
 const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   id: '/$slug',
@@ -113,9 +119,9 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   getParentRoute: () => ServicesCategoryRoute,
 } as any)
 const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
-  id: '/faq/homeowners/$slug',
-  path: '/faq/homeowners/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/homeowners/$slug',
+  path: '/homeowners/$slug',
+  getParentRoute: () => FaqRoute,
 } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
@@ -177,6 +184,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
@@ -200,6 +208,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
+    | '/faq'
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
@@ -242,6 +251,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
+    | '/faq'
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
@@ -264,8 +274,8 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  FaqSlugRoute: typeof FaqSlugRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
   PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
@@ -274,8 +284,6 @@ export interface RootRouteChildren {
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
-  FaqIndexRoute: typeof FaqIndexRoute
-  FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
@@ -287,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -319,10 +334,10 @@ declare module '@tanstack/react-router' {
     }
     '/faq/': {
       id: '/faq/'
-      path: '/faq'
+      path: '/'
       fullPath: '/faq/'
       preLoaderRoute: typeof FaqIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof FaqRoute
     }
     '/thank-you/$slug': {
       id: '/thank-you/$slug'
@@ -382,10 +397,10 @@ declare module '@tanstack/react-router' {
     }
     '/faq/$slug': {
       id: '/faq/$slug'
-      path: '/faq/$slug'
+      path: '/$slug'
       fullPath: '/faq/$slug'
       preLoaderRoute: typeof FaqSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof FaqRoute
     }
     '/services/$category/$slug': {
       id: '/services/$category/$slug'
@@ -396,10 +411,10 @@ declare module '@tanstack/react-router' {
     }
     '/faq/homeowners/$slug': {
       id: '/faq/homeowners/$slug'
-      path: '/faq/homeowners/$slug'
+      path: '/homeowners/$slug'
       fullPath: '/faq/homeowners/$slug'
       preLoaderRoute: typeof FaqHomeownersSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof FaqRoute
     }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
@@ -418,6 +433,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface FaqRouteChildren {
+  FaqSlugRoute: typeof FaqSlugRoute
+  FaqIndexRoute: typeof FaqIndexRoute
+  FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
+}
+
+const FaqRouteChildren: FaqRouteChildren = {
+  FaqSlugRoute: FaqSlugRoute,
+  FaqIndexRoute: FaqIndexRoute,
+  FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
+}
+
+const FaqRouteWithChildren = FaqRoute._addFileChildren(FaqRouteChildren)
+
 interface ServicesCategoryRouteChildren {
   ServicesCategorySlugRoute: typeof ServicesCategorySlugRoute
 }
@@ -434,8 +463,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  FaqSlugRoute: FaqSlugRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
   PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
@@ -444,8 +473,6 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
-  FaqIndexRoute: FaqIndexRoute,
-  FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
