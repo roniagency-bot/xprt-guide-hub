@@ -79,16 +79,35 @@ export async function fetchFaq(slug: string) {
     .maybeSingle();
   if (error) throw new Error(error.message);
   if (!faq) return null;
-  let related: Array<{ id: string; slug: string; question_en: string; short_answer_en: string }> = [];
+  type RelatedRow = { id: string; slug: string; question_en: string; short_answer_en: string; funnel_stage: string };
+  let relatedExplicit: RelatedRow[] = [];
   if (faq.related_faq_ids && faq.related_faq_ids.length > 0) {
     const { data } = await supabaseAdmin
       .from("faq_items")
-      .select("id, slug, question_en, short_answer_en")
+      .select("id, slug, question_en, short_answer_en, funnel_stage")
       .in("id", faq.related_faq_ids)
       .eq("is_published", true);
-    related = data ?? [];
+    relatedExplicit = (data as RelatedRow[]) ?? [];
   }
-  return { faq, related };
+
+  // Always derive a funnel-aware nav: 2 MOFU + 1 BOFU from same category, excluding self.
+  const { data: sameCat } = await supabaseAdmin
+    .from("faq_items")
+    .select("id, slug, question_en, short_answer_en, funnel_stage")
+    .eq("category_id", faq.category_id)
+    .eq("is_published", true)
+    .neq("id", faq.id);
+  const pool = (sameCat as RelatedRow[]) ?? [];
+  const goDeeper = pool.filter((r) => r.funnel_stage === "mofu").slice(0, 2);
+  const readyToAct = pool.filter((r) => r.funnel_stage === "bofu").slice(0, 1);
+
+  // Merge explicit related with funnel nav, dedup by id
+  const seen = new Set<string>();
+  const related: RelatedRow[] = [];
+  for (const r of [...relatedExplicit, ...goDeeper, ...readyToAct]) {
+    if (!seen.has(r.id)) { seen.add(r.id); related.push(r); }
+  }
+  return { faq, related, goDeeper, readyToAct };
 }
 
 export async function fetchLeadMagnet(slug: string) {
