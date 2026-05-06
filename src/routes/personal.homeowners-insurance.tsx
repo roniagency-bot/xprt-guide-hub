@@ -6,7 +6,7 @@ import {
   Home as HomeIcon,
   FileText,
   BookOpen,
-  PlayCircle,
+  // PlayCircle removed
   Sparkles,
   Calendar,
 } from "lucide-react";
