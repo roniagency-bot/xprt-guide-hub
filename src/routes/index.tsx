@@ -101,31 +101,27 @@ function HomePage() {
           <div className="relative lg:col-span-6">
             <div className="relative overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
               <img
-                src={heroHome}
-                alt="Modern luxury home in Nevada at golden hour with mountain backdrop"
+                src={heroAgency}
+                alt="XPRT Insurance — protecting Nevada and Colorado homes, autos, businesses, and contractors"
                 width={1920}
-                height={1280}
+                height={1080}
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-6 text-primary-foreground md:p-8">
                 <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold">
-                  <Sparkles className="h-3.5 w-3.5" /> Featured guide
+                  <Sparkles className="h-3.5 w-3.5" /> Independent · Nevada & Colorado
                 </div>
                 <p className="mt-2 font-display text-2xl leading-tight">
-                  Download the 1-page guide most homeowners wish they had before filing a claim
+                  Personal, Commercial, Bonds & Dealership — one advisory standard.
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-primary-foreground/80">
-                  Quickly understand what your policy covers, what it doesn't, and where most people are exposed.
-                </p>
-                <p className="mt-3 text-[11px] uppercase tracking-[0.18em] text-primary-foreground/60">
-                  Review this before your next renewal or claim
+                  Every line we write is reviewed line-by-line so you understand exactly what you own.
                 </p>
                 <Link
-                  to="/offers/$slug"
-                  params={{ slug: "homeowners-cheat-sheet" }}
-                  className="mt-1.5 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
+                  to="/book"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
                 >
-                  Get the cheat sheet →
+                  Book a free coverage review →
                 </Link>
               </div>
             </div>
