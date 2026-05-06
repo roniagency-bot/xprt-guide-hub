@@ -15,7 +15,8 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { TrustBar } from "@/components/site/TrustBar";
 import { CTASection } from "@/components/site/CTASection";
-import heroHome from "@/assets/hero-home.jpg";
+import heroAgency from "@/assets/hero-agency.jpg";
+import monthlyFocus from "@/assets/monthly-focus.jpg";
 import { pageHead, orgJsonLd, canonical } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
