@@ -28,6 +28,8 @@ import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
 import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
+import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -129,6 +131,16 @@ const LovableEmailQueueProcessRoute =
     path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
+  id: '/lovable/email/auth/webhook',
+  path: '/lovable/email/auth/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
+  id: '/lovable/email/auth/preview',
+  path: '/lovable/email/auth/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
   id: '/api/public/downloads/$slug',
   path: '/api/public/downloads/$slug',
@@ -155,6 +167,8 @@ export interface FileRoutesByFullPath {
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
+  '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
@@ -176,6 +190,8 @@ export interface FileRoutesByTo {
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
+  '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
@@ -199,6 +215,8 @@ export interface FileRoutesById {
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
+  '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
@@ -223,6 +241,8 @@ export interface FileRouteTypes {
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
+    | '/lovable/email/auth/preview'
+    | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -244,6 +264,8 @@ export interface FileRouteTypes {
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
+    | '/lovable/email/auth/preview'
+    | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
   id:
     | '__root__'
@@ -266,6 +288,8 @@ export interface FileRouteTypes {
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
+    | '/lovable/email/auth/preview'
+    | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
@@ -285,6 +309,8 @@ export interface RootRouteChildren {
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
+  LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
+  LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
@@ -423,6 +449,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/auth/webhook': {
+      id: '/lovable/email/auth/webhook'
+      path: '/lovable/email/auth/webhook'
+      fullPath: '/lovable/email/auth/webhook'
+      preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/auth/preview': {
+      id: '/lovable/email/auth/preview'
+      path: '/lovable/email/auth/preview'
+      fullPath: '/lovable/email/auth/preview'
+      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/downloads/$slug': {
       id: '/api/public/downloads/$slug'
       path: '/api/public/downloads/$slug'
@@ -474,6 +514,8 @@ const rootRouteChildren: RootRouteChildren = {
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
+  LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
+  LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
