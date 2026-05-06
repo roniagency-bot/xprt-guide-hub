@@ -15,7 +15,8 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { TrustBar } from "@/components/site/TrustBar";
 import { CTASection } from "@/components/site/CTASection";
-import heroHome from "@/assets/hero-home.jpg";
+import heroAgency from "@/assets/hero-agency.jpg";
+import monthlyFocus from "@/assets/monthly-focus.jpg";
 import { pageHead, orgJsonLd, canonical } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -100,31 +101,27 @@ function HomePage() {
           <div className="relative lg:col-span-6">
             <div className="relative overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
               <img
-                src={heroHome}
-                alt="Modern luxury home in Nevada at golden hour with mountain backdrop"
+                src={heroAgency}
+                alt="XPRT Insurance — protecting Nevada and Colorado homes, autos, businesses, and contractors"
                 width={1920}
-                height={1280}
+                height={1080}
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-6 text-primary-foreground md:p-8">
                 <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold">
-                  <Sparkles className="h-3.5 w-3.5" /> Featured guide
+                  <Sparkles className="h-3.5 w-3.5" /> Independent · Nevada & Colorado
                 </div>
                 <p className="mt-2 font-display text-2xl leading-tight">
-                  Download the 1-page guide most homeowners wish they had before filing a claim
+                  Personal, Commercial, Bonds & Dealership — one advisory standard.
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-primary-foreground/80">
-                  Quickly understand what your policy covers, what it doesn't, and where most people are exposed.
-                </p>
-                <p className="mt-3 text-[11px] uppercase tracking-[0.18em] text-primary-foreground/60">
-                  Review this before your next renewal or claim
+                  Every line we write is reviewed line-by-line so you understand exactly what you own.
                 </p>
                 <Link
-                  to="/offers/$slug"
-                  params={{ slug: "homeowners-cheat-sheet" }}
-                  className="mt-1.5 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
+                  to="/book"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:text-gold/80"
                 >
-                  Get the cheat sheet →
+                  Book a free coverage review →
                 </Link>
               </div>
             </div>
@@ -134,6 +131,42 @@ function HomePage() {
       </section>
 
       <TrustBar />
+
+      {/* MONTHLY FOCUS */}
+      <Section tone="cream">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <div className="overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
+              <img
+                src={monthlyFocus}
+                alt="This month's coverage focus from XPRT Insurance"
+                width={1600}
+                height={1088}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col justify-center lg:col-span-6">
+            <Eyebrow>Monthly Focus · {new Date().toLocaleString("en-US", { month: "long", year: "numeric" })}</Eyebrow>
+            <h2 className="mt-4 text-balance font-display text-4xl leading-tight md:text-5xl">
+              This month: reviewing your homeowners policy before renewal
+            </h2>
+            <p className="mt-5 text-pretty text-base text-muted-foreground md:text-lg">
+              Each month we spotlight one coverage topic worth a closer look. This month, we're walking
+              homeowners through the six sections of every policy and the gaps that surprise people most.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+                <Link to="/personal/homeowners-insurance">Read this month's focus</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/book">Book a free review</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Section>
 
       {/* SERVICES */}
       <Section>
