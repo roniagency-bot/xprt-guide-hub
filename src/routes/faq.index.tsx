@@ -6,7 +6,7 @@ import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQ_PREVIEWS } from "@/lib/homeowners-faqs";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/faq")({
+export const Route = createFileRoute("/faq/")({
   loader: () => getFaqHub(),
   head: () => pageHead({
     title: "Insurance Knowledge Base — FAQs | XPRT Insurance",
