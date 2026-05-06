@@ -94,7 +94,7 @@ export async function fetchFaq(slug: string) {
   const { data: sameCat } = await supabaseAdmin
     .from("faq_items")
     .select("id, slug, question_en, short_answer_en, funnel_stage")
-    .eq("category_id", faq.category_id)
+    .eq("category_id", faq.category_id ?? "")
     .eq("is_published", true)
     .neq("id", faq.id);
   const pool = (sameCat as RelatedRow[]) ?? [];
