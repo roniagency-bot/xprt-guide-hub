@@ -103,9 +103,9 @@ const OffersSlugRoute = OffersSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqSlugRoute = FaqSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => FaqRoute,
+  id: '/faq/$slug',
+  path: '/faq/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   id: '/$slug',
@@ -113,9 +113,9 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   getParentRoute: () => ServicesCategoryRoute,
 } as any)
 const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
-  id: '/homeowners/$slug',
-  path: '/homeowners/$slug',
-  getParentRoute: () => FaqRoute,
+  id: '/faq/homeowners/$slug',
+  path: '/faq/homeowners/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
@@ -265,6 +265,7 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  FaqSlugRoute: typeof FaqSlugRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
   PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
@@ -274,6 +275,7 @@ export interface RootRouteChildren {
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
   FaqIndexRoute: typeof FaqIndexRoute
+  FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
@@ -380,10 +382,10 @@ declare module '@tanstack/react-router' {
     }
     '/faq/$slug': {
       id: '/faq/$slug'
-      path: '/$slug'
+      path: '/faq/$slug'
       fullPath: '/faq/$slug'
       preLoaderRoute: typeof FaqSlugRouteImport
-      parentRoute: typeof FaqRoute
+      parentRoute: typeof rootRouteImport
     }
     '/services/$category/$slug': {
       id: '/services/$category/$slug'
@@ -394,10 +396,10 @@ declare module '@tanstack/react-router' {
     }
     '/faq/homeowners/$slug': {
       id: '/faq/homeowners/$slug'
-      path: '/homeowners/$slug'
+      path: '/faq/homeowners/$slug'
       fullPath: '/faq/homeowners/$slug'
       preLoaderRoute: typeof FaqHomeownersSlugRouteImport
-      parentRoute: typeof FaqRoute
+      parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
@@ -433,6 +435,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  FaqSlugRoute: FaqSlugRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
   PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
@@ -442,18 +445,10 @@ const rootRouteChildren: RootRouteChildren = {
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
   FaqIndexRoute: FaqIndexRoute,
+  FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
