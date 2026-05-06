@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import homeownersCheatSheetB64 from "@/assets/downloads/homeowners-cheat-sheet.pdf.base64";
+import homeownersEbookB64 from "@/assets/downloads/homeowners-ebook.pdf.base64";
 
 function b64ToBytes(b64: string): Uint8Array {
   const bin = atob(b64);
@@ -9,16 +10,13 @@ function b64ToBytes(b64: string): Uint8Array {
   return bytes;
 }
 
-const cheatSheetBytes = b64ToBytes(homeownersCheatSheetB64);
-
 const FILES: Record<string, { bytes: Uint8Array; downloadName: string }> = {
   "homeowners-cheat-sheet": {
-    bytes: cheatSheetBytes,
+    bytes: b64ToBytes(homeownersCheatSheetB64),
     downloadName: "XPRT-Homeowners-Insurance-Cheat-Sheet.pdf",
   },
-  // Ebook placeholder — serves the cheat-sheet bytes until the full ebook PDF is uploaded.
   "homeowners-ebook": {
-    bytes: cheatSheetBytes,
+    bytes: b64ToBytes(homeownersEbookB64),
     downloadName: "XPRT-Complete-Homeowners-Coverage-Guide.pdf",
   },
 };
