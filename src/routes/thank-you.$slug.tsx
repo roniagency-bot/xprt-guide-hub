@@ -53,22 +53,20 @@ function ThankYou() {
               "Check your inbox in a few minutes. In the meantime, you can download it directly below."}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            {lm.slug !== "homeowners-ebook" && (
-              <Button
-                asChild
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <a
+                href={lm.asset_url ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
               >
-                <a
-                  href={lm.asset_url ?? "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download
-                >
-                  <Download className="mr-1.5 h-4 w-4" /> Download {lm.title_en}
-                </a>
-              </Button>
-            )}
+                <Download className="mr-1.5 h-4 w-4" /> Download {lm.title_en}
+              </a>
+            </Button>
             <Button asChild size="lg" variant="outline">
               <Link to="/book">
                 Book a Free Coverage Review
@@ -76,22 +74,6 @@ function ThankYou() {
               </Link>
             </Button>
           </div>
-
-          {lm.slug === "homeowners-ebook" && (
-            <div className="mt-10 w-full max-w-4xl">
-              <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-                <iframe
-                  src="https://gamma.app/embed/khklkw5m4hav70a"
-                  title='The "Full Coverage" Lie: 7 Fatal Fine-Print Traps Draining Homeowner Equity'
-                  allow="fullscreen"
-                  className="h-[600px] w-full"
-                />
-              </div>
-              <p className="mt-3 text-center text-xs text-muted-foreground">
-                Tip: click the fullscreen icon for the best reading experience.
-              </p>
-            </div>
-          )}
           <p className="mt-10 text-sm text-muted-foreground">
             Want more?{" "}
             <Link
