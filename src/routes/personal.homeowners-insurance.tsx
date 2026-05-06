@@ -285,35 +285,23 @@ function HomeownersHub() {
         />
         <div className="mx-auto mt-12 max-w-4xl">
           <div className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-ink shadow-lift">
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage: `url(${heroHome})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/60 to-ink/40" />
-            <div className="relative flex h-full flex-col items-center justify-center px-6 text-center text-primary-foreground">
-              <span className="grid h-16 w-16 place-items-center rounded-full bg-gold text-gold-foreground shadow-gold">
-                <PlayCircle className="h-8 w-8" />
-              </span>
-              <p className="mt-6 font-display text-2xl leading-tight md:text-3xl">
-                Video walkthrough — coming soon
-              </p>
-              <p className="mt-2 max-w-xl text-sm text-primary-foreground/80">
-                In the meantime, grab the cheat sheet or book a 20-minute live walk-through with an advisor.
-              </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
-                  <a href="#cheat-sheet">Get the cheat sheet</a>
-                </Button>
-                <Button asChild variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10">
-                  <Link to="/book">Book a live walkthrough</Link>
-                </Button>
-              </div>
-            </div>
+            <video
+              src="/videos/home-insurance-building-blocks.mp4"
+              controls
+              preload="metadata"
+              poster={heroHome}
+              className="h-full w-full object-cover"
+            >
+              Your browser does not support video playback.
+            </video>
+          </div>
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+              <a href="#cheat-sheet">Get the cheat sheet</a>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/book">Book a live walkthrough</Link>
+            </Button>
           </div>
         </div>
       </Section>
