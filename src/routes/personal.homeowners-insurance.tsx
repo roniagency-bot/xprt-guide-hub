@@ -128,23 +128,11 @@ function HomeownersHub() {
             <div className="relative overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
               <img
                 src={heroHome}
-                alt="Modern Nevada home at golden hour — homeowners insurance review"
+                alt="Modern home in Nevada at golden hour with mountain backdrop"
                 width={1920}
-                height={1280}
+                height={1080}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-6 text-primary-foreground md:p-8">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold">
-                  <Sparkles className="h-3.5 w-3.5" /> Most-requested guide
-                </div>
-                <p className="mt-2 font-display text-2xl leading-tight">
-                  The 1-page homeowners policy cheat sheet
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-primary-foreground/80">
-                  Dwelling vs. market value, the 6 sections of every policy, and the endorsements
-                  most agents forget to mention.
-                </p>
-              </div>
             </div>
           </div>
         </div>
