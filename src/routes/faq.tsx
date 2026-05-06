@@ -3,6 +3,7 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { getFaqHub } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
+import { HOMEOWNERS_FAQ_PREVIEWS } from "@/lib/homeowners-faqs";
 import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/faq")({
@@ -47,7 +48,32 @@ function FaqHub() {
           <p className="text-muted-foreground">More articles coming soon.</p>
         )}
         <div className="space-y-16">
+          <div id="homeowners-insurance-faqs">
+            <SectionHeading eyebrow="Homeowners" title="Homeowners insurance questions" />
+            <div className="mt-8 space-y-8">
+              {STAGE_ORDER.map((stage) => {
+                const stageItems = HOMEOWNERS_FAQ_PREVIEWS.filter((i) => i.funnel_stage === stage);
+                if (stageItems.length === 0) return null;
+                return (
+                  <div key={stage}>
+                    <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">{STAGE_LABEL[stage]}</p>
+                    <ul className="grid gap-3 md:grid-cols-2">
+                      {stageItems.map((f) => (
+                        <li key={f.slug}>
+                          <Link to="/faq/homeowners/$slug" params={{ slug: f.slug }} className="group flex items-start justify-between gap-4 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50">
+                            <span className="font-display text-lg leading-tight text-foreground">{f.question_en}</span>
+                            <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           {categories.map((cat: any) => {
+            if (cat.slug === "homeowners-insurance-faqs") return null;
             const catItems = items.filter((i: any) => i.category_id === cat.id);
             if (catItems.length === 0) return null;
             return (
