@@ -19,7 +19,7 @@ import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
-import heroHome from "@/assets/hero-home.jpg";
+import heroHome from "@/assets/homeowners-hero.jpg";
 
 export const Route = createFileRoute("/personal/homeowners-insurance")({
   loader: async () => {
