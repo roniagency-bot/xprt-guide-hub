@@ -258,3 +258,7 @@ export function getHomeownersFaq(slug: string) {
 export function getHomeownersFaqs(slugs: string[]) {
   return slugs.map(getHomeownersFaq).filter(Boolean) as HomeownersFaq[];
 }
+
+export function isHomeownersFaqSlug(slug: string) {
+  return HOMEOWNERS_FAQS.some((faq) => faq.slug === slug);
+}
