@@ -7,14 +7,30 @@ export type HomeownersFaq = {
   stage: HomeownersFaqStage;
   metaDescription: string;
   paragraphs: string[];
+  whatThisMeans?: string[];
+  examples?: string[];
+  nvCoNote?: string;
+  whatToReview?: string[];
   bullets?: string[];
   stateContext?: string;
   goDeeper: string[];
   readyToAct: string;
+  relatedTofu?: string[];
 };
 
 const DEFAULT_GO_DEEPER = ["replacement-cost-vs-actual-cash-value", "what-endorsements-should-i-add"];
 const DEFAULT_READY = "how-to-review-homeowners-policy-with-an-advisor";
+const ALL_TOFU = [
+  "what-does-homeowners-insurance-cover",
+  "what-is-not-covered-by-homeowners-insurance",
+  "how-much-homeowners-insurance-do-i-need",
+  "does-homeowners-insurance-cover-flood",
+  "should-i-review-my-policy-before-renewal",
+];
+
+export function getRelatedTofu(slug: string, limit = 2) {
+  return ALL_TOFU.filter((s) => s !== slug).slice(0, limit);
+}
 
 export const HOMEOWNERS_FAQS: HomeownersFaq[] = [
   {
