@@ -304,7 +304,7 @@ function HomePage() {
             ].map((f) => (
               <Link
                 key={f.slug}
-                to="/faq/$slug"
+                to="/faq/homeowners/$slug"
                 params={{ slug: f.slug }}
                 className="group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-6 transition-colors hover:border-gold/50"
               >
