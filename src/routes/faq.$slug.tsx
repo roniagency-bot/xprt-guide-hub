@@ -42,8 +42,9 @@ export const Route = createFileRoute("/faq/$slug")({
 });
 
 function FaqDetail() {
-  const { faq, related } = Route.useLoaderData();
-  const lm = (faq as unknown as { lead_magnets?: { slug: string; title_en: string } | null }).lead_magnets;
+  const { faq, goDeeper, readyToAct } = Route.useLoaderData() as any;
+  const categoryName = (faq as any).faq_categories?.name_en ?? "Knowledge Base";
+  const categorySlug = (faq as any).faq_categories?.slug;
 
   return (
     <>
@@ -52,6 +53,7 @@ function FaqDetail() {
           <Breadcrumbs items={[
             { name: "Home", path: "/" },
             { name: "Knowledge Base", path: "/faq" },
+            { name: categoryName, path: categorySlug ? `/faq#${categorySlug}` : "/faq" },
             { name: faq.question_en },
           ]} />
         </div>
@@ -67,49 +69,78 @@ function FaqDetail() {
       </section>
 
       <Section>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <article className="prose prose-lg max-w-none lg:col-span-8">
-            {faq.long_answer_en && (
-              <div className="space-y-5 text-base leading-relaxed text-foreground/85 md:text-lg">
-                {faq.long_answer_en.split("\n\n").map((p: string, i: number) => (
-                  <p key={i}>{p}</p>
-                ))}
+        <article className="prose prose-lg mx-auto max-w-3xl">
+          {faq.long_answer_en && (
+            <div className="space-y-5 text-base leading-relaxed text-foreground/85 md:text-lg">
+              {faq.long_answer_en.split("\n\n").map((p: string, i: number) => {
+                // Render bullet blocks (lines starting with "- ")
+                const lines = p.split("\n");
+                if (lines.every((l) => l.trim().startsWith("- "))) {
+                  return (
+                    <ul key={i} className="list-disc space-y-2 pl-6">
+                      {lines.map((l, j) => <li key={j}>{l.replace(/^\s*-\s+/, "")}</li>)}
+                    </ul>
+                  );
+                }
+                return <p key={i}>{p}</p>;
+              })}
+            </div>
+          )}
+
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link to="/book">Book a Free Coverage Review</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/offers/$slug" params={{ slug: "homeowners-cheat-sheet" }}>
+                Download the Homeowners Cheat Sheet
+              </Link>
+            </Button>
+          </div>
+        </article>
+
+        {(goDeeper.length > 0 || readyToAct.length > 0) && (
+          <div className="mx-auto mt-16 max-w-3xl space-y-8">
+            {goDeeper.length > 0 && (
+              <div>
+                <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Go deeper</p>
+                <ul className="grid gap-3 md:grid-cols-2">
+                  {goDeeper.map((r: any) => (
+                    <li key={r.id}>
+                      <Link
+                        to="/faq/$slug"
+                        params={{ slug: r.slug }}
+                        className="group flex items-start justify-between gap-3 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50"
+                      >
+                        <span className="font-display text-base leading-snug">{r.question_en}</span>
+                        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link to="/book">Book a Coverage Review</Link>
-              </Button>
-              {lm && (
-                <Button asChild variant="outline">
-                  <Link to="/offers/$slug" params={{ slug: lm.slug }}>
-                    Free: {lm.title_en}
-                  </Link>
-                </Button>
-              )}
-            </div>
-          </article>
-
-          {related.length > 0 && (
-            <aside className="lg:col-span-4">
-              <h2 className="font-display text-xl">Related questions</h2>
-              <ul className="mt-4 space-y-3">
-                {related.map((r: any) => (
-                  <li key={r.id}>
-                    <Link
-                      to="/faq/$slug"
-                      params={{ slug: r.slug }}
-                      className="group flex items-start justify-between gap-3 rounded-lg border border-border bg-card p-4 transition-colors hover:border-gold/50"
-                    >
-                      <span className="text-sm font-medium">{r.question_en}</span>
-                      <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          )}
-        </div>
+            {readyToAct.length > 0 && (
+              <div>
+                <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Ready to act</p>
+                <ul className="grid gap-3">
+                  {readyToAct.map((r: any) => (
+                    <li key={r.id}>
+                      <Link
+                        to="/faq/$slug"
+                        params={{ slug: r.slug }}
+                        className="group flex items-start justify-between gap-3 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50"
+                      >
+                        <span className="font-display text-base leading-snug">{r.question_en}</span>
+                        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </Section>
 
       <CTASection />
