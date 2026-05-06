@@ -4,9 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import xprtLogo from "@/assets/xprt-logo.png";
 
-type SubItem =
-  | { kind: "personal"; slug: string; label: string; description?: string }
-  | { kind: "service"; category: string; slug: string; label: string; description?: string };
+type SubItem = { to: string; label: string; description?: string };
 
 type NavItem =
   | { kind: "static"; to: "/faq" | "/about" | "/contact"; label: string }
