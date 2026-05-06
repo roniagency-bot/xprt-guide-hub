@@ -7,6 +7,10 @@ export type HomeownersFaq = {
   stage: HomeownersFaqStage;
   metaDescription: string;
   paragraphs: string[];
+  whatThisMeans?: string[];
+  examples?: string[];
+  nvCoNote?: string;
+  whatToReview?: string[];
   bullets?: string[];
   stateContext?: string;
   goDeeper: string[];
