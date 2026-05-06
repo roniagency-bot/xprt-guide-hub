@@ -10,11 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
 import { Route as StatesStateRouteImport } from './routes/states.$state'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
@@ -32,11 +32,6 @@ import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -57,6 +52,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqIndexRoute = FaqIndexRouteImport.update({
+  id: '/faq/',
+  path: '/faq/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
@@ -134,7 +134,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
@@ -145,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/faq/': typeof FaqIndexRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
@@ -155,7 +155,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
@@ -166,6 +165,7 @@ export interface FileRoutesByTo {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/faq': typeof FaqIndexRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
@@ -177,7 +177,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
@@ -188,6 +187,7 @@ export interface FileRoutesById {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/faq/': typeof FaqIndexRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
@@ -200,7 +200,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
-    | '/faq'
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
@@ -211,6 +210,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/faq/'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
@@ -221,7 +221,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
-    | '/faq'
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
@@ -232,6 +231,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/faq'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
@@ -242,7 +242,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/book'
     | '/contact'
-    | '/faq'
     | '/sitemap.xml'
     | '/faq/$slug'
     | '/offers/$slug'
@@ -253,6 +252,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/faq/'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
@@ -264,7 +264,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
-  FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
@@ -274,6 +273,7 @@ export interface RootRouteChildren {
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
+  FaqIndexRoute: typeof FaqIndexRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
@@ -285,13 +285,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -320,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/': {
+      id: '/faq/'
+      path: '/faq'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof FaqIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/thank-you/$slug': {
@@ -416,18 +416,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface FaqRouteChildren {
-  FaqSlugRoute: typeof FaqSlugRoute
-  FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
-}
-
-const FaqRouteChildren: FaqRouteChildren = {
-  FaqSlugRoute: FaqSlugRoute,
-  FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
-}
-
-const FaqRouteWithChildren = FaqRoute._addFileChildren(FaqRouteChildren)
-
 interface ServicesCategoryRouteChildren {
   ServicesCategorySlugRoute: typeof ServicesCategorySlugRoute
 }
@@ -444,7 +432,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
-  FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
@@ -454,9 +441,19 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
+  FaqIndexRoute: FaqIndexRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
