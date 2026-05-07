@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
-import { FaqAccordion } from "@/components/site/FaqAccordion";
+
 import { BondsLeadForm } from "@/components/site/BondsLeadForm";
 import { getLeadMagnet } from "@/server/content.functions";
 import { BONDS_FAQ_PREVIEWS, PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
