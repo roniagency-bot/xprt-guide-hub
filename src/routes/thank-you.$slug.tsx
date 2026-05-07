@@ -4,18 +4,27 @@ import { Button } from "@/components/ui/button";
 import { getLeadMagnet, getServicePage } from "@/server/content.functions";
 import { pageHead } from "@/lib/seo";
 
+import { BONDS_FAQ_PREVIEWS } from "@/lib/bonds-faqs";
+
 export const Route = createFileRoute("/thank-you/$slug")({
   loader: async ({ params }) => {
     const lm = await getLeadMagnet({ data: { slug: params.slug } });
     if (!lm) throw notFound();
-    // For homeowners resources, surface related FAQs from the homeowners service page.
-    let faqs: Array<{ slug: string; question_en: string; short_answer_en: string }> = [];
+    let faqs: Array<{ slug: string; question_en: string; short_answer_en: string; faqType?: "homeowners" | "bonds" }> = [];
     if (params.slug.startsWith("homeowners-")) {
       const sp = await getServicePage({ data: { slug: "homeowners-insurance" } });
       faqs = (sp?.faqs ?? []).slice(0, 4).map((f: any) => ({
         slug: f.slug,
         question_en: f.question_en,
         short_answer_en: f.short_answer_en,
+        faqType: "homeowners" as const,
+      }));
+    } else if (params.slug === "bond-quick-guide" || params.slug === "complete-guide-to-surety-bonds") {
+      faqs = BONDS_FAQ_PREVIEWS.slice(0, 4).map((f) => ({
+        slug: f.slug,
+        question_en: f.question_en,
+        short_answer_en: f.short_answer_en,
+        faqType: "bonds" as const,
       }));
     }
     return { lm, faqs };
@@ -98,28 +107,32 @@ function ThankYou() {
                 </span>
               </div>
               <h2 className="mt-3 font-display text-3xl md:text-4xl">
-                While you're here — common homeowners questions
+                While you're here — related questions
               </h2>
               <ul className="mt-8 grid gap-3">
-                {faqs.map((f: { slug: string; question_en: string; short_answer_en: string }) => (
-                  <li key={f.slug}>
-                    <Link
-                      to="/faq/$slug"
-                      params={{ slug: f.slug }}
-                      className="group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50"
-                    >
+                {faqs.map((f: { slug: string; question_en: string; short_answer_en: string; faqType?: "homeowners" | "bonds" }) => {
+                  const inner = (
+                    <>
                       <div>
-                        <p className="font-display text-lg text-foreground">
-                          {f.question_en}
-                        </p>
-                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                          {f.short_answer_en}
-                        </p>
+                        <p className="font-display text-lg text-foreground">{f.question_en}</p>
+                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{f.short_answer_en}</p>
                       </div>
                       <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
-                    </Link>
-                  </li>
-                ))}
+                    </>
+                  );
+                  const cls = "group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50";
+                  return (
+                    <li key={f.slug}>
+                      {f.faqType === "bonds" ? (
+                        <Link to="/faq/bonds/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                      ) : f.faqType === "homeowners" ? (
+                        <Link to="/faq/homeowners/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                      ) : (
+                        <Link to="/faq/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

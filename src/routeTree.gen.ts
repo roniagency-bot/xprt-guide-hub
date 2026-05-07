@@ -25,8 +25,10 @@ import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/person
 import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
+import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
 import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
+import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -115,6 +117,11 @@ const FaqSlugRoute = FaqSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => FaqRoute,
 } as any)
+const BusinessInsuranceBondsRoute = BusinessInsuranceBondsRouteImport.update({
+  id: '/business-insurance/bonds',
+  path: '/business-insurance/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -123,6 +130,11 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
 const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
   id: '/homeowners/$slug',
   path: '/homeowners/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqBondsSlugRoute = FaqBondsSlugRouteImport.update({
+  id: '/bonds/$slug',
+  path: '/bonds/$slug',
   getParentRoute: () => FaqRoute,
 } as any)
 const LovableEmailQueueProcessRoute =
@@ -154,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -164,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/faq/': typeof FaqIndexRoute
+  '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
@@ -177,6 +191,7 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -187,6 +202,7 @@ export interface FileRoutesByTo {
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/faq': typeof FaqIndexRoute
+  '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
@@ -202,6 +218,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -212,6 +229,7 @@ export interface FileRoutesById {
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/faq/': typeof FaqIndexRoute
+  '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
@@ -228,6 +246,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
+    | '/business-insurance/bonds'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -238,6 +257,7 @@ export interface FileRouteTypes {
     | '/states/$state'
     | '/thank-you/$slug'
     | '/faq/'
+    | '/faq/bonds/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
@@ -251,6 +271,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/contact'
     | '/sitemap.xml'
+    | '/business-insurance/bonds'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -261,6 +282,7 @@ export interface FileRouteTypes {
     | '/states/$state'
     | '/thank-you/$slug'
     | '/faq'
+    | '/faq/bonds/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
@@ -275,6 +297,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
+    | '/business-insurance/bonds'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -285,6 +308,7 @@ export interface FileRouteTypes {
     | '/states/$state'
     | '/thank-you/$slug'
     | '/faq/'
+    | '/faq/bonds/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
     | '/api/public/downloads/$slug'
@@ -300,6 +324,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
   PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
@@ -428,6 +453,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqSlugRouteImport
       parentRoute: typeof FaqRoute
     }
+    '/business-insurance/bonds': {
+      id: '/business-insurance/bonds'
+      path: '/business-insurance/bonds'
+      fullPath: '/business-insurance/bonds'
+      preLoaderRoute: typeof BusinessInsuranceBondsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$category/$slug': {
       id: '/services/$category/$slug'
       path: '/$slug'
@@ -440,6 +472,13 @@ declare module '@tanstack/react-router' {
       path: '/homeowners/$slug'
       fullPath: '/faq/homeowners/$slug'
       preLoaderRoute: typeof FaqHomeownersSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/bonds/$slug': {
+      id: '/faq/bonds/$slug'
+      path: '/bonds/$slug'
+      fullPath: '/faq/bonds/$slug'
+      preLoaderRoute: typeof FaqBondsSlugRouteImport
       parentRoute: typeof FaqRoute
     }
     '/lovable/email/queue/process': {
@@ -476,12 +515,14 @@ declare module '@tanstack/react-router' {
 interface FaqRouteChildren {
   FaqSlugRoute: typeof FaqSlugRoute
   FaqIndexRoute: typeof FaqIndexRoute
+  FaqBondsSlugRoute: typeof FaqBondsSlugRoute
   FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
 }
 
 const FaqRouteChildren: FaqRouteChildren = {
   FaqSlugRoute: FaqSlugRoute,
   FaqIndexRoute: FaqIndexRoute,
+  FaqBondsSlugRoute: FaqBondsSlugRoute,
   FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
 }
 
@@ -505,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
   PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
@@ -521,12 +563,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
