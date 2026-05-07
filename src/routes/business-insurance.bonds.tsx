@@ -414,10 +414,42 @@ function BondsHub() {
           title="Bonds questions, organized as a funnel"
           intro="Start with the basics, go deeper, and finish with the action steps. Every answer connects to the next stage."
         />
-        <div className="mt-12">
-          <FaqAccordion items={faqs} />
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {(["tofu", "mofu", "bofu"] as const).map((stage) => {
+            const stageFaqs = faqs.filter((f) => f.funnel_stage === stage);
+            const meta = {
+              tofu: { label: "Start here", desc: "The basics — what bonds are and why you need one." },
+              mofu: { label: "Go deeper", desc: "Quoting, underwriting, and what affects approval." },
+              bofu: { label: "Ready to act", desc: "Quote, purchase, and issue your bond." },
+            }[stage];
+            return (
+              <div key={stage} className="rounded-2xl border border-border bg-card p-6 shadow-elegant">
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full border border-gold/40 bg-gold/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground/70">
+                    {meta.label}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{stageFaqs.length} {stageFaqs.length === 1 ? "topic" : "topics"}</span>
+                </div>
+                <p className="mt-4 text-sm text-muted-foreground">{meta.desc}</p>
+                <ul className="mt-5 space-y-3">
+                  {stageFaqs.map((f) => (
+                    <li key={f.slug}>
+                      <Link
+                        to="/faq/bonds/$slug"
+                        params={{ slug: f.slug }}
+                        className="group flex items-start justify-between gap-3 rounded-xl border border-border bg-background p-4 transition-colors hover:border-gold/50"
+                      >
+                        <span className="font-display text-base leading-snug text-foreground">{f.question}</span>
+                        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-gold" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
-        <div className="mt-8 text-center">
+        <div className="mt-10 text-center">
           <Button asChild variant="outline">
             <Link to="/faq">
               Browse the full knowledge base
