@@ -101,8 +101,13 @@ function CategoryHub() {
               </Link>
             );
           })}
-        </div>
       </Section>
+
+      {category.slug === "dealership" && (
+        <Section tone="cream">
+          <BondCallout />
+        </Section>
+      )}
 
       {lead_magnets.length > 0 && (
         <Section tone="cream">
