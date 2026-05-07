@@ -5,6 +5,7 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
+import { BondCallout } from "@/components/site/BondCallout";
 import { getServicePage } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from "@/lib/seo";
 
@@ -150,6 +151,12 @@ function ServicePage() {
               )}
             </aside>
           </div>
+        </Section>
+      )}
+
+      {params.category === "dealership" && (
+        <Section>
+          <BondCallout />
         </Section>
       )}
 
