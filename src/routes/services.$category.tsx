@@ -101,6 +101,7 @@ function CategoryHub() {
               </Link>
             );
           })}
+        </div>
       </Section>
 
       {category.slug === "dealership" && (
