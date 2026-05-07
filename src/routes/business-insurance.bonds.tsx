@@ -276,6 +276,25 @@ function BondsHub() {
             </div>
           ))}
         </div>
+        <div className="mx-auto mt-10 flex max-w-3xl flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 md:flex-row md:items-center md:justify-between md:p-8">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-gold">Related resource</p>
+            <h3 className="mt-2 font-display text-xl leading-tight">
+              Nevada auto dealer? Pair your bond with the right dealership coverage.
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Nevada dealers are typically required to maintain a $100,000 surety bond before licensing. We coordinate the bond with garage liability, dealer open lot, and DMV-required coverage.
+            </p>
+          </div>
+          <Button asChild variant="outline" className="shrink-0">
+            <Link
+              to="/services/$category/$slug"
+              params={{ category: "dealership", slug: "nevada-dealership-insurance" }}
+            >
+              Nevada Dealership Insurance
+            </Link>
+          </Button>
+        </div>
       </Section>
 
       {/* DIRECT ONLINE QUOTE */}
