@@ -154,6 +154,12 @@ function ServicePage() {
         </Section>
       )}
 
+      {params.category === "dealership" && (
+        <Section>
+          <BondCallout />
+        </Section>
+      )}
+
       {faqs.length > 0 && (
         <Section tone="cream">
           <SectionHeading
