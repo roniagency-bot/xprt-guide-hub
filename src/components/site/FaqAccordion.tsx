@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { isHomeownersFaqSlug } from "@/lib/homeowners-faqs";
+import { isBondsFaqSlug } from "@/lib/bonds-faqs";
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +27,7 @@ export function FaqAccordion({ items }: { items: FaqEntry[] }) {
     <Accordion type="single" collapsible className="w-full divide-y divide-border rounded-xl border border-border bg-card">
       {items.map((item) => {
         const isHomeowners = isHomeownersFaqSlug(item.slug);
+        const isBonds = isBondsFaqSlug(item.slug);
         return (
           <AccordionItem key={item.slug} value={item.slug} className="border-0 px-6">
             <AccordionTrigger className="py-5 text-left text-base font-medium text-foreground hover:no-underline">
@@ -42,6 +44,11 @@ export function FaqAccordion({ items }: { items: FaqEntry[] }) {
               <p>{item.short_answer}</p>
               {isHomeowners ? (
                 <Link to="/faq/homeowners/$slug" params={{ slug: item.slug }} className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-gold">
+                  Read the full answer
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              ) : isBonds ? (
+                <Link to="/faq/bonds/$slug" params={{ slug: item.slug }} className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-gold">
                   Read the full answer
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
