@@ -107,28 +107,32 @@ function ThankYou() {
                 </span>
               </div>
               <h2 className="mt-3 font-display text-3xl md:text-4xl">
-                While you're here — common homeowners questions
+                While you're here — related questions
               </h2>
               <ul className="mt-8 grid gap-3">
-                {faqs.map((f: { slug: string; question_en: string; short_answer_en: string }) => (
-                  <li key={f.slug}>
-                    <Link
-                      to="/faq/$slug"
-                      params={{ slug: f.slug }}
-                      className="group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50"
-                    >
+                {faqs.map((f) => {
+                  const inner = (
+                    <>
                       <div>
-                        <p className="font-display text-lg text-foreground">
-                          {f.question_en}
-                        </p>
-                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                          {f.short_answer_en}
-                        </p>
+                        <p className="font-display text-lg text-foreground">{f.question_en}</p>
+                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{f.short_answer_en}</p>
                       </div>
                       <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
-                    </Link>
-                  </li>
-                ))}
+                    </>
+                  );
+                  const cls = "group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50";
+                  return (
+                    <li key={f.slug}>
+                      {f.faqType === "bonds" ? (
+                        <Link to="/faq/bonds/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                      ) : f.faqType === "homeowners" ? (
+                        <Link to="/faq/homeowners/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                      ) : (
+                        <Link to="/faq/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
