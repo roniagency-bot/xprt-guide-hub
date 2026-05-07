@@ -38,6 +38,7 @@ const NAV: readonly NavItem[] = [
     category: "bonds",
     label: "Bonds",
     subitems: [
+      { to: "/business-insurance/bonds", label: "Bonds Hub", description: "Quote, purchase, and learn" },
       { to: "/services/bonds/surety-bonds", label: "Surety Bonds" },
       { to: "/services/bonds/license-permit-bonds", label: "License & Permit" },
       { to: "/services/bonds/contractor-bonds", label: "Contractor Bonds" },

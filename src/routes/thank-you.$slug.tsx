@@ -4,18 +4,27 @@ import { Button } from "@/components/ui/button";
 import { getLeadMagnet, getServicePage } from "@/server/content.functions";
 import { pageHead } from "@/lib/seo";
 
+import { BONDS_FAQ_PREVIEWS } from "@/lib/bonds-faqs";
+
 export const Route = createFileRoute("/thank-you/$slug")({
   loader: async ({ params }) => {
     const lm = await getLeadMagnet({ data: { slug: params.slug } });
     if (!lm) throw notFound();
-    // For homeowners resources, surface related FAQs from the homeowners service page.
-    let faqs: Array<{ slug: string; question_en: string; short_answer_en: string }> = [];
+    let faqs: Array<{ slug: string; question_en: string; short_answer_en: string; faqType?: "homeowners" | "bonds" }> = [];
     if (params.slug.startsWith("homeowners-")) {
       const sp = await getServicePage({ data: { slug: "homeowners-insurance" } });
       faqs = (sp?.faqs ?? []).slice(0, 4).map((f: any) => ({
         slug: f.slug,
         question_en: f.question_en,
         short_answer_en: f.short_answer_en,
+        faqType: "homeowners" as const,
+      }));
+    } else if (params.slug === "bond-quick-guide" || params.slug === "complete-guide-to-surety-bonds") {
+      faqs = BONDS_FAQ_PREVIEWS.slice(0, 4).map((f) => ({
+        slug: f.slug,
+        question_en: f.question_en,
+        short_answer_en: f.short_answer_en,
+        faqType: "bonds" as const,
       }));
     }
     return { lm, faqs };
