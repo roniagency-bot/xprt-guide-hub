@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { LeadCaptureForm } from "@/components/site/LeadCaptureForm";
+import { BondCallout } from "@/components/site/BondCallout";
 import { getLeadMagnet } from "@/server/content.functions";
 import { pageHead } from "@/lib/seo";
 
