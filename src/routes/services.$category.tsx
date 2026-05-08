@@ -240,7 +240,7 @@ const DEALERSHIP_COVERAGES: Coverage[] = [
     bestFor: "Dealers with significant inventory value, employee count, or floor-plan lending.",
     cta: {
       label: "Commercial coverages",
-      to: "/services/commercial",
+      href: "/services/commercial",
     },
   },
   {
