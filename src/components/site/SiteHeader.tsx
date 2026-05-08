@@ -169,29 +169,7 @@ export function SiteHeader() {
           <nav className="container-prose flex flex-col gap-1 py-4" aria-label="Mobile">
             {NAV.map((item) =>
               item.kind === "category" ? (
-                <div key={item.label} className="py-1">
-                  <Link
-                    to="/services/$category"
-                    params={{ category: item.category }}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent"
-                  >
-                    {item.label}
-                  </Link>
-                  <ul className="ml-3 border-l border-border pl-3">
-                    {item.subitems.map((s) => (
-                      <li key={s.to}>
-                        <Link
-                          to={s.to as any}
-                          onClick={() => setOpen(false)}
-                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
-                        >
-                          {s.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <MobileCategory key={item.label} item={item} onNavigate={() => setOpen(false)} />
               ) : (
                 <Link
                   key={item.label}
