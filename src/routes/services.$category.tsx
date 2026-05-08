@@ -354,22 +354,16 @@ function DealershipHub({ category, lead_magnets }: { category: any; lead_magnets
                       <strong className="text-foreground">Best for:</strong> {c.bestFor}
                     </p>
                     <div className="mt-6 flex flex-wrap gap-3">
-                      {c.cta.to ? (
-                        <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                          <Link to={c.cta.to}>{c.cta.label}</Link>
-                        </Button>
-                      ) : (
-                        <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                          <a
-                            href={c.cta.href}
-                            target={c.cta.external ? "_blank" : undefined}
-                            rel={c.cta.external ? "noopener noreferrer" : undefined}
-                          >
-                            {c.cta.label}
-                            {c.cta.external && <ExternalLink className="ml-1 h-4 w-4" />}
-                          </a>
-                        </Button>
-                      )}
+                      <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                        <a
+                          href={c.cta.to ?? c.cta.href}
+                          target={c.cta.external ? "_blank" : undefined}
+                          rel={c.cta.external ? "noopener noreferrer" : undefined}
+                        >
+                          {c.cta.label}
+                          {c.cta.external && <ExternalLink className="ml-1 h-4 w-4" />}
+                        </a>
+                      </Button>
                       {c.secondary && (
                         <Button asChild variant="outline">
                           <a
