@@ -83,6 +83,7 @@ export function BondCallout({
   if (variant === "compact") {
     return (
       <div className="rounded-xl border border-gold/40 bg-gold/5 p-5">
+        <BondCalloutJsonLd />
         <div className="flex items-start gap-3">
           <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
           <div className="flex-1">
