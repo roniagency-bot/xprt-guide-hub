@@ -103,6 +103,12 @@ function FaqDetail() {
           </div>
         </article>
 
+        {mentionsBond && (
+          <div className="mx-auto mt-12 max-w-3xl">
+            <BondCallout />
+          </div>
+        )}
+
         {(goDeeper.length > 0 || readyToAct.length > 0) && (
           <div className="mx-auto mt-16 max-w-3xl space-y-8">
             {goDeeper.length > 0 && (
