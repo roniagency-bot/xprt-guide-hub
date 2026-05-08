@@ -22,11 +22,16 @@ export const Route = createFileRoute("/faq/dealership/")({
       description:
         "Educational answers about Nevada dealership insurance — garage liability, open lot, garagekeepers, workers' comp, umbrella, and the Nevada $100,000 dealer bond.",
       path: "/faq/dealership",
-      jsonLd: breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Knowledge Center", path: "/faq" },
-        { name: "Dealership Insurance", path: "/faq/dealership" },
-      ]),
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Knowledge Center", path: "/faq" },
+          { name: "Dealership Insurance", path: "/faq/dealership" },
+        ]),
+        faqPageJsonLd(
+          DEALERSHIP_FAQS.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+        ),
+      ],
     }),
   component: DealershipFaqIndex,
 });
