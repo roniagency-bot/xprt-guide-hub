@@ -15,10 +15,18 @@ export const Route = createFileRoute("/faq/")({
       description:
         "Insurance guidance, organized clearly. Understand the basics, compare coverage and cost details, and take the next step when you're ready.",
       path: "/faq",
-      jsonLd: breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Knowledge Center", path: "/faq" },
-      ]),
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Knowledge Center", path: "/faq" },
+        ]),
+        faqPageJsonLd(
+          [...HOMEOWNERS_FAQS, ...BONDS_FAQS, ...DEALERSHIP_FAQS].map((f) => ({
+            question: f.question,
+            answer: f.shortAnswer,
+          })),
+        ),
+      ],
     }),
   component: FaqHub,
 });
