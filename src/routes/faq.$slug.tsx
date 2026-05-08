@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
+import { BondCallout } from "@/components/site/BondCallout";
 import { getFaq } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 
@@ -45,6 +46,9 @@ function FaqDetail() {
   const { faq, goDeeper, readyToAct } = Route.useLoaderData() as any;
   const categoryName = (faq as any).faq_categories?.name_en ?? "Knowledge Base";
   const categorySlug = (faq as any).faq_categories?.slug;
+
+  const haystack = `${faq.question_en ?? ""} ${faq.short_answer_en ?? ""} ${faq.long_answer_en ?? ""}`.toLowerCase();
+  const mentionsBond = /\b(dealer|dealership|surety|bond|bonds|bonded|bonding)\b/.test(haystack);
 
   return (
     <>
@@ -98,6 +102,12 @@ function FaqDetail() {
             </Button>
           </div>
         </article>
+
+        {mentionsBond && (
+          <div className="mx-auto mt-12 max-w-3xl">
+            <BondCallout />
+          </div>
+        )}
 
         {(goDeeper.length > 0 || readyToAct.length > 0) && (
           <div className="mx-auto mt-16 max-w-3xl space-y-8">
