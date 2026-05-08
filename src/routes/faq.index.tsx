@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Home, ShieldCheck, Car, Users, Building2, HardHat, Truck, Key, Briefcase } from "lucide-react";
+import { ArrowRight, Home, ShieldCheck, Car, Building2, HardHat, Truck, Key, Briefcase } from "lucide-react";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Button } from "@/components/ui/button";
