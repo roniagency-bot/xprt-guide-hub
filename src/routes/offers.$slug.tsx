@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { LeadCaptureForm } from "@/components/site/LeadCaptureForm";
+import { BondCallout } from "@/components/site/BondCallout";
 import { getLeadMagnet } from "@/server/content.functions";
 import { pageHead } from "@/lib/seo";
 
@@ -31,6 +32,8 @@ export const Route = createFileRoute("/offers/$slug")({
 
 function OfferPage() {
   const lm = Route.useLoaderData();
+  const haystack = `${lm.title_en ?? ""} ${lm.subtitle_en ?? ""} ${lm.description_en ?? ""} ${(lm.bullets_en ?? []).join(" ")} ${lm.slug ?? ""}`.toLowerCase();
+  const mentionsBond = /\b(dealer|dealership|surety|bond|bonds|bonded|bonding)\b/.test(haystack);
 
   return (
     <section className="bg-cream-gradient">
@@ -56,6 +59,11 @@ function OfferPage() {
                 </li>
               ))}
             </ul>
+          )}
+          {mentionsBond && (
+            <div className="mt-10">
+              <BondCallout />
+            </div>
           )}
         </div>
 
