@@ -430,7 +430,7 @@ function BondsHub() {
       <Section tone="cream">
         <SectionHeading
           eyebrow="Knowledge base"
-          title="Bonds questions, organized as a funnel"
+          title="Bonds questions, organized clearly"
           intro="Start with the basics, go deeper, and finish with the action steps. Every answer connects to the next stage."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">

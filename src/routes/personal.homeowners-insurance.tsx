@@ -311,7 +311,7 @@ function HomeownersHub() {
         <Section tone="cream">
           <SectionHeading
             eyebrow="Knowledge base"
-            title="Homeowners questions, organized as a funnel"
+            title="Homeowners questions, organized clearly"
             intro="Start with the basics, go deeper, and finish with the action steps. Every answer connects to the next stage."
           />
           <div className="mt-12">

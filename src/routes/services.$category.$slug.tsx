@@ -107,7 +107,7 @@ function ServicePage() {
             <h2 className="mt-4 font-display text-3xl">We're building out this page</h2>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
               Our advisors can already walk you through {page.name_en.toLowerCase()} today —
-              the written guide and FAQ funnel for this coverage are publishing soon.
+              the written guide and FAQ articles for this coverage are publishing soon.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
