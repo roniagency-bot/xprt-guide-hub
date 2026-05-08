@@ -300,6 +300,39 @@ export type Database = {
         }
         Relationships: []
       }
+      lead_magnet_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          ip_hash: string | null
+          metadata: Json | null
+          referer: string | null
+          slug: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          ip_hash?: string | null
+          metadata?: Json | null
+          referer?: string | null
+          slug: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          ip_hash?: string | null
+          metadata?: Json | null
+          referer?: string | null
+          slug?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       lead_magnets: {
         Row: {
           asset_url: string | null
