@@ -97,7 +97,19 @@ function FaqHub() {
               })}
             </div>
           </div>
-          {categories.map((cat: any) => {
+          {[...categories]
+            .sort((a: any, b: any) => {
+              const order = (slug: string) => {
+                const s = (slug ?? "").toLowerCase();
+                if (s.includes("personal") || s.includes("home") || s.includes("auto") || s.includes("renter") || s.includes("landlord")) return 0;
+                if (s.includes("bond")) return 1;
+                if (s.includes("dealer")) return 2;
+                if (s.includes("commercial") || s.includes("business") || s.includes("workers")) return 3;
+                return 4;
+              };
+              return order(a.slug) - order(b.slug);
+            })
+            .map((cat: any) => {
             if (cat.slug === "homeowners-insurance-faqs") return null;
             const catItems = items.filter((i: any) => i.category_id === cat.id);
             if (catItems.length === 0) return null;
