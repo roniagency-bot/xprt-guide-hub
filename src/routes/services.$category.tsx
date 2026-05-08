@@ -223,7 +223,7 @@ const DEALERSHIP_COVERAGES: Coverage[] = [
     bestFor: "Any dealership with W-2 employees.",
     cta: {
       label: "Workers' Comp details",
-      to: "/services/commercial/workers-compensation",
+      href: "/services/commercial/workers-compensation",
     },
   },
   {
