@@ -111,6 +111,57 @@ function CategoryDropdown({ item }: { item: Extract<NavItem, { kind: "category" 
   );
 }
 
+function MobileCategory({
+  item,
+  onNavigate,
+}: {
+  item: Extract<NavItem, { kind: "category" }>;
+  onNavigate: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="py-1">
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        aria-expanded={expanded}
+        className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-base font-medium text-foreground hover:bg-accent"
+      >
+        <span>{item.label}</span>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+          aria-hidden
+        />
+      </button>
+      {expanded && (
+        <ul className="ml-3 border-l border-border pl-3">
+          {item.subitems.map((s) => (
+            <li key={s.to}>
+              <Link
+                to={s.to as any}
+                onClick={onNavigate}
+                className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+              >
+                {s.label}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link
+              to="/services/$category"
+              params={{ category: item.category }}
+              onClick={onNavigate}
+              className="block rounded-md px-3 py-2 text-xs uppercase tracking-[0.18em] text-gold hover:bg-accent"
+            >
+              View all {item.label} →
+            </Link>
+          </li>
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
