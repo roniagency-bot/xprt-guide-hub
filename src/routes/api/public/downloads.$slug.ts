@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import homeownersCheatSheetB64 from "@/assets/downloads/homeowners-cheat-sheet.pdf.base64";
 import homeownersEbookB64 from "@/assets/downloads/homeowners-ebook.pdf.base64";
 import dealershipStarterGuideB64 from "@/assets/downloads/nevada-dealership-starter-guide.pdf.base64";
