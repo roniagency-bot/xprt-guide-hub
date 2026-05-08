@@ -8,7 +8,7 @@ import {
   GraduationCap,
   ShieldCheck,
   Sparkles,
-  CheckCircle2,
+  
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
