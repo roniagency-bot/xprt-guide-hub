@@ -62,7 +62,7 @@ function FaqDetail() {
           ]} />
         </div>
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
-          <Eyebrow>{faq.funnel_stage === "tofu" ? "Start here" : faq.funnel_stage === "mofu" ? "Go deeper" : "Ready to act"}</Eyebrow>
+          <Eyebrow>{faq.funnel_stage === "tofu" ? "Understanding the Basics" : faq.funnel_stage === "mofu" ? "Coverage & Cost Details" : "Ready for a Coverage Review?"}</Eyebrow>
           <h1 className="mt-5 text-balance text-4xl leading-[1.1] md:text-5xl">{faq.question_en}</h1>
           <p
             className={`mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl${faq.is_speakable ? " speakable" : ""}`}
@@ -113,7 +113,7 @@ function FaqDetail() {
           <div className="mx-auto mt-16 max-w-3xl space-y-8">
             {goDeeper.length > 0 && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Go deeper</p>
+                <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Coverage & Cost Details</p>
                 <ul className="grid gap-3 md:grid-cols-2">
                   {goDeeper.map((r: any) => (
                     <li key={r.id}>
@@ -132,7 +132,7 @@ function FaqDetail() {
             )}
             {readyToAct.length > 0 && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Ready to act</p>
+                <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Ready for a Coverage Review?</p>
                 <ul className="grid gap-3">
                   {readyToAct.map((r: any) => (
                     <li key={r.id}>

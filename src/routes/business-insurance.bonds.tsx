@@ -437,9 +437,9 @@ function BondsHub() {
           {(["tofu", "mofu", "bofu"] as const).map((stage) => {
             const stageFaqs = faqs.filter((f) => f.funnel_stage === stage);
             const meta = {
-              tofu: { label: "Start here", desc: "The basics — what bonds are and why you need one." },
-              mofu: { label: "Go deeper", desc: "Quoting, underwriting, and what affects approval." },
-              bofu: { label: "Ready to act", desc: "Quote, purchase, and issue your bond." },
+              tofu: { label: "Understanding the Basics", desc: "The basics — what bonds are and why you need one." },
+              mofu: { label: "Coverage & Cost Details", desc: "Quoting, underwriting, and what affects approval." },
+              bofu: { label: "Ready for a Coverage Review?", desc: "Quote, purchase, and issue your bond." },
             }[stage];
             return (
               <div key={stage} className="rounded-2xl border border-border bg-card p-6 shadow-elegant">

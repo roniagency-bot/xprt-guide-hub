@@ -17,9 +17,9 @@ export type FaqEntry = {
 };
 
 const STAGE_LABEL: Record<string, string> = {
-  tofu: "Start here",
-  mofu: "Go deeper",
-  bofu: "Ready to act",
+  tofu: "Understanding the Basics",
+  mofu: "Coverage & Cost Details",
+  bofu: "Ready for a Coverage Review?",
 };
 
 export function FaqAccordion({ items }: { items: FaqEntry[] }) {
