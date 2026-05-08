@@ -60,6 +60,11 @@ function OfferPage() {
               ))}
             </ul>
           )}
+          {mentionsBond && (
+            <div className="mt-10">
+              <BondCallout />
+            </div>
+          )}
         </div>
 
         <div className="lg:col-span-5">
