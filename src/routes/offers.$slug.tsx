@@ -32,6 +32,8 @@ export const Route = createFileRoute("/offers/$slug")({
 
 function OfferPage() {
   const lm = Route.useLoaderData();
+  const haystack = `${lm.title_en ?? ""} ${lm.subtitle_en ?? ""} ${lm.description_en ?? ""} ${(lm.bullets_en ?? []).join(" ")} ${lm.slug ?? ""}`.toLowerCase();
+  const mentionsBond = /\b(dealer|dealership|surety|bond|bonds|bonded|bonding)\b/.test(haystack);
 
   return (
     <section className="bg-cream-gradient">
