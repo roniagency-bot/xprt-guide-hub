@@ -8,7 +8,7 @@ import {
   GraduationCap,
   ShieldCheck,
   Sparkles,
-  CheckCircle2,
+  
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -89,13 +89,6 @@ function HomePage() {
                 <Link to="/faq">Browse the Knowledge Base</Link>
               </Button>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              {["Licensed NV + CO", "Bonds specialists", "Bilingual EN · ES"].map((b) => (
-                <li key={b} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-gold" /> {b}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="relative lg:col-span-6">
