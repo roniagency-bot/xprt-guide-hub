@@ -3,6 +3,69 @@ import { ArrowRight, ShieldCheck, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 
+const SITE_ORIGIN = "https://www.xprtinsurance.com";
+
+const BOND_CALLOUT_JSONLD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FinancialProduct",
+      "@id": `${SITE_ORIGIN}/business-insurance/bonds#dealer-surety-bond`,
+      name: "Nevada Dealer Surety Bond",
+      category: "Surety Bond",
+      url: `${SITE_ORIGIN}/business-insurance/bonds`,
+      provider: {
+        "@type": "InsuranceAgency",
+        name: "XPRT Insurance",
+        url: SITE_ORIGIN,
+      },
+      areaServed: { "@type": "State", name: "Nevada" },
+      description:
+        "Nevada dealers are typically required to maintain a $100,000 surety bond before licensing approval. XPRT Insurance helps secure the right bond and coordinate it with dealership insurance.",
+      potentialAction: {
+        "@type": "BuyAction",
+        name: "Quote & Purchase Online",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: PROPELLER_QUOTE_URL,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+          ],
+        },
+      },
+    },
+    {
+      "@type": "ItemList",
+      name: "Related Bond Resources",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Learn About Dealer Bonds",
+          url: `${SITE_ORIGIN}/business-insurance/bonds`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Quote & Purchase a Bond Online",
+          url: PROPELLER_QUOTE_URL,
+        },
+      ],
+    },
+  ],
+};
+
+function BondCalloutJsonLd() {
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(BOND_CALLOUT_JSONLD) }}
+    />
+  );
+}
+
 /**
  * Subtle, premium "Related Bond Requirement" callout.
  * Used wherever dealer/surety bond requirements are discussed so users can
