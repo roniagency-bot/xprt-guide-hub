@@ -64,7 +64,7 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
   ),
 });
 
-const STAGE_LABEL = { tofu: "Start here", mofu: "Go deeper", bofu: "Ready to act" } as const;
+const STAGE_LABEL = { tofu: "Understanding the Basics", mofu: "Coverage & Cost Details", bofu: "Ready for a Coverage Review?" } as const;
 
 function BondsFaqPage() {
   const { slug } = Route.useParams();
@@ -181,7 +181,7 @@ function BondsFaqPage() {
           )}
           {goDeeper.length > 0 && (
             <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Go deeper</p>
+              <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Coverage & Cost Details</p>
               <ul className="grid gap-3 md:grid-cols-2">
                 {goDeeper.map((item) => (
                   <RelatedLink key={item.slug} faq={item} />
@@ -191,7 +191,7 @@ function BondsFaqPage() {
           )}
           {readyToAct && readyToAct.slug !== faq.slug && (
             <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Ready to act</p>
+              <p className="mb-3 text-xs uppercase tracking-[0.2em] text-gold">Ready for a Coverage Review?</p>
               <ul className="grid gap-3">
                 <RelatedLink faq={readyToAct} />
               </ul>

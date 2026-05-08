@@ -28,8 +28,8 @@ function Book() {
               Book a free coverage review.
             </h1>
             <p className="mt-6 text-pretty text-lg text-muted-foreground md:text-xl">
-              We'll walk through your declarations page line by line, identify gaps, and explain every
-              section. No obligation. No pressure.
+              We'll review your current coverage, identify possible gaps, and explain things clearly —
+              without pressure or jargon.
             </p>
             <ul className="mt-8 space-y-3 text-base">
               {[

@@ -16,7 +16,6 @@ import { ServiceCard } from "@/components/site/ServiceCard";
 import { TrustBar } from "@/components/site/TrustBar";
 import { CTASection } from "@/components/site/CTASection";
 import heroAgency from "@/assets/hero-agency.jpg";
-import monthlyFocus from "@/assets/monthly-focus.jpg";
 import { pageHead, orgJsonLd, canonical } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -125,42 +124,6 @@ function HomePage() {
 
       <TrustBar />
 
-      {/* MONTHLY FOCUS */}
-      <Section tone="cream">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-6">
-            <div className="overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
-              <img
-                src={monthlyFocus}
-                alt="This month's coverage focus from XPRT Insurance"
-                width={1600}
-                height={1088}
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col justify-center lg:col-span-6">
-            <Eyebrow>Monthly Focus · {new Date().toLocaleString("en-US", { month: "long", year: "numeric" })}</Eyebrow>
-            <h2 className="mt-4 text-balance font-display text-4xl leading-tight md:text-5xl">
-              This month: reviewing your homeowners policy before renewal
-            </h2>
-            <p className="mt-5 text-pretty text-base text-muted-foreground md:text-lg">
-              Each month we spotlight one coverage topic worth a closer look. This month, we're walking
-              homeowners through the six sections of every policy and the gaps that surprise people most.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
-                <Link to="/personal/homeowners-insurance">Read this month's focus</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link to="/book">Book a free review</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Section>
-
       {/* SERVICES */}
       <Section>
         <SectionHeading
@@ -245,7 +208,7 @@ function HomePage() {
       <Section tone="cream">
         <SectionHeading
           eyebrow="Free guides"
-          title="Educational tripwires by category"
+          title="Free Guides & Resources"
           intro="One-page guides written by an advisor, not a marketer. Pick the one that matches your situation."
         />
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -279,7 +242,7 @@ function HomePage() {
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="Knowledge base"
-              title="Answers, organized like a funnel"
+              title="Insurance guidance, organized clearly."
               intro="Start with the basics, then go deeper. Every article connects to the next stage so you can build coverage knowledge step by step."
             />
             <Button asChild className="mt-8" variant="outline">
@@ -291,9 +254,9 @@ function HomePage() {
           </div>
           <div className="grid gap-3 lg:col-span-7">
             {[
-              { stage: "Start here", q: "What does homeowners insurance actually cover?", slug: "what-does-homeowners-insurance-cover" },
-              { stage: "Go deeper", q: "Replacement cost vs actual cash value — what's the difference?", slug: "replacement-cost-vs-actual-cash-value" },
-              { stage: "Ready to act", q: "How do I get my policy reviewed by an advisor?", slug: "how-to-review-homeowners-policy-with-an-advisor" },
+              { stage: "Understanding the Basics", q: "What does homeowners insurance actually cover?", slug: "what-does-homeowners-insurance-cover" },
+              { stage: "Coverage & Cost Details", q: "Replacement cost vs actual cash value — what's the difference?", slug: "replacement-cost-vs-actual-cash-value" },
+              { stage: "Ready for a Coverage Review?", q: "How do I get my policy reviewed by an advisor?", slug: "how-to-review-homeowners-policy-with-an-advisor" },
             ].map((f) => (
               <Link
                 key={f.slug}

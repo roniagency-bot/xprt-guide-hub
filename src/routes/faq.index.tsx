@@ -22,7 +22,7 @@ export const Route = createFileRoute("/faq/")({
 });
 
 const STAGE_ORDER = ["tofu", "mofu", "bofu"] as const;
-const STAGE_LABEL = { tofu: "Start here", mofu: "Go deeper", bofu: "Ready to act" };
+const STAGE_LABEL = { tofu: "Understanding the Basics", mofu: "Coverage & Cost Details", bofu: "Ready for a Coverage Review?" };
 
 function FaqHub() {
   const { categories, items } = Route.useLoaderData();
