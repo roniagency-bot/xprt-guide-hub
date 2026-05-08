@@ -24,17 +24,6 @@ const NAV: readonly NavItem[] = [
   },
   {
     kind: "category",
-    category: "commercial",
-    label: "Commercial",
-    subitems: [
-      { to: "/services/commercial/general-liability", label: "General Liability" },
-      { to: "/services/commercial/workers-compensation", label: "Workers' Comp" },
-      { to: "/services/commercial/commercial-auto", label: "Commercial Auto" },
-      { to: "/services/commercial/business-owners-policy", label: "Business Owners Policy" },
-    ],
-  },
-  {
-    kind: "category",
     category: "bonds",
     label: "Bonds",
     subitems: [
@@ -53,6 +42,17 @@ const NAV: readonly NavItem[] = [
       { to: "/services/dealership/garage-liability", label: "Garage Liability" },
       { to: "/services/dealership/dealer-open-lot", label: "Dealer Open Lot" },
       { to: "/services/dealership/dealer-bonds", label: "Dealer Bonds" },
+    ],
+  },
+  {
+    kind: "category",
+    category: "commercial",
+    label: "Commercial",
+    subitems: [
+      { to: "/services/commercial/general-liability", label: "General Liability" },
+      { to: "/services/commercial/workers-compensation", label: "Workers' Comp" },
+      { to: "/services/commercial/commercial-auto", label: "Commercial Auto" },
+      { to: "/services/commercial/business-owners-policy", label: "Business Owners Policy" },
     ],
   },
   { kind: "static", to: "/faq", label: "Knowledge Base" },

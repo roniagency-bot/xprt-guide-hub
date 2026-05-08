@@ -38,12 +38,6 @@ const SERVICES = [
     to: "/services/personal",
   },
   {
-    icon: Building2,
-    title: "Commercial Insurance",
-    description: "General Liability, Workers' Comp, Commercial Auto, and BOP coverage.",
-    to: "/services/commercial",
-  },
-  {
     icon: ScrollText,
     title: "Bonds",
     description: "Surety, license & permit, contractor, dealer, and court bonds. Our specialty.",
@@ -57,6 +51,12 @@ const SERVICES = [
     description: "Garage liability, dealer open lot, and dealer bonds — for licensed Nevada dealers.",
     to: "/services/dealership",
     badge: "NV only",
+  },
+  {
+    icon: Building2,
+    title: "Commercial Insurance",
+    description: "General Liability, Workers' Comp, Commercial Auto, and BOP coverage.",
+    to: "/services/commercial",
   },
 ] as const;
 
@@ -215,10 +215,10 @@ function HomePage() {
           {[
             { slug: "homeowners-cheat-sheet", title: "Homeowners Insurance Cheat Sheet", tag: "Personal" },
             { slug: "auto-coverage-guide", title: "Auto Insurance Coverage Guide", tag: "Personal" },
-            { slug: "small-business-starter-guide", title: "Small Business Insurance Starter Guide", tag: "Commercial" },
-            { slug: "workers-comp-liability-checklist", title: "Workers' Comp & Liability Checklist", tag: "Commercial" },
             { slug: "nevada-bond-cheat-sheet", title: "Nevada Bond Requirements Cheat Sheet", tag: "Bonds · NV" },
             { slug: "nevada-dealership-starter-guide", title: "Nevada Dealership Insurance & Bond Guide", tag: "Dealership · NV" },
+            { slug: "small-business-starter-guide", title: "Small Business Insurance Starter Guide", tag: "Commercial" },
+            { slug: "workers-comp-liability-checklist", title: "Workers' Comp & Liability Checklist", tag: "Commercial" },
           ].map((o) => (
             <Link
               key={o.slug}
