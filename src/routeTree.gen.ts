@@ -26,8 +26,12 @@ import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.aut
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
+import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
+import { Route as FaqDealershipIndexRouteImport } from './routes/faq.dealership.index'
+import { Route as FaqBondsIndexRouteImport } from './routes/faq.bonds.index'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
 import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
+import { Route as FaqDealershipSlugRouteImport } from './routes/faq.dealership.$slug'
 import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
@@ -122,6 +126,21 @@ const BusinessInsuranceBondsRoute = BusinessInsuranceBondsRouteImport.update({
   path: '/business-insurance/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqHomeownersIndexRoute = FaqHomeownersIndexRouteImport.update({
+  id: '/homeowners/',
+  path: '/homeowners/',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqDealershipIndexRoute = FaqDealershipIndexRouteImport.update({
+  id: '/dealership/',
+  path: '/dealership/',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqBondsIndexRoute = FaqBondsIndexRouteImport.update({
+  id: '/bonds/',
+  path: '/bonds/',
+  getParentRoute: () => FaqRoute,
+} as any)
 const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -130,6 +149,11 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
 const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
   id: '/homeowners/$slug',
   path: '/homeowners/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqDealershipSlugRoute = FaqDealershipSlugRouteImport.update({
+  id: '/dealership/$slug',
+  path: '/dealership/$slug',
   getParentRoute: () => FaqRoute,
 } as any)
 const FaqBondsSlugRoute = FaqBondsSlugRouteImport.update({
@@ -178,8 +202,12 @@ export interface FileRoutesByFullPath {
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/faq/': typeof FaqIndexRoute
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
+  '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/faq/bonds/': typeof FaqBondsIndexRoute
+  '/faq/dealership/': typeof FaqDealershipIndexRoute
+  '/faq/homeowners/': typeof FaqHomeownersIndexRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -203,8 +231,12 @@ export interface FileRoutesByTo {
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/faq': typeof FaqIndexRoute
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
+  '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/faq/bonds': typeof FaqBondsIndexRoute
+  '/faq/dealership': typeof FaqDealershipIndexRoute
+  '/faq/homeowners': typeof FaqHomeownersIndexRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -230,8 +262,12 @@ export interface FileRoutesById {
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/faq/': typeof FaqIndexRoute
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
+  '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/faq/bonds/': typeof FaqBondsIndexRoute
+  '/faq/dealership/': typeof FaqDealershipIndexRoute
+  '/faq/homeowners/': typeof FaqHomeownersIndexRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -258,8 +294,12 @@ export interface FileRouteTypes {
     | '/thank-you/$slug'
     | '/faq/'
     | '/faq/bonds/$slug'
+    | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
+    | '/faq/bonds/'
+    | '/faq/dealership/'
+    | '/faq/homeowners/'
     | '/api/public/downloads/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -283,8 +323,12 @@ export interface FileRouteTypes {
     | '/thank-you/$slug'
     | '/faq'
     | '/faq/bonds/$slug'
+    | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
+    | '/faq/bonds'
+    | '/faq/dealership'
+    | '/faq/homeowners'
     | '/api/public/downloads/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -309,8 +353,12 @@ export interface FileRouteTypes {
     | '/thank-you/$slug'
     | '/faq/'
     | '/faq/bonds/$slug'
+    | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
+    | '/faq/bonds/'
+    | '/faq/dealership/'
+    | '/faq/homeowners/'
     | '/api/public/downloads/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -460,6 +508,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessInsuranceBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq/homeowners/': {
+      id: '/faq/homeowners/'
+      path: '/homeowners'
+      fullPath: '/faq/homeowners/'
+      preLoaderRoute: typeof FaqHomeownersIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/dealership/': {
+      id: '/faq/dealership/'
+      path: '/dealership'
+      fullPath: '/faq/dealership/'
+      preLoaderRoute: typeof FaqDealershipIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/bonds/': {
+      id: '/faq/bonds/'
+      path: '/bonds'
+      fullPath: '/faq/bonds/'
+      preLoaderRoute: typeof FaqBondsIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
     '/services/$category/$slug': {
       id: '/services/$category/$slug'
       path: '/$slug'
@@ -472,6 +541,13 @@ declare module '@tanstack/react-router' {
       path: '/homeowners/$slug'
       fullPath: '/faq/homeowners/$slug'
       preLoaderRoute: typeof FaqHomeownersSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/dealership/$slug': {
+      id: '/faq/dealership/$slug'
+      path: '/dealership/$slug'
+      fullPath: '/faq/dealership/$slug'
+      preLoaderRoute: typeof FaqDealershipSlugRouteImport
       parentRoute: typeof FaqRoute
     }
     '/faq/bonds/$slug': {
@@ -516,14 +592,22 @@ interface FaqRouteChildren {
   FaqSlugRoute: typeof FaqSlugRoute
   FaqIndexRoute: typeof FaqIndexRoute
   FaqBondsSlugRoute: typeof FaqBondsSlugRoute
+  FaqDealershipSlugRoute: typeof FaqDealershipSlugRoute
   FaqHomeownersSlugRoute: typeof FaqHomeownersSlugRoute
+  FaqBondsIndexRoute: typeof FaqBondsIndexRoute
+  FaqDealershipIndexRoute: typeof FaqDealershipIndexRoute
+  FaqHomeownersIndexRoute: typeof FaqHomeownersIndexRoute
 }
 
 const FaqRouteChildren: FaqRouteChildren = {
   FaqSlugRoute: FaqSlugRoute,
   FaqIndexRoute: FaqIndexRoute,
   FaqBondsSlugRoute: FaqBondsSlugRoute,
+  FaqDealershipSlugRoute: FaqDealershipSlugRoute,
   FaqHomeownersSlugRoute: FaqHomeownersSlugRoute,
+  FaqBondsIndexRoute: FaqBondsIndexRoute,
+  FaqDealershipIndexRoute: FaqDealershipIndexRoute,
+  FaqHomeownersIndexRoute: FaqHomeownersIndexRoute,
 }
 
 const FaqRouteWithChildren = FaqRoute._addFileChildren(FaqRouteChildren)
@@ -563,3 +647,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
