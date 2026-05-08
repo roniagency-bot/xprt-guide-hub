@@ -115,6 +115,7 @@ export function BondCallout({
 
   return (
     <div className="rounded-2xl border border-gold/40 bg-gold/5 p-6 md:p-8">
+      <BondCalloutJsonLd />
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:gap-6">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-background">
           <ShieldCheck className="h-5 w-5 text-gold" />
