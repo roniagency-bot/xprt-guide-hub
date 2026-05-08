@@ -3,7 +3,7 @@ import { ArrowRight, Home, ShieldCheck, Car, Building2, HardHat, Truck, Key, Bri
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 import { BONDS_FAQS } from "@/lib/bonds-faqs";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
