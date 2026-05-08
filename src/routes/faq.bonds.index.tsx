@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
-import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { BONDS_FAQS, PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 
 const STAGE_ORDER = ["tofu", "mofu", "bofu"] as const;
