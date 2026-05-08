@@ -162,12 +162,16 @@ function CategoryCardLink({ cat }: { cat: CategoryCard }) {
   const className =
     "group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-gold/50";
 
-  if (isReady && cat.href) {
-    return (
-      <Link to={cat.href} className={className}>
-        {content}
-      </Link>
-    );
+  if (isReady) {
+    if (cat.href === "/faq/homeowners") {
+      return <Link to="/faq/homeowners" className={className}>{content}</Link>;
+    }
+    if (cat.href === "/faq/bonds") {
+      return <Link to="/faq/bonds" className={className}>{content}</Link>;
+    }
+    if (cat.href === "/faq/dealership") {
+      return <Link to="/faq/dealership" className={className}>{content}</Link>;
+    }
   }
   return (
     <Link to="/book" className={className}>
