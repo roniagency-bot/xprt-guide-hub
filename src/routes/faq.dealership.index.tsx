@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
-import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 
