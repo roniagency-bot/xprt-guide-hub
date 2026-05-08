@@ -47,6 +47,9 @@ function FaqDetail() {
   const categoryName = (faq as any).faq_categories?.name_en ?? "Knowledge Base";
   const categorySlug = (faq as any).faq_categories?.slug;
 
+  const haystack = `${faq.question_en ?? ""} ${faq.short_answer_en ?? ""} ${faq.long_answer_en ?? ""}`.toLowerCase();
+  const mentionsBond = /\b(dealer|dealership|surety|bond|bonds|bonded|bonding)\b/.test(haystack);
+
   return (
     <>
       <section className="bg-cream-gradient">
