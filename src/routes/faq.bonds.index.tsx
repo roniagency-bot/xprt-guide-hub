@@ -21,11 +21,16 @@ export const Route = createFileRoute("/faq/bonds/")({
       description:
         "Educational answers about surety bonds — what they are, why they're required, what affects approval and pricing, and how to quote and purchase common bonds online.",
       path: "/faq/bonds",
-      jsonLd: breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Knowledge Center", path: "/faq" },
-        { name: "Bonds", path: "/faq/bonds" },
-      ]),
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Knowledge Center", path: "/faq" },
+          { name: "Bonds", path: "/faq/bonds" },
+        ]),
+        faqPageJsonLd(
+          BONDS_FAQS.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+        ),
+      ],
     }),
   component: BondsFaqIndex,
 });
