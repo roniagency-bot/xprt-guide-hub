@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
-import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 
 const STAGE_ORDER = ["tofu", "mofu", "bofu"] as const;
@@ -21,11 +21,16 @@ export const Route = createFileRoute("/faq/homeowners/")({
       description:
         "Educational answers about homeowners insurance — coverage, exclusions, replacement cost, endorsements, liability, and policy reviews for Nevada and Colorado homeowners.",
       path: "/faq/homeowners",
-      jsonLd: breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Knowledge Center", path: "/faq" },
-        { name: "Homeowners Insurance", path: "/faq/homeowners" },
-      ]),
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Knowledge Center", path: "/faq" },
+          { name: "Homeowners Insurance", path: "/faq/homeowners" },
+        ]),
+        faqPageJsonLd(
+          HOMEOWNERS_FAQS.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+        ),
+      ],
     }),
   component: HomeownersFaqIndex,
 });

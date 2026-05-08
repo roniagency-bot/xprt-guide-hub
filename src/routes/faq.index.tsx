@@ -3,7 +3,7 @@ import { ArrowRight, Home, ShieldCheck, Car, Building2, HardHat, Truck, Key, Bri
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 import { BONDS_FAQS } from "@/lib/bonds-faqs";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
@@ -15,10 +15,18 @@ export const Route = createFileRoute("/faq/")({
       description:
         "Insurance guidance, organized clearly. Understand the basics, compare coverage and cost details, and take the next step when you're ready.",
       path: "/faq",
-      jsonLd: breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Knowledge Center", path: "/faq" },
-      ]),
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Knowledge Center", path: "/faq" },
+        ]),
+        faqPageJsonLd(
+          [...HOMEOWNERS_FAQS, ...BONDS_FAQS, ...DEALERSHIP_FAQS].map((f) => ({
+            question: f.question,
+            answer: f.shortAnswer,
+          })),
+        ),
+      ],
     }),
   component: FaqHub,
 });
