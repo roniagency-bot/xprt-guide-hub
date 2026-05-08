@@ -21,11 +21,16 @@ export const Route = createFileRoute("/faq/homeowners/")({
       description:
         "Educational answers about homeowners insurance — coverage, exclusions, replacement cost, endorsements, liability, and policy reviews for Nevada and Colorado homeowners.",
       path: "/faq/homeowners",
-      jsonLd: breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Knowledge Center", path: "/faq" },
-        { name: "Homeowners Insurance", path: "/faq/homeowners" },
-      ]),
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Knowledge Center", path: "/faq" },
+          { name: "Homeowners Insurance", path: "/faq/homeowners" },
+        ]),
+        faqPageJsonLd(
+          HOMEOWNERS_FAQS.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+        ),
+      ],
     }),
   component: HomeownersFaqIndex,
 });
