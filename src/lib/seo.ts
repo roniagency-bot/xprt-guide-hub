@@ -32,9 +32,20 @@ export function pageHead(opts: {
   image?: string;
   type?: "website" | "article";
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Locale of THIS page. Defaults to "en". */
+  locale?: "en" | "es";
+  /**
+   * Cross-language alternates. Provide the EN path and ES path (when a
+   * translated version exists). Emits rel="alternate" hreflang link tags
+   * for en, es, and x-default to help Google rank the right URL per locale.
+   */
+  alternates?: { en?: string; es?: string };
 }): { meta: Meta[]; links: LinkTag[]; scripts: ScriptTag[] } {
   const url = canonical(opts.path);
   const image = opts.image;
+  const locale = opts.locale ?? "en";
+  const ogLocale = locale === "es" ? "es_US" : "en_US";
+  const ogLocaleAlt = locale === "es" ? "en_US" : "es_US";
   const meta: Meta[] = [
     { title: opts.title },
     { name: "description", content: opts.description },
@@ -43,6 +54,7 @@ export function pageHead(opts: {
     { property: "og:type", content: opts.type ?? "website" },
     { property: "og:url", content: url },
     { property: "og:site_name", content: SITE.name },
+    { property: "og:locale", content: ogLocale },
     { name: "twitter:card", content: image ? "summary_large_image" : "summary" },
     { name: "twitter:title", content: opts.title },
     { name: "twitter:description", content: opts.description },
@@ -52,6 +64,20 @@ export function pageHead(opts: {
     meta.push({ name: "twitter:image", content: image });
   }
   const links: LinkTag[] = [{ rel: "canonical", href: url }];
+  if (opts.alternates) {
+    const { en, es } = opts.alternates;
+    if (en) {
+      links.push({ rel: "alternate", hreflang: "en", href: canonical(en) } as LinkTag);
+      links.push({ rel: "alternate", hreflang: "x-default", href: canonical(en) } as LinkTag);
+    }
+    if (es) {
+      links.push({ rel: "alternate", hreflang: "es", href: canonical(es) } as LinkTag);
+      // og:locale:alternate signals the other available language
+      meta.push({ property: "og:locale:alternate", content: locale === "es" ? "en_US" : "es_US" });
+    } else if (en) {
+      meta.push({ property: "og:locale:alternate", content: ogLocaleAlt });
+    }
+  }
   const scripts: ScriptTag[] = [];
   if (opts.jsonLd) {
     const arr = Array.isArray(opts.jsonLd) ? opts.jsonLd : [opts.jsonLd];
@@ -61,6 +87,7 @@ export function pageHead(opts: {
   }
   return { meta, links, scripts };
 }
+
 
 export const orgJsonLd = () => ({
   "@context": "https://schema.org",
