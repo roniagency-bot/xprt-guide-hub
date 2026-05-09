@@ -3,6 +3,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { CTASection } from "@/components/site/CTASection";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
@@ -40,7 +41,7 @@ function DealershipFaqIndex() {
   return (
     <>
       <section className="bg-cream-gradient">
-        <div className="container-prose pt-10 md:pt-14">
+        <div className="container-prose pt-10 md:pt-14 flex items-start justify-between gap-3 flex-wrap">
           <Breadcrumbs
             items={[
               { name: "Home", path: "/" },
@@ -48,6 +49,7 @@ function DealershipFaqIndex() {
               { name: "Dealership Insurance" },
             ]}
           />
+          <LanguageToggle current="en" />
         </div>
         <div className="container-prose pb-12 pt-10 md:pb-16 md:pt-14">
           <Eyebrow>Nevada Dealership Insurance</Eyebrow>

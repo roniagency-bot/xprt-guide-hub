@@ -3,6 +3,7 @@ import { ArrowRight, Home, ShieldCheck, Car, Building2, HardHat, Truck, Key, Bri
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Button } from "@/components/ui/button";
+import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 import { BONDS_FAQS } from "@/lib/bonds-faqs";
@@ -80,8 +81,9 @@ function FaqHub() {
   return (
     <>
       <section className="bg-cream-gradient">
-        <div className="container-prose pt-10 md:pt-14">
+        <div className="container-prose pt-10 md:pt-14 flex items-start justify-between gap-3 flex-wrap">
           <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Knowledge Center" }]} />
+          <LanguageToggle current="en" />
         </div>
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>Knowledge Center</Eyebrow>
