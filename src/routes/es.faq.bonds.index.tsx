@@ -17,6 +17,8 @@ export const Route = createFileRoute("/es/faq/bonds/")({
       description:
         "Respuestas educativas sobre fianzas surety — qué son, por qué se requieren, qué afecta la aprobación y el precio, y cómo cotizarlas y comprarlas en línea.",
       path: "/es/faq/bonds",
+      locale: "es",
+      alternates: { en: "/faq/bonds", es: "/es/faq/bonds" },
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Inicio", path: "/es" },

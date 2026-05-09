@@ -16,6 +16,8 @@ export const Route = createFileRoute("/es/faq/homeowners/")({
       description:
         "Respuestas educativas sobre el seguro de propietarios — cobertura, exclusiones, costo de reemplazo, endosos, responsabilidad y revisiones de póliza para propietarios en Nevada y Colorado.",
       path: "/es/faq/homeowners",
+      locale: "es",
+      alternates: { en: "/faq/homeowners", es: "/es/faq/homeowners" },
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Inicio", path: "/es" },
