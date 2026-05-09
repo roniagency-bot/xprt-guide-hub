@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createServerFn } from "@tanstack/react-start";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { enqueueTransactionalEmail } from "@/lib/email/enqueue.server";
 
 const LeadSchema = z.object({
   full_name: z.string().trim().min(2, "Please enter your name").max(120),
@@ -11,9 +12,6 @@ const LeadSchema = z.object({
   category_tag: z.string().max(80).optional(),
   source_path: z.string().max(300).optional(),
   state: z.enum(["NV", "CO"]).optional(),
-  // Optional structured metadata. Stored in `notes` as JSON so a
-  // GoHighLevel webhook handler can read all marketing context server-side
-  // without any further schema changes.
   meta: z
     .object({
       first_name: z.string().trim().max(80).optional(),
@@ -29,28 +27,52 @@ const LeadSchema = z.object({
 
 export type LeadInput = z.infer<typeof LeadSchema>;
 
+const SITE_URL =
+  process.env.SITE_URL?.replace(/\/$/, "") || "https://www.xprtinsurance.com";
+
+function detectLang(source_path?: string, page_url?: string): "en" | "es" {
+  const candidates = [source_path, page_url].filter(Boolean) as string[];
+  for (const raw of candidates) {
+    try {
+      const path = raw.startsWith("http") ? new URL(raw).pathname : raw;
+      if (path === "/es" || path.startsWith("/es/")) return "es";
+    } catch {
+      if (raw.startsWith("/es/") || raw === "/es") return "es";
+    }
+  }
+  return "en";
+}
+
+function generateDownloadToken(): string {
+  const bytes = new Uint8Array(24);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 export const submitLead = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => LeadSchema.parse(input))
   .handler(async ({ data }) => {
-    const { error } = await supabaseAdmin.from("lead_submissions").insert({
-      full_name: data.full_name,
-      email: data.email,
-      phone: data.phone || null,
-      consent: data.consent,
-      lead_magnet_id: data.lead_magnet_id ?? null,
-      category_tag: data.category_tag ?? null,
-      source_path: data.source_path ?? null,
-      state: data.state ?? null,
-      notes: data.meta ? JSON.stringify(data.meta) : null,
-    });
-    if (error) {
+    const { data: inserted, error } = await supabaseAdmin
+      .from("lead_submissions")
+      .insert({
+        full_name: data.full_name,
+        email: data.email,
+        phone: data.phone || null,
+        consent: data.consent,
+        lead_magnet_id: data.lead_magnet_id ?? null,
+        category_tag: data.category_tag ?? null,
+        source_path: data.source_path ?? null,
+        state: data.state ?? null,
+        notes: data.meta ? JSON.stringify(data.meta) : null,
+      })
+      .select("id")
+      .single();
+    if (error || !inserted) {
       console.error("submitLead failed:", error);
       return { ok: false as const, error: "Could not submit. Please try again." };
     }
 
-    // GoHighLevel webhook hook (server-side). When GHL_WEBHOOK_URL is set
-    // as a secret, forward a normalized payload. Failures are non-fatal —
-    // the lead is already saved in Supabase.
+    // GoHighLevel webhook (non-fatal)
     const webhookUrl = process.env.GHL_WEBHOOK_URL;
     if (webhookUrl) {
       try {
@@ -70,6 +92,62 @@ export const submitLead = createServerFn({ method: "POST" })
         });
       } catch (err) {
         console.error("GHL webhook forward failed:", err);
+      }
+    }
+
+    // ─── Bilingual tripwire email with tracked download link ───
+    if (data.lead_magnet_id) {
+      try {
+        const { data: magnet } = await supabaseAdmin
+          .from("lead_magnets")
+          .select("slug,title_en,title_es,is_published")
+          .eq("id", data.lead_magnet_id)
+          .maybeSingle();
+
+        if (magnet?.is_published && magnet.slug) {
+          const lang = detectLang(data.source_path, data.meta?.page_url);
+          const offerTitle =
+            (lang === "es" ? magnet.title_es : magnet.title_en) ||
+            magnet.title_en ||
+            magnet.slug;
+
+          const token = generateDownloadToken();
+          const { error: tokErr } = await supabaseAdmin
+            .from("download_tokens")
+            .insert({
+              token,
+              slug: magnet.slug,
+              email: data.email.toLowerCase(),
+              lead_submission_id: inserted.id,
+              lang,
+            });
+          if (tokErr) {
+            console.error("download_token insert failed:", tokErr);
+          }
+
+          const downloadUrl = `${SITE_URL}/api/public/downloads/${magnet.slug}?t=${token}`;
+          const firstName =
+            data.meta?.first_name ||
+            data.full_name.trim().split(/\s+/)[0] ||
+            undefined;
+
+          const result = await enqueueTransactionalEmail({
+            templateName: "tripwire-offer",
+            recipientEmail: data.email,
+            idempotencyKey: `tripwire-${inserted.id}`,
+            templateData: {
+              name: firstName,
+              offerTitle,
+              downloadUrl,
+              lang,
+            },
+          });
+          if (!result.ok) {
+            console.warn("Tripwire email not queued:", result.error);
+          }
+        }
+      } catch (err) {
+        console.error("Tripwire delivery failed (non-fatal):", err);
       }
     }
 
