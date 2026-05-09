@@ -17,9 +17,9 @@ const STAGE_LABEL = {
 export const Route = createFileRoute("/faq/homeowners/")({
   head: () =>
     pageHead({
-      title: "Homeowners Insurance FAQs | XPRT Insurance",
+      title: "Homeowners Insurance FAQs for Nevada & Colorado | XPRT",
       description:
-        "Educational answers about homeowners insurance — coverage, exclusions, replacement cost, endorsements, liability, and policy reviews for Nevada and Colorado homeowners.",
+        "Plain-English answers about homeowners insurance: replacement cost vs. ACV, wind and hail, water damage, liability limits, deductibles, and what a Nevada or Colorado policy review actually covers.",
       path: "/faq/homeowners",
       jsonLd: [
         breadcrumbJsonLd([
