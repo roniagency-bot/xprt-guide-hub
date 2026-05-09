@@ -36,6 +36,11 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
       title: `${faq.question} | XPRT Insurance`,
       description: faq.metaDescription,
       path,
+      locale: "en",
+      alternates: {
+        en: `/faq/bonds/${faq.slug}`,
+        es: `/es/faq/bonds/${faq.slug}`,
+      },
       type: "article",
       jsonLd: [
         breadcrumbJsonLd([
