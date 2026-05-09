@@ -55,7 +55,10 @@ export const Route = createFileRoute("/api/public/downloads/$slug")({
           return new Response("Not found", { status: 404 });
         }
 
-        // Fire-and-forget analytics log (server-side success signal)
+        const url = new URL(request.url);
+        const trackingToken = url.searchParams.get("t");
+
+        // Fire-and-forget tracking — record the unique-link click and analytics
         try {
           const ip =
             request.headers.get("cf-connecting-ip") ??
@@ -66,15 +69,43 @@ export const Route = createFileRoute("/api/public/downloads/$slug")({
             .from("lead_magnet_events")
             .insert({
               slug: params.slug,
-              event: "download_success",
+              event: trackingToken ? "download_success_tracked" : "download_success",
               user_agent: request.headers.get("user-agent"),
               referer: request.headers.get("referer"),
               ip_hash,
-              metadata: { bytes: entry.bytes.byteLength },
+              metadata: {
+                bytes: entry.bytes.byteLength,
+                has_token: Boolean(trackingToken),
+              },
             })
             .then(({ error }) => {
               if (error) console.error("lead_magnet_events insert failed", error);
             });
+
+          if (trackingToken) {
+            // Increment click counter on the unique download token. Atomic
+            // enough for our needs — first/last_clicked timestamps + a
+            // best-effort counter via read-modify-write.
+            void (async () => {
+              const { data: tok } = await supabaseAdmin
+                .from("download_tokens")
+                .select("click_count, first_clicked_at")
+                .eq("token", trackingToken)
+                .maybeSingle();
+              if (!tok) return;
+              const now = new Date().toISOString();
+              await supabaseAdmin
+                .from("download_tokens")
+                .update({
+                  click_count: (tok.click_count ?? 0) + 1,
+                  first_clicked_at: tok.first_clicked_at ?? now,
+                  last_clicked_at: now,
+                })
+                .eq("token", trackingToken);
+            })().catch((e) =>
+              console.error("download_token tracking failed", e),
+            );
+          }
         } catch (err) {
           console.error("download analytics error", err);
         }
