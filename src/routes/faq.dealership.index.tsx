@@ -3,6 +3,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { CTASection } from "@/components/site/CTASection";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
