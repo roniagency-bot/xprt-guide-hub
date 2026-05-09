@@ -41,6 +41,42 @@ export type Database = {
         }
         Relationships: []
       }
+      download_tokens: {
+        Row: {
+          click_count: number
+          created_at: string
+          email: string
+          first_clicked_at: string | null
+          lang: string
+          last_clicked_at: string | null
+          lead_submission_id: string | null
+          slug: string
+          token: string
+        }
+        Insert: {
+          click_count?: number
+          created_at?: string
+          email: string
+          first_clicked_at?: string | null
+          lang?: string
+          last_clicked_at?: string | null
+          lead_submission_id?: string | null
+          slug: string
+          token: string
+        }
+        Update: {
+          click_count?: number
+          created_at?: string
+          email?: string
+          first_clicked_at?: string | null
+          lang?: string
+          last_clicked_at?: string | null
+          lead_submission_id?: string | null
+          slug?: string
+          token?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
