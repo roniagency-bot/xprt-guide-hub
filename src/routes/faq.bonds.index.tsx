@@ -21,6 +21,8 @@ export const Route = createFileRoute("/faq/bonds/")({
       description:
         "Independent answers on surety bonds: what they are, why they're required, how credit and bond size drive premium, the difference from insurance, and how to quote and buy common commercial and license bonds online.",
       path: "/faq/bonds",
+      locale: "en",
+      alternates: { en: "/faq/bonds", es: "/es/faq/bonds" },
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Home", path: "/" },

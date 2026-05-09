@@ -16,6 +16,8 @@ export const Route = createFileRoute("/faq/")({
       description:
         "Insurance guidance, organized clearly. Understand the basics, compare coverage and cost details, and take the next step when you're ready.",
       path: "/faq",
+      locale: "en",
+      alternates: { en: "/faq", es: "/es/faq" },
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Home", path: "/" },

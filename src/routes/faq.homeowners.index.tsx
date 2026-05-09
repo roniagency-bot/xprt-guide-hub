@@ -21,6 +21,8 @@ export const Route = createFileRoute("/faq/homeowners/")({
       description:
         "Plain-English answers about homeowners insurance: replacement cost vs. ACV, wind and hail, water damage, liability limits, deductibles, and what a Nevada or Colorado policy review actually covers.",
       path: "/faq/homeowners",
+      locale: "en",
+      alternates: { en: "/faq/homeowners", es: "/es/faq/homeowners" },
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Home", path: "/" },

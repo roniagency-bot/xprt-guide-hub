@@ -18,6 +18,8 @@ export const Route = createFileRoute("/es/faq/dealership/")({
       description:
         "Respuestas educativas sobre el seguro para concesionarios en Nevada — garage liability, open lot, garagekeepers, compensación laboral, umbrella y la fianza de concesionario de $100,000.",
       path: "/es/faq/dealership",
+      locale: "es",
+      alternates: { en: "/faq/dealership", es: "/es/faq/dealership" },
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Inicio", path: "/es" },
