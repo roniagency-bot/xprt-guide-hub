@@ -29,14 +29,20 @@ import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-in
 import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
 import { Route as FaqDealershipIndexRouteImport } from './routes/faq.dealership.index'
 import { Route as FaqBondsIndexRouteImport } from './routes/faq.bonds.index'
+import { Route as EsFaqIndexRouteImport } from './routes/es.faq.index'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
 import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
 import { Route as FaqDealershipSlugRouteImport } from './routes/faq.dealership.$slug'
 import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
+import { Route as EsFaqHomeownersIndexRouteImport } from './routes/es.faq.homeowners.index'
 import { Route as EsFaqDealershipIndexRouteImport } from './routes/es.faq.dealership.index'
+import { Route as EsFaqBondsIndexRouteImport } from './routes/es.faq.bonds.index'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as EsFaqHomeownersSlugRouteImport } from './routes/es.faq.homeowners.$slug'
+import { Route as EsFaqDealershipSlugRouteImport } from './routes/es.faq.dealership.$slug'
+import { Route as EsFaqBondsSlugRouteImport } from './routes/es.faq.bonds.$slug'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -142,6 +148,11 @@ const FaqBondsIndexRoute = FaqBondsIndexRouteImport.update({
   path: '/bonds/',
   getParentRoute: () => FaqRoute,
 } as any)
+const EsFaqIndexRoute = EsFaqIndexRouteImport.update({
+  id: '/es/faq/',
+  path: '/es/faq/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -162,9 +173,19 @@ const FaqBondsSlugRoute = FaqBondsSlugRouteImport.update({
   path: '/bonds/$slug',
   getParentRoute: () => FaqRoute,
 } as any)
+const EsFaqHomeownersIndexRoute = EsFaqHomeownersIndexRouteImport.update({
+  id: '/es/faq/homeowners/',
+  path: '/es/faq/homeowners/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsFaqDealershipIndexRoute = EsFaqDealershipIndexRouteImport.update({
   id: '/es/faq/dealership/',
   path: '/es/faq/dealership/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqBondsIndexRoute = EsFaqBondsIndexRouteImport.update({
+  id: '/es/faq/bonds/',
+  path: '/es/faq/bonds/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailQueueProcessRoute =
@@ -181,6 +202,21 @@ const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
 const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   id: '/lovable/email/auth/preview',
   path: '/lovable/email/auth/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqHomeownersSlugRoute = EsFaqHomeownersSlugRouteImport.update({
+  id: '/es/faq/homeowners/$slug',
+  path: '/es/faq/homeowners/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqDealershipSlugRoute = EsFaqDealershipSlugRouteImport.update({
+  id: '/es/faq/dealership/$slug',
+  path: '/es/faq/dealership/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqBondsSlugRoute = EsFaqBondsSlugRouteImport.update({
+  id: '/es/faq/bonds/$slug',
+  path: '/es/faq/bonds/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
@@ -211,14 +247,20 @@ export interface FileRoutesByFullPath {
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/es/faq/': typeof EsFaqIndexRoute
   '/faq/bonds/': typeof FaqBondsIndexRoute
   '/faq/dealership/': typeof FaqDealershipIndexRoute
   '/faq/homeowners/': typeof FaqHomeownersIndexRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/es/faq/bonds/$slug': typeof EsFaqBondsSlugRoute
+  '/es/faq/dealership/$slug': typeof EsFaqDealershipSlugRoute
+  '/es/faq/homeowners/$slug': typeof EsFaqHomeownersSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/es/faq/bonds/': typeof EsFaqBondsIndexRoute
   '/es/faq/dealership/': typeof EsFaqDealershipIndexRoute
+  '/es/faq/homeowners/': typeof EsFaqHomeownersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -241,14 +283,20 @@ export interface FileRoutesByTo {
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/es/faq': typeof EsFaqIndexRoute
   '/faq/bonds': typeof FaqBondsIndexRoute
   '/faq/dealership': typeof FaqDealershipIndexRoute
   '/faq/homeowners': typeof FaqHomeownersIndexRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/es/faq/bonds/$slug': typeof EsFaqBondsSlugRoute
+  '/es/faq/dealership/$slug': typeof EsFaqDealershipSlugRoute
+  '/es/faq/homeowners/$slug': typeof EsFaqHomeownersSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/es/faq/bonds': typeof EsFaqBondsIndexRoute
   '/es/faq/dealership': typeof EsFaqDealershipIndexRoute
+  '/es/faq/homeowners': typeof EsFaqHomeownersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -273,14 +321,20 @@ export interface FileRoutesById {
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
+  '/es/faq/': typeof EsFaqIndexRoute
   '/faq/bonds/': typeof FaqBondsIndexRoute
   '/faq/dealership/': typeof FaqDealershipIndexRoute
   '/faq/homeowners/': typeof FaqHomeownersIndexRoute
   '/api/public/downloads/$slug': typeof ApiPublicDownloadsSlugRoute
+  '/es/faq/bonds/$slug': typeof EsFaqBondsSlugRoute
+  '/es/faq/dealership/$slug': typeof EsFaqDealershipSlugRoute
+  '/es/faq/homeowners/$slug': typeof EsFaqHomeownersSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/es/faq/bonds/': typeof EsFaqBondsIndexRoute
   '/es/faq/dealership/': typeof EsFaqDealershipIndexRoute
+  '/es/faq/homeowners/': typeof EsFaqHomeownersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -306,14 +360,20 @@ export interface FileRouteTypes {
     | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
+    | '/es/faq/'
     | '/faq/bonds/'
     | '/faq/dealership/'
     | '/faq/homeowners/'
     | '/api/public/downloads/$slug'
+    | '/es/faq/bonds/$slug'
+    | '/es/faq/dealership/$slug'
+    | '/es/faq/homeowners/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/es/faq/bonds/'
     | '/es/faq/dealership/'
+    | '/es/faq/homeowners/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -336,14 +396,20 @@ export interface FileRouteTypes {
     | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
+    | '/es/faq'
     | '/faq/bonds'
     | '/faq/dealership'
     | '/faq/homeowners'
     | '/api/public/downloads/$slug'
+    | '/es/faq/bonds/$slug'
+    | '/es/faq/dealership/$slug'
+    | '/es/faq/homeowners/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/es/faq/bonds'
     | '/es/faq/dealership'
+    | '/es/faq/homeowners'
   id:
     | '__root__'
     | '/'
@@ -367,14 +433,20 @@ export interface FileRouteTypes {
     | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
     | '/services/$category/$slug'
+    | '/es/faq/'
     | '/faq/bonds/'
     | '/faq/dealership/'
     | '/faq/homeowners/'
     | '/api/public/downloads/$slug'
+    | '/es/faq/bonds/$slug'
+    | '/es/faq/dealership/$slug'
+    | '/es/faq/homeowners/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/es/faq/bonds/'
     | '/es/faq/dealership/'
+    | '/es/faq/homeowners/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -393,11 +465,17 @@ export interface RootRouteChildren {
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
+  EsFaqIndexRoute: typeof EsFaqIndexRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
+  EsFaqBondsSlugRoute: typeof EsFaqBondsSlugRoute
+  EsFaqDealershipSlugRoute: typeof EsFaqDealershipSlugRoute
+  EsFaqHomeownersSlugRoute: typeof EsFaqHomeownersSlugRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  EsFaqBondsIndexRoute: typeof EsFaqBondsIndexRoute
   EsFaqDealershipIndexRoute: typeof EsFaqDealershipIndexRoute
+  EsFaqHomeownersIndexRoute: typeof EsFaqHomeownersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -542,6 +620,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqBondsIndexRouteImport
       parentRoute: typeof FaqRoute
     }
+    '/es/faq/': {
+      id: '/es/faq/'
+      path: '/es/faq'
+      fullPath: '/es/faq/'
+      preLoaderRoute: typeof EsFaqIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$category/$slug': {
       id: '/services/$category/$slug'
       path: '/$slug'
@@ -570,11 +655,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqBondsSlugRouteImport
       parentRoute: typeof FaqRoute
     }
+    '/es/faq/homeowners/': {
+      id: '/es/faq/homeowners/'
+      path: '/es/faq/homeowners'
+      fullPath: '/es/faq/homeowners/'
+      preLoaderRoute: typeof EsFaqHomeownersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/faq/dealership/': {
       id: '/es/faq/dealership/'
       path: '/es/faq/dealership'
       fullPath: '/es/faq/dealership/'
       preLoaderRoute: typeof EsFaqDealershipIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/faq/bonds/': {
+      id: '/es/faq/bonds/'
+      path: '/es/faq/bonds'
+      fullPath: '/es/faq/bonds/'
+      preLoaderRoute: typeof EsFaqBondsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -596,6 +695,27 @@ declare module '@tanstack/react-router' {
       path: '/lovable/email/auth/preview'
       fullPath: '/lovable/email/auth/preview'
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/faq/homeowners/$slug': {
+      id: '/es/faq/homeowners/$slug'
+      path: '/es/faq/homeowners/$slug'
+      fullPath: '/es/faq/homeowners/$slug'
+      preLoaderRoute: typeof EsFaqHomeownersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/faq/dealership/$slug': {
+      id: '/es/faq/dealership/$slug'
+      path: '/es/faq/dealership/$slug'
+      fullPath: '/es/faq/dealership/$slug'
+      preLoaderRoute: typeof EsFaqDealershipSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/faq/bonds/$slug': {
+      id: '/es/faq/bonds/$slug'
+      path: '/es/faq/bonds/$slug'
+      fullPath: '/es/faq/bonds/$slug'
+      preLoaderRoute: typeof EsFaqBondsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/downloads/$slug': {
@@ -659,11 +779,17 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
+  EsFaqIndexRoute: EsFaqIndexRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
+  EsFaqBondsSlugRoute: EsFaqBondsSlugRoute,
+  EsFaqDealershipSlugRoute: EsFaqDealershipSlugRoute,
+  EsFaqHomeownersSlugRoute: EsFaqHomeownersSlugRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  EsFaqBondsIndexRoute: EsFaqBondsIndexRoute,
   EsFaqDealershipIndexRoute: EsFaqDealershipIndexRoute,
+  EsFaqHomeownersIndexRoute: EsFaqHomeownersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
