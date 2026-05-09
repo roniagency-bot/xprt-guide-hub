@@ -51,11 +51,18 @@ function BondsFaqIndex() {
         <div className="container-prose pb-12 pt-10 md:pb-16 md:pt-14">
           <Eyebrow>Surety Bonds</Eyebrow>
           <h1 className="mt-5 text-balance text-4xl leading-[1.05] md:text-5xl">
-            Surety bonds, explained clearly.
+            Surety bond answers — quote, approval, and pricing demystified.
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
-            Understand the basics, learn how approval and pricing work, and quote and purchase
-            common bonds online.
+            A surety bond isn't insurance for you — it's a financial guarantee to a third party.
+            Learn how bond amount, bond type, and personal credit drive premium, why most license
+            and permit bonds approve in minutes online, and when a larger contract or court bond
+            needs underwriting.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+            Educational only. Bond requirements are set by the obligee (state agency, court, or
+            project owner). XPRT writes most standard bonds nationwide; specialized bonds may be
+            limited by carrier appetite and applicant credit.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
