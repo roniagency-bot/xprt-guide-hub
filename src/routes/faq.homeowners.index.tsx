@@ -51,11 +51,17 @@ function HomeownersFaqIndex() {
         <div className="container-prose pb-12 pt-10 md:pb-16 md:pt-14">
           <Eyebrow>Homeowners Insurance</Eyebrow>
           <h1 className="mt-5 text-balance text-4xl leading-[1.05] md:text-5xl">
-            Homeowners insurance, explained clearly.
+            Homeowners insurance answers for Nevada & Colorado homeowners.
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
-            Start with the basics, compare important coverage and cost details, and book a free
-            review when you're ready.
+            Independent, plain-English answers on coverage forms, replacement cost, deductibles,
+            water and wind damage, liability, and the endorsements most policies need but rarely
+            include by default. Start with the basics, dig into coverage and cost details, and
+            book a free policy review when you're ready.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+            Educational only. XPRT writes homeowners policies in Nevada and Colorado; specific
+            coverage, eligibility, and pricing depend on your carrier, property, and state.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
