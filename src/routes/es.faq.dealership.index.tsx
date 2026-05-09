@@ -1,17 +1,12 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
-import {
-  getDealershipFaq,
-  getDealershipFaqs,
-  getRelatedDealershipTofu,
-  DEALERSHIP_FAQS,
-} from "@/lib/dealership-faqs";
+import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
 import { DEALERSHIP_FAQS_ES } from "@/lib/i18n/dealership-faqs-es";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 import { applyTranslation, UI } from "@/lib/i18n";
-import { FaqCategoryIndex, FaqDetail } from "@/components/faq/FaqCategory";
+import { FaqCategoryIndex } from "@/components/faq/FaqCategory";
 
 const LANG = "es" as const;
 
@@ -70,5 +65,3 @@ export const Route = createFileRoute("/es/faq/dealership/")({
     />
   ),
 });
-
-export const SlugRoute = null;
