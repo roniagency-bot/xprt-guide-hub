@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -49,6 +50,11 @@ import { Route as EsFaqDealershipSlugRouteImport } from './routes/es.faq.dealers
 import { Route as EsFaqBondsSlugRouteImport } from './routes/es.faq.bonds.$slug'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -258,6 +264,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -298,6 +305,7 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -340,6 +348,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -383,6 +392,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/faq/$slug'
@@ -423,6 +433,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/contact'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/faq/$slug'
@@ -464,6 +475,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/faq/$slug'
@@ -506,6 +518,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   OffersSlugRoute: typeof OffersSlugRoute
@@ -534,6 +547,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -852,6 +872,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   OffersSlugRoute: OffersSlugRoute,
