@@ -54,11 +54,18 @@ function DealershipFaqIndex() {
         <div className="container-prose pb-12 pt-10 md:pb-16 md:pt-14">
           <Eyebrow>Nevada Dealership Insurance</Eyebrow>
           <h1 className="mt-5 text-balance text-4xl leading-[1.05] md:text-5xl">
-            Nevada dealership insurance, explained clearly.
+            Nevada dealership insurance & dealer bond FAQs.
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
-            Garage liability, open lot, garagekeepers, workers' comp, umbrella, and the Nevada
-            DMV $100,000 dealer bond — organized so you can review them together.
+            Built specifically for Nevada DMV–licensed franchise, used, wholesale, and rebuilder
+            dealers. Understand how garage liability, open lot physical damage, garagekeepers,
+            dealer plates, workers' compensation, and a commercial umbrella stack together — and
+            how the Nevada $100,000 motor vehicle dealer bond fits alongside your insurance.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+            Nevada-only guidance. These answers reflect Nevada DMV Compliance Enforcement Division
+            requirements (NRS 482) and are educational, not legal or licensing advice. Coverage,
+            limits, and bond pricing depend on your dealer type, lot size, inventory, and credit.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
