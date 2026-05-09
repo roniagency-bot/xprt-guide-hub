@@ -389,10 +389,10 @@ function BondsHubEs() {
       {/* FINAL CTA */}
       <CTASection
         title="¿Necesitas una fianza específica?"
-        subtitle="Cotiza y compra en línea, o habla con un especialista bilingüe que te guía en el proceso."
-        primaryLabel="Cotiza y compra en línea"
-        primaryHref={PROPELLER_QUOTE_URL}
-        secondaryLabel="Habla con un especialista"
+        subtitle="Habla con un especialista bilingüe que te guía en el proceso, o cotiza en línea."
+        primaryLabel="Agenda una llamada"
+        secondaryLabel="Ver Centro de Conocimiento"
+        secondaryHref="/es/faq"
       />
     </>
   );
