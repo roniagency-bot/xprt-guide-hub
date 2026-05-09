@@ -22,7 +22,7 @@ export function canonical(path: string) {
 }
 
 type Meta = { title?: string; name?: string; property?: string; content?: string; charSet?: string };
-type LinkTag = { rel: string; href: string };
+type LinkTag = { rel: string; href: string; hreflang?: string };
 type ScriptTag = { type?: string; children?: string };
 
 export function pageHead(opts: {
