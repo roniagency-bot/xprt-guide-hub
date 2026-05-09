@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -25,18 +26,22 @@ import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/person
 import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
 import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
 import { Route as FaqDealershipIndexRouteImport } from './routes/faq.dealership.index'
 import { Route as FaqBondsIndexRouteImport } from './routes/faq.bonds.index'
 import { Route as EsFaqIndexRouteImport } from './routes/es.faq.index'
 import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
 import { Route as FaqDealershipSlugRouteImport } from './routes/faq.dealership.$slug'
 import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
 import { Route as EsFaqHomeownersIndexRouteImport } from './routes/es.faq.homeowners.index'
 import { Route as EsFaqDealershipIndexRouteImport } from './routes/es.faq.dealership.index'
 import { Route as EsFaqBondsIndexRouteImport } from './routes/es.faq.bonds.index'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -45,6 +50,11 @@ import { Route as EsFaqDealershipSlugRouteImport } from './routes/es.faq.dealers
 import { Route as EsFaqBondsSlugRouteImport } from './routes/es.faq.bonds.$slug'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
 
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -128,6 +138,11 @@ const FaqSlugRoute = FaqSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => FaqRoute,
 } as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessInsuranceBondsRoute = BusinessInsuranceBondsRouteImport.update({
   id: '/business-insurance/bonds',
   path: '/business-insurance/bonds',
@@ -157,6 +172,11 @@ const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ServicesCategoryRoute,
+} as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
   id: '/homeowners/$slug',
@@ -188,6 +208,18 @@ const EsFaqBondsIndexRoute = EsFaqBondsIndexRouteImport.update({
   path: '/es/faq/bonds/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -232,7 +264,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -246,6 +280,7 @@ export interface FileRoutesByFullPath {
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/es/faq/': typeof EsFaqIndexRoute
   '/faq/bonds/': typeof FaqBondsIndexRoute
@@ -258,6 +293,8 @@ export interface FileRoutesByFullPath {
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/es/faq/bonds/': typeof EsFaqBondsIndexRoute
   '/es/faq/dealership/': typeof EsFaqDealershipIndexRoute
   '/es/faq/homeowners/': typeof EsFaqHomeownersIndexRoute
@@ -268,7 +305,9 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -282,6 +321,7 @@ export interface FileRoutesByTo {
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/es/faq': typeof EsFaqIndexRoute
   '/faq/bonds': typeof FaqBondsIndexRoute
@@ -294,6 +334,8 @@ export interface FileRoutesByTo {
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/es/faq/bonds': typeof EsFaqBondsIndexRoute
   '/es/faq/dealership': typeof EsFaqDealershipIndexRoute
   '/es/faq/homeowners': typeof EsFaqHomeownersIndexRoute
@@ -306,7 +348,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -320,6 +364,7 @@ export interface FileRoutesById {
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
   '/faq/homeowners/$slug': typeof FaqHomeownersSlugRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/services/$category/$slug': typeof ServicesCategorySlugRoute
   '/es/faq/': typeof EsFaqIndexRoute
   '/faq/bonds/': typeof FaqBondsIndexRoute
@@ -332,6 +377,8 @@ export interface FileRoutesById {
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/es/faq/bonds/': typeof EsFaqBondsIndexRoute
   '/es/faq/dealership/': typeof EsFaqDealershipIndexRoute
   '/es/faq/homeowners/': typeof EsFaqHomeownersIndexRoute
@@ -345,7 +392,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/business-insurance/bonds'
+    | '/email/unsubscribe'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -359,6 +408,7 @@ export interface FileRouteTypes {
     | '/faq/bonds/$slug'
     | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
+    | '/lovable/email/suppression'
     | '/services/$category/$slug'
     | '/es/faq/'
     | '/faq/bonds/'
@@ -371,6 +421,8 @@ export interface FileRouteTypes {
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
     | '/es/faq/bonds/'
     | '/es/faq/dealership/'
     | '/es/faq/homeowners/'
@@ -381,7 +433,9 @@ export interface FileRouteTypes {
     | '/book'
     | '/contact'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/business-insurance/bonds'
+    | '/email/unsubscribe'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -395,6 +449,7 @@ export interface FileRouteTypes {
     | '/faq/bonds/$slug'
     | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
+    | '/lovable/email/suppression'
     | '/services/$category/$slug'
     | '/es/faq'
     | '/faq/bonds'
@@ -407,6 +462,8 @@ export interface FileRouteTypes {
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
     | '/es/faq/bonds'
     | '/es/faq/dealership'
     | '/es/faq/homeowners'
@@ -418,7 +475,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/business-insurance/bonds'
+    | '/email/unsubscribe'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -432,6 +491,7 @@ export interface FileRouteTypes {
     | '/faq/bonds/$slug'
     | '/faq/dealership/$slug'
     | '/faq/homeowners/$slug'
+    | '/lovable/email/suppression'
     | '/services/$category/$slug'
     | '/es/faq/'
     | '/faq/bonds/'
@@ -444,6 +504,8 @@ export interface FileRouteTypes {
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
     | '/es/faq/bonds/'
     | '/es/faq/dealership/'
     | '/es/faq/homeowners/'
@@ -456,7 +518,9 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
   PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
@@ -465,6 +529,7 @@ export interface RootRouteChildren {
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
+  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   EsFaqIndexRoute: typeof EsFaqIndexRoute
   ApiPublicDownloadsSlugRoute: typeof ApiPublicDownloadsSlugRoute
   EsFaqBondsSlugRoute: typeof EsFaqBondsSlugRoute
@@ -473,6 +538,8 @@ export interface RootRouteChildren {
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
+  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   EsFaqBondsIndexRoute: typeof EsFaqBondsIndexRoute
   EsFaqDealershipIndexRoute: typeof EsFaqDealershipIndexRoute
   EsFaqHomeownersIndexRoute: typeof EsFaqHomeownersIndexRoute
@@ -480,6 +547,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -592,6 +666,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqSlugRouteImport
       parentRoute: typeof FaqRoute
     }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/business-insurance/bonds': {
       id: '/business-insurance/bonds'
       path: '/business-insurance/bonds'
@@ -634,6 +715,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCategorySlugRouteImport
       parentRoute: typeof ServicesCategoryRoute
     }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faq/homeowners/$slug': {
       id: '/faq/homeowners/$slug'
       path: '/homeowners/$slug'
@@ -674,6 +762,20 @@ declare module '@tanstack/react-router' {
       path: '/es/faq/bonds'
       fullPath: '/es/faq/bonds/'
       preLoaderRoute: typeof EsFaqBondsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -770,7 +872,9 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
   PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
@@ -779,6 +883,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
+  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   EsFaqIndexRoute: EsFaqIndexRoute,
   ApiPublicDownloadsSlugRoute: ApiPublicDownloadsSlugRoute,
   EsFaqBondsSlugRoute: EsFaqBondsSlugRoute,
@@ -787,6 +892,8 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
+  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   EsFaqBondsIndexRoute: EsFaqBondsIndexRoute,
   EsFaqDealershipIndexRoute: EsFaqDealershipIndexRoute,
   EsFaqHomeownersIndexRoute: EsFaqHomeownersIndexRoute,
