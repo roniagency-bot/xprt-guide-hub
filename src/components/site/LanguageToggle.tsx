@@ -4,8 +4,12 @@ import { toLangPath, type Lang, UI } from "@/lib/i18n";
 
 export function LanguageToggle({ current }: { current: Lang }) {
   const { pathname } = useLocation();
-  const otherLang: Lang = current === "en" ? "es" : "en";
-  const otherPath = toLangPath(pathname, otherLang);
+  const enPath = toLangPath(pathname, "en");
+  const esPath = toLangPath(pathname, "es");
+
+  const baseClass = "rounded-full px-3 py-1 font-medium transition-colors";
+  const activeClass = "bg-gold text-gold-foreground";
+  const inactiveClass = "text-muted-foreground hover:text-foreground";
 
   return (
     <div
@@ -14,28 +18,16 @@ export function LanguageToggle({ current }: { current: Lang }) {
       aria-label={UI.switchLanguage[current]}
     >
       <Languages className="ml-2 h-3.5 w-3.5 text-muted-foreground" aria-hidden />
-      <Link
-        to={current === "en" ? pathname : otherPath as never}
-        aria-current={current === "en" ? "page" : undefined}
-        className={`rounded-full px-3 py-1 font-medium transition-colors ${
-          current === "en"
-            ? "bg-gold text-gold-foreground"
-            : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        EN
-      </Link>
-      <Link
-        to={current === "es" ? pathname : otherPath as never}
-        aria-current={current === "es" ? "page" : undefined}
-        className={`rounded-full px-3 py-1 font-medium transition-colors ${
-          current === "es"
-            ? "bg-gold text-gold-foreground"
-            : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        ES
-      </Link>
+      {current === "en" ? (
+        <span className={`${baseClass} ${activeClass}`} aria-current="page">EN</span>
+      ) : (
+        <Link to={enPath as never} className={`${baseClass} ${inactiveClass}`}>EN</Link>
+      )}
+      {current === "es" ? (
+        <span className={`${baseClass} ${activeClass}`} aria-current="page">ES</span>
+      ) : (
+        <Link to={esPath as never} className={`${baseClass} ${inactiveClass}`}>ES</Link>
+      )}
     </div>
   );
 }
