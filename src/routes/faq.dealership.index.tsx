@@ -19,9 +19,9 @@ const STAGE_LABEL = {
 export const Route = createFileRoute("/faq/dealership/")({
   head: () =>
     pageHead({
-      title: "Nevada Dealership Insurance FAQs | XPRT Insurance",
+      title: "Nevada Dealer Insurance & $100K Bond FAQs | XPRT",
       description:
-        "Educational answers about Nevada dealership insurance — garage liability, open lot, garagekeepers, workers' comp, umbrella, and the Nevada $100,000 dealer bond.",
+        "Nevada-specific answers for licensed motor vehicle dealers: garage liability, open lot, garagekeepers, dealer plates, workers' comp, umbrella, and the Nevada DMV $100,000 dealer bond — what's required, what's optional, and how the pieces fit.",
       path: "/faq/dealership",
       jsonLd: [
         breadcrumbJsonLd([
