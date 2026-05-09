@@ -17,9 +17,9 @@ const STAGE_LABEL = {
 export const Route = createFileRoute("/faq/bonds/")({
   head: () =>
     pageHead({
-      title: "Surety Bonds FAQs | XPRT Insurance",
+      title: "Surety Bond FAQs: Cost, Approval & How They Work | XPRT",
       description:
-        "Educational answers about surety bonds — what they are, why they're required, what affects approval and pricing, and how to quote and purchase common bonds online.",
+        "Independent answers on surety bonds: what they are, why they're required, how credit and bond size drive premium, the difference from insurance, and how to quote and buy common commercial and license bonds online.",
       path: "/faq/bonds",
       jsonLd: [
         breadcrumbJsonLd([
