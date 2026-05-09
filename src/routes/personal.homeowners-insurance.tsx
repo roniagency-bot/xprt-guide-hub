@@ -64,6 +64,8 @@ export const Route = createFileRoute("/personal/homeowners-insurance")({
       description,
       path,
       image: canonical("/og-default.jpg"),
+      locale: "en",
+      alternates: { en: path, es: "/es/personal/homeowners-insurance" },
       jsonLd,
     });
   },

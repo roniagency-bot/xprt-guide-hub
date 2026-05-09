@@ -11,11 +11,43 @@ export function useLang(): Lang {
   return detectLang(pathname);
 }
 
+/**
+ * Set of EN paths that have a Spanish equivalent. Keep this list in sync
+ * whenever you add/remove an `es.*` route file. Used by toLangPath() so that
+ * the EN→ES toggle never points at a non-existent Spanish page.
+ *
+ * Static prefixes match exactly; dynamic prefixes (those ending with "/")
+ * match any sub-path.
+ */
+const ES_AVAILABLE_EXACT = new Set<string>([
+  "/",
+  "/faq",
+  "/faq/homeowners",
+  "/faq/bonds",
+  "/faq/dealership",
+  "/personal/homeowners-insurance",
+  "/business-insurance/bonds",
+]);
+const ES_AVAILABLE_PREFIXES = [
+  "/faq/homeowners/",
+  "/faq/bonds/",
+  "/faq/dealership/",
+];
+
+function hasSpanishVersion(enPath: string): boolean {
+  if (ES_AVAILABLE_EXACT.has(enPath)) return true;
+  return ES_AVAILABLE_PREFIXES.some((p) => enPath.startsWith(p));
+}
+
 /** Convert any /faq... path into its /es/faq... mirror, and vice versa. */
 export function toLangPath(pathname: string, lang: Lang): string {
   const isEs = pathname.startsWith("/es/") || pathname === "/es";
   const stripped = isEs ? pathname.replace(/^\/es/, "") || "/" : pathname;
   if (lang === "en") return stripped;
+  // Going EN → ES: only return the mirrored path if a Spanish route exists,
+  // otherwise fall back to the Spanish Knowledge Center so the toggle never
+  // produces a 404.
+  if (!hasSpanishVersion(stripped)) return "/es";
   return stripped === "/" ? "/es" : `/es${stripped}`;
 }
 

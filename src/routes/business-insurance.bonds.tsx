@@ -52,6 +52,8 @@ export const Route = createFileRoute("/business-insurance/bonds")({
       description,
       path: PATH,
       image: canonical("/og-default.jpg"),
+      locale: "en",
+      alternates: { en: PATH, es: "/es/business-insurance/bonds" },
       jsonLd: [
         orgJsonLd(),
         breadcrumbJsonLd([

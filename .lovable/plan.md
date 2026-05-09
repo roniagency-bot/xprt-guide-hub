@@ -1,76 +1,83 @@
-## Bilingual EN/ES Toggle for Knowledge Center
+## Goal
 
-### Approach
+Two deliverables in one pass:
 
-URL-prefixed Spanish mirror at `/es/...` for SEO, sharing, and per-language `head()`. Pre-translated content stored alongside English in the existing FAQ data files. A single `<LanguageToggle>` swaps between the matching EN/ES URL.
+1. Lock down email deliverability for the sending domain (DKIM, SPF, DMARC) and ship a verification checklist you can run after every publish.
+2. Extend the Spanish `/es` structure — but only to sections that are genuinely complete, so we don't ship empty translated pages or dead toggles.
 
-### Architecture
+---
 
-1. **i18n primitives** — `src/lib/i18n.ts`
-   - `Lang = "en" | "es"` type
-   - `useLang()` hook reads current pathname; pages can also pass `lang` explicitly
-   - `UI` dictionary for static labels (breadcrumbs, eyebrows, "Short answer", buttons, CTAs, category-card titles, hub headings, "Coming soon", legal disclaimer, etc.)
-   - `pickLang(en, es, lang)` helper with safe fallback to English when a translation is missing
+## Part 1 — Email authentication (DKIM / SPF / DMARC)
 
-2. **FAQ data — add Spanish fields** in the three existing files (`homeowners-faqs.ts`, `bonds-faqs.ts`, `dealership-faqs.ts`)
-   - Optional fields per item: `question_es`, `shortAnswer_es`, `metaDescription_es`, `paragraphs_es[]`, `bullets_es[]`, `whatToPrepare_es[]`, `stateContext_es`
-   - Helper `getFaqI18n(faq, lang)` returns the language-resolved object
+**Current state:** the sending domain `notify.www.xprtinsurance.com` is verified through Lovable Emails. Because that subdomain is delegated to Lovable's nameservers (`ns5/ns6.lovable.cloud`), the SPF (`TXT v=spf1 ...`), DKIM (Mailgun selector CNAME), and MX records are auto‑provisioned and rotated by Lovable. There is no manual record to add at the registrar for the sending subdomain itself.
 
-3. **Refactor render logic into shared components** so EN/ES routes don't duplicate JSX
-   - `src/components/faq/FaqDetail.tsx` — body of `faq.{cat}.$slug.tsx` (takes `faq`, `lang`, `category`)
-   - `src/components/faq/FaqCategoryIndex.tsx` — list grid (takes `faqs`, `lang`, `category`)
-   - `src/components/faq/KnowledgeHub.tsx` — the 9-card hub
-   - Existing EN route files become thin shells calling these components with `lang="en"`
+**What we'll do:**
+- Add a **DMARC** record at the registrar level for `www.xprtinsurance.com` (the registrar still controls DNS for the parent domain). Recommended record:
+  - Host: `_dmarc.www.xprtinsurance.com`
+  - Type: `TXT`
+  - Value: `v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@xprtinsurance.com; ruf=mailto:dmarc-reports@xprtinsurance.com; fo=1; adkim=r; aspf=r; pct=100`
+  - Start at `p=quarantine`; move to `p=reject` after 2 weeks of clean reports.
+- Generate a downloadable **deliverability checklist** (Markdown) covering DKIM, SPF, DMARC, suppression hygiene, and post‑publish smoke tests. Saved to `/mnt/documents/email-deliverability-checklist.md`.
+- No code changes required for SPF/DKIM — they are already live through Lovable's managed zone.
 
-4. **Spanish route files** (mirror structure under `/es/`)
-   ```
-   src/routes/es.faq.index.tsx
-   src/routes/es.faq.homeowners.index.tsx
-   src/routes/es.faq.homeowners.$slug.tsx
-   src/routes/es.faq.bonds.index.tsx
-   src/routes/es.faq.bonds.$slug.tsx
-   src/routes/es.faq.dealership.index.tsx
-   src/routes/es.faq.dealership.$slug.tsx
-   ```
-   Each calls the same shared component with `lang="es"`, sets Spanish `head()` (title, description, og:locale=`es_US`, JSON-LD with Spanish question/answer), and uses the `_es` data fields.
+**Note for the user:** the `_dmarc` record above must be added at your registrar where `xprtinsurance.com` itself is hosted (not inside Lovable's `notify` zone). Lovable can't add it for you because it lives outside the delegated subdomain.
 
-5. **Language toggle component** — `src/components/site/LanguageToggle.tsx`
-   - "EN | ES" pill placed on the Knowledge Center hub, category indices, and FAQ detail pages
-   - Computes the sibling URL (e.g. `/faq/dealership/foo` ⇄ `/es/faq/dealership/foo`)
-   - Each detail page sets `<link rel="alternate" hreflang="es"|"en">` for SEO
+---
 
-### Translation scope (this pass)
+## Part 2 — Spanish `/es` structure (only completed sections)
 
-- All UI labels (hub, category indices, detail page chrome, CTAs, breadcrumbs, "Coming soon", legal disclaimers)
-- All 7 Dealership FAQs (full content)
-- All Homeowners FAQs (full content)
-- All Bonds FAQs (full content)
-- The 9 Knowledge Center category card titles + descriptions
-- Spanish JSON-LD on each `/es/...` page
+### Already shipped in Spanish (keep, no changes)
+- `/es/faq` — Knowledge Center index
+- `/es/faq/homeowners` + `/es/faq/homeowners/$slug`
+- `/es/faq/bonds` + `/es/faq/bonds/$slug`
+- `/es/faq/dealership` + `/es/faq/dealership/$slug` *(was built in earlier turn; leaving in place so the existing toggle and sitemap entries don't 404)*
 
-### Out of scope
+### Audit of service pages
+| Page | Lines | Status | Spanish action |
+| --- | --- | --- | --- |
+| `personal.homeowners-insurance.tsx` | 402 | **Complete** | Create `/es/personal/homeowners-insurance` |
+| `business-insurance.bonds.tsx` | 501 | **Complete** | Create `/es/business-insurance/bonds` |
+| `personal.auto-insurance.tsx` | 59 | Stub / placeholder | **Skip** (no ES route) |
+| `personal.landlord-insurance.tsx` | 59 | Stub / placeholder | **Skip** |
+| `personal.renters-insurance.tsx` | 58 | Stub / placeholder | **Skip** |
 
-- Translating other site pages (homeowners landing, bonds landing, services pages, header/footer) — only Knowledge Center per request
-- Auto language detection from browser; toggle is explicit
-- Persisting last-chosen language across sessions (URL is the source of truth)
+### Files to add
+- `src/routes/es.personal.homeowners-insurance.tsx`
+- `src/routes/es.business-insurance.bonds.tsx`
 
-### Guardrails
+Each new ES page will:
+- Mirror the EN layout/components but render Spanish copy (headings, CTAs, FAQ blocks, disclosure text).
+- Use `pageHead({ locale: "es", alternates: { en, es } })` so `<title>`, meta description, OG, canonical, and hreflang are all Spanish — no English metadata leaks through.
+- Emit Spanish `BreadcrumbList` and (where applicable) `Service` / `FAQPage` JSON‑LD with Spanish `name` / `description` and `/es/...` URLs.
+- Reuse the existing English forms, PDFs, and download tokens — the lead form already detects `lang` from `source_path`, so submissions from `/es/...` already trigger the Spanish tripwire email.
 
-- English routes remain byte-identical in URL and behavior; refactor only swaps the inner JSX for the shared component
-- All existing route files keep their `Route = createFileRoute(...)` exports; only the component bodies change
-- Fallback: if a Spanish field is missing, render English so nothing ever appears blank
-- All cross-links inside Spanish pages stay within `/es/...`; CTA links to non-translated pages (e.g. `/book`, `/services/dealership`) remain English (these aren't being translated this pass) and a Spanish helper note explains that the booking flow is in English
+### EN ↔ ES toggle behavior
+The shared `LanguageToggle` already maps a current path to its localized counterpart via the route's `alternates` map. We'll:
+- Add `alternates: { en: "/personal/homeowners-insurance", es: "/es/personal/homeowners-insurance" }` to both EN and ES homeowners service pages.
+- Same pair for the bonds service pages.
+- For pages that have no Spanish equivalent (auto, renters, landlord, about, book, contact, etc.), the toggle will fall back to `/es` (Knowledge Center) instead of producing a 404 — preventing any dead links.
 
-### Files
+### Sitemap
+The dynamic sitemap already enumerates routes from `routeTree.gen.ts`, so the two new `/es/...` URLs will be picked up automatically with their hreflang alternates on the next build.
 
-Created (~10):
-- `src/lib/i18n.ts`
-- `src/components/site/LanguageToggle.tsx`
-- `src/components/faq/FaqDetail.tsx`
-- `src/components/faq/FaqCategoryIndex.tsx`
-- `src/components/faq/KnowledgeHub.tsx`
-- 7 × `src/routes/es.faq.*.tsx`
+### Guardrails enforced
+- English routes are not touched (only their `alternates` map is extended).
+- No Spanish version is created for any incomplete page → no empty translated content.
+- Dealership ES FAQ stays as‑is to preserve the working toggle from earlier work.
+- Existing English pages, lead forms, gated PDFs, and tracked download links continue to work unchanged (verified end‑to‑end last turn).
 
-Edited (~7):
-- `src/lib/{homeowners,bonds,dealership}-faqs.ts` (add `_es` fields + helper)
-- `src/routes/faq.index.tsx` + 6 existing FAQ route files (swap bodies for shared components, add toggle)
+---
+
+## Technical notes
+
+- ES service pages will pull through the same component primitives (`<Hero>`, `<FAQAccordion>`, `<LeadCaptureForm>`) so style, analytics, and form wiring stay consistent — only copy props and `pageHead` change.
+- `LanguageToggle` change is a one‑line fallback: `to = currentRoute.alternates?.[targetLang] ?? (targetLang === "es" ? "/es" : "/")`.
+- DMARC text record is the only DNS change you need to make at your registrar; everything else is already authenticated through Lovable's managed zone.
+
+---
+
+## Out of scope (intentionally deferred)
+
+- Spanish versions of `personal.auto-insurance`, `personal.landlord-insurance`, `personal.renters-insurance` — pending real EN content.
+- Spanish versions of `about`, `contact`, `book`, `states/$state`, `offers/$slug`, `thank-you/$slug`.
+- Switching DMARC from `p=quarantine` to `p=reject` (do that after 2 weeks of clean reports).
