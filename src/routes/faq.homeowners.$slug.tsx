@@ -44,8 +44,8 @@ export const Route = createFileRoute("/faq/homeowners/$slug")({
       jsonLd: [
         breadcrumbJsonLd([
           { name: "Home", path: "/" },
-          { name: "Knowledge Base", path: "/faq" },
-          { name: "Homeowners", path: "/faq#homeowners-insurance-faqs" },
+          { name: "Knowledge Center", path: "/faq" },
+          { name: "Homeowners Insurance", path: "/faq/homeowners" },
           { name: faq.question, path },
         ]),
         faqPageJsonLd([
@@ -85,8 +85,8 @@ function HomeownersFaqPage() {
           <Breadcrumbs
             items={[
               { name: "Home", path: "/" },
-              { name: "Knowledge Base", path: "/faq" },
-              { name: "Homeowners", path: "/faq#homeowners-insurance-faqs" },
+              { name: "Knowledge Center", path: "/faq" },
+              { name: "Homeowners Insurance", path: "/faq/homeowners" },
               { name: faq.question },
             ]}
           />
