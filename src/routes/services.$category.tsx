@@ -330,9 +330,13 @@ function DealershipHub({ category, lead_magnets }: { category: any; lead_magnets
               <MapPin className="h-4 w-4 text-gold" /> Available for licensed Nevada dealerships only
             </div>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link to="/book">Book a Coverage Review</Link>
-              </Button>
+              <GhlFormButton
+                form="commercial_quote"
+                size="lg"
+                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+              >
+                Get a Dealership Quote
+              </GhlFormButton>
               <Button asChild size="lg" variant="outline">
                 <a href="#coverages">Explore coverages</a>
               </Button>
