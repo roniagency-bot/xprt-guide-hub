@@ -463,7 +463,7 @@ function DealershipHub({ category, lead_magnets }: { category: any; lead_magnets
         </Section>
       )}
 
-      <CTASection />
+      <CTASection primaryForm="commercial_quote" primaryLabel="Get a Dealership Quote" />
     </>
   );
 }
