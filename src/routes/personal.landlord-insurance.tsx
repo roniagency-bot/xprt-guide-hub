@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/personal/landlord-insurance")({
