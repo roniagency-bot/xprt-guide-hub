@@ -103,9 +103,19 @@ function ServicePage() {
               </div>
             )}
             <div className="mt-9 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link to="/book">Book a Review</Link>
-              </Button>
+              {quoteForm ? (
+                <GhlFormButton
+                  form={quoteForm}
+                  size="lg"
+                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                >
+                  {quoteLabel}
+                </GhlFormButton>
+              ) : (
+                <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Link to="/book">Book a Review</Link>
+                </Button>
+              )}
               {lead_magnets[0] && (
                 <Button asChild size="lg" variant="outline">
                   <Link to="/offers/$slug" params={{ slug: lead_magnets[0].slug }}>
