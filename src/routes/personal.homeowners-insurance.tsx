@@ -17,6 +17,7 @@ import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/homeowners-hero.jpg";
@@ -115,12 +116,14 @@ function HomeownersHub() {
               gaps, and know what to review before renewal or a claim.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
-                <a href="#cheat-sheet">
-                  Get the Homeowners Cheat Sheet
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
-                </a>
-              </Button>
+              <GhlFormButton
+                form="personal_quote"
+                size="lg"
+                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+              >
+                Get a Homeowners Quote
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </GhlFormButton>
               <Button asChild size="lg" variant="outline">
                 <Link to="/book">Book a Free Coverage Review</Link>
               </Button>
@@ -395,7 +398,8 @@ function HomeownersHub() {
       <CTASection
         title="Get a homeowners coverage review — free, 20 minutes."
         subtitle="An advisor walks you through your current policy line by line. No quote required, no pressure. Just clarity on what you own and what you might be missing."
-        primaryLabel="Book a Free Coverage Review"
+        primaryLabel="Get a Homeowners Quote"
+        primaryForm="personal_quote"
         secondaryLabel="Get the Cheat Sheet"
         secondaryHref="/personal/homeowners-insurance#cheat-sheet"
       />

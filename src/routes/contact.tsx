@@ -1,8 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Mail, Phone, MapPin, Clock, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { pageHead } from "@/lib/seo";
 import { SITE } from "@/lib/seo";
 
@@ -28,6 +29,15 @@ function Contact() {
           <p className="mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
             Personal, commercial, bonds, dealership — reach out and we'll route you to the right advisor.
           </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <GhlFormButton form="contact" size="lg" className="bg-gold text-gold-foreground hover:bg-gold/90">
+              <MessageSquare className="mr-1.5 h-4 w-4" />
+              Send a Message
+            </GhlFormButton>
+            <GhlFormButton form="personal_quote" size="lg" variant="outline">
+              Get a Quote
+            </GhlFormButton>
+          </div>
         </div>
       </section>
 

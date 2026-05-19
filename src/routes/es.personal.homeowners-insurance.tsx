@@ -15,6 +15,7 @@ import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import {
@@ -125,16 +126,14 @@ function HomeownersHubEs() {
               revisar antes de la renovación o un reclamo.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button
-                asChild
+              <GhlFormButton
+                form="personal_quote"
                 size="lg"
                 className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
               >
-                <a href="#guia-rapida">
-                  Descarga la Guía Rápida
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
-                </a>
-              </Button>
+                Solicitar Cotización
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </GhlFormButton>
               <Button asChild size="lg" variant="outline">
                 <Link to="/book">Agenda una revisión gratuita</Link>
               </Button>
@@ -388,7 +387,8 @@ function HomeownersHubEs() {
       <CTASection
         title="Obtén una revisión de cobertura — gratis, 20 minutos."
         subtitle="Un asesor revisa tu póliza actual línea por línea. Sin cotización requerida, sin presión. Solo claridad sobre lo que tienes y lo que podría faltarte."
-        primaryLabel="Agenda una revisión gratuita"
+        primaryLabel="Solicitar Cotización"
+        primaryForm="personal_quote"
         secondaryLabel="Descarga la Guía Rápida"
         secondaryHref="/es/personal/homeowners-insurance#guia-rapida"
       />

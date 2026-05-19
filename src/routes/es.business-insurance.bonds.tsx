@@ -20,6 +20,7 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { BondsLeadForm } from "@/components/site/BondsLeadForm";
 import { getLeadMagnet } from "@/server/content.functions";
 import { BONDS_FAQ_PREVIEWS, PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
@@ -203,11 +204,9 @@ function BondsHubEs() {
                   <ExternalLink className="ml-1.5 h-4 w-4" />
                 </a>
               </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#guia-fianzas">
-                  Descarga la Guía Rápida de Fianzas
-                </a>
-              </Button>
+              <GhlFormButton form="bonds" size="lg" variant="outline">
+                Iniciar Solicitud de Fianza
+              </GhlFormButton>
             </div>
             <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
               {TRUST_ITEMS_ES.map((t) => (
@@ -390,7 +389,8 @@ function BondsHubEs() {
       <CTASection
         title="¿Necesitas una fianza específica?"
         subtitle="Habla con un especialista bilingüe que te guía en el proceso, o cotiza en línea."
-        primaryLabel="Agenda una llamada"
+        primaryLabel="Iniciar Solicitud de Fianza"
+        primaryForm="bonds"
         secondaryLabel="Ver Centro de Conocimiento"
         secondaryHref="/es/faq"
       />
