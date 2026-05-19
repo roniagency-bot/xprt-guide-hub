@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/personal/auto-insurance")({
@@ -40,10 +41,17 @@ function AutoStub() {
               an accident, not after.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
+              <GhlFormButton
+                form="personal_quote"
+                size="lg"
+                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+              >
+                Get an Auto Quote
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </GhlFormButton>
+              <Button asChild size="lg" variant="outline">
                 <Link to="/offers/$slug" params={{ slug: "auto-coverage-guide" }}>
                   Get the Auto Coverage Guide
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
@@ -53,7 +61,7 @@ function AutoStub() {
           </div>
         </div>
       </section>
-      <CTASection />
+      <CTASection primaryForm="personal_quote" primaryLabel="Get a Personal Lines Quote" />
     </>
   );
 }

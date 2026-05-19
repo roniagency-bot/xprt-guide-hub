@@ -197,8 +197,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <GhlFormButton form="personal_quote" variant="ghost" size="sm">
-            Get Quote
+          <GhlFormButton form="contact" variant="ghost" size="sm">
+            Contact Us
           </GhlFormButton>
           <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link to="/book">Book a Review</Link>
@@ -234,8 +234,8 @@ export function SiteHeader() {
               ),
             )}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
-              <GhlFormButton form="personal_quote" variant="outline">
-                Get Quote
+              <GhlFormButton form="contact" variant="outline">
+                Contact Us
               </GhlFormButton>
               <Button asChild className="bg-primary text-primary-foreground">
                 <Link to="/book" onClick={() => setOpen(false)}>Book a Review</Link>

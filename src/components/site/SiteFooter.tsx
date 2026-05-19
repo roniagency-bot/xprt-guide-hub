@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import xprtLogo from "@/assets/xprt-logo.png";
 
 export function SiteFooter() {
@@ -18,6 +19,23 @@ export function SiteFooter() {
           <p className="mt-4 text-xs text-primary-foreground/50">
             Bilingual service · English & Español
           </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <GhlFormButton
+              form="contact"
+              size="sm"
+              className="bg-gold text-gold-foreground hover:bg-gold/90"
+            >
+              Contact Us
+            </GhlFormButton>
+            <GhlFormButton
+              form="personal_quote"
+              size="sm"
+              variant="outline"
+              className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+            >
+              Get a Quote
+            </GhlFormButton>
+          </div>
         </div>
 
         <div>

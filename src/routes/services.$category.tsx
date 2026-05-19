@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { getCategoryHub } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
@@ -76,6 +77,20 @@ function CategoryHub() {
             {isNvOnly && (
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 text-sm text-foreground">
                 <MapPin className="h-4 w-4 text-gold" /> Available for licensed Nevada dealerships only
+              </div>
+            )}
+            {category.slug === "personal" && (
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <GhlFormButton
+                  form="personal_quote"
+                  size="lg"
+                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                >
+                  Get a Personal Lines Quote
+                </GhlFormButton>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/book">Book a Free Coverage Review</Link>
+                </Button>
               </div>
             )}
           </div>
@@ -144,7 +159,11 @@ function CategoryHub() {
         </Section>
       )}
 
-      <CTASection />
+      <CTASection
+        {...(category.slug === "personal"
+          ? { primaryForm: "personal_quote" as const, primaryLabel: "Get a Personal Lines Quote" }
+          : {})}
+      />
     </>
   );
 }
