@@ -6,6 +6,8 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { BondCallout } from "@/components/site/BondCallout";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
+import type { GhlFormKey } from "@/lib/ghl-forms";
 import { getServicePage } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from "@/lib/seo";
 
@@ -58,6 +60,22 @@ function ServicePage() {
   const { page, faqs, lead_magnets } = Route.useLoaderData();
   const params = Route.useParams();
 
+  // Pick the right GHL form for this service.
+  let quoteForm: GhlFormKey | null = null;
+  let quoteLabel = "Get a Quote";
+  if (params.slug === "workers-compensation") {
+    quoteForm = "workers_comp";
+    quoteLabel = "Get a Workers' Comp Quote";
+  } else if (params.slug === "commercial-auto") {
+    quoteForm = "commercial_auto";
+    quoteLabel = "Get a Commercial Auto Quote";
+  } else if (params.category === "commercial" || params.category === "dealership") {
+    quoteForm = "commercial_quote";
+    quoteLabel =
+      params.category === "dealership" ? "Get a Dealership Quote" : "Get a Commercial Quote";
+  }
+
+
   return (
     <>
       <section className="bg-cream-gradient">
@@ -85,9 +103,19 @@ function ServicePage() {
               </div>
             )}
             <div className="mt-9 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link to="/book">Book a Review</Link>
-              </Button>
+              {quoteForm ? (
+                <GhlFormButton
+                  form={quoteForm}
+                  size="lg"
+                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                >
+                  {quoteLabel}
+                </GhlFormButton>
+              ) : (
+                <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Link to="/book">Book a Review</Link>
+                </Button>
+              )}
               {lead_magnets[0] && (
                 <Button asChild size="lg" variant="outline">
                   <Link to="/offers/$slug" params={{ slug: lead_magnets[0].slug }}>
@@ -180,7 +208,11 @@ function ServicePage() {
         </Section>
       )}
 
-      <CTASection />
+      {quoteForm ? (
+        <CTASection primaryForm={quoteForm} primaryLabel={quoteLabel} />
+      ) : (
+        <CTASection />
+      )}
     </>
   );
 }

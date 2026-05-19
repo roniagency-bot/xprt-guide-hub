@@ -17,10 +17,11 @@ export const GHL_FORMS = {
     title: "Bond Application",
     description: "Start your surety bond application — most types issue online.",
   },
-  commercial_full: {
-    id: "oK6olCAA4APFvF8PfYW4",
-    title: "Commercial Intake",
-    description: "Complete commercial intake for a tailored business insurance review.",
+  commercial_quote: {
+    id: "ORhIVKUzCHklssPs46Cm",
+    title: "Commercial Insurance Quote",
+    description:
+      "Tell us about your business and we'll put together the right commercial coverage — general liability, property, bonds, dealership programs, and more.",
   },
   workers_comp: {
     id: "EgSOk7OI4iHtddPWb4JI",
@@ -31,11 +32,6 @@ export const GHL_FORMS = {
     id: "l7jflX6hwYoGENEcMwDp",
     title: "Commercial Auto Quote",
     description: "Request a commercial auto insurance quote.",
-  },
-  general_liability: {
-    id: "ORhIVKUzCHklssPs46Cm",
-    title: "General Liability Quote",
-    description: "Request a general liability insurance quote.",
   },
 } as const;
 

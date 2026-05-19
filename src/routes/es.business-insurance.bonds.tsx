@@ -204,8 +204,8 @@ function BondsHubEs() {
                   <ExternalLink className="ml-1.5 h-4 w-4" />
                 </a>
               </Button>
-              <GhlFormButton form="bonds" size="lg" variant="outline">
-                Iniciar Solicitud de Fianza
+              <GhlFormButton form="commercial_quote" size="lg" variant="outline">
+                Hablar con un Agente
               </GhlFormButton>
             </div>
             <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
@@ -389,8 +389,8 @@ function BondsHubEs() {
       <CTASection
         title="¿Necesitas una fianza específica?"
         subtitle="Habla con un especialista bilingüe que te guía en el proceso, o cotiza en línea."
-        primaryLabel="Iniciar Solicitud de Fianza"
-        primaryForm="bonds"
+        primaryLabel="Solicitar una Cotización"
+        primaryForm="commercial_quote"
         secondaryLabel="Ver Centro de Conocimiento"
         secondaryHref="/es/faq"
       />
