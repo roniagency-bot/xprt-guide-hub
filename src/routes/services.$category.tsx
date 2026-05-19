@@ -159,7 +159,11 @@ function CategoryHub() {
         </Section>
       )}
 
-      <CTASection />
+      <CTASection
+        {...(category.slug === "personal"
+          ? { primaryForm: "personal_quote" as const, primaryLabel: "Get a Personal Lines Quote" }
+          : {})}
+      />
     </>
   );
 }
