@@ -389,8 +389,8 @@ function BondsHubEs() {
       <CTASection
         title="¿Necesitas una fianza específica?"
         subtitle="Habla con un especialista bilingüe que te guía en el proceso, o cotiza en línea."
-        primaryLabel="Iniciar Solicitud de Fianza"
-        primaryForm="bonds"
+        primaryLabel="Solicitar una Cotización"
+        primaryForm="commercial_quote"
         secondaryLabel="Ver Centro de Conocimiento"
         secondaryHref="/es/faq"
       />
