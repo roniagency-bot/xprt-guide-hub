@@ -1,21 +1,28 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
+import type { GhlFormKey } from "@/lib/ghl-forms";
 
 export function CTASection({
   title = "Ready for a clarity-first coverage review?",
   subtitle = "Book a free 20-minute call. No pressure, no jargon — just a structured walk-through of your current policy and where it can be improved.",
   primaryHref = "/book",
   primaryLabel = "Book a Review",
+  primaryForm,
   secondaryHref = "/faq",
   secondaryLabel = "Browse the Knowledge Base",
+  eyebrow = "Free coverage review",
 }: {
   title?: string;
   subtitle?: string;
   primaryHref?: string;
   primaryLabel?: string;
+  /** If set, the primary CTA opens this GHL form in a modal instead of navigating. */
+  primaryForm?: GhlFormKey;
   secondaryHref?: string;
   secondaryLabel?: string;
+  eyebrow?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-ink py-24 text-primary-foreground">
@@ -30,23 +37,34 @@ export function CTASection({
       <div className="container-prose relative">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-xs uppercase tracking-[0.2em] text-gold">
-            <Calendar className="h-3.5 w-3.5" /> Free coverage review
+            <Calendar className="h-3.5 w-3.5" /> {eyebrow}
           </span>
           <h2 className="mt-6 text-balance font-display text-4xl leading-tight md:text-5xl">{title}</h2>
           <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-primary-foreground/75 md:text-lg">
             {subtitle}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
-            >
-              <Link to={primaryHref}>
+            {primaryForm ? (
+              <GhlFormButton
+                form={primaryForm}
+                size="lg"
+                className="bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
+              >
                 {primaryLabel}
                 <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
+              </GhlFormButton>
+            ) : (
+              <Button
+                asChild
+                size="lg"
+                className="bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
+              >
+                <Link to={primaryHref}>
+                  {primaryLabel}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </Button>
+            )}
             <Button
               asChild
               size="lg"

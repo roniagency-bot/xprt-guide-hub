@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
 import xprtLogo from "@/assets/xprt-logo.png";
 
 type SubItem = { to: string; label: string; description?: string };
@@ -196,9 +197,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button asChild variant="ghost" size="sm">
-            <Link to="/services/$category" params={{ category: "personal" }}>Get Quote</Link>
-          </Button>
+          <GhlFormButton form="personal_quote" variant="ghost" size="sm">
+            Get Quote
+          </GhlFormButton>
           <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link to="/book">Book a Review</Link>
           </Button>
@@ -233,9 +234,9 @@ export function SiteHeader() {
               ),
             )}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
-              <Button asChild variant="outline">
-                <Link to="/services/$category" params={{ category: "personal" }} onClick={() => setOpen(false)}>Get Quote</Link>
-              </Button>
+              <GhlFormButton form="personal_quote" variant="outline">
+                Get Quote
+              </GhlFormButton>
               <Button asChild className="bg-primary text-primary-foreground">
                 <Link to="/book" onClick={() => setOpen(false)}>Book a Review</Link>
               </Button>
