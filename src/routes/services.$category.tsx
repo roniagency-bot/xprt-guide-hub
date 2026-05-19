@@ -79,6 +79,20 @@ function CategoryHub() {
                 <MapPin className="h-4 w-4 text-gold" /> Available for licensed Nevada dealerships only
               </div>
             )}
+            {category.slug === "personal" && (
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <GhlFormButton
+                  form="personal_quote"
+                  size="lg"
+                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                >
+                  Get a Personal Lines Quote
+                </GhlFormButton>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/book">Book a Free Coverage Review</Link>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
