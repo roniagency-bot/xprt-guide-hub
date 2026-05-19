@@ -60,6 +60,22 @@ function ServicePage() {
   const { page, faqs, lead_magnets } = Route.useLoaderData();
   const params = Route.useParams();
 
+  // Pick the right GHL form for this service.
+  let quoteForm: GhlFormKey | null = null;
+  let quoteLabel = "Get a Quote";
+  if (params.slug === "workers-compensation") {
+    quoteForm = "workers_comp";
+    quoteLabel = "Get a Workers' Comp Quote";
+  } else if (params.slug === "commercial-auto") {
+    quoteForm = "commercial_auto";
+    quoteLabel = "Get a Commercial Auto Quote";
+  } else if (params.category === "commercial" || params.category === "dealership") {
+    quoteForm = "commercial_quote";
+    quoteLabel =
+      params.category === "dealership" ? "Get a Dealership Quote" : "Get a Commercial Quote";
+  }
+
+
   return (
     <>
       <section className="bg-cream-gradient">
