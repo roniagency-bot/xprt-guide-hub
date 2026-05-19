@@ -40,10 +40,17 @@ function RentersStub() {
               tenants underestimate. Get a policy structured for how you actually live.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
+              <GhlFormButton
+                form="personal_quote"
+                size="lg"
+                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+              >
+                Get a Renters Quote
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </GhlFormButton>
+              <Button asChild size="lg" variant="outline">
                 <Link to="/offers/$slug" params={{ slug: "renters-landlord-gap-checklist" }}>
                   Get the Renters Coverage Checklist
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
@@ -53,7 +60,7 @@ function RentersStub() {
           </div>
         </div>
       </section>
-      <CTASection />
+      <CTASection primaryForm="personal_quote" primaryLabel="Get a Personal Lines Quote" />
     </>
   );
 }
