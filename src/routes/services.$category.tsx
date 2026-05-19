@@ -93,6 +93,20 @@ function CategoryHub() {
                 </Button>
               </div>
             )}
+            {category.slug !== "personal" && category.slug !== "dealership" && (
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <GhlFormButton
+                  form="commercial_quote"
+                  size="lg"
+                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                >
+                  Get a Commercial Quote
+                </GhlFormButton>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/book">Book a Coverage Review</Link>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
