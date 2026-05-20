@@ -58,6 +58,14 @@ export const PERSON_ID = `${SITE_URL}/#roni-rivers`;
 
 const LOGO_URL = `${SITE_URL}/favicon.ico`;
 
+/**
+ * Stable, site-wide "last reviewed" date used as a fallback when individual
+ * content rows don't carry their own `updated_at`. Bump manually on
+ * meaningful editorial passes — never `new Date()`, because that re-stamps
+ * every render and looks like auto-generated spam to Google/LLMs.
+ */
+export const SITE_LAST_REVIEWED = "2026-05-20";
+
 export function canonical(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
@@ -291,8 +299,6 @@ export const articleFaqJsonLd = (opts: {
   const url = canonical(opts.path);
   const locale = opts.locale ?? "en";
   const inLanguage = locale === "es" ? "es-US" : "en-US";
-  // Default to a stable build date so crawlers see freshness signals.
-  const today = new Date().toISOString().slice(0, 10);
   const node: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -305,8 +311,8 @@ export const articleFaqJsonLd = (opts: {
     isPartOf: { "@id": WEBSITE_ID },
     author: { "@id": PERSON_ID },
     publisher: { "@id": ORG_ID },
-    datePublished: opts.datePublished ?? today,
-    dateModified: opts.dateModified ?? today,
+    datePublished: opts.datePublished ?? SITE_LAST_REVIEWED,
+    dateModified: opts.dateModified ?? opts.datePublished ?? SITE_LAST_REVIEWED,
     image: LOGO_URL,
   };
   if (opts.speakableSelectors && opts.speakableSelectors.length > 0) {
@@ -317,6 +323,93 @@ export const articleFaqJsonLd = (opts: {
   }
   return node;
 };
+
+/**
+ * QAPage — Google and LLM-friendly format for single-question pages.
+ * Stronger semantic fit than Article for Q&A content; carries author,
+ * publisher, freshness, topical `about`, and speakable in one node.
+ */
+export const qaPageJsonLd = (opts: {
+  question: string;
+  answer: string;
+  path: string;
+  locale?: "en" | "es";
+  datePublished?: string;
+  dateModified?: string;
+  about?: string | string[];
+  speakableSelectors?: string[];
+}) => {
+  const url = canonical(opts.path);
+  const locale = opts.locale ?? "en";
+  const inLanguage = locale === "es" ? "es-US" : "en-US";
+  const datePublished = opts.datePublished ?? SITE_LAST_REVIEWED;
+  const dateModified = opts.dateModified ?? datePublished;
+  const aboutArr = opts.about ? (Array.isArray(opts.about) ? opts.about : [opts.about]) : [];
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "QAPage",
+    "@id": `${url}#qapage`,
+    url,
+    mainEntityOfPage: url,
+    inLanguage,
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORG_ID },
+    datePublished,
+    dateModified,
+    mainEntity: {
+      "@type": "Question",
+      name: opts.question,
+      text: opts.question,
+      answerCount: 1,
+      author: { "@id": PERSON_ID },
+      dateCreated: datePublished,
+      inLanguage,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: opts.answer,
+        inLanguage,
+        dateCreated: datePublished,
+        upvoteCount: 0,
+        author: { "@id": PERSON_ID },
+        url,
+      },
+    },
+  };
+  if (aboutArr.length > 0) {
+    node.about = aboutArr.map((name) => ({ "@type": "Thing", name }));
+  }
+  if (opts.speakableSelectors && opts.speakableSelectors.length > 0) {
+    node.speakable = {
+      "@type": "SpeakableSpecification",
+      cssSelector: opts.speakableSelectors,
+    };
+  }
+  return node;
+};
+
+/**
+ * ItemList — gives category hub pages a machine-readable directory of every
+ * Q&A they link to. LLMs prefer crawling one structured hub over fanning out
+ * across many slug pages; massive citation lift for topical authority.
+ */
+export const itemListJsonLd = (opts: {
+  name: string;
+  path: string;
+  items: { name: string; path: string }[];
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${canonical(opts.path)}#itemlist`,
+  name: opts.name,
+  url: canonical(opts.path),
+  numberOfItems: opts.items.length,
+  itemListElement: opts.items.map((it, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: canonical(it.path),
+    name: it.name,
+  })),
+});
 
 export const serviceJsonLd = (opts: { name: string; description: string; path: string; areaServed?: string[] }) => ({
   "@context": "https://schema.org",

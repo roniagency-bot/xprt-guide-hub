@@ -6,6 +6,7 @@ import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { BondCallout } from "@/components/site/BondCallout";
+import { AuthorByline } from "@/components/site/AuthorByline";
 import { applyTranslation, UI, type Lang } from "@/lib/i18n";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 
@@ -200,6 +201,7 @@ export function FaqDetail({
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{stageLabel(faq.stage, lang)}</Eyebrow>
           <h1 className="speakable mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">{faq.question}</h1>
+          <AuthorByline lang={lang} />
         </div>
       </section>
 

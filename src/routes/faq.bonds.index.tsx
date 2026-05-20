@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
-import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd, itemListJsonLd } from "@/lib/seo";
 import { BONDS_FAQS, PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 
 const STAGE_ORDER = ["tofu", "mofu", "bofu"] as const;
@@ -31,7 +31,16 @@ export const Route = createFileRoute("/faq/bonds/")({
         ]),
         faqPageJsonLd(
           BONDS_FAQS.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+          { path: "/faq/bonds", locale: "en" },
         ),
+        itemListJsonLd({
+          name: "Surety Bond FAQs",
+          path: "/faq/bonds",
+          items: BONDS_FAQS.map((f) => ({
+            name: f.question,
+            path: `/faq/bonds/${f.slug}`,
+          })),
+        }),
       ],
     }),
   component: BondsFaqIndex,
