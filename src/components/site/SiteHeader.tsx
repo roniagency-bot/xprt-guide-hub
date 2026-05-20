@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
+import { LanguageToggle } from "@/components/site/LanguageToggle";
+import { useLang } from "@/lib/i18n";
 import xprtLogo from "@/assets/xprt-logo.png";
 
 type SubItem = { to: string; label: string; description?: string };
