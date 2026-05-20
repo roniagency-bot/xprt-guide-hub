@@ -19,7 +19,7 @@ export const Route = createFileRoute("/faq/$slug")({
     const f = loaderData.faq;
     const path = `/faq/${params.slug}`;
     return pageHead({
-      title: f.meta_title ?? `${f.question_en} | XPRT Insurance`,
+      title: f.meta_title ?? brandedTitle(f.question_en),
       description: f.meta_description ?? f.short_answer_en,
       path,
       type: "article",

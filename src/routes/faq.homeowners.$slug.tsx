@@ -32,7 +32,7 @@ export const Route = createFileRoute("/faq/homeowners/$slug")({
     if (!faq) return {};
     const path = `/faq/homeowners/${faq.slug}`;
     return pageHead({
-      title: `${faq.question} | XPRT Insurance`,
+      title: brandedTitle(faq.question),
       description: faq.metaDescription,
       path,
       locale: "en",

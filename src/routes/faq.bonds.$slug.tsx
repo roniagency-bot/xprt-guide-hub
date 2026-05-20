@@ -33,7 +33,7 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
     if (!faq) return {};
     const path = `/faq/bonds/${faq.slug}`;
     return pageHead({
-      title: `${faq.question} | XPRT Insurance`,
+      title: brandedTitle(faq.question),
       description: faq.metaDescription,
       path,
       locale: "en",

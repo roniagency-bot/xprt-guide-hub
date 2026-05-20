@@ -29,7 +29,7 @@ export const Route = createFileRoute("/es/faq/homeowners/$slug")({
     const faq = applyTranslation(base, HOMEOWNERS_FAQS_ES[base.slug]);
     const path = `/es/faq/homeowners/${faq.slug}`;
     return pageHead({
-      title: `${faq.question} | XPRT Insurance`,
+      title: brandedTitle(faq.question),
       description: faq.metaDescription,
       path,
       locale: "es",
