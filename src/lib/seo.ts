@@ -58,6 +58,14 @@ export const PERSON_ID = `${SITE_URL}/#roni-rivers`;
 
 const LOGO_URL = `${SITE_URL}/favicon.ico`;
 
+/**
+ * Stable, site-wide "last reviewed" date used as a fallback when individual
+ * content rows don't carry their own `updated_at`. Bump manually on
+ * meaningful editorial passes — never `new Date()`, because that re-stamps
+ * every render and looks like auto-generated spam to Google/LLMs.
+ */
+export const SITE_LAST_REVIEWED = "2026-05-20";
+
 export function canonical(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
