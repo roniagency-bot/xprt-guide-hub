@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
 import { BondCallout } from "@/components/site/BondCallout";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getDealershipFaq,
   getDealershipFaqs,

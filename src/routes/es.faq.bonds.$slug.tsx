@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getBondsFaq,
   getBondsFaqs,
