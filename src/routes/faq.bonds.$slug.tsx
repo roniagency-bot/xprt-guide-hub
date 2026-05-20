@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
-import { articleFaqJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { qaPageJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { AuthorByline } from "@/components/site/AuthorByline";
 import {
   getBondsFaq,
   getBondsFaqs,
@@ -61,11 +62,12 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
           [{ question: faq.question, answer: fullAnswer }],
           { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
         ),
-        articleFaqJsonLd({
-          headline: faq.question,
-          description: faq.metaDescription,
+        qaPageJsonLd({
+          question: faq.question,
+          answer: fullAnswer,
           path,
           locale: "en",
+          about: ["Surety Bond", "Insurance"],
           speakableSelectors: [".speakable", "h1"],
         }),
       ],

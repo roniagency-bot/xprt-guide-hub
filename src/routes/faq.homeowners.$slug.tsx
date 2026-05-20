@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
-import { articleFaqJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { qaPageJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { AuthorByline } from "@/components/site/AuthorByline";
 import {
   getHomeownersFaq,
   getHomeownersFaqs,
@@ -60,11 +61,12 @@ export const Route = createFileRoute("/faq/homeowners/$slug")({
           [{ question: faq.question, answer: fullAnswer }],
           { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
         ),
-        articleFaqJsonLd({
-          headline: faq.question,
-          description: faq.metaDescription,
+        qaPageJsonLd({
+          question: faq.question,
+          answer: fullAnswer,
           path,
           locale: "en",
+          about: ["Homeowners Insurance", "Nevada", "Colorado"],
           speakableSelectors: [".speakable", "h1"],
         }),
       ],
@@ -107,6 +109,7 @@ function HomeownersFaqPage() {
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{STAGE_LABEL[faq.stage]}</Eyebrow>
           <h1 className="speakable mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">{faq.question}</h1>
+          <AuthorByline lang="en" lastReviewed={undefined} />
         </div>
       </section>
 

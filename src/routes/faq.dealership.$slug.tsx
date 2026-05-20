@@ -5,7 +5,8 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
 import { BondCallout } from "@/components/site/BondCallout";
-import { articleFaqJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { qaPageJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { AuthorByline } from "@/components/site/AuthorByline";
 import {
   getDealershipFaq,
   getDealershipFaqs,
@@ -53,11 +54,12 @@ export const Route = createFileRoute("/faq/dealership/$slug")({
           [{ question: faq.question, answer: fullAnswer }],
           { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
         ),
-        articleFaqJsonLd({
-          headline: faq.question,
-          description: faq.metaDescription,
+        qaPageJsonLd({
+          question: faq.question,
+          answer: fullAnswer,
           path,
           locale: "en",
+          about: ["Dealership Insurance", "Nevada", "Surety Bond"],
           speakableSelectors: [".speakable", "h1"],
         }),
       ],
