@@ -97,6 +97,8 @@ function HomePage() {
                 alt="XPRT Insurance — protecting Nevada and Colorado homes, autos, businesses, and contractors"
                 width={1920}
                 height={1080}
+                fetchPriority="high"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/30 to-transparent p-6 text-primary-foreground md:p-8">
