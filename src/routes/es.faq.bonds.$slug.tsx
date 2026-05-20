@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { articleFaqJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { qaPageJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getBondsFaq,
   getBondsFaqs,
@@ -57,11 +57,12 @@ export const Route = createFileRoute("/es/faq/bonds/$slug")({
           [{ question: faq.question, answer: fullAnswer }],
           { path, locale: "es", speakableSelectors: [".speakable", "h1"] },
         ),
-        articleFaqJsonLd({
-          headline: faq.question,
-          description: faq.metaDescription,
+        qaPageJsonLd({
+          question: faq.question,
+          answer: fullAnswer,
           path,
           locale: "es",
+          about: ["Fianza surety", "Seguro"],
           speakableSelectors: [".speakable", "h1"],
         }),
       ],
