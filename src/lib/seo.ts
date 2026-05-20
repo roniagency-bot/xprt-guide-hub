@@ -357,11 +357,13 @@ export const qaPageJsonLd = (opts: {
     publisher: { "@id": ORG_ID },
     datePublished,
     dateModified,
+    primaryImageOfPage: { "@type": "ImageObject", url: DEFAULT_ARTICLE_IMAGE, width: 1920, height: 1080 },
     mainEntity: {
       "@type": "Question",
       name: opts.question,
       text: opts.question,
       answerCount: 1,
+      upvoteCount: 0,
       author: { "@id": PERSON_ID },
       dateCreated: datePublished,
       inLanguage,
@@ -372,7 +374,7 @@ export const qaPageJsonLd = (opts: {
         dateCreated: datePublished,
         upvoteCount: 0,
         author: { "@id": PERSON_ID },
-        url,
+        url: `${url}#answer`,
       },
     },
   };
