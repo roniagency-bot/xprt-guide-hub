@@ -20,7 +20,7 @@ import { pageHead, orgJsonLd, canonical } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => pageHead({
-    title: "XPRT Insurance — Nevada & Colorado | Personal, Commercial, Bonds, Dealership",
+    title: "XPRT Insurance | Nevada & Colorado Agency",
     description:
       "Independent insurance agency licensed in Nevada and Colorado. Educational, advisor-led coverage for personal, commercial, bonds, and Nevada dealerships.",
     path: "/",

@@ -27,6 +27,13 @@ export const Route = createFileRoute("/sitemap.xml")({
           "/book",
           "/states/nevada",
           "/states/colorado",
+          "/business-insurance/bonds",
+          "/es/business-insurance/bonds",
+          "/personal/homeowners-insurance",
+          "/es/personal/homeowners-insurance",
+          "/personal/auto-insurance",
+          "/personal/renters-insurance",
+          "/personal/landlord-insurance",
         ];
         for (const u of staticUrls) urls.push(urlEntry(u, "monthly", "0.7"));
 
