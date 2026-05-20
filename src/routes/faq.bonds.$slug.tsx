@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getBondsFaq,
   getBondsFaqs,
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
     if (!faq) return {};
     const path = `/faq/bonds/${faq.slug}`;
     return pageHead({
-      title: `${faq.question} | XPRT Insurance`,
+      title: brandedTitle(faq.question),
       description: faq.metaDescription,
       path,
       locale: "en",

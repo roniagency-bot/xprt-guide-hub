@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getHomeownersFaq,
   getHomeownersFaqs,
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/es/faq/homeowners/$slug")({
     const faq = applyTranslation(base, HOMEOWNERS_FAQS_ES[base.slug]);
     const path = `/es/faq/homeowners/${faq.slug}`;
     return pageHead({
-      title: `${faq.question} | XPRT Insurance`,
+      title: brandedTitle(faq.question),
       description: faq.metaDescription,
       path,
       locale: "es",

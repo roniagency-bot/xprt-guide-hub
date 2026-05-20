@@ -21,6 +21,19 @@ export function canonical(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+/**
+ * Build a page title that stays under `limit` chars (default 60) by truncating
+ * the lead text and appending " | XPRT Insurance". Keeps titles SEO-friendly
+ * for FAQ/long-question pages.
+ */
+export function brandedTitle(lead: string, limit = 60): string {
+  const suffix = " | XPRT Insurance";
+  const maxLead = limit - suffix.length;
+  const trimmed = lead.trim().replace(/[.?!]+$/, "");
+  if (trimmed.length <= maxLead) return `${trimmed}${suffix}`;
+  return `${trimmed.slice(0, maxLead - 1).trimEnd()}…${suffix}`;
+}
+
 type Meta = { title?: string; name?: string; property?: string; content?: string; charSet?: string };
 type LinkTag = { rel: string; href: string; hreflang?: string };
 type ScriptTag = { type?: string; children?: string };

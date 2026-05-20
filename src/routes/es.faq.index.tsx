@@ -23,7 +23,7 @@ export const Route = createFileRoute("/es/faq/")({
       ...DEALERSHIP_FAQS.map((f) => applyTranslation(f, DEALERSHIP_FAQS_ES[f.slug])),
     ];
     return pageHead({
-      title: "Centro de Conocimiento — Orientación de seguros | XPRT Insurance",
+      title: "Centro de Conocimiento — Guía de Seguros | XPRT Insurance",
       description:
         "Orientación de seguros, organizada con claridad. Comprende lo básico, compara detalles de cobertura y costo, y da el siguiente paso cuando estés listo.",
       path: "/es/faq",
