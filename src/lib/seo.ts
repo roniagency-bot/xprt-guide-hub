@@ -140,7 +140,6 @@ export function pageHead(opts: {
  * we don't poison NAP — fill in SITE.phone / SITE.address to populate.
  */
 export const orgJsonLd = () => {
-  const isPlaceholderPhone = SITE.phone.includes("000-0000");
   const node: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "InsuranceAgency",
@@ -152,6 +151,7 @@ export const orgJsonLd = () => {
     image: LOGO_URL,
     description: SITE.description,
     email: SITE.email,
+    telephone: SITE.phone,
     areaServed: [
       { "@type": "State", name: "Nevada" },
       { "@type": "State", name: "Colorado" },
@@ -164,9 +164,29 @@ export const orgJsonLd = () => {
       "Dealership Insurance",
     ],
   };
-  if (!isPlaceholderPhone) node.telephone = SITE.phone;
-  if (SITE.address) {
-    node.address = { "@type": "PostalAddress", ...SITE.address };
+  if (SITE.addresses.length > 0) {
+    const addresses = SITE.addresses.map((a) => ({
+      "@type": "PostalAddress",
+      streetAddress: a.streetAddress,
+      addressLocality: a.addressLocality,
+      addressRegion: a.addressRegion,
+      postalCode: a.postalCode,
+      addressCountry: a.addressCountry,
+    }));
+    node.address = addresses.length === 1 ? addresses[0] : addresses;
+    node.location = SITE.addresses.map((a) => ({
+      "@type": "Place",
+      name: `XPRT Insurance — ${a.addressLocality}`,
+      telephone: a.telephone,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: a.streetAddress,
+        addressLocality: a.addressLocality,
+        addressRegion: a.addressRegion,
+        postalCode: a.postalCode,
+        addressCountry: a.addressCountry,
+      },
+    }));
   }
   if (SITE.sameAs.length > 0) node.sameAs = SITE.sameAs;
   return node;
