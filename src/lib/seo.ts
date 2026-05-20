@@ -56,7 +56,8 @@ export const ORG_ID = `${SITE_URL}/#org`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const PERSON_ID = `${SITE_URL}/#roni-rivers`;
 
-const LOGO_URL = `${SITE_URL}/favicon.ico`;
+const LOGO_URL = `${SITE_URL}/logo.png`;
+const DEFAULT_ARTICLE_IMAGE = `${SITE_URL}/og-default.jpg`;
 
 /**
  * Stable, site-wide "last reviewed" date used as a fallback when individual
