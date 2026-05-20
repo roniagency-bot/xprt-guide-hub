@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
+import { LanguageToggle } from "@/components/site/LanguageToggle";
+import { useLang } from "@/lib/i18n";
 import xprtLogo from "@/assets/xprt-logo.png";
 
 type SubItem = { to: string; label: string; description?: string };
@@ -165,6 +167,8 @@ function MobileCategory({
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const lang = useLang();
+
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -197,6 +201,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <LanguageToggle current={lang} />
           <GhlFormButton form="contact" variant="ghost" size="sm">
             Contact Us
           </GhlFormButton>
@@ -204,6 +209,7 @@ export function SiteHeader() {
             <Link to="/book">Book a Review</Link>
           </Button>
         </div>
+
 
         <button
           type="button"
@@ -234,6 +240,9 @@ export function SiteHeader() {
               ),
             )}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
+              <div className="flex justify-start">
+                <LanguageToggle current={lang} />
+              </div>
               <GhlFormButton form="contact" variant="outline">
                 Contact Us
               </GhlFormButton>
@@ -241,6 +250,7 @@ export function SiteHeader() {
                 <Link to="/book" onClick={() => setOpen(false)}>Book a Review</Link>
               </Button>
             </div>
+
           </nav>
         </div>
       )}
