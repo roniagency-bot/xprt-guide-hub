@@ -4,7 +4,7 @@ import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
-import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 import { BONDS_FAQS } from "@/lib/bonds-faqs";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
@@ -16,13 +16,8 @@ import { applyTranslation, UI } from "@/lib/i18n";
 const LANG = "es" as const;
 
 export const Route = createFileRoute("/es/faq/")({
-  head: () => {
-    const all = [
-      ...HOMEOWNERS_FAQS.map((f) => applyTranslation(f, HOMEOWNERS_FAQS_ES[f.slug])),
-      ...BONDS_FAQS.map((f) => applyTranslation(f, BONDS_FAQS_ES[f.slug])),
-      ...DEALERSHIP_FAQS.map((f) => applyTranslation(f, DEALERSHIP_FAQS_ES[f.slug])),
-    ];
-    return pageHead({
+  head: () =>
+    pageHead({
       title: "Centro de Conocimiento — Guía de Seguros | XPRT Insurance",
       description:
         "Orientación de seguros, organizada con claridad. Comprende lo básico, compara detalles de cobertura y costo, y da el siguiente paso cuando estés listo.",
@@ -34,10 +29,8 @@ export const Route = createFileRoute("/es/faq/")({
           { name: "Inicio", path: "/es" },
           { name: "Centro de Conocimiento", path: "/es/faq" },
         ]),
-        faqPageJsonLd(all.map((f) => ({ question: f.question, answer: f.shortAnswer }))),
       ],
-    });
-  },
+    }),
   component: FaqHubEs,
 });
 
