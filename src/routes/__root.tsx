@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { orgJsonLd, websiteJsonLd, personJsonLd } from "@/lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -44,6 +45,11 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap",
       },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(orgJsonLd()) },
+      { type: "application/ld+json", children: JSON.stringify(websiteJsonLd()) },
+      { type: "application/ld+json", children: JSON.stringify(personJsonLd()) },
     ],
   }),
   shellComponent: RootShell,

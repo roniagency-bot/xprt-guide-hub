@@ -199,7 +199,7 @@ export function FaqDetail({
         </div>
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{stageLabel(faq.stage, lang)}</Eyebrow>
-          <h1 className="mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">{faq.question}</h1>
+          <h1 className="speakable mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">{faq.question}</h1>
         </div>
       </section>
 
@@ -207,7 +207,7 @@ export function FaqDetail({
         <article className="mx-auto max-w-3xl space-y-12 text-base leading-relaxed text-foreground/85 md:text-lg">
           <div>
             <h2 className="font-display text-2xl md:text-3xl">{UI.shortAnswer[lang]}</h2>
-            <p className="mt-4 text-pretty text-lg leading-relaxed text-foreground md:text-xl">
+            <p className="speakable mt-4 text-pretty text-lg leading-relaxed text-foreground md:text-xl">
               {faq.shortAnswer}
             </p>
           </div>

@@ -4,18 +4,36 @@
  */
 
 const SITE_URL = "https://www.xprtinsurance.com";
-const ORG_NAME = "XPRT Insurance, A Roni Rivers Agemcy";
+const ORG_NAME = "XPRT Insurance, A Roni Rivers Agency";
 
 export const SITE = {
   url: SITE_URL,
   name: ORG_NAME,
   legalName: "XPRT Insurance — A Roni Rivers Agency",
+  // TODO: replace placeholder with real published phone (E.164 format)
   phone: "+1-702-000-0000",
   email: "info@xprtinsurance.com",
   states: ["NV", "CO"],
   description:
     "Independent insurance agency licensed in Nevada and Colorado. Personal, commercial, bonds, and dealership coverage. Educational, advisor-led, bilingual.",
+  // TODO: add real social/professional profiles for entity disambiguation
+  sameAs: [] as string[],
+  // TODO: replace with real PostalAddress fields once confirmed
+  address: null as null | {
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  },
 };
+
+/** Stable @id anchors so all schemas reference one entity. */
+export const ORG_ID = `${SITE_URL}/#org`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+export const PERSON_ID = `${SITE_URL}/#roni-rivers`;
+
+const LOGO_URL = `${SITE_URL}/favicon.ico`;
 
 export function canonical(path: string) {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
@@ -23,8 +41,7 @@ export function canonical(path: string) {
 
 /**
  * Build a page title that stays under `limit` chars (default 60) by truncating
- * the lead text and appending " | XPRT Insurance". Keeps titles SEO-friendly
- * for FAQ/long-question pages.
+ * the lead text and appending " | XPRT Insurance".
  */
 export function brandedTitle(lead: string, limit = 60): string {
   const suffix = " | XPRT Insurance";
@@ -45,13 +62,7 @@ export function pageHead(opts: {
   image?: string;
   type?: "website" | "article";
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-  /** Locale of THIS page. Defaults to "en". */
   locale?: "en" | "es";
-  /**
-   * Cross-language alternates. Provide the EN path and ES path (when a
-   * translated version exists). Emits rel="alternate" hreflang link tags
-   * for en, es, and x-default to help Google rank the right URL per locale.
-   */
   alternates?: { en?: string; es?: string };
 }): { meta: Meta[]; links: LinkTag[]; scripts: ScriptTag[] } {
   const url = canonical(opts.path);
@@ -85,7 +96,6 @@ export function pageHead(opts: {
     }
     if (es) {
       links.push({ rel: "alternate", hreflang: "es", href: canonical(es) } as LinkTag);
-      // og:locale:alternate signals the other available language
       meta.push({ property: "og:locale:alternate", content: locale === "es" ? "en_US" : "es_US" });
     } else if (en) {
       meta.push({ property: "og:locale:alternate", content: ogLocaleAlt });
@@ -101,19 +111,71 @@ export function pageHead(opts: {
   return { meta, links, scripts };
 }
 
+/**
+ * Full Organization (InsuranceAgency) block. Emit ONCE in __root.tsx so every
+ * page references the same entity by @id. Omits placeholder phone/address so
+ * we don't poison NAP — fill in SITE.phone / SITE.address to populate.
+ */
+export const orgJsonLd = () => {
+  const isPlaceholderPhone = SITE.phone.includes("000-0000");
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "InsuranceAgency",
+    "@id": ORG_ID,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    url: SITE.url,
+    logo: { "@type": "ImageObject", url: LOGO_URL },
+    image: LOGO_URL,
+    description: SITE.description,
+    email: SITE.email,
+    areaServed: [
+      { "@type": "State", name: "Nevada" },
+      { "@type": "State", name: "Colorado" },
+    ],
+    knowsLanguage: ["en", "es"],
+    serviceType: [
+      "Personal Insurance",
+      "Commercial Insurance",
+      "Surety Bonds",
+      "Dealership Insurance",
+    ],
+  };
+  if (!isPlaceholderPhone) node.telephone = SITE.phone;
+  if (SITE.address) {
+    node.address = { "@type": "PostalAddress", ...SITE.address };
+  }
+  if (SITE.sameAs.length > 0) node.sameAs = SITE.sameAs;
+  return node;
+};
 
-export const orgJsonLd = () => ({
+/** Sitewide WebSite entity — helps Google sitelinks and entity graphs. */
+export const websiteJsonLd = () => ({
   "@context": "https://schema.org",
-  "@type": "InsuranceAgency",
-  name: SITE.name,
+  "@type": "WebSite",
+  "@id": WEBSITE_ID,
   url: SITE.url,
-  description: SITE.description,
-  areaServed: [
-    { "@type": "State", name: "Nevada" },
-    { "@type": "State", name: "Colorado" },
-  ],
+  name: SITE.name,
+  inLanguage: ["en-US", "es-US"],
+  publisher: { "@id": ORG_ID },
+});
+
+/** Author entity for FAQ articles — drives EEAT and AI citation. */
+export const personJsonLd = () => ({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": PERSON_ID,
+  name: "Roni Rivers",
+  jobTitle: "Licensed Insurance Advisor",
+  worksFor: { "@id": ORG_ID },
   knowsLanguage: ["en", "es"],
-  serviceType: ["Personal Insurance", "Commercial Insurance", "Surety Bonds", "Dealership Insurance"],
+  knowsAbout: [
+    "Homeowners Insurance",
+    "Auto Insurance",
+    "Surety Bonds",
+    "Dealership Insurance",
+    "Commercial Insurance",
+  ],
 });
 
 export const breadcrumbJsonLd = (items: { name: string; path: string }[]) => ({
@@ -127,15 +189,88 @@ export const breadcrumbJsonLd = (items: { name: string; path: string }[]) => ({
   })),
 });
 
-export const faqPageJsonLd = (qas: { question: string; answer: string }[]) => ({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: qas.map((qa) => ({
-    "@type": "Question",
-    name: qa.question,
-    acceptedAnswer: { "@type": "Answer", text: qa.answer },
-  })),
-});
+/**
+ * FAQPage — pairs Q&A and references publisher entity. Pass `path` to attach
+ * `mainEntityOfPage` and `inLanguage`. `speakableSelectors` enables voice/AI
+ * answer extraction (matches CSS selectors on the page).
+ */
+export const faqPageJsonLd = (
+  qas: { question: string; answer: string }[],
+  opts?: {
+    path?: string;
+    locale?: "en" | "es";
+    speakableSelectors?: string[];
+  },
+) => {
+  const locale = opts?.locale ?? "en";
+  const inLanguage = locale === "es" ? "es-US" : "en-US";
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage,
+    publisher: { "@id": ORG_ID },
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: qas.map((qa) => ({
+      "@type": "Question",
+      name: qa.question,
+      acceptedAnswer: { "@type": "Answer", text: qa.answer, inLanguage },
+    })),
+  };
+  if (opts?.path) {
+    node["@id"] = `${canonical(opts.path)}#faq`;
+    node.mainEntityOfPage = canonical(opts.path);
+  }
+  if (opts?.speakableSelectors && opts.speakableSelectors.length > 0) {
+    node.speakable = {
+      "@type": "SpeakableSpecification",
+      cssSelector: opts.speakableSelectors,
+    };
+  }
+  return node;
+};
+
+/**
+ * Article schema for FAQ answer pages — adds author/publisher/dates so LLMs
+ * can attribute the content. Use ALONGSIDE faqPageJsonLd on slug pages.
+ */
+export const articleFaqJsonLd = (opts: {
+  headline: string;
+  description: string;
+  path: string;
+  locale?: "en" | "es";
+  datePublished?: string;
+  dateModified?: string;
+  speakableSelectors?: string[];
+}) => {
+  const url = canonical(opts.path);
+  const locale = opts.locale ?? "en";
+  const inLanguage = locale === "es" ? "es-US" : "en-US";
+  // Default to a stable build date so crawlers see freshness signals.
+  const today = new Date().toISOString().slice(0, 10);
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: opts.headline.slice(0, 110),
+    description: opts.description,
+    url,
+    mainEntityOfPage: url,
+    inLanguage,
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": ORG_ID },
+    datePublished: opts.datePublished ?? today,
+    dateModified: opts.dateModified ?? today,
+    image: LOGO_URL,
+  };
+  if (opts.speakableSelectors && opts.speakableSelectors.length > 0) {
+    node.speakable = {
+      "@type": "SpeakableSpecification",
+      cssSelector: opts.speakableSelectors,
+    };
+  }
+  return node;
+};
 
 export const serviceJsonLd = (opts: { name: string; description: string; path: string; areaServed?: string[] }) => ({
   "@context": "https://schema.org",
@@ -143,6 +278,6 @@ export const serviceJsonLd = (opts: { name: string; description: string; path: s
   name: opts.name,
   description: opts.description,
   url: canonical(opts.path),
-  provider: { "@type": "InsuranceAgency", name: SITE.name, url: SITE.url },
+  provider: { "@id": ORG_ID },
   areaServed: (opts.areaServed ?? SITE.states).map((s) => ({ "@type": "State", name: s })),
 });

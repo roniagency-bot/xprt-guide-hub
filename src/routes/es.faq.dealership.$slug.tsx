@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { articleFaqJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getDealershipFaq,
   getDealershipFaqs,
@@ -28,6 +28,14 @@ export const Route = createFileRoute("/es/faq/dealership/$slug")({
     if (!base) return {};
     const faq = applyTranslation(base, DEALERSHIP_FAQS_ES[base.slug]);
     const path = `/es/faq/dealership/${faq.slug}`;
+    const fullAnswer = [
+      faq.shortAnswer,
+      ...faq.paragraphs,
+      ...(faq.bullets ?? []),
+      faq.stateContext ?? "",
+    ]
+      .filter(Boolean)
+      .join(" ");
     return pageHead({
       title: brandedTitle(faq.question),
       description: faq.metaDescription,
@@ -45,9 +53,17 @@ export const Route = createFileRoute("/es/faq/dealership/$slug")({
           { name: "Seguro para concesionarios", path: "/es/faq/dealership" },
           { name: faq.question, path },
         ]),
-        faqPageJsonLd([
-          { question: faq.question, answer: `${faq.shortAnswer} ${faq.paragraphs.join(" ")}` },
-        ]),
+        faqPageJsonLd(
+          [{ question: faq.question, answer: fullAnswer }],
+          { path, locale: "es", speakableSelectors: [".speakable", "h1"] },
+        ),
+        articleFaqJsonLd({
+          headline: faq.question,
+          description: faq.metaDescription,
+          path,
+          locale: "es",
+          speakableSelectors: [".speakable", "h1"],
+        }),
       ],
     });
   },

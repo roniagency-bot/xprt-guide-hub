@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { BondCallout } from "@/components/site/BondCallout";
 import { getFaq } from "@/server/content.functions";
-import { brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { articleFaqJsonLd, brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/faq/$slug")({
   loader: async ({ params }) => {
@@ -29,7 +29,17 @@ export const Route = createFileRoute("/faq/$slug")({
           { name: "Knowledge Base", path: "/faq" },
           { name: f.question_en, path },
         ]),
-        faqPageJsonLd([{ question: f.question_en, answer: f.long_answer_en ?? f.short_answer_en }]),
+        faqPageJsonLd(
+          [{ question: f.question_en, answer: f.long_answer_en ?? f.short_answer_en }],
+          { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
+        ),
+        articleFaqJsonLd({
+          headline: f.question_en,
+          description: f.meta_description ?? f.short_answer_en,
+          path,
+          locale: "en",
+          speakableSelectors: [".speakable", "h1"],
+        }),
       ],
     });
   },
@@ -63,9 +73,9 @@ function FaqDetail() {
         </div>
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{faq.funnel_stage === "tofu" ? "Understanding the Basics" : faq.funnel_stage === "mofu" ? "Coverage & Cost Details" : "Ready for a Coverage Review?"}</Eyebrow>
-          <h1 className="mt-5 text-balance text-4xl leading-[1.1] md:text-5xl">{faq.question_en}</h1>
+          <h1 className="speakable mt-5 text-balance text-4xl leading-[1.1] md:text-5xl">{faq.question_en}</h1>
           <p
-            className={`mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl${faq.is_speakable ? " speakable" : ""}`}
+            className={`mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl speakable${faq.is_speakable ? "" : ""}`}
           >
             {faq.short_answer_en}
           </p>
