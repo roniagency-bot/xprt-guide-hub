@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { Eyebrow, Section } from "@/components/site/Section";
-import { brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { articleFaqJsonLd, brandedTitle, breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
 import {
   getBondsFaq,
   getBondsFaqs,
@@ -32,6 +32,14 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
     const faq = getBondsFaq(params.slug);
     if (!faq) return {};
     const path = `/faq/bonds/${faq.slug}`;
+    const fullAnswer = [
+      faq.shortAnswer,
+      ...faq.paragraphs,
+      ...(faq.bullets ?? []),
+      faq.stateContext ?? "",
+    ]
+      .filter(Boolean)
+      .join(" ");
     return pageHead({
       title: brandedTitle(faq.question),
       description: faq.metaDescription,
@@ -49,12 +57,17 @@ export const Route = createFileRoute("/faq/bonds/$slug")({
           { name: "Surety Bonds", path: "/faq/bonds" },
           { name: faq.question, path },
         ]),
-        faqPageJsonLd([
-          {
-            question: faq.question,
-            answer: `${faq.shortAnswer} ${faq.paragraphs.join(" ")}`,
-          },
-        ]),
+        faqPageJsonLd(
+          [{ question: faq.question, answer: fullAnswer }],
+          { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
+        ),
+        articleFaqJsonLd({
+          headline: faq.question,
+          description: faq.metaDescription,
+          path,
+          locale: "en",
+          speakableSelectors: [".speakable", "h1"],
+        }),
       ],
     });
   },
@@ -94,7 +107,7 @@ function BondsFaqPage() {
         </div>
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{STAGE_LABEL[faq.stage]}</Eyebrow>
-          <h1 className="mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">
+          <h1 className="speakable mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">
             {faq.question}
           </h1>
         </div>
@@ -104,7 +117,7 @@ function BondsFaqPage() {
         <article className="mx-auto max-w-3xl space-y-12 text-base leading-relaxed text-foreground/85 md:text-lg">
           <div>
             <h2 className="font-display text-2xl md:text-3xl">Short answer</h2>
-            <p className="mt-4 text-pretty text-lg leading-relaxed text-foreground md:text-xl">
+            <p className="speakable mt-4 text-pretty text-lg leading-relaxed text-foreground md:text-xl">
               {faq.shortAnswer}
             </p>
           </div>
