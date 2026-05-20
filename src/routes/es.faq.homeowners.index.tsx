@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { breadcrumbJsonLd, faqPageJsonLd, itemListJsonLd, pageHead } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 import { HOMEOWNERS_FAQS_ES } from "@/lib/i18n/homeowners-faqs-es";
 import { applyTranslation, UI } from "@/lib/i18n";
@@ -24,7 +24,18 @@ export const Route = createFileRoute("/es/faq/homeowners/")({
           { name: "Centro de Conocimiento", path: "/es/faq" },
           { name: "Seguro de propietarios", path: "/es/faq/homeowners" },
         ]),
-        faqPageJsonLd(localized.map((f) => ({ question: f.question, answer: f.shortAnswer }))),
+        faqPageJsonLd(
+          localized.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+          { path: "/es/faq/homeowners", locale: "es" },
+        ),
+        itemListJsonLd({
+          name: "Preguntas frecuentes — Seguro de propietarios",
+          path: "/es/faq/homeowners",
+          items: localized.map((f) => ({
+            name: f.question,
+            path: `/es/faq/homeowners/${f.slug}`,
+          })),
+        }),
       ],
     });
   },

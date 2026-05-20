@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { breadcrumbJsonLd, faqPageJsonLd, itemListJsonLd, pageHead } from "@/lib/seo";
 import { BONDS_FAQS, PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 import { BONDS_FAQS_ES } from "@/lib/i18n/bonds-faqs-es";
 import { applyTranslation, UI } from "@/lib/i18n";
@@ -25,7 +25,18 @@ export const Route = createFileRoute("/es/faq/bonds/")({
           { name: "Centro de Conocimiento", path: "/es/faq" },
           { name: "Fianzas", path: "/es/faq/bonds" },
         ]),
-        faqPageJsonLd(localized.map((f) => ({ question: f.question, answer: f.shortAnswer }))),
+        faqPageJsonLd(
+          localized.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+          { path: "/es/faq/bonds", locale: "es" },
+        ),
+        itemListJsonLd({
+          name: "Preguntas frecuentes — Fianzas surety",
+          path: "/es/faq/bonds",
+          items: localized.map((f) => ({
+            name: f.question,
+            path: `/es/faq/bonds/${f.slug}`,
+          })),
+        }),
       ],
     });
   },

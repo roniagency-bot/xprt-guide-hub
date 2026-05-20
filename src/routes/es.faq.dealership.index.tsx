@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { breadcrumbJsonLd, faqPageJsonLd, pageHead } from "@/lib/seo";
+import { breadcrumbJsonLd, faqPageJsonLd, itemListJsonLd, pageHead } from "@/lib/seo";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
 import { DEALERSHIP_FAQS_ES } from "@/lib/i18n/dealership-faqs-es";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
@@ -26,7 +26,18 @@ export const Route = createFileRoute("/es/faq/dealership/")({
           { name: "Centro de Conocimiento", path: "/es/faq" },
           { name: "Seguro para concesionarios", path: "/es/faq/dealership" },
         ]),
-        faqPageJsonLd(localized.map((f) => ({ question: f.question, answer: f.shortAnswer }))),
+        faqPageJsonLd(
+          localized.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+          { path: "/es/faq/dealership", locale: "es" },
+        ),
+        itemListJsonLd({
+          name: "Preguntas frecuentes — Seguro para concesionarios en Nevada",
+          path: "/es/faq/dealership",
+          items: localized.map((f) => ({
+            name: f.question,
+            path: `/es/faq/dealership/${f.slug}`,
+          })),
+        }),
       ],
     });
   },

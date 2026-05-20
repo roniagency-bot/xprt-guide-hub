@@ -5,7 +5,7 @@ import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { CTASection } from "@/components/site/CTASection";
-import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd, faqPageJsonLd, itemListJsonLd } from "@/lib/seo";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 
@@ -33,7 +33,16 @@ export const Route = createFileRoute("/faq/dealership/")({
         ]),
         faqPageJsonLd(
           DEALERSHIP_FAQS.map((f) => ({ question: f.question, answer: f.shortAnswer })),
+          { path: "/faq/dealership", locale: "en" },
         ),
+        itemListJsonLd({
+          name: "Nevada Dealership Insurance FAQs",
+          path: "/faq/dealership",
+          items: DEALERSHIP_FAQS.map((f) => ({
+            name: f.question,
+            path: `/faq/dealership/${f.slug}`,
+          })),
+        }),
       ],
     }),
   component: DealershipFaqIndex,
