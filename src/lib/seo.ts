@@ -156,7 +156,7 @@ export const orgJsonLd = () => {
     name: SITE.name,
     legalName: SITE.legalName,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: LOGO_URL },
+    logo: { "@type": "ImageObject", url: LOGO_URL, width: 969, height: 678 },
     image: LOGO_URL,
     description: SITE.description,
     email: SITE.email,
