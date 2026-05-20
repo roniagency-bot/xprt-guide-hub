@@ -167,6 +167,8 @@ function MobileCategory({
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const lang = useLang();
+
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
