@@ -4,6 +4,12 @@ import { z } from "zod";
 
 export const Route = createFileRoute("/unsubscribe")({
   validateSearch: z.object({ token: z.string().optional() }),
+  head: () => ({
+    meta: [
+      { title: "Unsubscribe — XPRT Insurance" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: UnsubscribePage,
 });
 
