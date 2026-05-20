@@ -10,21 +10,44 @@ export const SITE = {
   url: SITE_URL,
   name: ORG_NAME,
   legalName: "XPRT Insurance — A Roni Rivers Agency",
-  // TODO: replace placeholder with real published phone (E.164 format)
-  phone: "+1-702-000-0000",
+  phone: "+17027663394",
   email: "info@xprtinsurance.com",
   states: ["NV", "CO"],
   description:
     "Independent insurance agency licensed in Nevada and Colorado. Personal, commercial, bonds, and dealership coverage. Educational, advisor-led, bilingual.",
-  // TODO: add real social/professional profiles for entity disambiguation
-  sameAs: [] as string[],
-  // TODO: replace with real PostalAddress fields once confirmed
-  address: null as null | {
-    streetAddress: string;
-    addressLocality: string;
-    addressRegion: string;
-    postalCode: string;
-    addressCountry: string;
+  sameAs: [
+    "https://maps.app.goo.gl/9utR7ynkfkt4V2V47",
+    "https://www.facebook.com/xprtins/",
+    "https://www.instagram.com/xprtinsurance/",
+  ] as string[],
+  addresses: [
+    {
+      streetAddress: "2525 S Bruce St",
+      addressLocality: "Las Vegas",
+      addressRegion: "NV",
+      postalCode: "89169",
+      addressCountry: "US",
+      telephone: "+17027663394",
+    },
+    {
+      streetAddress: "1350 40th St",
+      addressLocality: "Denver",
+      addressRegion: "CO",
+      postalCode: "80205",
+      addressCountry: "US",
+      telephone: "+17253442211",
+    },
+  ],
+  /** Primary address for backwards compatibility. */
+  get address() {
+    const a = this.addresses[0];
+    return {
+      streetAddress: a.streetAddress,
+      addressLocality: a.addressLocality,
+      addressRegion: a.addressRegion,
+      postalCode: a.postalCode,
+      addressCountry: a.addressCountry,
+    };
   },
 };
 
