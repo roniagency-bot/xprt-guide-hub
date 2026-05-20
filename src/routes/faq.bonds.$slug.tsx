@@ -112,6 +112,7 @@ function BondsFaqPage() {
           <h1 className="speakable mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">
             {faq.question}
           </h1>
+          <AuthorByline lang="en" />
         </div>
       </section>
 

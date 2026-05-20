@@ -105,6 +105,7 @@ function DealershipFaqPage() {
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{STAGE_LABEL[faq.stage]}</Eyebrow>
           <h1 className="speakable mt-5 text-balance text-4xl leading-[1.08] md:text-5xl">{faq.question}</h1>
+          <AuthorByline lang="en" />
         </div>
       </section>
 
