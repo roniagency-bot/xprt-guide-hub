@@ -31,11 +31,15 @@ export const Route = createFileRoute("/thank-you/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    return pageHead({
+    const base = pageHead({
       title: `Thank you — ${loaderData.lm.title_en} | XPRT Insurance`,
       description: "Your guide is ready. Thanks for trusting XPRT Insurance.",
       path: `/thank-you/${loaderData.lm.slug}`,
     });
+    return {
+      ...base,
+      meta: [...(base.meta ?? []), { name: "robots", content: "noindex, nofollow" }],
+    };
   },
   component: ThankYou,
   notFoundComponent: () => (
