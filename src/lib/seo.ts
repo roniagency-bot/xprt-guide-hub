@@ -314,7 +314,7 @@ export const articleFaqJsonLd = (opts: {
     publisher: { "@id": ORG_ID },
     datePublished: opts.datePublished ?? SITE_LAST_REVIEWED,
     dateModified: opts.dateModified ?? opts.datePublished ?? SITE_LAST_REVIEWED,
-    image: LOGO_URL,
+    image: { "@type": "ImageObject", url: DEFAULT_ARTICLE_IMAGE, width: 1920, height: 1080 },
   };
   if (opts.speakableSelectors && opts.speakableSelectors.length > 0) {
     node.speakable = {
