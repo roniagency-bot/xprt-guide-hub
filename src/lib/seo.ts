@@ -56,7 +56,8 @@ export const ORG_ID = `${SITE_URL}/#org`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const PERSON_ID = `${SITE_URL}/#roni-rivers`;
 
-const LOGO_URL = `${SITE_URL}/favicon.ico`;
+const LOGO_URL = `${SITE_URL}/logo.png`;
+const DEFAULT_ARTICLE_IMAGE = `${SITE_URL}/og-default.jpg`;
 
 /**
  * Stable, site-wide "last reviewed" date used as a fallback when individual
@@ -155,7 +156,7 @@ export const orgJsonLd = () => {
     name: SITE.name,
     legalName: SITE.legalName,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: LOGO_URL },
+    logo: { "@type": "ImageObject", url: LOGO_URL, width: 969, height: 678 },
     image: LOGO_URL,
     description: SITE.description,
     email: SITE.email,
@@ -313,7 +314,7 @@ export const articleFaqJsonLd = (opts: {
     publisher: { "@id": ORG_ID },
     datePublished: opts.datePublished ?? SITE_LAST_REVIEWED,
     dateModified: opts.dateModified ?? opts.datePublished ?? SITE_LAST_REVIEWED,
-    image: LOGO_URL,
+    image: { "@type": "ImageObject", url: DEFAULT_ARTICLE_IMAGE, width: 1920, height: 1080 },
   };
   if (opts.speakableSelectors && opts.speakableSelectors.length > 0) {
     node.speakable = {
@@ -356,11 +357,13 @@ export const qaPageJsonLd = (opts: {
     publisher: { "@id": ORG_ID },
     datePublished,
     dateModified,
+    primaryImageOfPage: { "@type": "ImageObject", url: DEFAULT_ARTICLE_IMAGE, width: 1920, height: 1080 },
     mainEntity: {
       "@type": "Question",
       name: opts.question,
       text: opts.question,
       answerCount: 1,
+      upvoteCount: 0,
       author: { "@id": PERSON_ID },
       dateCreated: datePublished,
       inLanguage,
@@ -371,7 +374,7 @@ export const qaPageJsonLd = (opts: {
         dateCreated: datePublished,
         upvoteCount: 0,
         author: { "@id": PERSON_ID },
-        url,
+        url: `${url}#answer`,
       },
     },
   };
