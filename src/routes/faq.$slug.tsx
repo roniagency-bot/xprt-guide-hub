@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { BondCallout } from "@/components/site/BondCallout";
 import { getFaq } from "@/server/content.functions";
-import { brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { articleFaqJsonLd, brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/faq/$slug")({
   loader: async ({ params }) => {
@@ -29,7 +29,17 @@ export const Route = createFileRoute("/faq/$slug")({
           { name: "Knowledge Base", path: "/faq" },
           { name: f.question_en, path },
         ]),
-        faqPageJsonLd([{ question: f.question_en, answer: f.long_answer_en ?? f.short_answer_en }]),
+        faqPageJsonLd(
+          [{ question: f.question_en, answer: f.long_answer_en ?? f.short_answer_en }],
+          { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
+        ),
+        articleFaqJsonLd({
+          headline: f.question_en,
+          description: f.meta_description ?? f.short_answer_en,
+          path,
+          locale: "en",
+          speakableSelectors: [".speakable", "h1"],
+        }),
       ],
     });
   },
