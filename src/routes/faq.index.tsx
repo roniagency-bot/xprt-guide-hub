@@ -4,7 +4,7 @@ import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
-import { pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
 import { HOMEOWNERS_FAQS } from "@/lib/homeowners-faqs";
 import { BONDS_FAQS } from "@/lib/bonds-faqs";
 import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
@@ -23,12 +23,6 @@ export const Route = createFileRoute("/faq/")({
           { name: "Home", path: "/" },
           { name: "Knowledge Center", path: "/faq" },
         ]),
-        faqPageJsonLd(
-          [...HOMEOWNERS_FAQS, ...BONDS_FAQS, ...DEALERSHIP_FAQS].map((f) => ({
-            question: f.question,
-            answer: f.shortAnswer,
-          })),
-        ),
       ],
     }),
   component: FaqHub,
