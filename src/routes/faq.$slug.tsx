@@ -6,7 +6,8 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { BondCallout } from "@/components/site/BondCallout";
 import { getFaq } from "@/server/content.functions";
-import { articleFaqJsonLd, brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { qaPageJsonLd, brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
+import { AuthorByline } from "@/components/site/AuthorByline";
 
 export const Route = createFileRoute("/faq/$slug")({
   loader: async ({ params }) => {
@@ -33,11 +34,14 @@ export const Route = createFileRoute("/faq/$slug")({
           [{ question: f.question_en, answer: f.long_answer_en ?? f.short_answer_en }],
           { path, locale: "en", speakableSelectors: [".speakable", "h1"] },
         ),
-        articleFaqJsonLd({
-          headline: f.question_en,
-          description: f.meta_description ?? f.short_answer_en,
+        qaPageJsonLd({
+          question: f.question_en,
+          answer: f.long_answer_en ?? f.short_answer_en,
           path,
           locale: "en",
+          about: (f as any).faq_categories?.name_en,
+          datePublished: (f as any).created_at,
+          dateModified: (f as any).updated_at,
           speakableSelectors: [".speakable", "h1"],
         }),
       ],
@@ -74,9 +78,8 @@ function FaqDetail() {
         <div className="container-prose pb-16 pt-10 md:pb-20 md:pt-14">
           <Eyebrow>{faq.funnel_stage === "tofu" ? "Understanding the Basics" : faq.funnel_stage === "mofu" ? "Coverage & Cost Details" : "Ready for a Coverage Review?"}</Eyebrow>
           <h1 className="speakable mt-5 text-balance text-4xl leading-[1.1] md:text-5xl">{faq.question_en}</h1>
-          <p
-            className={`mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl speakable${faq.is_speakable ? "" : ""}`}
-          >
+          <AuthorByline lastReviewed={(faq as any).updated_at ?? (faq as any).created_at} />
+          <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl speakable">
             {faq.short_answer_en}
           </p>
         </div>
