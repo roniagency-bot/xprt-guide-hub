@@ -240,6 +240,9 @@ export function SiteHeader() {
               ),
             )}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
+              <div className="flex justify-start">
+                <LanguageToggle current={lang} />
+              </div>
               <GhlFormButton form="contact" variant="outline">
                 Contact Us
               </GhlFormButton>
@@ -247,6 +250,7 @@ export function SiteHeader() {
                 <Link to="/book" onClick={() => setOpen(false)}>Book a Review</Link>
               </Button>
             </div>
+
           </nav>
         </div>
       )}
