@@ -201,6 +201,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <LanguageToggle current={lang} />
           <GhlFormButton form="contact" variant="ghost" size="sm">
             Contact Us
           </GhlFormButton>
@@ -208,6 +209,7 @@ export function SiteHeader() {
             <Link to="/book">Book a Review</Link>
           </Button>
         </div>
+
 
         <button
           type="button"
