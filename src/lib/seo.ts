@@ -219,6 +219,9 @@ export const personJsonLd = () => ({
     "Dealership Insurance",
     "Commercial Insurance",
   ],
+  sameAs: [
+    "https://www.linkedin.com/in/veronica-rivera-nunez-a66b6458/",
+  ],
 });
 
 export const breadcrumbJsonLd = (items: { name: string; path: string }[]) => ({
