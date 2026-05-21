@@ -178,7 +178,7 @@ export function SiteHeader() {
             src={xprtLogo}
             alt="XPRT Insurance — A Roni Rivers Agency"
             className="block h-24 w-auto md:h-28"
-            width={320}
+            width={160}
             height={112}
           />
         </Link>
