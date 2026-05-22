@@ -17,6 +17,7 @@ import { Route as BookRouteImport } from './routes/book'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqIndexRouteImport } from './routes/faq.index'
+import { Route as EsIndexRouteImport } from './routes/es.index'
 import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
 import { Route as StatesStateRouteImport } from './routes/states.$state'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
@@ -91,6 +92,11 @@ const FaqIndexRoute = FaqIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => FaqRoute,
+} as any)
+const EsIndexRoute = EsIndexRouteImport.update({
+  id: '/es/',
+  path: '/es/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
   id: '/thank-you/$slug',
@@ -290,6 +296,7 @@ export interface FileRoutesByFullPath {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/es/': typeof EsIndexRoute
   '/faq/': typeof FaqIndexRoute
   '/es/business-insurance/bonds': typeof EsBusinessInsuranceBondsRoute
   '/es/personal/homeowners-insurance': typeof EsPersonalHomeownersInsuranceRoute
@@ -333,6 +340,7 @@ export interface FileRoutesByTo {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/es': typeof EsIndexRoute
   '/faq': typeof FaqIndexRoute
   '/es/business-insurance/bonds': typeof EsBusinessInsuranceBondsRoute
   '/es/personal/homeowners-insurance': typeof EsPersonalHomeownersInsuranceRoute
@@ -378,6 +386,7 @@ export interface FileRoutesById {
   '/services/$category': typeof ServicesCategoryRouteWithChildren
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
+  '/es/': typeof EsIndexRoute
   '/faq/': typeof FaqIndexRoute
   '/es/business-insurance/bonds': typeof EsBusinessInsuranceBondsRoute
   '/es/personal/homeowners-insurance': typeof EsPersonalHomeownersInsuranceRoute
@@ -424,6 +433,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/es/'
     | '/faq/'
     | '/es/business-insurance/bonds'
     | '/es/personal/homeowners-insurance'
@@ -467,6 +477,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/es'
     | '/faq'
     | '/es/business-insurance/bonds'
     | '/es/personal/homeowners-insurance'
@@ -511,6 +522,7 @@ export interface FileRouteTypes {
     | '/services/$category'
     | '/states/$state'
     | '/thank-you/$slug'
+    | '/es/'
     | '/faq/'
     | '/es/business-insurance/bonds'
     | '/es/personal/homeowners-insurance'
@@ -555,6 +567,7 @@ export interface RootRouteChildren {
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
+  EsIndexRoute: typeof EsIndexRoute
   EsBusinessInsuranceBondsRoute: typeof EsBusinessInsuranceBondsRoute
   EsPersonalHomeownersInsuranceRoute: typeof EsPersonalHomeownersInsuranceRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -630,6 +643,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/faq/'
       preLoaderRoute: typeof FaqIndexRouteImport
       parentRoute: typeof FaqRoute
+    }
+    '/es/': {
+      id: '/es/'
+      path: '/es'
+      fullPath: '/es/'
+      preLoaderRoute: typeof EsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/thank-you/$slug': {
       id: '/thank-you/$slug'
@@ -925,6 +945,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
+  EsIndexRoute: EsIndexRoute,
   EsBusinessInsuranceBondsRoute: EsBusinessInsuranceBondsRoute,
   EsPersonalHomeownersInsuranceRoute: EsPersonalHomeownersInsuranceRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
@@ -945,12 +966,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
