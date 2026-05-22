@@ -32,6 +32,7 @@ import {
   orgJsonLd,
   canonical,
 } from "@/lib/seo";
+import heroBonds from "@/assets/hero-bonds.jpg";
 
 const PATH = "/business-insurance/bonds";
 
