@@ -36,7 +36,7 @@ export function ServiceCard({
         <span
           className={
             featured
-              ? "grid h-12 w-12 place-items-center rounded-lg bg-gold text-gold-foreground shadow-elegant transition-transform group-hover:scale-105"
+              ? "grid h-12 w-12 place-items-center rounded-lg bg-gold text-gold-foreground shadow-elegant transition-all duration-300 group-hover:scale-110 group-hover:shadow-gold"
               : "grid h-12 w-12 place-items-center rounded-lg bg-primary text-primary-foreground transition-colors group-hover:bg-gold group-hover:text-gold-foreground"
           }
         >
