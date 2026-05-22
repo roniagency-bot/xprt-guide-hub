@@ -21,8 +21,8 @@ export function ServiceCard({
       to={to}
       className={
         featured
-          ? "group relative flex h-full flex-col overflow-hidden rounded-xl border-2 border-gold/60 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift ring-1 ring-gold/20 transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:shadow-lift"
-          : "group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 shadow-elegant transition-all duration-500 hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
+          ? "group relative flex h-full flex-col overflow-hidden rounded-xl border-2 border-gold/60 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift ring-1 ring-gold/20 transition-all duration-500 hover:-translate-y-1 hover:border-gold hover:shadow-gold"
+          : "group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 shadow-elegant transition-all duration-500 hover:-translate-y-1 hover:border-gold/50 hover:shadow-gold"
       }
     >
       {featured && (
@@ -36,7 +36,7 @@ export function ServiceCard({
         <span
           className={
             featured
-              ? "grid h-12 w-12 place-items-center rounded-lg bg-gold text-gold-foreground shadow-elegant transition-transform group-hover:scale-105"
+              ? "grid h-12 w-12 place-items-center rounded-lg bg-gold text-gold-foreground shadow-elegant transition-all duration-300 group-hover:scale-110 group-hover:shadow-gold"
               : "grid h-12 w-12 place-items-center rounded-lg bg-primary text-primary-foreground transition-colors group-hover:bg-gold group-hover:text-gold-foreground"
           }
         >

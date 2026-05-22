@@ -48,7 +48,7 @@ export function CTASection({
               <GhlFormButton
                 form={primaryForm}
                 size="lg"
-                className="bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
+                className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
               >
                 {primaryLabel}
                 <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -57,7 +57,7 @@ export function CTASection({
               <Button
                 asChild
                 size="lg"
-                className="bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
+                className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
               >
                 <Link to={primaryHref}>
                   {primaryLabel}

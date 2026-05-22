@@ -205,7 +205,7 @@ export function SiteHeader() {
           <GhlFormButton form="contact" variant="ghost" size="sm">
             Contact Us
           </GhlFormButton>
-          <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button asChild size="sm" className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90">
             <Link to="/book">Book a Review</Link>
           </Button>
         </div>

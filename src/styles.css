@@ -177,4 +177,42 @@
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+
+  /* Gold shimmer for primary CTAs */
+  .btn-gold-shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.2s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth), background-color 0.2s;
+  }
+  .btn-gold-shimmer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      color-mix(in oklab, white 55%, transparent) 50%,
+      transparent 70%
+    );
+    transform: translateX(-150%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .btn-gold-shimmer > * { position: relative; z-index: 1; }
+  .btn-gold-shimmer:hover { box-shadow: var(--shadow-gold); }
+  .btn-gold-shimmer:hover::before { animation: goldShimmer 1.2s ease-in-out; }
+  .btn-gold-shimmer:active { transform: scale(0.98); }
+
+  @keyframes goldShimmer {
+    0%   { transform: translateX(-150%); opacity: 0; }
+    40%  { opacity: 1; }
+    100% { transform: translateX(150%); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-gold-shimmer::before { display: none; }
+    .btn-gold-shimmer:active { transform: none; }
+  }
 }

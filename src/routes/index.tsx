@@ -81,7 +81,7 @@ function HomePage() {
               around how you actually live and work. Educational first. Sales pitch never.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
+              <Button asChild size="lg" className="btn-gold-shimmer bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
                 <Link to="/book">
                   Book Your Free Coverage Review
                   <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -181,7 +181,7 @@ function HomePage() {
               },
             ].map(({ icon: Icon, title, body }, i) => (
               <Reveal key={title} delay={STAGGER[i] ?? 225}>
-                <div className="rounded-xl border border-border bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
+                <div className="rounded-xl border border-border bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-gold">
                   <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
                   <h3 className="mt-4 font-display text-xl">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
@@ -239,7 +239,7 @@ function HomePage() {
               <Link
                 to="/offers/$slug"
                 params={{ slug: o.slug }}
-                className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
+                className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-gold"
               >
                 <span className="text-xs uppercase tracking-[0.2em] text-gold">{o.tag}</span>
                 <h3 className="mt-3 font-display text-2xl leading-tight">{o.title}</h3>
