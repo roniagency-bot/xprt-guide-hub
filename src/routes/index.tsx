@@ -150,13 +150,13 @@ function HomePage() {
       {/* WHY CLIENTS CHOOSE */}
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
+          <Reveal className="lg:col-span-5">
             <SectionHeading
               eyebrow="Why XPRT"
               title="Independent. Educational. Built on clarity."
               intro="We work for you, not the carriers. Our process starts with understanding what you're protecting — then we structure coverage that actually matches it."
             />
-          </div>
+          </Reveal>
           <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
             {[
               {
@@ -179,12 +179,14 @@ function HomePage() {
                 title: "Bilingual service",
                 body: "English and Español, with the same advisory standard in both languages.",
               },
-            ].map(({ icon: Icon, title, body }) => (
-              <div key={title} className="rounded-xl border border-border bg-card p-6 shadow-elegant">
-                <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
-                <h3 className="mt-4 font-display text-xl">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
-              </div>
+            ].map(({ icon: Icon, title, body }, i) => (
+              <Reveal key={title} delay={STAGGER[i] ?? 225}>
+                <div className="rounded-xl border border-border bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
+                  <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
+                  <h3 className="mt-4 font-display text-xl">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
