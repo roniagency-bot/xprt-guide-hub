@@ -239,7 +239,7 @@ function HomePage() {
               <Link
                 to="/offers/$slug"
                 params={{ slug: o.slug }}
-                className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
+                className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-gold"
               >
                 <span className="text-xs uppercase tracking-[0.2em] text-gold">{o.tag}</span>
                 <h3 className="mt-3 font-display text-2xl leading-tight">{o.title}</h3>
