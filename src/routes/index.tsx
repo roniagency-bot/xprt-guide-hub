@@ -127,18 +127,22 @@ function HomePage() {
         </div>
       </section>
 
-      <TrustBar />
+      <Reveal><TrustBar /></Reveal>
 
       {/* SERVICES */}
       <Section>
-        <SectionHeading
-          eyebrow="Coverage"
-          title="Structured coverage for every line"
-          intro="Four practice areas. One advisory standard. Every policy reviewed line-by-line so you understand what you own."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Coverage"
+            title="Structured coverage for every line"
+            intro="Four practice areas. One advisory standard. Every policy reviewed line-by-line so you understand what you own."
+          />
+        </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((s) => (
-            <ServiceCard key={s.to} {...s} />
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.to} delay={STAGGER[i] ?? 225}>
+              <ServiceCard {...s} />
+            </Reveal>
           ))}
         </div>
       </Section>
