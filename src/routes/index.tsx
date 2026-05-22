@@ -81,7 +81,7 @@ function HomePage() {
               around how you actually live and work. Educational first. Sales pitch never.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
+              <Button asChild size="lg" className="btn-gold-shimmer bg-gold text-gold-foreground shadow-lift hover:bg-gold/90">
                 <Link to="/book">
                   Book Your Free Coverage Review
                   <ArrowRight className="ml-1.5 h-4 w-4" />
