@@ -292,7 +292,7 @@ function HomePage() {
         </div>
       </Section>
 
-      <CTASection />
+      <Reveal><CTASection /></Reveal>
     </>
   );
 }
