@@ -194,23 +194,25 @@ function HomePage() {
 
       {/* PROCESS */}
       <Section>
-        <SectionHeading
-          align="center"
-          eyebrow="The process"
-          title="How a coverage review works"
-          intro="A simple, structured walk-through. No quote required to start."
-        />
+        <Reveal>
+          <SectionHeading
+            align="center"
+            eyebrow="The process"
+            title="How a coverage review works"
+            intro="A simple, structured walk-through. No quote required to start."
+          />
+        </Reveal>
         <ol className="mt-14 grid gap-8 md:grid-cols-3">
           {[
             { n: "01", t: "Discovery", b: "20-minute call to understand your situation, assets, and current policies." },
             { n: "02", t: "Education", b: "We explain coverage line by line — what each section pays for and where most policies fall short." },
             { n: "03", t: "Recommendation", b: "If we can structure it better, we show you options side by side. If not, we tell you that too." },
-          ].map((step) => (
-            <li key={step.n} className="relative">
+          ].map((step, i) => (
+            <Reveal key={step.n} as="li" delay={STAGGER[i] ?? 225} className="relative">
               <span className="font-display text-5xl text-gold">{step.n}</span>
               <h3 className="mt-3 font-display text-2xl">{step.t}</h3>
               <p className="mt-2 text-muted-foreground">{step.b}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </Section>
