@@ -181,7 +181,7 @@ function HomePage() {
               },
             ].map(({ icon: Icon, title, body }, i) => (
               <Reveal key={title} delay={STAGGER[i] ?? 225}>
-                <div className="rounded-xl border border-border bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
+                <div className="rounded-xl border border-border bg-card p-6 shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-gold">
                   <Icon className="h-5 w-5 text-gold" strokeWidth={2} />
                   <h3 className="mt-4 font-display text-xl">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
