@@ -160,8 +160,20 @@ function BondsHub() {
   return (
     <>
       {/* HERO */}
-      <section className="relative isolate overflow-hidden bg-cream-gradient">
-        <div className="container-prose pt-10 md:pt-14">
+      <section className="relative isolate overflow-hidden bg-ink">
+        <img
+          src={heroBonds}
+          alt=""
+          aria-hidden
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/65 to-ink/30" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/35 to-transparent" />
+        <div className="container-prose relative pt-10 md:pt-14">
           <Breadcrumbs
             items={[
               { name: "Home", path: "/" },
@@ -170,13 +182,13 @@ function BondsHub() {
             ]}
           />
         </div>
-        <div className="container-prose pb-20 pt-10 md:pb-28 md:pt-14">
-          <div className="max-w-3xl fade-in-up">
-            <Eyebrow>Bonds · Nevada & Colorado</Eyebrow>
-            <h1 className="mt-5 text-balance text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
+        <div className="container-prose relative pb-20 pt-10 md:pb-28 md:pt-14">
+          <div className="max-w-3xl fade-in-up text-primary-foreground">
+            <Eyebrow className="text-gold">Bonds · Nevada & Colorado</Eyebrow>
+            <h1 className="mt-5 text-balance text-4xl leading-[1.05] text-primary-foreground sm:text-5xl md:text-6xl">
               Get the bond you need — with less confusion.
             </h1>
-            <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+            <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-primary-foreground/85 md:text-lg">
               Simple guidance and direct online options for license, permit, contractor, dealer,
               notary, and compliance bond needs.
             </p>
@@ -184,18 +196,18 @@ function BondsHub() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                className="btn-gold-shimmer bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
               >
                 <a href={PROPELLER_QUOTE_URL} target="_blank" rel="noopener noreferrer">
                   Quote & Purchase Online
                   <ExternalLink className="ml-1.5 h-4 w-4" />
                 </a>
               </Button>
-              <GhlFormButton form="commercial_quote" size="lg" variant="outline">
+              <GhlFormButton form="commercial_quote" size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
                 Talk to an Agent
               </GhlFormButton>
             </div>
-            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-primary-foreground/80">
               {TRUST_ITEMS.map((t) => (
                 <li key={t} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-gold" /> {t}
