@@ -20,6 +20,16 @@ import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { getCategoryHub } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd } from "@/lib/seo";
 import { PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
+import heroPersonal from "@/assets/hero-personal.jpg";
+import heroDealership from "@/assets/hero-dealership.jpg";
+import heroCommercial from "@/assets/hero-commercial.jpg";
+import heroAgency from "@/assets/hero-agency.jpg";
+
+const HERO_IMAGE: Record<string, string> = {
+  personal: heroPersonal,
+  dealership: heroDealership,
+  commercial: heroCommercial,
+};
 
 export const Route = createFileRoute("/services/$category")({
   loader: async ({ params }) => {
