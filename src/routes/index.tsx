@@ -219,11 +219,13 @@ function HomePage() {
 
       {/* FEATURED OFFERS */}
       <Section tone="cream">
-        <SectionHeading
-          eyebrow="Free guides"
-          title="Free Guides & Resources"
-          intro="One-page guides written by an advisor, not a marketer. Pick the one that matches your situation."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Free guides"
+            title="Free Guides & Resources"
+            intro="One-page guides written by an advisor, not a marketer. Pick the one that matches your situation."
+          />
+        </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {[
             { slug: "homeowners-cheat-sheet", title: "Homeowners Insurance Cheat Sheet", tag: "Personal" },
@@ -232,19 +234,20 @@ function HomePage() {
             { slug: "nevada-dealership-starter-guide", title: "Nevada Dealership Insurance & Bond Guide", tag: "Dealership · NV" },
             { slug: "small-business-starter-guide", title: "Small Business Insurance Starter Guide", tag: "Commercial" },
             { slug: "workers-comp-liability-checklist", title: "Workers' Comp & Liability Checklist", tag: "Commercial" },
-          ].map((o) => (
-            <Link
-              key={o.slug}
-              to="/offers/$slug"
-              params={{ slug: o.slug }}
-              className="group relative flex flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
-            >
-              <span className="text-xs uppercase tracking-[0.2em] text-gold">{o.tag}</span>
-              <h3 className="mt-3 font-display text-2xl leading-tight">{o.title}</h3>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold">
-                Get the guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
+          ].map((o, i) => (
+            <Reveal key={o.slug} delay={STAGGER[i] ?? 225}>
+              <Link
+                to="/offers/$slug"
+                params={{ slug: o.slug }}
+                className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-gold">{o.tag}</span>
+                <h3 className="mt-3 font-display text-2xl leading-tight">{o.title}</h3>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold">
+                  Get the guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -252,7 +255,7 @@ function HomePage() {
       {/* FAQ ENTRY */}
       <Section>
         <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+          <Reveal className="lg:col-span-5">
             <SectionHeading
               eyebrow="Knowledge base"
               title="Insurance guidance, organized clearly."
@@ -264,25 +267,26 @@ function HomePage() {
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </Reveal>
           <div className="grid gap-3 lg:col-span-7">
             {[
               { stage: "Understanding the Basics", q: "What does homeowners insurance actually cover?", slug: "what-does-homeowners-insurance-cover" },
               { stage: "Coverage & Cost Details", q: "Replacement cost vs actual cash value — what's the difference?", slug: "replacement-cost-vs-actual-cash-value" },
               { stage: "Ready for a Coverage Review?", q: "How do I get my policy reviewed by an advisor?", slug: "how-to-review-homeowners-policy-with-an-advisor" },
-            ].map((f) => (
-              <Link
-                key={f.slug}
-                to="/faq/homeowners/$slug"
-                params={{ slug: f.slug }}
-                className="group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-6 transition-colors hover:border-gold/50"
-              >
-                <div>
-                  <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold">{f.stage}</span>
-                  <p className="mt-1.5 font-display text-xl text-foreground">{f.q}</p>
-                </div>
-                <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
-              </Link>
+            ].map((f, i) => (
+              <Reveal key={f.slug} delay={STAGGER[i] ?? 225}>
+                <Link
+                  to="/faq/homeowners/$slug"
+                  params={{ slug: f.slug }}
+                  className="group flex items-start justify-between gap-6 rounded-xl border border-border bg-card p-6 transition-colors hover:border-gold/50"
+                >
+                  <div>
+                    <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold">{f.stage}</span>
+                    <p className="mt-1.5 font-display text-xl text-foreground">{f.q}</p>
+                  </div>
+                  <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
