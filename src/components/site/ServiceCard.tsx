@@ -21,8 +21,8 @@ export function ServiceCard({
       to={to}
       className={
         featured
-          ? "group relative flex h-full flex-col overflow-hidden rounded-xl border-2 border-gold/60 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift ring-1 ring-gold/20 transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:shadow-lift"
-          : "group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 shadow-elegant transition-all duration-500 hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-lift"
+          ? "group relative flex h-full flex-col overflow-hidden rounded-xl border-2 border-gold/60 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift ring-1 ring-gold/20 transition-all duration-500 hover:-translate-y-1 hover:border-gold hover:shadow-gold"
+          : "group relative flex h-full flex-col rounded-xl border border-border bg-card p-7 shadow-elegant transition-all duration-500 hover:-translate-y-1 hover:border-gold/50 hover:shadow-gold"
       }
     >
       {featured && (
