@@ -70,22 +70,34 @@ function CategoryHub() {
 
   return (
     <>
-      <section className="bg-cream-gradient">
-        <div className="container-prose pt-10 md:pt-14">
+      <section className="relative isolate overflow-hidden bg-ink">
+        <img
+          src={HERO_IMAGE[category.slug] ?? heroAgency}
+          alt=""
+          aria-hidden
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/60 to-ink/25" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/30 to-transparent" />
+        <div className="container-prose relative pt-10 md:pt-14">
           <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: category.name_en }]} />
         </div>
-        <div className="container-prose pb-20 pt-10 md:pb-28 md:pt-14">
-          <div className="max-w-3xl">
-            <Eyebrow>{category.line.toUpperCase()} · Coverage</Eyebrow>
-            <h1 className="mt-5 text-balance text-4xl leading-[1.05] md:text-6xl">{category.name_en}</h1>
+        <div className="container-prose relative pb-20 pt-10 md:pb-28 md:pt-14">
+          <div className="max-w-3xl text-primary-foreground">
+            <Eyebrow className="text-gold">{category.line.toUpperCase()} · Coverage</Eyebrow>
+            <h1 className="mt-5 text-balance text-4xl leading-[1.05] text-primary-foreground md:text-6xl">{category.name_en}</h1>
             {category.tagline_en && (
-              <p className="mt-5 text-pretty text-lg text-muted-foreground md:text-xl">{category.tagline_en}</p>
+              <p className="mt-5 text-pretty text-lg text-primary-foreground/85 md:text-xl">{category.tagline_en}</p>
             )}
             {category.description_en && (
-              <p className="mt-4 text-pretty text-base text-muted-foreground">{category.description_en}</p>
+              <p className="mt-4 text-pretty text-base text-primary-foreground/75">{category.description_en}</p>
             )}
             {isNvOnly && (
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 text-sm text-foreground">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gold/15 px-3.5 py-1.5 text-sm text-primary-foreground backdrop-blur-sm">
                 <MapPin className="h-4 w-4 text-gold" /> Available for licensed Nevada dealerships only
               </div>
             )}
@@ -94,11 +106,11 @@ function CategoryHub() {
                 <GhlFormButton
                   form="personal_quote"
                   size="lg"
-                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                  className="btn-gold-shimmer bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
                 >
                   Get a Personal Lines Quote
                 </GhlFormButton>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
                   <Link to="/book">Book a Free Coverage Review</Link>
                 </Button>
               </div>
@@ -108,11 +120,11 @@ function CategoryHub() {
                 <GhlFormButton
                   form="commercial_quote"
                   size="lg"
-                  className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
+                  className="btn-gold-shimmer bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
                 >
                   Get a Commercial Quote
                 </GhlFormButton>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
                   <Link to="/book">Book a Coverage Review</Link>
                 </Button>
               </div>
