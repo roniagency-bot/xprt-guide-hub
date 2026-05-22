@@ -15,8 +15,11 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { TrustBar } from "@/components/site/TrustBar";
 import { CTASection } from "@/components/site/CTASection";
+import { Reveal } from "@/components/site/Reveal";
 import heroAgency from "@/assets/hero-agency.jpg";
 import { pageHead, orgJsonLd, canonical } from "@/lib/seo";
+
+const STAGGER = [0, 75, 150, 225, 225, 225] as const;
 
 export const Route = createFileRoute("/")({
   head: () => pageHead({
