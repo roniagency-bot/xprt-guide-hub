@@ -249,6 +249,112 @@ export const HOMEOWNERS_FAQS: HomeownersFaq[] = [
     goDeeper: ["should-i-review-my-policy-before-renewal", "what-endorsements-should-i-add"],
     readyToAct: DEFAULT_READY,
   },
+  {
+    slug: "water-damage-vs-flood-insurance",
+    question: "What's the difference between water damage and flood insurance?",
+    shortAnswer:
+      "Water damage from a sudden internal source (like a burst pipe or a failed water heater) is usually covered by a homeowners policy. Water that enters the home from outside at ground level — overflowing rivers, flash floods, heavy rain runoff, or storm surge — is considered flood and almost always requires a separate flood policy.",
+    stage: "mofu",
+    metaDescription:
+      "Understand the difference between water damage and flood insurance and which one your Nevada or Colorado homeowners policy actually covers.",
+    paragraphs: [
+      "One of the most expensive misunderstandings in homeowners insurance is assuming that any water-related loss is covered. The policy language draws a sharp line between water damage and flood, and confusing the two can leave a major loss completely uninsured.",
+      "Water damage, in policy terms, is generally sudden and accidental water release from inside the home — a pipe bursts in the wall, a washing-machine hose fails, a water heater ruptures, an upstairs bathroom overflows. Most homeowners policies respond to these losses, often subject to mold sublimits and the requirement that the damage was not gradual.",
+      "Flood is water that enters the home from outside at ground level. This includes overflowing creeks and rivers, heavy rain that pools and pushes inside, flash floods, mudflow, and storm surge. It is excluded from virtually every standard homeowners policy in the United States. Flood coverage usually comes from a separate NFIP (National Flood Insurance Program) policy or a private flood carrier.",
+      "Sewer or drain backup sits in a third category. It is water that comes up through your pipes from a clogged or overwhelmed municipal line. It is also excluded by default, but most carriers offer a water backup endorsement for $5,000 to $25,000 in coverage that you can add to your policy.",
+    ],
+    bullets: [
+      "Burst pipes and appliance failures: usually covered by homeowners",
+      "Ground-level outside water (floods, flash floods, mudflow): requires separate flood policy",
+      "Sewer or drain backup: requires a water backup endorsement",
+      "Gradual leaks and long-term seepage: excluded as wear, tear, or maintenance",
+      "Mold from water damage: often capped at $5,000 unless increased",
+    ],
+    stateContext:
+      "In Las Vegas, Henderson, and the Reno valley, flash flooding during monsoon season is a real exposure even for homes far from a designated flood zone. In Colorado, snowmelt, burn-scar runoff after wildfires, and Front Range thunderstorms produce flood losses every year that homeowners assume are covered until they read the denial letter.",
+    goDeeper: ["does-homeowners-insurance-cover-flood", "what-endorsements-should-i-add"],
+    readyToAct: DEFAULT_READY,
+  },
+  {
+    slug: "roof-age-and-homeowners-insurance",
+    question: "How does my roof's age affect my homeowners insurance?",
+    shortAnswer:
+      "Roof age is one of the biggest factors in homeowners insurance pricing, eligibility, and claim settlement. Roofs over 15 years old often shift from replacement cost to actual cash value, may carry higher deductibles, and in some cases can make a home harder to insure at all.",
+    stage: "mofu",
+    metaDescription:
+      "Learn how roof age changes homeowners insurance eligibility, pricing, deductibles, and claim payouts for Nevada and Colorado homeowners.",
+    paragraphs: [
+      "Carriers care about roof age because the roof is the single most expensive component of most claims. A failed roof leads to interior water damage, mold, structural repairs, and contents losses. Older roofs are statistically more likely to fail, so insurers price and underwrite around their condition.",
+      "Once a roof passes roughly 15 years, many carriers change how they pay a roof claim. Instead of replacement cost (paying what a new roof costs today), they switch to actual cash value, which subtracts depreciation. On a 20-year-old asphalt shingle roof, that depreciation can be 60-80% — meaning a $25,000 roof claim might pay out $5,000-$10,000.",
+      "Some carriers go further. They may require a separate, higher wind/hail deductible (often 1-2% of dwelling coverage instead of a flat dollar amount), refuse to write new business on roofs over 20 years, or non-renew a policy if a roof inspection shows excessive wear. Wood shake and tile roofs have their own underwriting rules.",
+      "If your roof is 10+ years old, ask your advisor three questions before renewal: Is the roof still being settled at replacement cost? What's my wind/hail deductible? And if I had a total roof loss tomorrow, what would the carrier actually pay?",
+    ],
+    bullets: [
+      "Under 10 years: typically full replacement cost, standard deductible",
+      "10–15 years: still usually replacement cost, watch for deductible changes",
+      "15–20 years: often shifts to actual cash value (ACV)",
+      "20+ years: harder to place, may require inspection or roof replacement to renew",
+      "Wood shake roofs: many carriers will not write at all",
+    ],
+    stateContext:
+      "Colorado homeowners feel this most. Front Range hail damage drives huge claim volume, so carriers in Denver, Aurora, Colorado Springs, and Boulder have tightened roof rules aggressively — 1-2% percentage deductibles and ACV roof settlement are now common. In Nevada, the issue is sun and wind exposure on Las Vegas valley roofs; carriers are starting to apply similar age-based rules.",
+    goDeeper: ["replacement-cost-vs-actual-cash-value", "what-endorsements-should-i-add"],
+    readyToAct: DEFAULT_READY,
+  },
+  {
+    slug: "wildfire-coverage-colorado-homes",
+    question: "Does homeowners insurance cover wildfire damage in Colorado?",
+    shortAnswer:
+      "Yes — standard homeowners insurance generally covers wildfire damage to the home, other structures, and personal property, plus loss of use if you have to evacuate. But coverage limits, defensible-space requirements, and carrier availability have all tightened significantly in high-risk Colorado zones.",
+    stage: "tofu",
+    metaDescription:
+      "Find out how Colorado homeowners insurance handles wildfire damage, evacuation costs, and rebuild — and what to review if you live in a high-risk area.",
+    paragraphs: [
+      "Wildfire is a covered peril on virtually every standard homeowners policy in Colorado. If a fire damages or destroys your home, the policy responds to the dwelling, other structures, personal property, and additional living expenses while you're displaced. This is the baseline.",
+      "The real questions are not whether wildfire is covered, but whether your limits are actually high enough. Post-Marshall Fire and Cameron Peak rebuilds revealed that thousands of Front Range homeowners were 20-40% underinsured on dwelling coverage. Labor shortages, building-code upgrades, debris removal, and lot prep after a wildfire all add cost that a pre-fire limit often does not anticipate.",
+      "Loss-of-use coverage matters more than people realize. A wildfire evacuation can last weeks, and a total loss rebuild can take 18-36 months. Standard 20% loss-of-use limits on a $600K dwelling give you $120K — which sounds like a lot until you're paying $4,500/month for a comparable rental, plus storage, pet boarding, and increased commuting costs.",
+      "In high-risk Colorado zip codes (mountain communities, the wildland-urban interface around Boulder, Colorado Springs, and Estes Park), insurance is also getting harder to keep. Carriers are non-renewing policies, requiring defensible-space inspections, mandating Class A roof materials, and in some cases withdrawing from the market entirely. The Colorado FAIR Plan launched in 2025 as a last-resort option.",
+    ],
+    bullets: [
+      "Wildfire damage: covered as a standard peril",
+      "Smoke damage and ash cleanup: usually covered",
+      "Evacuation costs (hotels, meals, pet boarding): covered under loss of use",
+      "Defensible-space and Class A roof: increasingly required by carriers",
+      "Extended replacement cost endorsement: critical in high-rebuild-cost areas",
+      "FAIR Plan: last-resort coverage if no carrier will write the home",
+    ],
+    stateContext:
+      "If you live in Boulder County, Larimer County, El Paso County foothills, or any mountain community, an annual coverage review is no longer optional. Confirm dwelling limit, extended replacement cost percentage, loss-of-use limit, debris removal, and ordinance-or-law coverage. Ask whether your carrier has restrictions on roof material, defensible space, or property condition before renewal.",
+    goDeeper: ["how-much-homeowners-insurance-do-i-need", "what-endorsements-should-i-add"],
+    readyToAct: DEFAULT_READY,
+  },
+  {
+    slug: "scheduled-personal-property-jewelry",
+    question: "Do I need scheduled personal property for jewelry, watches, or art?",
+    shortAnswer:
+      "Probably yes if you own valuables worth more than the policy's special limits. Standard homeowners policies cap jewelry, watches, and art coverage at $1,500–$2,500 total per loss, and they exclude common causes like mysterious disappearance. Scheduling each item raises the limit, broadens coverage, and removes the deductible.",
+    stage: "mofu",
+    metaDescription:
+      "Learn when to schedule jewelry, watches, art, or firearms on your homeowners policy and how scheduled personal property coverage works.",
+    paragraphs: [
+      "Every standard homeowners policy includes personal property coverage — usually 50-70% of your dwelling limit — but tucked inside that coverage are 'special limits' that cap certain high-risk categories. Jewelry, watches, and furs are typically capped at $1,500 total for theft. Firearms and silverware have similar sublimits. Fine art, collectibles, and trading cards have their own rules.",
+      "Worse than the low limit is what the base policy does not cover at all. Jewelry losses from 'mysterious disappearance' — the diamond falls out of the setting at the gym, the wedding ring goes missing in a hotel — are generally excluded on the base policy. So is breakage of fragile items, damage during travel, and many causes of loss for art.",
+      "Scheduling personal property fixes both problems. You provide an appraisal or proof of value, the carrier adds the item to your policy with its own listed limit, and coverage becomes 'open peril' — meaning almost any cause of loss is covered, including mysterious disappearance, breakage, and damage anywhere in the world. Most scheduled-property endorsements also waive the deductible.",
+      "What's worth scheduling? As a rule of thumb: any single item worth over $2,500, anything you'd be heartbroken to lose, and anything you travel with regularly. A $12,000 engagement ring, a $20,000 collection of watches, a $40,000 piece of original art, or a $8,000 hunting rifle collection all belong on a schedule rather than buried in personal property.",
+    ],
+    bullets: [
+      "Base policy limit for jewelry theft: usually $1,500 total",
+      "Mysterious disappearance: excluded on base policy, covered on schedule",
+      "Worldwide coverage: scheduled items travel with you",
+      "Appraisal required: typically within the last 3-5 years",
+      "Deductible: usually waived on scheduled items",
+      "Categories to consider: jewelry, watches, fine art, firearms, silverware, musical instruments, collectibles",
+    ],
+    stateContext:
+      "Travelers from both Nevada and Colorado should pay attention to worldwide coverage. A piece of jewelry stolen from a Las Vegas hotel room or lost on a ski trip in Vail is almost never fully covered under the base policy — scheduling it is what makes the difference. We also see frequent claims for trading cards, sports memorabilia, and firearms collections that exceed sublimits.",
+    goDeeper: ["what-endorsements-should-i-add", "what-is-not-covered-by-homeowners-insurance"],
+    readyToAct: DEFAULT_READY,
+  },
 ];
 
 export const HOMEOWNERS_FAQ_PREVIEWS = HOMEOWNERS_FAQS.map((faq) => ({
