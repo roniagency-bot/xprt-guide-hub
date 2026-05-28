@@ -58,7 +58,7 @@ export function TeamSection({ members = TEAM }: { members?: TeamMember[] }) {
               The team
             </p>
             <h2 className="font-display text-4xl font-light tracking-tighter text-primary-foreground sm:text-5xl md:text-7xl">
-              People you can <span className="text-primary-foreground/40">call directly.</span>
+              Meet the <span className="text-gold">XPRTs</span>
             </h2>
           </div>
           <div className="mx-8 hidden h-px flex-1 bg-primary-foreground/15 md:block" />

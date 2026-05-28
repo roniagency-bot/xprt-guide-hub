@@ -62,7 +62,7 @@ function About() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#team">
-                <Button variant="outline" size="lg">Meet the team</Button>
+                <Button variant="outline" size="lg">Meet the XPRTs</Button>
               </a>
               <a href="#contact">
                 <Button size="lg" className="bg-gold text-gold-foreground hover:bg-gold/90">
