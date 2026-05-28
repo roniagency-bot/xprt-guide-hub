@@ -319,7 +319,7 @@ const DEALERSHIP_COVERAGES: Coverage[] = [
     },
     secondary: {
       label: "Learn About Dealer Bonds",
-      href: "/business-insurance/bonds",
+      href: "/bonds",
     },
   },
 ];

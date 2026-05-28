@@ -31,6 +31,7 @@ import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as EsContactRouteImport } from './routes/es.contact'
 import { Route as EsBookRouteImport } from './routes/es.book'
+import { Route as EsBondsRouteImport } from './routes/es.bonds'
 import { Route as EsAboutRouteImport } from './routes/es.about'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
@@ -169,6 +170,11 @@ const EsContactRoute = EsContactRouteImport.update({
 const EsBookRoute = EsBookRouteImport.update({
   id: '/es/book',
   path: '/es/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBondsRoute = EsBondsRouteImport.update({
+  id: '/es/bonds',
+  path: '/es/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsAboutRoute = EsAboutRouteImport.update({
@@ -319,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
+  '/es/bonds': typeof EsBondsRoute
   '/es/book': typeof EsBookRoute
   '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -368,6 +375,7 @@ export interface FileRoutesByTo {
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
+  '/es/bonds': typeof EsBondsRoute
   '/es/book': typeof EsBookRoute
   '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -419,6 +427,7 @@ export interface FileRoutesById {
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
+  '/es/bonds': typeof EsBondsRoute
   '/es/book': typeof EsBookRoute
   '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -471,6 +480,7 @@ export interface FileRouteTypes {
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
+    | '/es/bonds'
     | '/es/book'
     | '/es/contact'
     | '/faq/$slug'
@@ -520,6 +530,7 @@ export interface FileRouteTypes {
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
+    | '/es/bonds'
     | '/es/book'
     | '/es/contact'
     | '/faq/$slug'
@@ -570,6 +581,7 @@ export interface FileRouteTypes {
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
+    | '/es/bonds'
     | '/es/book'
     | '/es/contact'
     | '/faq/$slug'
@@ -621,6 +633,7 @@ export interface RootRouteChildren {
   BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   EsAboutRoute: typeof EsAboutRoute
+  EsBondsRoute: typeof EsBondsRoute
   EsBookRoute: typeof EsBookRoute
   EsContactRoute: typeof EsContactRoute
   OffersSlugRoute: typeof OffersSlugRoute
@@ -805,6 +818,13 @@ declare module '@tanstack/react-router' {
       path: '/es/book'
       fullPath: '/es/book'
       preLoaderRoute: typeof EsBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/bonds': {
+      id: '/es/bonds'
+      path: '/es/bonds'
+      fullPath: '/es/bonds'
+      preLoaderRoute: typeof EsBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/about': {
@@ -1039,6 +1059,7 @@ const rootRouteChildren: RootRouteChildren = {
   BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   EsAboutRoute: EsAboutRoute,
+  EsBondsRoute: EsBondsRoute,
   EsBookRoute: EsBookRoute,
   EsContactRoute: EsContactRoute,
   OffersSlugRoute: OffersSlugRoute,

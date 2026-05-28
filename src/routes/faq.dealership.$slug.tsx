@@ -178,7 +178,7 @@ function DealershipFaqPage() {
                 </Link>
               </Button>
               <Button asChild variant="outline">
-                <Link to="/business-insurance/bonds">Learn About Dealer Bonds</Link>
+                <Link to="/bonds">Learn About Dealer Bonds</Link>
               </Button>
             </div>
           </div>
