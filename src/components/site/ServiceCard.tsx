@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, type LucideIcon } from "lucide-react";
+import { useLang, UI } from "@/lib/i18n";
+
 
 export function ServiceCard({
   icon: Icon,
@@ -16,6 +18,8 @@ export function ServiceCard({
   badge?: string;
   featured?: boolean;
 }) {
+  const lang = useLang();
+
   return (
     <Link
       to={to}
@@ -58,7 +62,7 @@ export function ServiceCard({
       <h3 className="relative mt-6 font-display text-2xl leading-tight text-foreground">{title}</h3>
       <p className="relative mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
       <span className={`relative mt-6 inline-flex items-center gap-1.5 text-sm font-medium ${featured ? "text-foreground" : "text-foreground"}`}>
-        {featured ? "Explore our specialty" : "Explore coverage"}
+        {featured ? UI.exploreSpecialty[lang] : UI.exploreCoverage[lang]}
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </span>
     </Link>
