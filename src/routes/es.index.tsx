@@ -46,7 +46,7 @@ const SERVICES = [
     icon: ScrollText,
     title: "Fianzas",
     description: "Surety, licencia y permiso, contratista, concesionario y judiciales. Nuestra especialidad.",
-    to: "/es/business-insurance/bonds",
+    to: "/es/bonds",
     badge: "Nuestra especialidad",
     featured: true,
   },

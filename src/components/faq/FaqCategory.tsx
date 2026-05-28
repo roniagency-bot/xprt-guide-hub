@@ -369,7 +369,7 @@ function NextStepButtons({ category, lang }: { category: FaqCategory; lang: Lang
           </Link>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/business-insurance/bonds">{UI.learnAboutDealerBonds[lang]}</Link>
+          <Link to="/bonds">{UI.learnAboutDealerBonds[lang]}</Link>
         </Button>
       </div>
     );
@@ -384,7 +384,7 @@ function NextStepButtons({ category, lang }: { category: FaqCategory; lang: Lang
           </a>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/business-insurance/bonds" hash="bond-quick-guide">
+          <Link to="/bonds" hash="bond-quick-guide">
             {UI.downloadBondQuickGuide[lang]}
           </Link>
         </Button>
@@ -427,7 +427,7 @@ function DetailCta({ category, lang }: { category: FaqCategory; lang: Lang }) {
         subtitle={UI.ctaQuoteBondSubtitle[lang]}
         primaryLabel={UI.bookQuickBondReview[lang]}
         secondaryLabel={UI.downloadBondQuickGuide[lang]}
-        secondaryHref="/business-insurance/bonds#bond-quick-guide"
+        secondaryHref="/bonds#bond-quick-guide"
       />
     );
   }

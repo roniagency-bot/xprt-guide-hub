@@ -10,10 +10,10 @@ const BOND_CALLOUT_JSONLD = {
   "@graph": [
     {
       "@type": "FinancialProduct",
-      "@id": `${SITE_ORIGIN}/business-insurance/bonds#dealer-surety-bond`,
+      "@id": `${SITE_ORIGIN}/bonds#dealer-surety-bond`,
       name: "Nevada Dealer Surety Bond",
       category: "Surety Bond",
-      url: `${SITE_ORIGIN}/business-insurance/bonds`,
+      url: `${SITE_ORIGIN}/bonds`,
       provider: {
         "@type": "InsuranceAgency",
         name: "XPRT Insurance",
@@ -43,7 +43,7 @@ const BOND_CALLOUT_JSONLD = {
           "@type": "ListItem",
           position: 1,
           name: "Learn About Dealer Bonds",
-          url: `${SITE_ORIGIN}/business-insurance/bonds`,
+          url: `${SITE_ORIGIN}/bonds`,
         },
         {
           "@type": "ListItem",
@@ -91,7 +91,7 @@ export function BondCallout({
             <p className="mt-1 text-sm text-muted-foreground">{body}</p>
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
               <Link
-                to="/business-insurance/bonds"
+                to="/bonds"
                 className="inline-flex items-center gap-1 font-medium text-foreground hover:text-gold"
               >
                 Learn About Dealer Bonds
@@ -126,7 +126,7 @@ export function BondCallout({
           <p className="mt-3 text-sm text-muted-foreground md:text-base">{body}</p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Button asChild variant="outline">
-              <Link to="/business-insurance/bonds">Learn About Dealer Bonds</Link>
+              <Link to="/bonds">Learn About Dealer Bonds</Link>
             </Button>
             <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
               <a href={PROPELLER_QUOTE_URL} target="_blank" rel="noopener noreferrer">

@@ -29,7 +29,7 @@ const ES_AVAILABLE_EXACT = new Set<string>([
   "/faq/bonds",
   "/faq/dealership",
   "/personal/homeowners-insurance",
-  "/business-insurance/bonds",
+  "/bonds",
 ]);
 const ES_AVAILABLE_PREFIXES = [
   "/faq/homeowners/",

@@ -58,7 +58,7 @@ export const Route = createFileRoute("/es/faq/bonds/")({
             </a>
           </Button>
           <Button asChild variant="outline">
-            <Link to="/business-insurance/bonds">{UI.learnAboutBonds[LANG]}</Link>
+            <Link to="/bonds">{UI.learnAboutBonds[LANG]}</Link>
           </Button>
         </>
       }
@@ -67,7 +67,7 @@ export const Route = createFileRoute("/es/faq/bonds/")({
         subtitle: UI.ctaQuoteBondSubtitle[LANG],
         primaryLabel: UI.bookQuickBondReview[LANG],
         secondaryLabel: UI.learnAboutBonds[LANG],
-        secondaryHref: "/business-insurance/bonds",
+        secondaryHref: "/bonds",
       }}
     />
   ),
