@@ -597,13 +597,13 @@ function BondsHub() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild variant="outline" size="sm">
-              <a href="tel:+17027101941">
-                <Phone className="mr-1.5 h-4 w-4" /> (702) 710-1941
+              <a href="tel:+17027663394">
+                <Phone className="mr-1.5 h-4 w-4" /> (702) 766-3394
               </a>
             </Button>
             <Button asChild variant="outline" size="sm">
-              <a href="mailto:bonds@xprtinsurance.com">
-                <Mail className="mr-1.5 h-4 w-4" /> bonds@xprtinsurance.com
+              <a href="mailto:roni@xprtinsurance.com">
+                <Mail className="mr-1.5 h-4 w-4" /> roni@xprtinsurance.com
               </a>
             </Button>
             <Button asChild variant="outline" size="sm">
