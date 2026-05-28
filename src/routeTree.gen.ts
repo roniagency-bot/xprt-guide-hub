@@ -14,12 +14,14 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as BondsRouteImport } from './routes/bonds'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as EsIndexRouteImport } from './routes/es.index'
 import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
 import { Route as StatesStateRouteImport } from './routes/states.$state'
+import { Route as ServicesBondsRouteImport } from './routes/services.bonds'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
 import { Route as PersonalRentersInsuranceRouteImport } from './routes/personal.renters-insurance'
 import { Route as PersonalLandlordInsuranceRouteImport } from './routes/personal.landlord-insurance'
@@ -81,6 +83,11 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BondsRoute = BondsRouteImport.update({
+  id: '/bonds',
+  path: '/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -109,6 +116,11 @@ const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
 const StatesStateRoute = StatesStateRouteImport.update({
   id: '/states/$state',
   path: '/states/$state',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesBondsRoute = ServicesBondsRouteImport.update({
+  id: '/services/bonds',
+  path: '/services/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
@@ -298,6 +310,7 @@ const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bonds': typeof BondsRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -315,6 +328,7 @@ export interface FileRoutesByFullPath {
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/services/bonds': typeof ServicesBondsRoute
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/es/': typeof EsIndexRoute
@@ -346,6 +360,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bonds': typeof BondsRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -362,6 +377,7 @@ export interface FileRoutesByTo {
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/services/bonds': typeof ServicesBondsRoute
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/es': typeof EsIndexRoute
@@ -394,6 +410,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bonds': typeof BondsRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -411,6 +428,7 @@ export interface FileRoutesById {
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/services/bonds': typeof ServicesBondsRoute
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/es/': typeof EsIndexRoute
@@ -444,6 +462,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/bonds'
     | '/book'
     | '/contact'
     | '/faq'
@@ -461,6 +480,7 @@ export interface FileRouteTypes {
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
+    | '/services/bonds'
     | '/states/$state'
     | '/thank-you/$slug'
     | '/es/'
@@ -492,6 +512,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/bonds'
     | '/book'
     | '/contact'
     | '/sitemap.xml'
@@ -508,6 +529,7 @@ export interface FileRouteTypes {
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
+    | '/services/bonds'
     | '/states/$state'
     | '/thank-you/$slug'
     | '/es'
@@ -539,6 +561,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/bonds'
     | '/book'
     | '/contact'
     | '/faq'
@@ -556,6 +579,7 @@ export interface FileRouteTypes {
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
+    | '/services/bonds'
     | '/states/$state'
     | '/thank-you/$slug'
     | '/es/'
@@ -588,6 +612,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BondsRoute: typeof BondsRoute
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
@@ -604,6 +629,7 @@ export interface RootRouteChildren {
   PersonalLandlordInsuranceRoute: typeof PersonalLandlordInsuranceRoute
   PersonalRentersInsuranceRoute: typeof PersonalRentersInsuranceRoute
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
+  ServicesBondsRoute: typeof ServicesBondsRoute
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
   EsIndexRoute: typeof EsIndexRoute
@@ -662,6 +688,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bonds': {
+      id: '/bonds'
+      path: '/bonds'
+      fullPath: '/bonds'
+      preLoaderRoute: typeof BondsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -702,6 +735,13 @@ declare module '@tanstack/react-router' {
       path: '/states/$state'
       fullPath: '/states/$state'
       preLoaderRoute: typeof StatesStateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/bonds': {
+      id: '/services/bonds'
+      path: '/services/bonds'
+      fullPath: '/services/bonds'
+      preLoaderRoute: typeof ServicesBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$category': {
@@ -990,6 +1030,7 @@ const ServicesCategoryRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BondsRoute: BondsRoute,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
@@ -1006,6 +1047,7 @@ const rootRouteChildren: RootRouteChildren = {
   PersonalLandlordInsuranceRoute: PersonalLandlordInsuranceRoute,
   PersonalRentersInsuranceRoute: PersonalRentersInsuranceRoute,
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
+  ServicesBondsRoute: ServicesBondsRoute,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
   EsIndexRoute: EsIndexRoute,
