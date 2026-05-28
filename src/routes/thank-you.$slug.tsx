@@ -19,7 +19,11 @@ export const Route = createFileRoute("/thank-you/$slug")({
         short_answer_en: f.short_answer_en,
         faqType: "homeowners" as const,
       }));
-    } else if (params.slug === "bond-quick-guide" || params.slug === "complete-guide-to-surety-bonds") {
+    } else if (
+      params.slug === "bond-quick-guide" ||
+      params.slug === "complete-guide-to-surety-bonds" ||
+      params.slug === "dealer-bond-bundle"
+    ) {
       faqs = BONDS_FAQ_PREVIEWS.slice(0, 4).map((f) => ({
         slug: f.slug,
         question_en: f.question_en,

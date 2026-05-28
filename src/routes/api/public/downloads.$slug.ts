@@ -4,6 +4,7 @@ import homeownersCheatSheetB64 from "@/assets/downloads/homeowners-cheat-sheet.p
 import homeownersEbookB64 from "@/assets/downloads/homeowners-ebook.pdf.base64";
 import dealershipStarterGuideB64 from "@/assets/downloads/nevada-dealership-starter-guide.pdf.base64";
 import dealershipCheatSheetB64 from "@/assets/downloads/nevada-dealership-cheat-sheet.pdf.base64";
+import dealerBondBundleB64 from "@/assets/downloads/dealer-bond-bundle.pdf.base64";
 
 function b64ToBytes(b64: string): Uint8Array {
   const bin = atob(b64);
@@ -29,6 +30,10 @@ const FILES: Record<string, { bytes: Uint8Array; downloadName: string }> = {
   "nevada-dealership-cheat-sheet": {
     bytes: b64ToBytes(dealershipCheatSheetB64),
     downloadName: "XPRT-Nevada-Dealership-Insurance-Cheat-Sheet.pdf",
+  },
+  "dealer-bond-bundle": {
+    bytes: b64ToBytes(dealerBondBundleB64),
+    downloadName: "XPRT-Dealer-Bond-and-Garage-Liability-Bundle.pdf",
   },
 };
 
