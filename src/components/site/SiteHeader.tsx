@@ -7,11 +7,12 @@ import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { useLang, UI, type Lang } from "@/lib/i18n";
 import xprtLogo from "@/assets/xprt-logo.png";
 
-type SubItem = { to: string; label: string; description?: string };
+type SubItem = { to: string; label: string; description?: string; external?: boolean };
 
 type NavItem =
   | { kind: "static"; to: string; label: string }
-  | { kind: "category"; category: string; label: string; subitems: SubItem[] };
+  | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string };
+
 
 function buildNav(lang: Lang): readonly NavItem[] {
   return [
