@@ -245,6 +245,32 @@ export const breadcrumbJsonLd = (items: { name: string; path: string }[]) => ({
 });
 
 /**
+ * Per-person JSON-LD for the team section. Strong EEAT signal for YMYL —
+ * each licensed advisor becomes a citable entity with direct contact info
+ * and a `worksFor` reference back to the agency entity.
+ */
+export const teamPersonJsonLd = (opts: {
+  name: string;
+  jobTitle: string;
+  telephone?: string;
+  email?: string;
+  worksLocation?: string;
+}) => {
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: opts.name,
+    jobTitle: opts.jobTitle,
+    worksFor: { "@id": ORG_ID },
+    knowsLanguage: ["en", "es"],
+  };
+  if (opts.telephone) node.telephone = opts.telephone;
+  if (opts.email) node.email = opts.email;
+  if (opts.worksLocation) node.workLocation = { "@type": "Place", name: opts.worksLocation };
+  return node;
+};
+
+/**
  * FAQPage — pairs Q&A and references publisher entity. Pass `path` to attach
  * `mainEntityOfPage` and `inLanguage`. `speakableSelectors` enables voice/AI
  * answer extraction (matches CSS selectors on the page).
