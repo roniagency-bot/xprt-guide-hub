@@ -1,120 +1,74 @@
-'use client';
-import React, { useState, useRef, useEffect } from 'react';
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  AnimatePresence,
-} from 'framer-motion';
-import { ArrowUpRight, Minus, Plus } from 'lucide-react';
-import Image from 'next/image';
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { Phone, Mail, ArrowUpRight, Minus, Plus } from "lucide-react";
+import { TEAM, initialsOf, type TeamMember } from "@/data/team";
 
-/* ---------- Types ---------- */
-
-interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  image: string;
-}
-
-/* ---------- Data ---------- */
-
-const TEAM: TeamMember[] = [
-  {
-    id: '01',
-    name: 'Alex Morgan',
-    role: 'Design Director',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop',
-  },
-  {
-    id: '02',
-    name: 'Jordan Lee',
-    role: 'Lead Architect',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop',
-  },
-  {
-    id: '03',
-    name: 'Casey Smith',
-    role: 'Creative Technologist',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop',
-  },
-  {
-    id: '04',
-    name: 'Taylor Reed',
-    role: 'Brand Strategist',
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop',
-  },
-  {
-    id: '05',
-    name: 'Riley Davis',
-    role: 'Motion Designer',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop',
-  },
-];
-
-/* ---------- Main Component ---------- */
-
-export default function KineticTeamHybrid() {
+/**
+ * Kinetic team section — adapted from 21st.dev "kinetic-team-hybrid".
+ * - Themed to XPRT tokens (ink surface, gold accent, primary-foreground text).
+ * - Replaces next/image with plain <img> + monogram fallback.
+ * - Adds direct phone + email rendered inside the row + floating preview card.
+ */
+export function TeamSection({ members = TEAM }: { members?: TeamMember[] }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Mouse position resources (Global for the floating card)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
-  // Smooth physics for the floating card
   const springConfig = { damping: 20, stiffness: 150, mass: 0.5 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
-  // Detect mobile for conditional rendering logic
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isMobile) return;
-    // Offset the cursor card so it doesn't block the text
-    mouseX.set(e.clientX + 20); 
+    mouseX.set(e.clientX + 20);
     mouseY.set(e.clientY + 20);
   };
+
+  const active = members.find((m) => m.id === activeId);
 
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full cursor-default bg-neutral-950 px-6 py-24 text-neutral-200 md:px-12"
+      className="relative w-full cursor-default bg-ink px-6 py-24 text-primary-foreground md:px-12"
     >
-      {/* Background Ambience */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_70%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.04),transparent_70%)]" />
 
       <div className="mx-auto max-w-6xl">
-        <motion.header 
+        <motion.header
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-20 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+          className="mb-16 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <h1 className="text-4xl font-light tracking-tighter text-white sm:text-6xl md:text-8xl">
-              Creative <span className="text-neutral-600">Talent</span>
-            </h1>
+            <p className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-gold">
+              <span className="inline-block h-px w-8 bg-gold" />
+              The team
+            </p>
+            <h2 className="font-display text-4xl font-light tracking-tighter text-primary-foreground sm:text-5xl md:text-7xl">
+              People you can <span className="text-primary-foreground/40">call directly.</span>
+            </h2>
           </div>
-          <div className="h-px flex-1 bg-neutral-900 mx-8 hidden md:block" />
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-neutral-500">
-            Selected Works &apos;24
+          <div className="mx-8 hidden h-px flex-1 bg-primary-foreground/15 md:block" />
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-primary-foreground/50">
+            Nevada · Colorado
           </p>
         </motion.header>
 
-        {/* The List */}
         <div className="flex flex-col">
-          {TEAM.map((member, index) => (
+          {members.map((member, index) => (
             <TeamRow
               key={member.id}
               data={member}
@@ -128,36 +82,35 @@ export default function KineticTeamHybrid() {
         </div>
       </div>
 
-      {/* DESKTOP ONLY: Global Floating Cursor Image */}
-      {/* We use Portal-like fixed positioning to ensure it floats above everything smoothly */}
+      {/* DESKTOP: floating preview card follows cursor */}
       {!isMobile && (
         <motion.div
           style={{ x: cursorX, y: cursorY }}
           className="pointer-events-none fixed left-0 top-0 z-50 hidden md:block"
         >
           <AnimatePresence mode="wait">
-            {activeId && (
+            {active && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.5, filter: "blur(10px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, scale: 0.5, filter: "blur(10px)" }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="relative h-64 w-80 overflow-hidden rounded-xl border border-white/10 bg-neutral-900 shadow-2xl"
+                className="relative h-64 w-80 overflow-hidden rounded-xl border border-primary-foreground/10 bg-card text-card-foreground shadow-2xl"
               >
-                {/* Find the active image */}
-                <Image
-                  src={TEAM.find((t) => t.id === activeId)?.image}
-                                  alt="Preview"
-                                  fill
-                  className="h-full w-full object-cover"
-                />
-                
-                {/* Overlay Metadata */}
-                <div className="absolute bottom-0 w-full bg-linear-to-t from-black/80 to-transparent p-4">
-                  <div className="flex items-center gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] uppercase tracking-widest text-white/80">Active</span>
-                  </div>
+                {active.photo ? (
+                  <img
+                    src={active.photo}
+                    alt={active.name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <Monogram name={active.name} className="h-full w-full text-6xl" />
+                )}
+                <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/85 to-transparent p-4">
+                  <p className="font-display text-lg text-white">{active.name}</p>
+                  <p className="mt-0.5 text-xs uppercase tracking-widest text-gold">
+                    {active.location}
+                  </p>
                 </div>
               </motion.div>
             )}
@@ -168,7 +121,7 @@ export default function KineticTeamHybrid() {
   );
 }
 
-/* ---------- Row Component ---------- */
+/* ---------- Row ---------- */
 
 function TeamRow({
   data,
@@ -189,75 +142,107 @@ function TeamRow({
 
   return (
     <motion.div
-      layout // This enables smooth height animation on mobile
+      layout
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: isDimmed ? 0.3 : 1, 
-        y: 0,
-        backgroundColor: isActive && isMobile ? 'rgba(255,255,255,0.03)' : 'transparent'
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      animate={{
+        opacity: isDimmed ? 0.35 : 1,
+        backgroundColor: isActive && isMobile ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0)",
       }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       onMouseEnter={() => !isMobile && setActiveId(data.id)}
       onMouseLeave={() => !isMobile && setActiveId(null)}
       onClick={() => isMobile && setActiveId(isActive ? null : data.id)}
-      className={`group relative border-t border-neutral-900 transition-colors duration-500 last:border-b ${
-        isMobile ? 'cursor-pointer' : 'cursor-default'
+      className={`group relative border-t border-primary-foreground/10 transition-colors duration-500 last:border-b ${
+        isMobile ? "cursor-pointer" : "cursor-default"
       }`}
     >
-      <div className="relative z-10 flex flex-col py-8 md:flex-row md:items-center md:justify-between md:py-12">
-        
-        {/* Name & Index Section */}
-        <div className="flex items-baseline gap-6 md:gap-12 pl-4 md:pl-0 transition-transform duration-500 group-hover:translate-x-4">
-          <span className="font-mono text-xs text-neutral-600">
-            0{index + 1}
-          </span>
-          <h2 className="text-3xl font-medium tracking-tight text-neutral-400 transition-colors duration-300 group-hover:text-white md:text-6xl">
-            {data.name}
-          </h2>
+      <div className="relative z-10 flex flex-col py-8 md:flex-row md:items-center md:justify-between md:py-10">
+        <div className="flex items-baseline gap-6 pl-4 transition-transform duration-500 group-hover:translate-x-3 md:gap-10 md:pl-0">
+          <span className="font-mono text-xs text-primary-foreground/40">{data.id}</span>
+          <div>
+            <h3 className="font-display text-2xl font-medium tracking-tight text-primary-foreground/60 transition-colors duration-300 group-hover:text-primary-foreground md:text-5xl">
+              {data.name}
+            </h3>
+            <p className="mt-2 text-xs uppercase tracking-[0.2em] text-primary-foreground/40 transition-colors group-hover:text-gold md:hidden">
+              {data.role}
+            </p>
+          </div>
         </div>
 
-        {/* Role & Icon Section */}
-        <div className="mt-4 flex items-center justify-between pl-12 pr-4 md:mt-0 md:justify-end md:gap-12 md:pl-0 md:pr-0">
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-600 transition-colors group-hover:text-neutral-400">
+        <div className="mt-4 flex items-center justify-between pl-12 pr-4 md:mt-0 md:justify-end md:gap-10 md:pl-0 md:pr-0">
+          <span className="hidden text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground/50 transition-colors group-hover:text-gold md:inline">
             {data.role}
           </span>
-          
-          {/* Mobile Toggle Icon */}
-          <div className="block md:hidden text-neutral-500">
+
+          <div className="block text-primary-foreground/60 md:hidden">
             {isActive ? <Minus size={18} /> : <Plus size={18} />}
           </div>
 
-          {/* Desktop Arrow */}
           <motion.div
-             animate={{ x: isActive ? 0 : -10, opacity: isActive ? 1 : 0 }}
-             className="hidden md:block text-white"
+            animate={{ x: isActive ? 0 : -10, opacity: isActive ? 1 : 0 }}
+            className="hidden text-gold md:block"
           >
-             <ArrowUpRight size={28} strokeWidth={1.5} />
+            <ArrowUpRight size={26} strokeWidth={1.5} />
           </motion.div>
         </div>
       </div>
 
-      {/* MOBILE ONLY: Inline Accordion Image */}
+      {/* Expanded contact panel — inline on mobile, slides on desktop hover */}
       <AnimatePresence>
-        {isMobile && isActive && (
+        {((isMobile && isActive) || (!isMobile && isActive)) && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden bg-neutral-900/50"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
           >
-            <div className="p-4">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                <Image 
-                  src={data.image} 
-                  alt={data.name} 
-                                  className="h-full w-full object-cover" 
-                                  fill
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                   <p className="text-xs uppercase tracking-widest text-white">View Profile</p>
+            <div className="grid gap-4 px-4 pb-8 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-6 md:px-0 md:pb-10">
+              <div className="hidden h-20 w-20 overflow-hidden rounded-full border border-primary-foreground/10 sm:block md:h-24 md:w-24">
+                {data.photo ? (
+                  <img src={data.photo} alt={data.name} className="h-full w-full object-cover" />
+                ) : (
+                  <Monogram name={data.name} className="h-full w-full text-2xl" />
+                )}
+              </div>
+              <div className="space-y-3">
+                <p className="text-sm leading-relaxed text-primary-foreground/70 md:text-base">
+                  {data.specialty}
+                </p>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+                  {data.phone ? (
+                    <a
+                      href={`tel:${data.phone}`}
+                      className="inline-flex items-center gap-2 text-gold hover:underline"
+                    >
+                      <Phone size={14} />
+                      {data.phoneDisplay || data.phone}
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 text-primary-foreground/40">
+                      <Phone size={14} />
+                      Direct line coming soon
+                    </span>
+                  )}
+                  {data.email ? (
+                    <a
+                      href={`mailto:${data.email}`}
+                      className="inline-flex items-center gap-2 text-gold hover:underline"
+                    >
+                      <Mail size={14} />
+                      {data.email}
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 text-primary-foreground/40">
+                      <Mail size={14} />
+                      Direct email coming soon
+                    </span>
+                  )}
+                  <span className="text-xs uppercase tracking-widest text-primary-foreground/40">
+                    {data.location}
+                  </span>
                 </div>
               </div>
             </div>
@@ -267,3 +252,17 @@ function TeamRow({
     </motion.div>
   );
 }
+
+function Monogram({ name, className = "" }: { name: string; className?: string }) {
+  const initials = initialsOf(name);
+  return (
+    <div
+      className={`flex items-center justify-center bg-gradient-to-br from-gold/30 to-primary-foreground/5 font-display font-light tracking-tight text-gold ${className}`}
+      aria-hidden="true"
+    >
+      {initials}
+    </div>
+  );
+}
+
+export default TeamSection;
