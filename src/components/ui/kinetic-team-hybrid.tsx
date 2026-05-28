@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Phone, Mail, ArrowUpRight, Minus, Plus } from "lucide-react";
 import { TEAM, initialsOf, type TeamMember } from "@/data/team";
+import { useLang, UI } from "@/lib/i18n";
 
 /**
  * Kinetic team section — adapted from 21st.dev "kinetic-team-hybrid".
@@ -11,6 +12,8 @@ import { TEAM, initialsOf, type TeamMember } from "@/data/team";
  * - Adds direct phone + email rendered inside the row + floating preview card.
  */
 export function TeamSection({ members = TEAM }: { members?: TeamMember[] }) {
+  const lang = useLang();
+
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,7 +58,8 @@ export function TeamSection({ members = TEAM }: { members?: TeamMember[] }) {
           <div>
             <p className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-gold">
               <span className="inline-block h-px w-8 bg-gold" />
-              The team
+              {UI.teamEyebrow[lang]}
+
             </p>
             <h2 className="font-display text-4xl font-light tracking-tighter text-primary-foreground sm:text-5xl md:text-7xl">
               Meet the <span className="text-gold">XPRTs</span>
@@ -77,8 +81,10 @@ export function TeamSection({ members = TEAM }: { members?: TeamMember[] }) {
               setActiveId={setActiveId}
               isMobile={isMobile}
               isAnyActive={activeId !== null}
+              lang={lang}
             />
           ))}
+
         </div>
       </div>
 
@@ -130,6 +136,7 @@ function TeamRow({
   setActiveId,
   isMobile,
   isAnyActive,
+  lang,
 }: {
   data: TeamMember;
   index: number;
@@ -137,8 +144,12 @@ function TeamRow({
   setActiveId: (id: string | null) => void;
   isMobile: boolean;
   isAnyActive: boolean;
+  lang: "en" | "es";
 }) {
   const isDimmed = isAnyActive && !isActive;
+  const role = lang === "es" ? data.roleEs : data.role;
+  const specialty = lang === "es" ? data.specialtyEs : data.specialty;
+
 
   return (
     <motion.div
@@ -166,15 +177,16 @@ function TeamRow({
               {data.name}
             </h3>
             <p className="mt-2 text-xs uppercase tracking-[0.2em] text-primary-foreground/40 transition-colors group-hover:text-gold md:hidden">
-              {data.role}
+              {role}
             </p>
           </div>
         </div>
 
         <div className="mt-4 flex items-center justify-between pl-12 pr-4 md:mt-0 md:justify-end md:gap-10 md:pl-0 md:pr-0">
           <span className="hidden text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground/50 transition-colors group-hover:text-gold md:inline">
-            {data.role}
+            {role}
           </span>
+
 
           <div className="block text-primary-foreground/60 md:hidden">
             {isActive ? <Minus size={18} /> : <Plus size={18} />}
@@ -209,7 +221,7 @@ function TeamRow({
               </div>
               <div className="space-y-3">
                 <p className="text-sm leading-relaxed text-primary-foreground/70 md:text-base">
-                  {data.specialty}
+                  {specialty}
                 </p>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
                   {data.phone ? (
@@ -223,7 +235,7 @@ function TeamRow({
                   ) : (
                     <span className="inline-flex items-center gap-2 text-primary-foreground/40">
                       <Phone size={14} />
-                      Direct line coming soon
+                      {UI.teamLineComingSoon[lang]}
                     </span>
                   )}
                   {data.email ? (
@@ -237,9 +249,10 @@ function TeamRow({
                   ) : (
                     <span className="inline-flex items-center gap-2 text-primary-foreground/40">
                       <Mail size={14} />
-                      Direct email coming soon
+                      {UI.teamEmailComingSoon[lang]}
                     </span>
                   )}
+
                   <span className="text-xs uppercase tracking-widest text-primary-foreground/40">
                     {data.location}
                   </span>

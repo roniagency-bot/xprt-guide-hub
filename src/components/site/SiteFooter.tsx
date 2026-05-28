@@ -1,8 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
+import { useLang, UI } from "@/lib/i18n";
 import xprtLogo from "@/assets/xprt-logo.png";
 
 export function SiteFooter() {
+  const lang = useLang();
+  const aboutHref = lang === "es" ? "/es/about" : "/about";
+  const faqHref = lang === "es" ? "/es/faq" : "/faq";
+  const bookHref = lang === "es" ? "/es/book" : "/book";
   return (
     <footer className="mt-24 border-t border-border bg-ink text-primary-foreground">
       <div className="container-prose grid gap-12 py-16 md:grid-cols-5">
@@ -13,11 +18,10 @@ export function SiteFooter() {
             className="h-24 w-auto"
           />
           <p className="mt-4 max-w-md text-sm leading-relaxed text-primary-foreground/70">
-            Independent agency licensed in Nevada & Colorado. Personal, commercial, bonds,
-            and dealership coverage — explained clearly, structured correctly.
+            {UI.footerDescription[lang]}
           </p>
           <p className="mt-4 text-xs text-primary-foreground/50">
-            Bilingual service · English & Español
+            {UI.footerBilingualLine[lang]}
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             <GhlFormButton
@@ -25,7 +29,7 @@ export function SiteFooter() {
               size="sm"
               className="bg-gold text-gold-foreground hover:bg-gold/90"
             >
-              Contact Us
+              {UI.btnContactUs[lang]}
             </GhlFormButton>
             <GhlFormButton
               form="personal_quote"
@@ -33,35 +37,35 @@ export function SiteFooter() {
               variant="outline"
               className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
             >
-              Get a Quote
+              {UI.btnGetAQuote[lang]}
             </GhlFormButton>
           </div>
         </div>
 
         <div>
-          <h4 className="font-display text-sm uppercase tracking-widest text-gold">Coverage</h4>
+          <h4 className="font-display text-sm uppercase tracking-widest text-gold">{UI.footerCoverage[lang]}</h4>
           <ul className="mt-4 space-y-2 text-sm text-primary-foreground/80">
-            <li><Link to="/services/$category" params={{ category: "personal" }} className="hover:text-gold">Personal</Link></li>
-            <li><Link to="/services/$category" params={{ category: "commercial" }} className="hover:text-gold">Commercial</Link></li>
-            <li><Link to="/services/$category" params={{ category: "bonds" }} className="hover:text-gold">Bonds</Link></li>
-            <li><Link to="/services/$category" params={{ category: "dealership" }} className="hover:text-gold">Dealership (NV)</Link></li>
+            <li><Link to="/services/$category" params={{ category: "personal" }} className="hover:text-gold">{UI.navPersonal[lang]}</Link></li>
+            <li><Link to="/services/$category" params={{ category: "commercial" }} className="hover:text-gold">{UI.navCommercial[lang]}</Link></li>
+            <li><Link to="/services/$category" params={{ category: "bonds" }} className="hover:text-gold">{UI.navBonds[lang]}</Link></li>
+            <li><Link to="/services/$category" params={{ category: "dealership" }} className="hover:text-gold">{UI.footerNvDealership[lang]}</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-display text-sm uppercase tracking-widest text-gold">Agency</h4>
+          <h4 className="font-display text-sm uppercase tracking-widest text-gold">{UI.footerAgency[lang]}</h4>
           <ul className="mt-4 space-y-2 text-sm text-primary-foreground/80">
-            <li><Link to="/about" className="hover:text-gold">Meet the XPRTs</Link></li>
-            <li><Link to="/faq" className="hover:text-gold">Knowledge Base</Link></li>
+            <li><Link to={aboutHref as any} className="hover:text-gold">{UI.navMeetTheXprts[lang]}</Link></li>
+            <li><Link to={faqHref as any} className="hover:text-gold">{UI.navKnowledgeBase[lang]}</Link></li>
             <li><Link to="/states/$state" params={{ state: "nevada" }} className="hover:text-gold">Nevada</Link></li>
             <li><Link to="/states/$state" params={{ state: "colorado" }} className="hover:text-gold">Colorado</Link></li>
-            <li><Link to="/about" hash="contact" className="hover:text-gold">Contact</Link></li>
-            <li><Link to="/book" className="hover:text-gold">Book a Review</Link></li>
+            <li><Link to={aboutHref as any} hash="contact" className="hover:text-gold">{UI.footerContact[lang]}</Link></li>
+            <li><Link to={bookHref as any} className="hover:text-gold">{UI.btnBookAReview[lang]}</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-display text-sm uppercase tracking-widest text-gold">Offices</h4>
+          <h4 className="font-display text-sm uppercase tracking-widest text-gold">{UI.footerOffices[lang]}</h4>
           <address className="mt-4 space-y-4 text-sm not-italic text-primary-foreground/80">
             <div>
               <p className="font-semibold text-primary-foreground">Las Vegas, NV</p>
@@ -80,8 +84,8 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose flex flex-col items-start justify-between gap-2 py-6 text-xs text-primary-foreground/50 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} XPRT Insurance. All rights reserved.</p>
-          <p>Licensed insurance producer · NV DOI #3762886 · CO DOI #759040 · Educational content, not legal advice.</p>
+          <p>© {new Date().getFullYear()} XPRT Insurance. {UI.footerRights[lang]}</p>
+          <p>{UI.footerDisclaimer[lang]}</p>
         </div>
       </div>
     </footer>

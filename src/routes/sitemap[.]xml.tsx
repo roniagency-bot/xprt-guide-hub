@@ -24,6 +24,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           "/",
           "/about",
           "/book",
+          "/es",
+          "/es/about",
+          "/es/book",
           "/states/nevada",
           "/states/colorado",
           "/business-insurance/bonds",
@@ -35,6 +38,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           "/personal/landlord-insurance",
         ];
         for (const u of staticUrls) urls.push(urlEntry(u, "monthly", "0.7"));
+
 
         for (const c of data.categories)
           urls.push(urlEntry(`/services/${c.slug}`, "monthly", "0.7"));
