@@ -1,3 +1,10 @@
 User-agent: *
 Allow: /
+
+# Utility / transactional routes — not for indexing
+Disallow: /unsubscribe
+Disallow: /email/unsubscribe
+Disallow: /thank-you/
+Disallow: /api/
+
 Sitemap: https://www.xprtinsurance.com/sitemap.xml
