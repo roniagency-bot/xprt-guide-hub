@@ -44,7 +44,7 @@ function Contact() {
       <Section>
         <div className="grid gap-10 lg:grid-cols-2">
           {[
-            { icon: Phone, t: "Las Vegas Office", v: "(702) 766-3394", action: "Call now", href: "tel:+17027663394" },
+            { icon: Phone, t: "Las Vegas Office", v: "(725) 344-2211", action: "Call now", href: "tel:+17253442211" },
             { icon: Mail, t: "Email", v: SITE.email, action: "Send email", href: `mailto:${SITE.email}` },
             { icon: MapPin, t: "Service Area", v: "Nevada & Colorado", action: "Browse Nevada", href: "/states/nevada" },
             { icon: Clock, t: "Hours", v: "Mon–Fri · 9am–6pm PT", action: "Book a review", href: "/book" },
