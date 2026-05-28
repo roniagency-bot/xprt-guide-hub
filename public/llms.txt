@@ -8,7 +8,7 @@ XPRT Insurance (a Roni Rivers Agency) helps individuals and businesses in Nevada
 
 - [Home](/): Overview of XPRT Insurance and the coverage we offer.
 - [About](/about): Who we are and how we work.
-- [Contact](/contact): Reach an advisor or request a quote.
+- [About & Contact](/about): Meet the team, see office locations, and reach an advisor.
 - [Book a Review](/book): Schedule a coverage review.
 - [Nevada](/states/nevada): Coverage for Nevada residents and businesses.
 - [Colorado](/states/colorado): Coverage for Colorado residents and businesses.
