@@ -331,13 +331,25 @@ function BondsHub() {
                 <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Coordinated renewal calendar &amp; DMV filings.</li>
                 <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Bilingual support for Spanish-speaking dealers.</li>
               </ul>
-              <Link
-                to="/faq/dealership"
-                className="mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:underline"
-              >
-                Read the dealership knowledge base
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="mt-7 flex flex-col gap-2 text-sm">
+                {bundle && (
+                  <Link
+                    to="/bonds/auto-dealer-bond"
+                    hash="bundle"
+                    className="inline-flex items-center gap-1.5 font-medium text-gold hover:underline"
+                  >
+                    Download the Bundle Worksheet (PDF)
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
+                <Link
+                  to="/faq/dealership"
+                  className="inline-flex items-center gap-1.5 font-medium text-gold hover:underline"
+                >
+                  Read the dealership knowledge base
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </aside>
           </div>
         </div>
