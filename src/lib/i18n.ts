@@ -21,6 +21,9 @@ export function useLang(): Lang {
  */
 const ES_AVAILABLE_EXACT = new Set<string>([
   "/",
+  "/about",
+  "/contact",
+  "/book",
   "/faq",
   "/faq/homeowners",
   "/faq/bonds",
@@ -33,6 +36,7 @@ const ES_AVAILABLE_PREFIXES = [
   "/faq/bonds/",
   "/faq/dealership/",
 ];
+
 
 function hasSpanishVersion(enPath: string): boolean {
   if (ES_AVAILABLE_EXACT.has(enPath)) return true;
@@ -234,8 +238,84 @@ export const UI = {
     en: "Dealership insurance is offered for Nevada dealers. Coverage availability, eligibility, limits, and pricing depend on the carrier, underwriting, application details, endorsements, exclusions, and Nevada DMV licensing requirements. This information is educational and is not legal advice or a guarantee of coverage.",
     es: "El seguro para concesionarios se ofrece para concesionarios de Nevada. La disponibilidad, elegibilidad, límites y precios de la cobertura dependen de la aseguradora, la suscripción, los detalles de la solicitud, los endosos, las exclusiones y los requisitos de licencia del DMV de Nevada. Esta información es educativa y no constituye asesoría legal ni garantiza cobertura.",
   },
+  // Header / nav
+  navPersonal: { en: "Personal", es: "Personal" },
+  navBonds: { en: "Bonds", es: "Fianzas" },
+  navDealership: { en: "Dealership", es: "Concesionarios" },
+  navCommercial: { en: "Commercial", es: "Comercial" },
+  navKnowledgeBase: { en: "Knowledge Base", es: "Centro de Conocimiento" },
+  navMeetTheXprts: { en: "Meet the XPRTs", es: "Conoce a los XPRTs" },
+  navViewAll: { en: "View all", es: "Ver todo" },
+  // Sub-items
+  subHomeowners: { en: "Homeowners", es: "Propietarios" },
+  subHomeownersDesc: { en: "Dwelling, contents, liability", es: "Vivienda, contenidos, responsabilidad" },
+  subAuto: { en: "Auto", es: "Auto" },
+  subAutoDesc: { en: "Liability, collision, UM/UIM", es: "Responsabilidad, colisión, UM/UIM" },
+  subRenters: { en: "Renters", es: "Inquilinos" },
+  subRentersDesc: { en: "Contents and liability", es: "Contenidos y responsabilidad" },
+  subLandlord: { en: "Landlord", es: "Propietarios de alquiler" },
+  subLandlordDesc: { en: "Rental dwelling coverage", es: "Cobertura de vivienda de alquiler" },
+  subBondsHub: { en: "Bonds Hub", es: "Centro de Fianzas" },
+  subBondsHubDesc: { en: "Quote, purchase, and learn", es: "Cotiza, compra y aprende" },
+  subSurety: { en: "Surety Bonds", es: "Fianzas de garantía" },
+  subLicensePermit: { en: "License & Permit", es: "Licencia y Permiso" },
+  subContractor: { en: "Contractor Bonds", es: "Fianzas de Contratista" },
+  subCourt: { en: "Court Bonds", es: "Fianzas Judiciales" },
+  subGarage: { en: "Garage Liability", es: "Responsabilidad de Garage" },
+  subOpenLot: { en: "Dealer Open Lot", es: "Open Lot del Concesionario" },
+  subDealerBonds: { en: "Dealer Bonds", es: "Fianzas del Concesionario" },
+  subGL: { en: "General Liability", es: "Responsabilidad General" },
+  subWC: { en: "Workers' Comp", es: "Compensación Laboral" },
+  subCommAuto: { en: "Commercial Auto", es: "Auto Comercial" },
+  subBOP: { en: "Business Owners Policy", es: "Póliza de Dueños de Negocio" },
+  // Buttons
+  btnContactUs: { en: "Contact Us", es: "Contáctanos" },
+  btnBookAReview: { en: "Book a Review", es: "Reservar una Revisión" },
+  btnGetAQuote: { en: "Get a Quote", es: "Obtener una Cotización" },
+  btnSendAMessage: { en: "Send a Message", es: "Enviar un Mensaje" },
+  // Trust bar
+  trustLicensed: { en: "Licensed in Nevada & Colorado", es: "Con licencia en Nevada y Colorado" },
+  trustIndependent: { en: "Independent — not captive", es: "Independiente — no cautiva" },
+  trustBilingual: { en: "Bilingual · English & Español", es: "Bilingüe · Inglés y Español" },
+  trustEducational: { en: "Educational, advisor-first", es: "Educativos, asesor primero" },
+  // Footer
+  footerDescription: {
+    en: "Independent agency licensed in Nevada & Colorado. Personal, commercial, bonds, and dealership coverage — explained clearly, structured correctly.",
+    es: "Agencia independiente con licencia en Nevada y Colorado. Cobertura personal, comercial, fianzas y concesionarios — explicada con claridad y estructurada correctamente.",
+  },
+  footerBilingualLine: { en: "Bilingual service · English & Español", es: "Servicio bilingüe · Inglés y Español" },
+  footerCoverage: { en: "Coverage", es: "Cobertura" },
+  footerAgency: { en: "Agency", es: "Agencia" },
+  footerOffices: { en: "Offices", es: "Oficinas" },
+  footerContact: { en: "Contact", es: "Contacto" },
+  footerRights: { en: "All rights reserved.", es: "Todos los derechos reservados." },
+  footerDisclaimer: {
+    en: "Licensed insurance producer · NV DOI #3762886 · CO DOI #759040 · Educational content, not legal advice.",
+    es: "Productor de seguros licenciado · NV DOI #3762886 · CO DOI #759040 · Contenido educativo, no asesoría legal.",
+  },
+  footerNvDealership: { en: "Dealership (NV)", es: "Concesionarios (NV)" },
+  // CTA section defaults
+  ctaEyebrowDefault: { en: "Free coverage review", es: "Revisión gratuita de cobertura" },
+  ctaTitleDefault: {
+    en: "Ready for a clarity-first coverage review?",
+    es: "¿Listo para una revisión de cobertura con claridad primero?",
+  },
+  ctaSubtitleDefault: {
+    en: "Book a free 20-minute call. No pressure, no jargon — just a structured walk-through of your current policy and where it can be improved.",
+    es: "Reserva una llamada gratuita de 20 minutos. Sin presión, sin tecnicismos — solo un recorrido estructurado por tu póliza actual y dónde puede mejorarse.",
+  },
+  ctaPrimaryDefault: { en: "Book a Review", es: "Reservar una Revisión" },
+  ctaSecondaryDefault: { en: "Browse the Knowledge Base", es: "Explorar el Centro de Conocimiento" },
+  // Service card
+  exploreCoverage: { en: "Explore coverage", es: "Explorar cobertura" },
+  exploreSpecialty: { en: "Explore our specialty", es: "Explorar nuestra especialidad" },
+  // Kinetic team
+  teamEyebrow: { en: "The team", es: "El equipo" },
+  teamLineComingSoon: { en: "Direct line coming soon", es: "Línea directa próximamente" },
+  teamEmailComingSoon: { en: "Direct email coming soon", es: "Email directo próximamente" },
 } as const;
 
 export function t(key: keyof typeof UI, lang: Lang): string {
   return UI[key][lang];
 }
+
