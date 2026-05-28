@@ -10,7 +10,7 @@ export const SITE = {
   url: SITE_URL,
   name: ORG_NAME,
   legalName: "XPRT Insurance — A Roni Rivers Agency",
-  phone: "+17027663394",
+  phone: "+17253442211",
   email: "info@xprtinsurance.com",
   states: ["NV", "CO"],
   description:
@@ -27,7 +27,7 @@ export const SITE = {
       addressRegion: "NV",
       postalCode: "89169",
       addressCountry: "US",
-      telephone: "+17027663394",
+      telephone: "+17253442211",
     },
     {
       streetAddress: "1350 40th St",
@@ -35,7 +35,7 @@ export const SITE = {
       addressRegion: "CO",
       postalCode: "80205",
       addressCountry: "US",
-      telephone: "+17253442211",
+      telephone: "+17027663394",
     },
   ],
   /** Primary address for backwards compatibility. */

@@ -67,13 +67,13 @@ export function SiteFooter() {
               <p className="font-semibold text-primary-foreground">Las Vegas, NV</p>
               <p className="mt-1">2525 S Bruce St</p>
               <p>Las Vegas, NV 89169</p>
-              <a href="tel:+17027663394" className="mt-1 inline-block text-gold hover:underline">(702) 766-3394</a>
+              <a href="tel:+17253442211" className="mt-1 inline-block text-gold hover:underline">(725) 344-2211</a>
             </div>
             <div>
               <p className="font-semibold text-primary-foreground">Denver, CO</p>
               <p className="mt-1">1350 40th St</p>
               <p>Denver, CO 80205</p>
-              <a href="tel:+17253442211" className="mt-1 inline-block text-gold hover:underline">(725) 344-2211</a>
+              <a href="tel:+17027663394" className="mt-1 inline-block text-gold hover:underline">(702) 766-3394</a>
             </div>
           </address>
         </div>
