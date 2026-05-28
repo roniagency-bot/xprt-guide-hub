@@ -67,11 +67,12 @@ const AEO_QA: Array<{ q: string; a: string }> = [
 
 export const Route = createFileRoute("/bonds")({
   loader: async () => {
-    const [quickGuide, ebook] = await Promise.all([
+    const [quickGuide, ebook, bundle] = await Promise.all([
       getLeadMagnet({ data: { slug: "bond-quick-guide" } }),
       getLeadMagnet({ data: { slug: "complete-guide-to-surety-bonds" } }),
+      getLeadMagnet({ data: { slug: "dealer-bond-bundle" } }),
     ]);
-    return { quickGuide, ebook };
+    return { quickGuide, ebook, bundle };
   },
   head: () => {
     const title = "Surety Bonds — Instant Online Issuance in Nevada & Colorado | XPRT Insurance";
@@ -137,7 +138,7 @@ const BOND_TYPES = [
 ];
 
 function BondsHub() {
-  const { quickGuide, ebook } = Route.useLoaderData();
+  const { quickGuide, ebook, bundle } = Route.useLoaderData();
   const faqs = BONDS_FAQ_PREVIEWS.map((f) => ({
     slug: f.slug,
     question: f.question_en,
@@ -298,12 +299,18 @@ function BondsHub() {
                   variant="outline"
                   className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
                 >
-                  <Link to="/services/$category" params={{ category: "dealership" }}>
-                    Add Dealership Insurance
+                  <Link to="/bonds/auto-dealer-bond">
+                    Auto Dealer Bond Deep Dive
                     <ArrowRight className="ml-1.5 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
+              <p className="mt-4 text-xs text-primary-foreground/70">
+                Also adding the dealership program?{" "}
+                <Link to="/services/$category" params={{ category: "dealership" }} className="text-gold hover:underline">
+                  See dealership insurance →
+                </Link>
+              </p>
             </div>
 
             <aside className="border-t border-primary-foreground/10 bg-primary-foreground/5 p-8 lg:col-span-2 lg:border-l lg:border-t-0 lg:p-10">
@@ -324,13 +331,25 @@ function BondsHub() {
                 <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Coordinated renewal calendar &amp; DMV filings.</li>
                 <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Bilingual support for Spanish-speaking dealers.</li>
               </ul>
-              <Link
-                to="/faq/dealership"
-                className="mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:underline"
-              >
-                Read the dealership knowledge base
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="mt-7 flex flex-col gap-2 text-sm">
+                {bundle && (
+                  <Link
+                    to="/bonds/auto-dealer-bond"
+                    hash="bundle"
+                    className="inline-flex items-center gap-1.5 font-medium text-gold hover:underline"
+                  >
+                    Download the Bundle Worksheet (PDF)
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
+                <Link
+                  to="/faq/dealership"
+                  className="inline-flex items-center gap-1.5 font-medium text-gold hover:underline"
+                >
+                  Read the dealership knowledge base
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </aside>
           </div>
         </div>

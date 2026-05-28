@@ -35,6 +35,7 @@ import { Route as EsBondsRouteImport } from './routes/es.bonds'
 import { Route as EsAboutRouteImport } from './routes/es.about'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
+import { Route as BondsAutoDealerBondRouteImport } from './routes/bonds.auto-dealer-bond'
 import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
 import { Route as FaqDealershipIndexRouteImport } from './routes/faq.dealership.index'
 import { Route as FaqBondsIndexRouteImport } from './routes/faq.bonds.index'
@@ -192,6 +193,11 @@ const BusinessInsuranceBondsRoute = BusinessInsuranceBondsRouteImport.update({
   path: '/business-insurance/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BondsAutoDealerBondRoute = BondsAutoDealerBondRouteImport.update({
+  id: '/auto-dealer-bond',
+  path: '/auto-dealer-bond',
+  getParentRoute: () => BondsRoute,
+} as any)
 const FaqHomeownersIndexRoute = FaqHomeownersIndexRouteImport.update({
   id: '/homeowners/',
   path: '/homeowners/',
@@ -316,12 +322,13 @@ const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/bonds': typeof BondsRoute
+  '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/bonds/auto-dealer-bond': typeof BondsAutoDealerBondRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
@@ -367,11 +374,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/bonds': typeof BondsRoute
+  '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/bonds/auto-dealer-bond': typeof BondsAutoDealerBondRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
@@ -418,12 +426,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/bonds': typeof BondsRoute
+  '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/bonds/auto-dealer-bond': typeof BondsAutoDealerBondRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
@@ -477,6 +486,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/sitemap.xml'
     | '/unsubscribe'
+    | '/bonds/auto-dealer-bond'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
@@ -527,6 +537,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/sitemap.xml'
     | '/unsubscribe'
+    | '/bonds/auto-dealer-bond'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
@@ -578,6 +589,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/sitemap.xml'
     | '/unsubscribe'
+    | '/bonds/auto-dealer-bond'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
@@ -624,7 +636,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  BondsRoute: typeof BondsRoute
+  BondsRoute: typeof BondsRouteWithChildren
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
@@ -848,6 +860,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BusinessInsuranceBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bonds/auto-dealer-bond': {
+      id: '/bonds/auto-dealer-bond'
+      path: '/auto-dealer-bond'
+      fullPath: '/bonds/auto-dealer-bond'
+      preLoaderRoute: typeof BondsAutoDealerBondRouteImport
+      parentRoute: typeof BondsRoute
+    }
     '/faq/homeowners/': {
       id: '/faq/homeowners/'
       path: '/homeowners'
@@ -1012,6 +1031,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BondsRouteChildren {
+  BondsAutoDealerBondRoute: typeof BondsAutoDealerBondRoute
+}
+
+const BondsRouteChildren: BondsRouteChildren = {
+  BondsAutoDealerBondRoute: BondsAutoDealerBondRoute,
+}
+
+const BondsRouteWithChildren = BondsRoute._addFileChildren(BondsRouteChildren)
+
 interface FaqRouteChildren {
   FaqSlugRoute: typeof FaqSlugRoute
   FaqIndexRoute: typeof FaqIndexRoute
@@ -1050,7 +1079,7 @@ const ServicesCategoryRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  BondsRoute: BondsRoute,
+  BondsRoute: BondsRouteWithChildren,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
