@@ -7,11 +7,12 @@ import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { useLang, UI, type Lang } from "@/lib/i18n";
 import xprtLogo from "@/assets/xprt-logo.png";
 
-type SubItem = { to: string; label: string; description?: string };
+type SubItem = { to: string; label: string; description?: string; external?: boolean };
 
 type NavItem =
   | { kind: "static"; to: string; label: string }
-  | { kind: "category"; category: string; label: string; subitems: SubItem[] };
+  | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string };
+
 
 function buildNav(lang: Lang): readonly NavItem[] {
   return [
@@ -30,14 +31,15 @@ function buildNav(lang: Lang): readonly NavItem[] {
       kind: "category",
       category: "bonds",
       label: UI.navBonds[lang],
+      hubTo: lang === "es" ? "/es/bonds" : "/bonds",
       subitems: [
         { to: lang === "es" ? "/es/bonds" : "/bonds", label: UI.subBondsHub[lang], description: UI.subBondsHubDesc[lang] },
-        { to: "/services/bonds/surety-bonds", label: UI.subSurety[lang] },
-        { to: "/services/bonds/license-permit-bonds", label: UI.subLicensePermit[lang] },
-        { to: "/services/bonds/contractor-bonds", label: UI.subContractor[lang] },
-        { to: "/services/bonds/court-bonds", label: UI.subCourt[lang] },
+        { to: "/bonds/auto-dealer-bond", label: lang === "es" ? "Fianza de Concesionario de Autos" : "Auto Dealer Bond", description: lang === "es" ? "Más vendida — emisión el mismo día" : "Most-purchased — same-day issuance" },
+        { to: "/bonds#bond-types", label: lang === "es" ? "Todos los tipos de fianza" : "All Bond Types", description: lang === "es" ? "Cotiza con un clic" : "Quote in one click" },
+        { to: lang === "es" ? "/es/faq/bonds" : "/faq/bonds", label: lang === "es" ? "Preguntas sobre Fianzas" : "Bond FAQs", description: lang === "es" ? "Costo, aprobación y cómo funcionan" : "Cost, approval, and how they work" },
       ],
     },
+
     {
       kind: "category",
       category: "dealership",
@@ -64,49 +66,88 @@ function buildNav(lang: Lang): readonly NavItem[] {
   ];
 }
 
+function SubItemLink({ s, onNavigate, mobile }: { s: SubItem; onNavigate?: () => void; mobile?: boolean }) {
+  const isAnchorOrExternal = s.external || s.to.startsWith("http") || s.to.includes("#");
+  const desktopCls = "block px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-accent";
+  const mobileCls = "block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground";
+  const cls = mobile ? mobileCls : desktopCls;
+  const inner = mobile ? (
+    s.label
+  ) : (
+    <>
+      <div className="font-medium">{s.label}</div>
+      {s.description && <div className="text-xs text-muted-foreground">{s.description}</div>}
+    </>
+  );
+  if (isAnchorOrExternal) {
+    return (
+      <a
+        href={s.to}
+        onClick={onNavigate}
+        className={cls}
+        {...(s.external || s.to.startsWith("http")
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link to={s.to as any} onClick={onNavigate} className={cls}>
+      {inner}
+    </Link>
+  );
+}
+
 function CategoryDropdown({ item, lang }: { item: Extract<NavItem, { kind: "category" }>; lang: Lang }) {
   const [open, setOpen] = useState(false);
+  const hubIsCustom = !!item.hubTo;
   return (
     <div
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <Link
-        to="/services/$category"
-        params={{ category: item.category }}
-        className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-        activeProps={{ className: "text-foreground bg-accent" }}
-      >
-        {item.label}
-        <ChevronDown className="h-3.5 w-3.5" aria-hidden />
-      </Link>
+      {hubIsCustom ? (
+        <a
+          href={item.hubTo!}
+          className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        >
+          {item.label}
+          <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+        </a>
+      ) : (
+        <Link
+          to="/services/$category"
+          params={{ category: item.category }}
+          className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          activeProps={{ className: "text-foreground bg-accent" }}
+        >
+          {item.label}
+          <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+        </Link>
+      )}
       {open && (
         <div className="absolute left-0 top-full z-50 w-72 pt-2">
           <div className="overflow-hidden rounded-xl border border-border bg-popover shadow-lift">
             <ul className="py-2">
               {item.subitems.map((s) => (
                 <li key={s.to}>
-                  <Link
-                    to={s.to as any}
-                    className="block px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-accent"
-                  >
-                    <div className="font-medium">{s.label}</div>
-                    {s.description && (
-                      <div className="text-xs text-muted-foreground">{s.description}</div>
-                    )}
-                  </Link>
+                  <SubItemLink s={s} />
                 </li>
               ))}
-              <li className="mt-1 border-t border-border">
-                <Link
-                  to="/services/$category"
-                  params={{ category: item.category }}
-                  className="block px-4 py-2.5 text-xs uppercase tracking-[0.18em] text-gold hover:bg-accent"
-                >
-                  {UI.navViewAll[lang]} {item.label} →
-                </Link>
-              </li>
+              {!hubIsCustom && (
+                <li className="mt-1 border-t border-border">
+                  <Link
+                    to="/services/$category"
+                    params={{ category: item.category }}
+                    className="block px-4 py-2.5 text-xs uppercase tracking-[0.18em] text-gold hover:bg-accent"
+                  >
+                    {UI.navViewAll[lang]} {item.label} →
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -125,6 +166,7 @@ function MobileCategory({
   onNavigate: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const hubIsCustom = !!item.hubTo;
   return (
     <div className="py-1">
       <button
@@ -143,30 +185,27 @@ function MobileCategory({
         <ul className="ml-3 border-l border-border pl-3">
           {item.subitems.map((s) => (
             <li key={s.to}>
-              <Link
-                to={s.to as any}
-                onClick={onNavigate}
-                className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
-              >
-                {s.label}
-              </Link>
+              <SubItemLink s={s} onNavigate={onNavigate} mobile />
             </li>
           ))}
-          <li>
-            <Link
-              to="/services/$category"
-              params={{ category: item.category }}
-              onClick={onNavigate}
-              className="block rounded-md px-3 py-2 text-xs uppercase tracking-[0.18em] text-gold hover:bg-accent"
-            >
-              {UI.navViewAll[lang]} {item.label} →
-            </Link>
-          </li>
+          {!hubIsCustom && (
+            <li>
+              <Link
+                to="/services/$category"
+                params={{ category: item.category }}
+                onClick={onNavigate}
+                className="block rounded-md px-3 py-2 text-xs uppercase tracking-[0.18em] text-gold hover:bg-accent"
+              >
+                {UI.navViewAll[lang]} {item.label} →
+              </Link>
+            </li>
+          )}
         </ul>
       )}
     </div>
   );
 }
+
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);

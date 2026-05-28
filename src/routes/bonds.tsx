@@ -211,7 +211,7 @@ function BondsHub() {
       </section>
 
       {/* QUICK BOND TYPE GRID — direct routes into the issuance platform */}
-      <Section tone="cream">
+      <Section tone="cream" id="bond-types">
         <SectionHeading
           eyebrow="Coverages"
           title="Common bond types — start a quote in one click"

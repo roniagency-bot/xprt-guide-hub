@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowRight, MapPin, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -12,11 +12,22 @@ import { getServicePage } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/services/$category/$slug")({
+  beforeLoad: ({ params }) => {
+    // Bonds were consolidated to /bonds. Redirect legacy /services/bonds/* URLs
+    // (auto-dealer-bond gets its own deep-dive page).
+    if (params.category === "bonds") {
+      if (params.slug === "auto-dealer-bond") {
+        throw redirect({ to: "/bonds/auto-dealer-bond" });
+      }
+      throw redirect({ to: "/bonds", hash: "bond-types" });
+    }
+  },
   loader: async ({ params }) => {
     const data = await getServicePage({ data: { slug: params.slug } });
     if (!data) throw notFound();
     return data;
   },
+
   head: ({ loaderData, params }) => {
     if (!loaderData) return {};
     const p = loaderData.page;
