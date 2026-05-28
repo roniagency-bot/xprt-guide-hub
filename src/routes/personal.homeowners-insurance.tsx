@@ -3,6 +3,7 @@ import {
   ArrowRight,
   CheckCircle2,
   ShieldCheck,
+  ShieldAlert,
   Home as HomeIcon,
   FileText,
   BookOpen,
@@ -17,6 +18,7 @@ import { CTASection } from "@/components/site/CTASection";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
+import { DwellingCalculator } from "@/components/site/DwellingCalculator";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { getServicePage, getLeadMagnet } from "@/server/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
@@ -267,6 +269,83 @@ function HomeownersHub() {
         </div>
       </Section>
 
+      {/* WHAT'S NOT COVERED */}
+      <Section id="not-covered">
+        <div className="mx-auto max-w-5xl rounded-2xl border-2 border-gold/40 bg-gradient-to-br from-card via-card to-gold/5 p-7 shadow-lift md:p-10">
+          <div className="flex items-start gap-4">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gold/15 text-gold">
+              <ShieldAlert className="h-6 w-6" />
+            </span>
+            <div>
+              <Eyebrow>Read this before the quiz</Eyebrow>
+              <h2 className="mt-3 text-balance font-display text-3xl leading-tight md:text-4xl">
+                What a standard homeowners policy does NOT cover
+              </h2>
+              <p className="mt-3 max-w-2xl text-pretty text-base text-muted-foreground">
+                These are the gaps that turn into the most expensive surprises after a claim.
+                Each one can usually be solved — but only if you add the right endorsement or
+                separate policy <em>before</em> the loss happens.
+              </p>
+            </div>
+          </div>
+
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+            {[
+              {
+                title: "Flood",
+                body:
+                  "Excluded on every standard policy. Requires a separate NFIP or private flood policy — even outside FEMA-mapped flood zones.",
+              },
+              {
+                title: "Earthquake",
+                body:
+                  "Excluded. Requires an earthquake endorsement or standalone policy. Critical for NV and CO foothills.",
+              },
+              {
+                title: "Sewer / drain backup",
+                body:
+                  "Excluded by default. A water backup endorsement adds $5,000–$25,000 of coverage for a small premium.",
+              },
+              {
+                title: "Mold",
+                body:
+                  "Usually capped at $5,000 even when the source is covered. Limit can be increased on most policies.",
+              },
+              {
+                title: "Wear, tear & neglect",
+                body:
+                  "Gradual damage, deferred maintenance, and old roofs are excluded. Insurance covers sudden, accidental losses — not aging.",
+              },
+              {
+                title: "Vacant home (30+ days)",
+                body:
+                  "Coverage narrows or disappears once a home is vacant. Requires a vacancy endorsement or a dwelling fire (DP) policy.",
+              },
+            ].map((item) => (
+              <li
+                key={item.title}
+                className="rounded-xl border border-border bg-background p-5"
+              >
+                <p className="font-display text-lg leading-tight text-foreground">{item.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground">
+              Not sure which of these apply to your home?
+            </p>
+            <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+              <Link to="/book">
+                Book a Free Coverage Review
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </Section>
+
       {/* QUIZ */}
       <Section id="quiz" tone="cream">
         <SectionHeading
@@ -279,6 +358,20 @@ function HomeownersHub() {
           <HomeownersQuiz cheatSheetSlug="homeowners-cheat-sheet" />
         </div>
       </Section>
+
+      {/* DWELLING CALCULATOR */}
+      <Section id="calculator">
+        <SectionHeading
+          align="center"
+          eyebrow="Coverage calculator"
+          title="How much dwelling coverage do you actually need?"
+          intro="A 60-second estimate based on your square footage, location, and construction quality. Use it as a sanity check against the limit on your declarations page."
+        />
+        <div className="mx-auto mt-12 max-w-6xl">
+          <DwellingCalculator />
+        </div>
+      </Section>
+
 
       {/* VIDEO */}
       <Section>
