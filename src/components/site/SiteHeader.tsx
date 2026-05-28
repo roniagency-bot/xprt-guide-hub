@@ -10,7 +10,7 @@ import xprtLogo from "@/assets/xprt-logo.png";
 type SubItem = { to: string; label: string; description?: string };
 
 type NavItem =
-  | { kind: "static"; to: "/faq" | "/about" | "/contact"; label: string }
+  | { kind: "static"; to: "/faq" | "/about"; label: string }
   | { kind: "category"; category: string; label: string; subitems: SubItem[] };
 
 const NAV: readonly NavItem[] = [
