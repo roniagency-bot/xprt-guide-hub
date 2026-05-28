@@ -181,4 +181,11 @@ export const HOMEOWNERS_FAQS_ES: Record<string, Partial<HomeownersFaq>> = {
     stateContext:
       "XPRT Insurance ofrece revisiones educativas de cobertura para propietarios en Nevada y Colorado, incluidas familias en Las Vegas y el área de Denver.",
   },
+  // ES translations pending — these slugs intentionally have no overrides yet
+  // so applyTranslation() falls back to the English source. Will be filled in
+  // the next translation batch.
+  "water-damage-vs-flood-insurance": {},
+  "roof-age-and-homeowners-insurance": {},
+  "wildfire-coverage-colorado-homes": {},
+  "scheduled-personal-property-jewelry": {},
 };
