@@ -23,7 +23,6 @@ export const Route = createFileRoute("/sitemap.xml")({
         const staticUrls = [
           "/",
           "/about",
-          "/contact",
           "/book",
           "/states/nevada",
           "/states/colorado",
