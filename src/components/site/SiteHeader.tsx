@@ -31,14 +31,15 @@ function buildNav(lang: Lang): readonly NavItem[] {
       kind: "category",
       category: "bonds",
       label: UI.navBonds[lang],
+      hubTo: lang === "es" ? "/es/bonds" : "/bonds",
       subitems: [
         { to: lang === "es" ? "/es/bonds" : "/bonds", label: UI.subBondsHub[lang], description: UI.subBondsHubDesc[lang] },
-        { to: "/services/bonds/surety-bonds", label: UI.subSurety[lang] },
-        { to: "/services/bonds/license-permit-bonds", label: UI.subLicensePermit[lang] },
-        { to: "/services/bonds/contractor-bonds", label: UI.subContractor[lang] },
-        { to: "/services/bonds/court-bonds", label: UI.subCourt[lang] },
+        { to: "/bonds/auto-dealer-bond", label: lang === "es" ? "Fianza de Concesionario de Autos" : "Auto Dealer Bond", description: lang === "es" ? "Más vendida — emisión el mismo día" : "Most-purchased — same-day issuance" },
+        { to: "/bonds#bond-types", label: lang === "es" ? "Todos los tipos de fianza" : "All Bond Types", description: lang === "es" ? "Cotiza con un clic" : "Quote in one click" },
+        { to: lang === "es" ? "/es/faq/bonds" : "/faq/bonds", label: lang === "es" ? "Preguntas sobre Fianzas" : "Bond FAQs", description: lang === "es" ? "Costo, aprobación y cómo funcionan" : "Cost, approval, and how they work" },
       ],
     },
+
     {
       kind: "category",
       category: "dealership",
