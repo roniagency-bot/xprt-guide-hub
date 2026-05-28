@@ -31,9 +31,9 @@ export const Route = createFileRoute("/about")({
       }),
     );
     return pageHead({
-      title: "About & Contact — XPRT Insurance | NV & CO",
+      title: "Meet the XPRTs — XPRT Insurance | NV & CO",
       description:
-        "Meet the XPRT Insurance team — bilingual advisors and producers in Las Vegas and Denver. Direct phones, emails, and offices for personal, commercial, bonds, and dealership coverage.",
+        "Meet the XPRTs — bilingual advisors and producers in Las Vegas and Denver. Direct phones, emails, and offices for personal, commercial, bonds, and dealership coverage.",
       path: "/about",
       jsonLd: [orgJsonLd(), ...team],
     });
@@ -46,19 +46,18 @@ function About() {
     <>
       <section className="bg-cream-gradient">
         <div className="container-prose pt-10 md:pt-14">
-          <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "About" }]} />
+          <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Meet the XPRTs" }]} />
         </div>
         <div className="container-prose pb-20 pt-10 md:pb-28 md:pt-14">
           <div className="max-w-3xl">
-            <Eyebrow>About & contact</Eyebrow>
+            <Eyebrow>Meet the XPRTs</Eyebrow>
             <h1 className="mt-5 text-balance text-4xl leading-[1.05] md:text-6xl">
-              An independent agency built on clarity.
+              The team behind every policy.
             </h1>
             <p className="speakable mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
               XPRT Insurance is an independent agency licensed in Nevada (NV DOI #3762886) and
-              Colorado (CO DOI #759040). We specialize in personal lines, commercial coverage,
-              bonds, and Nevada dealership programs — but our specialty isn't a product. It's
-              clarity.
+              Colorado (CO DOI #759040). Bilingual advisors and producers across Las Vegas and
+              Denver — personal, commercial, bonds, and Nevada dealership coverage.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#team">
@@ -72,6 +71,11 @@ function About() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Team — kinetic 21st.dev component on ink surface */}
+      <section id="team" className="scroll-mt-24">
+        <TeamSection />
       </section>
 
       <Section>
@@ -114,11 +118,6 @@ function About() {
           ))}
         </div>
       </Section>
-
-      {/* Team — kinetic 21st.dev component on ink surface */}
-      <section id="team" className="scroll-mt-24">
-        <TeamSection />
-      </section>
 
       {/* Offices */}
       <Section id="offices">
