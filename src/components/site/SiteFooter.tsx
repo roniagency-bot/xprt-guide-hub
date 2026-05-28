@@ -55,7 +55,7 @@ export function SiteFooter() {
             <li><Link to="/faq" className="hover:text-gold">Knowledge Base</Link></li>
             <li><Link to="/states/$state" params={{ state: "nevada" }} className="hover:text-gold">Nevada</Link></li>
             <li><Link to="/states/$state" params={{ state: "colorado" }} className="hover:text-gold">Colorado</Link></li>
-            <li><Link to="/contact" className="hover:text-gold">Contact</Link></li>
+            <li><Link to="/about" hash="contact" className="hover:text-gold">Contact</Link></li>
             <li><Link to="/book" className="hover:text-gold">Book a Review</Link></li>
           </ul>
         </div>
