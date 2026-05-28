@@ -1,9 +1,11 @@
 /**
- * Team roster for /about. Phone and email are placeholders — fill once the
- * founder confirms direct lines. Photo paths point at src/assets/team/;
- * until real headshots arrive, the TeamSection renders a branded monogram
- * fallback (initials on the brand surface) so layout is never broken.
+ * Team roster for /about. Photos live in src/assets/team/ and are imported
+ * as ES6 modules for proper bundling. When a photo is null, the TeamSection
+ * renders a branded monogram fallback (initials on the brand surface).
  */
+import veronicaPhoto from "@/assets/team/veronica.png";
+import sindyPhoto from "@/assets/team/sindy.png";
+
 export type TeamMember = {
   id: string;
   name: string;
@@ -29,10 +31,10 @@ export const TEAM: TeamMember[] = [
     location: "Denver, CO",
     specialty:
       "Founder of XPRT Insurance. Bond, commercial, and Colorado coverage specialist.",
-    phone: "",
-    phoneDisplay: "",
-    email: "",
-    photo: null,
+    phone: "+17027663394",
+    phoneDisplay: "(702) 766-3394",
+    email: "vrivera@farmersagent.com",
+    photo: veronicaPhoto,
   },
   {
     id: "02",
@@ -40,10 +42,10 @@ export const TEAM: TeamMember[] = [
     role: "Las Vegas Personal Insurance Specialist",
     location: "Las Vegas, NV",
     specialty: "Home, auto, renters and landlord coverage for Nevada families.",
-    phone: "",
-    phoneDisplay: "",
-    email: "",
-    photo: null,
+    phone: "+17253442211",
+    phoneDisplay: "(725) 344-2211",
+    email: "sindy.vrivera@farmersagency.com",
+    photo: sindyPhoto,
   },
   {
     id: "03",
@@ -51,20 +53,21 @@ export const TEAM: TeamMember[] = [
     role: "Las Vegas Insurance Producer",
     location: "Las Vegas, NV",
     specialty: "Bilingual producer guiding new clients through quotes and coverage.",
-    phone: "",
-    phoneDisplay: "",
-    email: "",
+    phone: "+17253442211",
+    phoneDisplay: "(725) 344-2211",
+    email: "mayelad.vrivera@farmersagency.com",
     photo: null,
   },
   {
     id: "04",
     name: "Yasmin Munoz",
-    role: "Las Vegas CSR",
+    role: "Las Vegas CSR & DMV Services Specialist",
     location: "Las Vegas, NV",
-    specialty: "Client service — policy changes, certificates, claims support.",
-    phone: "",
-    phoneDisplay: "",
-    email: "",
+    specialty:
+      "Client service and DMV services — policy changes, certificates, claims, and registration support.",
+    phone: "+17253442211",
+    phoneDisplay: "(725) 344-2211",
+    email: "yasmin.vrivera@farmersagency.com",
     photo: null,
   },
 ];

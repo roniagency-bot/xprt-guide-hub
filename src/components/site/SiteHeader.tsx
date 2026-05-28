@@ -59,7 +59,7 @@ const NAV: readonly NavItem[] = [
     ],
   },
   { kind: "static", to: "/faq", label: "Knowledge Base" },
-  { kind: "static", to: "/about", label: "About & Contact" },
+  { kind: "static", to: "/about", label: "Meet the XPRTs" },
 ] as const;
 
 function CategoryDropdown({ item }: { item: Extract<NavItem, { kind: "category" }> }) {

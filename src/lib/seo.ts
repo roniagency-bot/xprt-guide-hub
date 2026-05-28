@@ -11,7 +11,7 @@ export const SITE = {
   name: ORG_NAME,
   legalName: "XPRT Insurance — A Roni Rivers Agency",
   phone: "+17253442211",
-  email: "info@xprtinsurance.com",
+  email: "roni@xprtinsurance.com",
   states: ["NV", "CO"],
   description:
     "Independent insurance agency licensed in Nevada and Colorado. Personal, commercial, bonds, and dealership coverage. Educational, advisor-led, bilingual.",
