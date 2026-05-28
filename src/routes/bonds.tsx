@@ -124,10 +124,11 @@ const BOND_PARTIES = [
   { icon: Building2, title: "Surety", body: "The company that issues the bond and stands behind the guarantee." },
 ];
 
+// Auto Dealer Bonds are featured in their own spotlight section below
+// (most-purchased bond + bundle play with dealership insurance).
 const BOND_TYPES = [
   { icon: FileBadge, title: "License & Permit Bonds", body: "Required by state, county, and city agencies before a license or permit is issued." },
   { icon: Hammer, title: "Contractor License Bonds", body: "Required by contractor licensing boards to protect customers and uphold trade rules." },
-  { icon: Car, title: "Auto Dealer Bonds", body: "Required for licensed dealers as part of state DMV or revenue department compliance." },
   { icon: ScrollText, title: "Title / Lost Title Bonds", body: "Used when ownership documentation is missing and a vehicle title needs to be cleared." },
   { icon: ClipboardCheck, title: "Contract Bonds", body: "Bid, performance, and payment bonds used on construction and service contracts." },
   { icon: PenTool, title: "Notary Bonds", body: "Required to be commissioned as a notary public in many states." },
