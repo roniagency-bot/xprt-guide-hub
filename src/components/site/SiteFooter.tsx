@@ -51,7 +51,7 @@ export function SiteFooter() {
         <div>
           <h4 className="font-display text-sm uppercase tracking-widest text-gold">Agency</h4>
           <ul className="mt-4 space-y-2 text-sm text-primary-foreground/80">
-            <li><Link to="/about" className="hover:text-gold">About</Link></li>
+            <li><Link to="/about" className="hover:text-gold">Meet the XPRTs</Link></li>
             <li><Link to="/faq" className="hover:text-gold">Knowledge Base</Link></li>
             <li><Link to="/states/$state" params={{ state: "nevada" }} className="hover:text-gold">Nevada</Link></li>
             <li><Link to="/states/$state" params={{ state: "colorado" }} className="hover:text-gold">Colorado</Link></li>
