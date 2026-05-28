@@ -178,7 +178,7 @@ function BondsFaqPage() {
                 </a>
               </Button>
               <Button asChild variant="outline">
-                <Link to="/business-insurance/bonds" hash="bond-quick-guide">
+                <Link to="/bonds" hash="bond-quick-guide">
                   Download the Bond Quick Guide
                 </Link>
               </Button>
@@ -226,7 +226,7 @@ function BondsFaqPage() {
         subtitle="Quote and purchase common bonds online, or book a short bond review for help with larger or specialized bonds in Nevada and Colorado."
         primaryLabel="Book a Quick Bond Review"
         secondaryLabel="Download the Bond Quick Sheet"
-        secondaryHref="/business-insurance/bonds#bond-quick-guide"
+        secondaryHref="/bonds#bond-quick-guide"
       />
     </>
   );

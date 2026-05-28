@@ -83,7 +83,7 @@ function BondsFaqIndex() {
               </a>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/business-insurance/bonds">Learn About Bonds</Link>
+              <Link to="/bonds">Learn About Bonds</Link>
             </Button>
           </div>
         </div>
@@ -126,7 +126,7 @@ function BondsFaqIndex() {
         subtitle="Quote and purchase common bonds online, or book a short bond review for help with larger or specialized bonds in Nevada and Colorado."
         primaryLabel="Book a Quick Bond Review"
         secondaryLabel="Learn About Bonds"
-        secondaryHref="/business-insurance/bonds"
+        secondaryHref="/bonds"
       />
     </>
   );

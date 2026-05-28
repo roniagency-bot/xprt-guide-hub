@@ -29,7 +29,7 @@ const ES_AVAILABLE_EXACT = new Set<string>([
   "/faq/bonds",
   "/faq/dealership",
   "/personal/homeowners-insurance",
-  "/business-insurance/bonds",
+  // "/bonds", — ES translation pending; re-enable when /es/bonds ships
 ]);
 const ES_AVAILABLE_PREFIXES = [
   "/faq/homeowners/",

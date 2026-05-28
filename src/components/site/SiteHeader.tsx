@@ -31,7 +31,7 @@ function buildNav(lang: Lang): readonly NavItem[] {
       category: "bonds",
       label: UI.navBonds[lang],
       subitems: [
-        { to: lang === "es" ? "/es/business-insurance/bonds" : "/business-insurance/bonds", label: UI.subBondsHub[lang], description: UI.subBondsHubDesc[lang] },
+        { to: lang === "es" ? "/es/bonds" : "/bonds", label: UI.subBondsHub[lang], description: UI.subBondsHubDesc[lang] },
         { to: "/services/bonds/surety-bonds", label: UI.subSurety[lang] },
         { to: "/services/bonds/license-permit-bonds", label: UI.subLicensePermit[lang] },
         { to: "/services/bonds/contractor-bonds", label: UI.subContractor[lang] },

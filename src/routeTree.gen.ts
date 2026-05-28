@@ -14,12 +14,14 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as BondsRouteImport } from './routes/bonds'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as EsIndexRouteImport } from './routes/es.index'
 import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
 import { Route as StatesStateRouteImport } from './routes/states.$state'
+import { Route as ServicesBondsRouteImport } from './routes/services.bonds'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
 import { Route as PersonalRentersInsuranceRouteImport } from './routes/personal.renters-insurance'
 import { Route as PersonalLandlordInsuranceRouteImport } from './routes/personal.landlord-insurance'
@@ -29,6 +31,7 @@ import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as EsContactRouteImport } from './routes/es.contact'
 import { Route as EsBookRouteImport } from './routes/es.book'
+import { Route as EsBondsRouteImport } from './routes/es.bonds'
 import { Route as EsAboutRouteImport } from './routes/es.about'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
@@ -81,6 +84,11 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BondsRoute = BondsRouteImport.update({
+  id: '/bonds',
+  path: '/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -109,6 +117,11 @@ const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
 const StatesStateRoute = StatesStateRouteImport.update({
   id: '/states/$state',
   path: '/states/$state',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesBondsRoute = ServicesBondsRouteImport.update({
+  id: '/services/bonds',
+  path: '/services/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
@@ -157,6 +170,11 @@ const EsContactRoute = EsContactRouteImport.update({
 const EsBookRoute = EsBookRouteImport.update({
   id: '/es/book',
   path: '/es/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBondsRoute = EsBondsRouteImport.update({
+  id: '/es/bonds',
+  path: '/es/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsAboutRoute = EsAboutRouteImport.update({
@@ -298,6 +316,7 @@ const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bonds': typeof BondsRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -306,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
+  '/es/bonds': typeof EsBondsRoute
   '/es/book': typeof EsBookRoute
   '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -315,6 +335,7 @@ export interface FileRoutesByFullPath {
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/services/bonds': typeof ServicesBondsRoute
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/es/': typeof EsIndexRoute
@@ -346,6 +367,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bonds': typeof BondsRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -353,6 +375,7 @@ export interface FileRoutesByTo {
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
+  '/es/bonds': typeof EsBondsRoute
   '/es/book': typeof EsBookRoute
   '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -362,6 +385,7 @@ export interface FileRoutesByTo {
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/services/bonds': typeof ServicesBondsRoute
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/es': typeof EsIndexRoute
@@ -394,6 +418,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bonds': typeof BondsRoute
   '/book': typeof BookRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -402,6 +427,7 @@ export interface FileRoutesById {
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
+  '/es/bonds': typeof EsBondsRoute
   '/es/book': typeof EsBookRoute
   '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
@@ -411,6 +437,7 @@ export interface FileRoutesById {
   '/personal/landlord-insurance': typeof PersonalLandlordInsuranceRoute
   '/personal/renters-insurance': typeof PersonalRentersInsuranceRoute
   '/services/$category': typeof ServicesCategoryRouteWithChildren
+  '/services/bonds': typeof ServicesBondsRoute
   '/states/$state': typeof StatesStateRoute
   '/thank-you/$slug': typeof ThankYouSlugRoute
   '/es/': typeof EsIndexRoute
@@ -444,6 +471,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/bonds'
     | '/book'
     | '/contact'
     | '/faq'
@@ -452,6 +480,7 @@ export interface FileRouteTypes {
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
+    | '/es/bonds'
     | '/es/book'
     | '/es/contact'
     | '/faq/$slug'
@@ -461,6 +490,7 @@ export interface FileRouteTypes {
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
+    | '/services/bonds'
     | '/states/$state'
     | '/thank-you/$slug'
     | '/es/'
@@ -492,6 +522,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/bonds'
     | '/book'
     | '/contact'
     | '/sitemap.xml'
@@ -499,6 +530,7 @@ export interface FileRouteTypes {
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
+    | '/es/bonds'
     | '/es/book'
     | '/es/contact'
     | '/faq/$slug'
@@ -508,6 +540,7 @@ export interface FileRouteTypes {
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
+    | '/services/bonds'
     | '/states/$state'
     | '/thank-you/$slug'
     | '/es'
@@ -539,6 +572,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/bonds'
     | '/book'
     | '/contact'
     | '/faq'
@@ -547,6 +581,7 @@ export interface FileRouteTypes {
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
     | '/es/about'
+    | '/es/bonds'
     | '/es/book'
     | '/es/contact'
     | '/faq/$slug'
@@ -556,6 +591,7 @@ export interface FileRouteTypes {
     | '/personal/landlord-insurance'
     | '/personal/renters-insurance'
     | '/services/$category'
+    | '/services/bonds'
     | '/states/$state'
     | '/thank-you/$slug'
     | '/es/'
@@ -588,6 +624,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BondsRoute: typeof BondsRoute
   BookRoute: typeof BookRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
@@ -596,6 +633,7 @@ export interface RootRouteChildren {
   BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   EsAboutRoute: typeof EsAboutRoute
+  EsBondsRoute: typeof EsBondsRoute
   EsBookRoute: typeof EsBookRoute
   EsContactRoute: typeof EsContactRoute
   OffersSlugRoute: typeof OffersSlugRoute
@@ -604,6 +642,7 @@ export interface RootRouteChildren {
   PersonalLandlordInsuranceRoute: typeof PersonalLandlordInsuranceRoute
   PersonalRentersInsuranceRoute: typeof PersonalRentersInsuranceRoute
   ServicesCategoryRoute: typeof ServicesCategoryRouteWithChildren
+  ServicesBondsRoute: typeof ServicesBondsRoute
   StatesStateRoute: typeof StatesStateRoute
   ThankYouSlugRoute: typeof ThankYouSlugRoute
   EsIndexRoute: typeof EsIndexRoute
@@ -662,6 +701,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bonds': {
+      id: '/bonds'
+      path: '/bonds'
+      fullPath: '/bonds'
+      preLoaderRoute: typeof BondsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -702,6 +748,13 @@ declare module '@tanstack/react-router' {
       path: '/states/$state'
       fullPath: '/states/$state'
       preLoaderRoute: typeof StatesStateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/bonds': {
+      id: '/services/bonds'
+      path: '/services/bonds'
+      fullPath: '/services/bonds'
+      preLoaderRoute: typeof ServicesBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$category': {
@@ -765,6 +818,13 @@ declare module '@tanstack/react-router' {
       path: '/es/book'
       fullPath: '/es/book'
       preLoaderRoute: typeof EsBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/bonds': {
+      id: '/es/bonds'
+      path: '/es/bonds'
+      fullPath: '/es/bonds'
+      preLoaderRoute: typeof EsBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/about': {
@@ -990,6 +1050,7 @@ const ServicesCategoryRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BondsRoute: BondsRoute,
   BookRoute: BookRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
@@ -998,6 +1059,7 @@ const rootRouteChildren: RootRouteChildren = {
   BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   EsAboutRoute: EsAboutRoute,
+  EsBondsRoute: EsBondsRoute,
   EsBookRoute: EsBookRoute,
   EsContactRoute: EsContactRoute,
   OffersSlugRoute: OffersSlugRoute,
@@ -1006,6 +1068,7 @@ const rootRouteChildren: RootRouteChildren = {
   PersonalLandlordInsuranceRoute: PersonalLandlordInsuranceRoute,
   PersonalRentersInsuranceRoute: PersonalRentersInsuranceRoute,
   ServicesCategoryRoute: ServicesCategoryRouteWithChildren,
+  ServicesBondsRoute: ServicesBondsRoute,
   StatesStateRoute: StatesStateRoute,
   ThankYouSlugRoute: ThankYouSlugRoute,
   EsIndexRoute: EsIndexRoute,
