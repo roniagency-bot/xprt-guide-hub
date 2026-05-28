@@ -59,7 +59,7 @@ function Book() {
 
             <div className="mt-6 rounded-lg border border-border/60 bg-background/50 px-5 py-4 text-center text-sm text-muted-foreground">
               Prefer not to schedule online? You can also{" "}
-              <a href="tel:+17020000000" className="inline-flex items-center gap-1 font-medium text-foreground hover:text-gold">
+              <a href="tel:+17027663394" className="inline-flex items-center gap-1 font-medium text-foreground hover:text-gold">
                 <Phone className="h-3.5 w-3.5" /> call us
               </a>{" "}
               or{" "}
