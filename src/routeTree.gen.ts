@@ -27,6 +27,9 @@ import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/person
 import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
 import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
+import { Route as EsContactRouteImport } from './routes/es.contact'
+import { Route as EsBookRouteImport } from './routes/es.book'
+import { Route as EsAboutRouteImport } from './routes/es.about'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
 import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
@@ -145,6 +148,21 @@ const FaqSlugRoute = FaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => FaqRoute,
+} as any)
+const EsContactRoute = EsContactRouteImport.update({
+  id: '/es/contact',
+  path: '/es/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBookRoute = EsBookRouteImport.update({
+  id: '/es/book',
+  path: '/es/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsAboutRoute = EsAboutRouteImport.update({
+  id: '/es/about',
+  path: '/es/about',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
@@ -287,6 +305,9 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/book': typeof EsBookRoute
+  '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -331,6 +352,9 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/book': typeof EsBookRoute
+  '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -377,6 +401,9 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/business-insurance/bonds': typeof BusinessInsuranceBondsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/book': typeof EsBookRoute
+  '/es/contact': typeof EsContactRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/offers/$slug': typeof OffersSlugRoute
   '/personal/auto-insurance': typeof PersonalAutoInsuranceRoute
@@ -424,6 +451,9 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
+    | '/es/about'
+    | '/es/book'
+    | '/es/contact'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -468,6 +498,9 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
+    | '/es/about'
+    | '/es/book'
+    | '/es/contact'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -513,6 +546,9 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/business-insurance/bonds'
     | '/email/unsubscribe'
+    | '/es/about'
+    | '/es/book'
+    | '/es/contact'
     | '/faq/$slug'
     | '/offers/$slug'
     | '/personal/auto-insurance'
@@ -559,6 +595,9 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  EsAboutRoute: typeof EsAboutRoute
+  EsBookRoute: typeof EsBookRoute
+  EsContactRoute: typeof EsContactRoute
   OffersSlugRoute: typeof OffersSlugRoute
   PersonalAutoInsuranceRoute: typeof PersonalAutoInsuranceRoute
   PersonalHomeownersInsuranceRoute: typeof PersonalHomeownersInsuranceRoute
@@ -713,6 +752,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/faq/$slug'
       preLoaderRoute: typeof FaqSlugRouteImport
       parentRoute: typeof FaqRoute
+    }
+    '/es/contact': {
+      id: '/es/contact'
+      path: '/es/contact'
+      fullPath: '/es/contact'
+      preLoaderRoute: typeof EsContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/book': {
+      id: '/es/book'
+      path: '/es/book'
+      fullPath: '/es/book'
+      preLoaderRoute: typeof EsBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/about': {
+      id: '/es/about'
+      path: '/es/about'
+      fullPath: '/es/about'
+      preLoaderRoute: typeof EsAboutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/email/unsubscribe': {
       id: '/email/unsubscribe'
@@ -937,6 +997,9 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  EsAboutRoute: EsAboutRoute,
+  EsBookRoute: EsBookRoute,
+  EsContactRoute: EsContactRoute,
   OffersSlugRoute: OffersSlugRoute,
   PersonalAutoInsuranceRoute: PersonalAutoInsuranceRoute,
   PersonalHomeownersInsuranceRoute: PersonalHomeownersInsuranceRoute,
