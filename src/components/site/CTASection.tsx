@@ -3,16 +3,17 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import type { GhlFormKey } from "@/lib/ghl-forms";
+import { useLang, UI } from "@/lib/i18n";
 
 export function CTASection({
-  title = "Ready for a clarity-first coverage review?",
-  subtitle = "Book a free 20-minute call. No pressure, no jargon — just a structured walk-through of your current policy and where it can be improved.",
-  primaryHref = "/book",
-  primaryLabel = "Book a Review",
+  title,
+  subtitle,
+  primaryHref,
+  primaryLabel,
   primaryForm,
-  secondaryHref = "/faq",
-  secondaryLabel = "Browse the Knowledge Base",
-  eyebrow = "Free coverage review",
+  secondaryHref,
+  secondaryLabel,
+  eyebrow,
 }: {
   title?: string;
   subtitle?: string;
@@ -24,6 +25,15 @@ export function CTASection({
   secondaryLabel?: string;
   eyebrow?: string;
 }) {
+  const lang = useLang();
+  const _title = title ?? UI.ctaTitleDefault[lang];
+  const _subtitle = subtitle ?? UI.ctaSubtitleDefault[lang];
+  const _primaryHref = primaryHref ?? (lang === "es" ? "/es/book" : "/book");
+  const _primaryLabel = primaryLabel ?? UI.ctaPrimaryDefault[lang];
+  const _secondaryHref = secondaryHref ?? (lang === "es" ? "/es/faq" : "/faq");
+  const _secondaryLabel = secondaryLabel ?? UI.ctaSecondaryDefault[lang];
+  const _eyebrow = eyebrow ?? UI.ctaEyebrowDefault[lang];
+
   return (
     <section className="relative overflow-hidden bg-ink py-24 text-primary-foreground">
       <div
@@ -37,11 +47,11 @@ export function CTASection({
       <div className="container-prose relative">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-xs uppercase tracking-[0.2em] text-gold">
-            <Calendar className="h-3.5 w-3.5" /> {eyebrow}
+            <Calendar className="h-3.5 w-3.5" /> {_eyebrow}
           </span>
-          <h2 className="mt-6 text-balance font-display text-4xl leading-tight md:text-5xl">{title}</h2>
+          <h2 className="mt-6 text-balance font-display text-4xl leading-tight md:text-5xl">{_title}</h2>
           <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-primary-foreground/75 md:text-lg">
-            {subtitle}
+            {_subtitle}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {primaryForm ? (
@@ -50,7 +60,7 @@ export function CTASection({
                 size="lg"
                 className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
               >
-                {primaryLabel}
+                {_primaryLabel}
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </GhlFormButton>
             ) : (
@@ -59,8 +69,8 @@ export function CTASection({
                 size="lg"
                 className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
               >
-                <Link to={primaryHref}>
-                  {primaryLabel}
+                <Link to={_primaryHref}>
+                  {_primaryLabel}
                   <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Link>
               </Button>
@@ -71,7 +81,7 @@ export function CTASection({
               variant="outline"
               className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
             >
-              <Link to={secondaryHref}>{secondaryLabel}</Link>
+              <Link to={_secondaryHref}>{_secondaryLabel}</Link>
             </Button>
           </div>
         </div>
