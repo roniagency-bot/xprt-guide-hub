@@ -239,6 +239,104 @@ function BondsHub() {
         </div>
       </Section>
 
+      {/* FEATURED — Auto Dealer Bond spotlight (most-purchased bond) */}
+      <Section id="auto-dealer-bond">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border-2 border-gold/40 bg-gradient-to-br from-ink via-ink to-ink/95 text-primary-foreground shadow-lift">
+          <div className="grid gap-0 lg:grid-cols-5">
+            <div className="p-8 lg:col-span-3 lg:p-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-gold">
+                <Sparkles className="h-3.5 w-3.5" /> Most-purchased bond
+              </span>
+              <h2 className="mt-5 text-balance font-display text-3xl leading-tight md:text-4xl">
+                Auto Dealer Bonds — Nevada &amp; Colorado DMV-ready in minutes.
+              </h2>
+              <p className="mt-5 text-pretty text-base leading-relaxed text-primary-foreground/85 md:text-lg">
+                The Motor Vehicle Dealer Bond is our highest-volume filing. Whether you're
+                opening a new lot, renewing your DMV license, or moving from wholesale to
+                retail, we issue, file, and deliver the bond on the same day.
+              </p>
+
+              <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-lg border border-primary-foreground/15 bg-primary-foreground/5 p-4">
+                  <dt className="text-xs uppercase tracking-wider text-gold">Nevada — Used / New Dealer</dt>
+                  <dd className="mt-1 font-display text-lg">$100,000 bond limit</dd>
+                  <p className="mt-1 text-xs text-primary-foreground/70">Required by Nevada DMV for licensed dealerships.</p>
+                </div>
+                <div className="rounded-lg border border-primary-foreground/15 bg-primary-foreground/5 p-4">
+                  <dt className="text-xs uppercase tracking-wider text-gold">Nevada — Motorcycle / Trailer</dt>
+                  <dd className="mt-1 font-display text-lg">$10,000 bond limit</dd>
+                  <p className="mt-1 text-xs text-primary-foreground/70">Lower limit for motorcycle &amp; utility-trailer dealers.</p>
+                </div>
+                <div className="rounded-lg border border-primary-foreground/15 bg-primary-foreground/5 p-4">
+                  <dt className="text-xs uppercase tracking-wider text-gold">Colorado — Motor Vehicle Dealer</dt>
+                  <dd className="mt-1 font-display text-lg">$50,000 bond limit</dd>
+                  <p className="mt-1 text-xs text-primary-foreground/70">Per Colorado Auto Industry Division licensing rules.</p>
+                </div>
+                <div className="rounded-lg border border-primary-foreground/15 bg-primary-foreground/5 p-4">
+                  <dt className="text-xs uppercase tracking-wider text-gold">Typical Annual Premium</dt>
+                  <dd className="mt-1 font-display text-lg">1–3% of bond limit</dd>
+                  <p className="mt-1 text-xs text-primary-foreground/70">$500–$1,500 range for prime-credit applicants.</p>
+                </div>
+              </dl>
+
+              <ul className="mt-8 space-y-2 text-sm text-primary-foreground/85">
+                <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Same-day digital filing accepted by NV DMV &amp; CO Auto Industry Division.</li>
+                <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Continuous bond — renewable annually with no re-underwriting for prime credit.</li>
+                <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Bundles with dealer garage liability, open-lot, and dealer E&amp;O coverage.</li>
+              </ul>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="lg" className="bg-gold text-gold-foreground shadow-gold hover:bg-gold/90">
+                  <a href={PROPELLER_QUOTE_URL} target="_blank" rel="noopener noreferrer">
+                    Quote Auto Dealer Bond
+                    <ExternalLink className="ml-1.5 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                >
+                  <Link to="/services/$category" params={{ category: "dealership" }}>
+                    Add Dealership Insurance
+                    <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <aside className="border-t border-primary-foreground/10 bg-primary-foreground/5 p-8 lg:col-span-2 lg:border-l lg:border-t-0 lg:p-10">
+              <div className="flex items-center gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-gold text-gold-foreground">
+                  <Car className="h-5 w-5" />
+                </span>
+                <h3 className="font-display text-lg leading-tight">Dealer bundle play</h3>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-primary-foreground/80">
+                Most of our dealer clients carry the bond <em>and</em> a full dealership
+                insurance program with us — garage liability, dealer open lot, dealer plates,
+                and employee dishonesty. Stacking them with one agency keeps renewals,
+                certificates, and DMV filings on a single timeline.
+              </p>
+              <ul className="mt-6 space-y-3 text-sm text-primary-foreground/85">
+                <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> One agent for bond + garage liability + open lot.</li>
+                <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Coordinated renewal calendar &amp; DMV filings.</li>
+                <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Bilingual support for Spanish-speaking dealers.</li>
+              </ul>
+              <Link
+                to="/faq/dealership"
+                className="mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-gold hover:underline"
+              >
+                Read the dealership knowledge base
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </aside>
+          </div>
+        </div>
+      </Section>
+
+
       {/* INSTANT BUY CALLOUT */}
       <Section>
         <div className="mx-auto max-w-3xl rounded-2xl border-2 border-gold/40 bg-gradient-to-br from-card via-card to-gold/5 p-10 text-center shadow-lift md:p-14">
