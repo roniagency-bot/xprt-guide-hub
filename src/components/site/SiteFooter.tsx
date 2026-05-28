@@ -81,7 +81,7 @@ export function SiteFooter() {
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose flex flex-col items-start justify-between gap-2 py-6 text-xs text-primary-foreground/50 md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} XPRT Insurance. All rights reserved.</p>
-          <p>Licensed in Nevada & Colorado · Educational content, not legal advice.</p>
+          <p>Licensed insurance producer · NV DOI #3762886 · CO DOI #759040 · Educational content, not legal advice.</p>
         </div>
       </div>
     </footer>
