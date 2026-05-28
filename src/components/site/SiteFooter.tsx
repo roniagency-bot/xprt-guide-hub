@@ -5,7 +5,7 @@ import xprtLogo from "@/assets/xprt-logo.png";
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-ink text-primary-foreground">
-      <div className="container-prose grid gap-12 py-16 md:grid-cols-4">
+      <div className="container-prose grid gap-12 py-16 md:grid-cols-5">
         <div className="md:col-span-2">
           <img
             src={xprtLogo}
@@ -59,11 +59,29 @@ export function SiteFooter() {
             <li><Link to="/book" className="hover:text-gold">Book a Review</Link></li>
           </ul>
         </div>
+
+        <div>
+          <h4 className="font-display text-sm uppercase tracking-widest text-gold">Offices</h4>
+          <address className="mt-4 space-y-4 text-sm not-italic text-primary-foreground/80">
+            <div>
+              <p className="font-semibold text-primary-foreground">Las Vegas, NV</p>
+              <p className="mt-1">2525 S Bruce St</p>
+              <p>Las Vegas, NV 89169</p>
+              <a href="tel:+17027663394" className="mt-1 inline-block text-gold hover:underline">(702) 766-3394</a>
+            </div>
+            <div>
+              <p className="font-semibold text-primary-foreground">Denver, CO</p>
+              <p className="mt-1">1350 40th St</p>
+              <p>Denver, CO 80205</p>
+              <a href="tel:+17253442211" className="mt-1 inline-block text-gold hover:underline">(725) 344-2211</a>
+            </div>
+          </address>
+        </div>
       </div>
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose flex flex-col items-start justify-between gap-2 py-6 text-xs text-primary-foreground/50 md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} XPRT Insurance. All rights reserved.</p>
-          <p>Licensed in Nevada & Colorado · Educational content, not legal advice.</p>
+          <p>Licensed insurance producer · NV DOI #3762886 · CO DOI #759040 · Educational content, not legal advice.</p>
         </div>
       </div>
     </footer>
