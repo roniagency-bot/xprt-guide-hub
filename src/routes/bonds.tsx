@@ -75,7 +75,7 @@ export const Route = createFileRoute("/bonds")({
     return { quickGuide, ebook, bundle };
   },
   head: () => {
-    const title = "Surety Bonds — Instant Online Issuance in Nevada & Colorado | XPRT Insurance";
+    const title = "Surety Bonds in Nevada & Colorado | XPRT Insurance";
     const description =
       "Buy your Nevada or Colorado surety bond online in under five minutes. License, permit, contractor, dealer, notary, and commercial bonds — instant quote, digital delivery, licensed agents.";
     return pageHead({
