@@ -36,6 +36,7 @@ export const Route = createFileRoute("/about")({
         "Meet the XPRTs — bilingual advisors and producers in Las Vegas and Denver. Direct phones, emails, and offices for personal, commercial, bonds, and dealership coverage.",
       path: "/about",
       jsonLd: [orgJsonLd(), ...team],
+      alternates: { en: "/about", es: "/es/about" },
     });
   },
   component: About,
