@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useServerFn } from "@tanstack/react-start";
-import { submitLead } from "@/server/leads.functions";
+import { submitLead } from "@/lib/leads.functions";
 import { Loader2 } from "lucide-react";
 
 export function HomeownersLeadForm({

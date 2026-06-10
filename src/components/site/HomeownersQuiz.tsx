@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Eyebrow } from "@/components/site/Section";
-import { submitQuiz } from "@/server/quiz.functions";
+import { submitQuiz } from "@/lib/quiz.functions";
 
 type Answer = "yes" | "no" | "unsure";
 
