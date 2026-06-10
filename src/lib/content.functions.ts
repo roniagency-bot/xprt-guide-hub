@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import * as content from "./content.server";
+import * as content from "@/server/content.server";
 
 export const getHomeData = createServerFn({ method: "GET" }).handler(async () => {
   const categories = await content.fetchAllServiceCategories();

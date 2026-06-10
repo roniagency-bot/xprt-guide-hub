@@ -20,7 +20,7 @@ import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { DwellingCalculator } from "@/components/site/DwellingCalculator";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
-import { getServicePage, getLeadMagnet } from "@/server/content.functions";
+import { getServicePage, getLeadMagnet } from "@/lib/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/homeowners-hero.jpg";
 

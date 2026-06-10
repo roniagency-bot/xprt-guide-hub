@@ -17,7 +17,7 @@ import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
-import { getServicePage, getLeadMagnet } from "@/server/content.functions";
+import { getServicePage, getLeadMagnet } from "@/lib/content.functions";
 import {
   pageHead,
   breadcrumbJsonLd,
