@@ -46,6 +46,7 @@ import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$
 import { Route as FaqDealershipSlugRouteImport } from './routes/faq.dealership.$slug'
 import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
 import { Route as EsPersonalHomeownersInsuranceRouteImport } from './routes/es.personal.homeowners-insurance'
+import { Route as EsPersonalAutoInsuranceRouteImport } from './routes/es.personal.auto-insurance'
 import { Route as EsBusinessInsuranceBondsRouteImport } from './routes/es.business-insurance.bonds'
 import { Route as EsFaqHomeownersIndexRouteImport } from './routes/es.faq.homeowners.index'
 import { Route as EsFaqDealershipIndexRouteImport } from './routes/es.faq.dealership.index'
@@ -249,6 +250,11 @@ const EsPersonalHomeownersInsuranceRoute =
     path: '/es/personal/homeowners-insurance',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EsPersonalAutoInsuranceRoute = EsPersonalAutoInsuranceRouteImport.update({
+  id: '/es/personal/auto-insurance',
+  path: '/es/personal/auto-insurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsBusinessInsuranceBondsRoute =
   EsBusinessInsuranceBondsRouteImport.update({
     id: '/es/business-insurance/bonds',
@@ -348,6 +354,7 @@ export interface FileRoutesByFullPath {
   '/es/': typeof EsIndexRoute
   '/faq/': typeof FaqIndexRoute
   '/es/business-insurance/bonds': typeof EsBusinessInsuranceBondsRoute
+  '/es/personal/auto-insurance': typeof EsPersonalAutoInsuranceRoute
   '/es/personal/homeowners-insurance': typeof EsPersonalHomeownersInsuranceRoute
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
@@ -399,6 +406,7 @@ export interface FileRoutesByTo {
   '/es': typeof EsIndexRoute
   '/faq': typeof FaqIndexRoute
   '/es/business-insurance/bonds': typeof EsBusinessInsuranceBondsRoute
+  '/es/personal/auto-insurance': typeof EsPersonalAutoInsuranceRoute
   '/es/personal/homeowners-insurance': typeof EsPersonalHomeownersInsuranceRoute
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
@@ -452,6 +460,7 @@ export interface FileRoutesById {
   '/es/': typeof EsIndexRoute
   '/faq/': typeof FaqIndexRoute
   '/es/business-insurance/bonds': typeof EsBusinessInsuranceBondsRoute
+  '/es/personal/auto-insurance': typeof EsPersonalAutoInsuranceRoute
   '/es/personal/homeowners-insurance': typeof EsPersonalHomeownersInsuranceRoute
   '/faq/bonds/$slug': typeof FaqBondsSlugRoute
   '/faq/dealership/$slug': typeof FaqDealershipSlugRoute
@@ -506,6 +515,7 @@ export interface FileRouteTypes {
     | '/es/'
     | '/faq/'
     | '/es/business-insurance/bonds'
+    | '/es/personal/auto-insurance'
     | '/es/personal/homeowners-insurance'
     | '/faq/bonds/$slug'
     | '/faq/dealership/$slug'
@@ -557,6 +567,7 @@ export interface FileRouteTypes {
     | '/es'
     | '/faq'
     | '/es/business-insurance/bonds'
+    | '/es/personal/auto-insurance'
     | '/es/personal/homeowners-insurance'
     | '/faq/bonds/$slug'
     | '/faq/dealership/$slug'
@@ -609,6 +620,7 @@ export interface FileRouteTypes {
     | '/es/'
     | '/faq/'
     | '/es/business-insurance/bonds'
+    | '/es/personal/auto-insurance'
     | '/es/personal/homeowners-insurance'
     | '/faq/bonds/$slug'
     | '/faq/dealership/$slug'
@@ -659,6 +671,7 @@ export interface RootRouteChildren {
   ThankYouSlugRoute: typeof ThankYouSlugRoute
   EsIndexRoute: typeof EsIndexRoute
   EsBusinessInsuranceBondsRoute: typeof EsBusinessInsuranceBondsRoute
+  EsPersonalAutoInsuranceRoute: typeof EsPersonalAutoInsuranceRoute
   EsPersonalHomeownersInsuranceRoute: typeof EsPersonalHomeownersInsuranceRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   EsFaqIndexRoute: typeof EsFaqIndexRoute
@@ -937,6 +950,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsPersonalHomeownersInsuranceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/personal/auto-insurance': {
+      id: '/es/personal/auto-insurance'
+      path: '/es/personal/auto-insurance'
+      fullPath: '/es/personal/auto-insurance'
+      preLoaderRoute: typeof EsPersonalAutoInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/business-insurance/bonds': {
       id: '/es/business-insurance/bonds'
       path: '/es/business-insurance/bonds'
@@ -1102,6 +1122,7 @@ const rootRouteChildren: RootRouteChildren = {
   ThankYouSlugRoute: ThankYouSlugRoute,
   EsIndexRoute: EsIndexRoute,
   EsBusinessInsuranceBondsRoute: EsBusinessInsuranceBondsRoute,
+  EsPersonalAutoInsuranceRoute: EsPersonalAutoInsuranceRoute,
   EsPersonalHomeownersInsuranceRoute: EsPersonalHomeownersInsuranceRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   EsFaqIndexRoute: EsFaqIndexRoute,
