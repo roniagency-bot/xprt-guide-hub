@@ -32,8 +32,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           "/bonds",
           "/es/bonds",
           "/bonds/auto-dealer-bond",
-          "/contact",
-          "/es/contact",
+
 
           "/personal/homeowners-insurance",
           "/es/personal/homeowners-insurance",
