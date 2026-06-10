@@ -10,6 +10,7 @@ export const Route = createFileRoute("/book")({
     title: "Book a Free Coverage Review | XPRT Insurance",
     description: "Book a free 20-minute coverage review with a licensed advisor. Educational, no obligation, bilingual.",
     path: "/book",
+    alternates: { en: "/book", es: "/es/book" },
   }),
   component: Book,
 });

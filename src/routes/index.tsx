@@ -29,6 +29,7 @@ export const Route = createFileRoute("/")({
     path: "/",
     image: canonical("/og-default.jpg"),
     jsonLd: orgJsonLd(),
+    alternates: { en: "/", es: "/es" },
   }),
   component: HomePage,
 });
