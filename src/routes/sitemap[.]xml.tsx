@@ -37,6 +37,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           "/personal/homeowners-insurance",
           "/es/personal/homeowners-insurance",
           "/personal/auto-insurance",
+          "/es/personal/auto-insurance",
           "/personal/renters-insurance",
           "/personal/landlord-insurance",
         ];
