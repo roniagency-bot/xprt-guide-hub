@@ -128,13 +128,12 @@ const BOND_PARTIES = [
 // Auto Dealer Bonds are featured in their own spotlight section below
 // (most-purchased bond + bundle play with dealership insurance).
 const BOND_TYPES = [
-  { icon: FileBadge, title: "License & Permit Bonds", body: "Required by state, county, and city agencies before a license or permit is issued." },
-  { icon: Hammer, title: "Contractor License Bonds", body: "Required by contractor licensing boards to protect customers and uphold trade rules." },
-  { icon: ScrollText, title: "Title / Lost Title Bonds", body: "Used when ownership documentation is missing and a vehicle title needs to be cleared." },
-  { icon: ClipboardCheck, title: "Contract Bonds", body: "Bid, performance, and payment bonds used on construction and service contracts." },
-  { icon: PenTool, title: "Notary Bonds", body: "Required to be commissioned as a notary public in many states." },
-  { icon: ShieldCheck, title: "Fidelity Bonds", body: "Protect a business or its clients from losses caused by employee dishonesty." },
   { icon: FileText, title: "Document Preparation / LDA Bonds", body: "Required for document preparers and legal document assistants in regulated states." },
+  { icon: ScrollText, title: "Title / Lost Title Bonds", body: "Used when ownership documentation is missing and a vehicle title needs to be cleared." },
+  { icon: PenTool, title: "Notary Bonds", body: "Required to be commissioned as a notary public in many states." },
+  { icon: FileBadge, title: "License & Permit Bonds", body: "Required by state, county, and city agencies before a license or permit is issued." },
+  { icon: Hammer, title: "Contract & Contractor Bonds", body: "Contractor license bonds protect customers and uphold trade rules. Contract bonds guarantee project completion and payment on construction and service contracts." },
+  { icon: ShieldCheck, title: "Fidelity Bonds", body: "Protect a business or its clients from losses caused by employee dishonesty." },
 ];
 
 function BondsHub() {
