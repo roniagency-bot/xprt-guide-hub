@@ -26,7 +26,7 @@ import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { CTASection } from "@/components/site/CTASection";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import { BondsLeadForm } from "@/components/site/BondsLeadForm";
-import { getLeadMagnet } from "@/server/content.functions";
+import { getLeadMagnet } from "@/lib/content.functions";
 import { BONDS_FAQ_PREVIEWS, PROPELLER_QUOTE_URL } from "@/lib/bonds-faqs";
 import { BONDS_FAQS_ES } from "@/lib/i18n/bonds-faqs-es";
 import {

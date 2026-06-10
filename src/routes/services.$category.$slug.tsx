@@ -8,7 +8,7 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { BondCallout } from "@/components/site/BondCallout";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import type { GhlFormKey } from "@/lib/ghl-forms";
-import { getServicePage } from "@/server/content.functions";
+import { getServicePage } from "@/lib/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/services/$category/$slug")({

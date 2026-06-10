@@ -4,7 +4,7 @@ import { Section, Eyebrow } from "@/components/site/Section";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { LeadCaptureForm } from "@/components/site/LeadCaptureForm";
 import { BondCallout } from "@/components/site/BondCallout";
-import { getLeadMagnet } from "@/server/content.functions";
+import { getLeadMagnet } from "@/lib/content.functions";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/offers/$slug")({

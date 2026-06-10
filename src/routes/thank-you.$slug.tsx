@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Download, CheckCircle2, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getLeadMagnet, getServicePage } from "@/server/content.functions";
+import { getLeadMagnet, getServicePage } from "@/lib/content.functions";
 import { pageHead } from "@/lib/seo";
 
 import { BONDS_FAQ_PREVIEWS } from "@/lib/bonds-faqs";
