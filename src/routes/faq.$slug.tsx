@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, Eyebrow } from "@/components/site/Section";
@@ -8,8 +8,25 @@ import { BondCallout } from "@/components/site/BondCallout";
 import { getFaq } from "@/lib/content.functions";
 import { qaPageJsonLd, brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { AuthorByline } from "@/components/site/AuthorByline";
+import { isHomeownersFaqSlug } from "@/lib/homeowners-faqs";
+import { isBondsFaqSlug } from "@/lib/bonds-faqs";
+import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
+const isDealershipFaqSlug = (slug: string) => DEALERSHIP_FAQS.some((f) => f.slug === slug);
 
 export const Route = createFileRoute("/faq/$slug")({
+  beforeLoad: ({ params }) => {
+    // Categorized FAQ hubs are the canonical home for these slugs.
+    // Redirect legacy flat /faq/<slug> URLs to consolidate ranking signals.
+    if (isHomeownersFaqSlug(params.slug)) {
+      throw redirect({ to: "/faq/homeowners/$slug", params: { slug: params.slug } });
+    }
+    if (isBondsFaqSlug(params.slug)) {
+      throw redirect({ to: "/faq/bonds/$slug", params: { slug: params.slug } });
+    }
+    if (isDealershipFaqSlug(params.slug)) {
+      throw redirect({ to: "/faq/dealership/$slug", params: { slug: params.slug } });
+    }
+  },
   loader: async ({ params }) => {
     const data = await getFaq({ data: { slug: params.slug } });
     if (!data) throw notFound();

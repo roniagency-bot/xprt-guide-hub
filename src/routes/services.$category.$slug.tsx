@@ -21,6 +21,18 @@ export const Route = createFileRoute("/services/$category/$slug")({
       }
       throw redirect({ to: "/bonds", hash: "bond-types" });
     }
+    // Personal lines have dedicated hand-built SEO pages at /personal/<slug>.
+    // Redirect the CMS-backed duplicates to consolidate ranking signals.
+    if (params.category === "personal") {
+      const personalCanonical: Record<string, string> = {
+        "auto-insurance": "/personal/auto-insurance",
+        "homeowners-insurance": "/personal/homeowners-insurance",
+        "renters-insurance": "/personal/renters-insurance",
+        "landlord-insurance": "/personal/landlord-insurance",
+      };
+      const target = personalCanonical[params.slug];
+      if (target) throw redirect({ to: target });
+    }
   },
   loader: async ({ params }) => {
     const data = await getServicePage({ data: { slug: params.slug } });
