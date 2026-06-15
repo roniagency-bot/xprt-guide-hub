@@ -46,8 +46,9 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         for (const c of data.categories)
           urls.push(urlEntry(`/services/${c.slug}`, "monthly", "0.7"));
-        for (const s of data.services)
-          urls.push(urlEntry(`/services/_/${s.slug}`, "monthly", "0.6"));
+        // NOTE: Legacy /services/_/<slug> entries removed — the "_" placeholder
+        // is not a real category and those URLs 404. Canonical service pages
+        // for personal lines live at /personal/<slug>; bonds at /bonds.
         for (const m of data.magnets)
           urls.push(urlEntry(`/offers/${m.slug}`, "monthly", "0.5"));
 
@@ -67,16 +68,21 @@ export const Route = createFileRoute("/sitemap.xml")({
           ["bonds", BONDS_FAQS],
           ["dealership", DEALERSHIP_FAQS],
         ];
+        const categorizedSlugs = new Set<string>();
         for (const [cat, list] of categorized) {
           for (const f of list) {
+            categorizedSlugs.add(f.slug);
             urls.push(urlEntry(`/faq/${cat}/${f.slug}`, "monthly", "0.6"));
             urls.push(urlEntry(`/es/faq/${cat}/${f.slug}`, "monthly", "0.5"));
           }
         }
 
-        // Legacy flat /faq/$slug entries from CMS (kept for back-compat)
-        for (const f of data.faqs)
+        // Legacy flat /faq/<slug> entries — only include CMS FAQs that
+        // don't already have a categorized canonical (those redirect 301).
+        for (const f of data.faqs) {
+          if (categorizedSlugs.has(f.slug)) continue;
           urls.push(urlEntry(`/faq/${f.slug}`, "monthly", "0.4"));
+        }
 
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>`;
         return new Response(xml, {
