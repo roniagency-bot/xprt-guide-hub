@@ -10,7 +10,8 @@ import { qaPageJsonLd, brandedTitle, pageHead, breadcrumbJsonLd, faqPageJsonLd }
 import { AuthorByline } from "@/components/site/AuthorByline";
 import { isHomeownersFaqSlug } from "@/lib/homeowners-faqs";
 import { isBondsFaqSlug } from "@/lib/bonds-faqs";
-import { isDealershipFaqSlug } from "@/lib/dealership-faqs";
+import { DEALERSHIP_FAQS } from "@/lib/dealership-faqs";
+const isDealershipFaqSlug = (slug: string) => DEALERSHIP_FAQS.some((f) => f.slug === slug);
 
 export const Route = createFileRoute("/faq/$slug")({
   beforeLoad: ({ params }) => {
