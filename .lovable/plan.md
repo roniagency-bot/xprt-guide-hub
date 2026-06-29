@@ -1,73 +1,34 @@
-## Goal
-Finalize the English homeowners insurance page by adding the 3 highest-impact pieces: a coverage calculator, a "what's NOT covered" callout, and 4 new Knowledge Center articles. Video is already done — skip it.
+## Temporary July 4th Office Closure Banner
 
-## 1. Dwelling Coverage Calculator (new component + new section)
+### Goal
+Add a short-lived, site-wide announcement banner that tells visitors the office will be closed Friday, July 3, 2026 for the Independence Day holiday. It will be bilingual, dismissible, and automatically stop showing after a configured end date so no manual redeploy is required to remove it.
 
-**New file**: `src/components/site/DwellingCalculator.tsx`
+### Why a top banner?
+- **Visibility**: Every page visitor sees it immediately, which is the right urgency for operational hours.
+- **Accessibility**: A static, dismissible ribbon is better than a scrolling marquee (marquees are hard to read, can violate WCAG motion guidelines, and are ignored by search engines).
+- **Non-intrusive**: Placed above the sticky header so it doesn't overlap content, and can be dismissed.
 
-Client-side widget, no backend. Inputs:
-- Home square footage (number)
-- ZIP or state picker (NV / CO only — drives rebuild $/sqft)
-- Home age bucket (<10, 10-30, 30+ yrs) — modifier
-- Construction quality (Standard / Custom / Luxury) — multiplier
-- Optional: # of stories, basement Y/N
+### Proposed component behavior
+1. **Display window**: Show from a start date (e.g., June 30, 2026) through an end date (e.g., July 6, 2026 at 11:59 PM). Hide before or after those dates automatically.
+2. **Dismissible**: User can click an X to close; dismissal is remembered in `localStorage` for the current browser so repeat visits don't re-show it.
+3. **Bilingual**: English text on `/` and `/en/*` paths; Spanish text on `/es/*` paths.
+4. **Mobile safe**: Text stays readable, close button stays tappable, no horizontal scroll.
+5. **No SEO/meta changes**: A simple announcement banner should not alter page titles, descriptions, or canonical tags.
 
-Output card:
-- **Estimated dwelling (Coverage A)** — sqft × local $/sqft × quality multiplier
-- **Recommended other structures (B)** — 10% of A
-- **Recommended personal property (C)** — 50–70% of A (slider)
-- **Recommended loss of use (D)** — 20% of A
-- **Recommended liability** — $300K default, $500K suggested
-- **Umbrella suggestion** — $1M if assets/income flag checked
+### Files to change
+- `src/components/site/HolidayBanner.tsx` — new reusable component with the date logic, dismissal state, and EN/ES copy.
+- `src/routes/__root.tsx` — insert `<HolidayBanner />` above `<SiteHeader />` so it appears site-wide.
+- `src/lib/i18n.ts` — add holiday banner strings (or keep them co-located in the component; we can decide during implementation).
 
-Below results: disclaimer (estimates only, real number requires a replacement cost estimator from the carrier — Verisk 360Value / e2Value), CTA buttons "Book a free coverage review" + "Download the cheat sheet".
+### Copy
+- English: "Our office will be closed Friday, July 3 for the Independence Day holiday. Emergency claims support remains available."
+- Spanish: "Nuestra oficina estará cerrada el viernes 3 de julio por el feriado del Día de la Independencia. El soporte de reclamos de emergencia sigue disponible."
 
-**Rebuild cost table** (lives in `src/lib/rebuild-costs.ts`): static $/sqft by metro — Las Vegas, Reno, Henderson, Denver, Colorado Springs, Boulder, mountain CO (higher), rural NV (lower). Source from RSMeans / Craftsman ballpark; mark as "2025 estimate."
+### Technical notes
+- Use `new Date()` comparison with stable UTC boundaries (e.g., `Date.UTC(2026, 6, 6, 23, 59, 59)`) to avoid timezone edge cases.
+- Use `useState` + `useEffect` for `localStorage` read/write so SSR doesn't try to access `window`.
+- Style with existing tokens: gold background/gold-foreground or primary background/primary-foreground, plus a close icon from `lucide-react`.
 
-**Insert** on `src/routes/personal.homeowners-insurance.tsx` between the QUIZ section and the VIDEO section, with anchor `id="calculator"`. Add to in-page nav if one exists.
-
-## 2. "What This Policy Does NOT Cover" callout
-
-**Inline** on `src/routes/personal.homeowners-insurance.tsx`, placed right after the coverage explainer / before the quiz (so users see exclusions before self-assessing).
-
-Visual: bordered callout box (warning tone, not destructive), heading "What a standard homeowners policy does NOT cover," followed by a 2-column grid of 6 items with 1-sentence each + the endorsement/separate policy that fixes it:
-
-1. **Flood** → separate NFIP or private flood policy
-2. **Earthquake** → earthquake endorsement (critical in NV/CO foothills)
-3. **Sewer / drain backup** → water backup endorsement ($5K–$25K)
-4. **Mold** → usually capped at $5K, can be increased
-5. **Wear, tear, neglect** → maintenance is the owner's job
-6. **Vacant home (30+ days)** → vacancy endorsement or DP policy
-
-CTA at the bottom: "Not sure which of these you need? → Book a free coverage review."
-
-No new component needed — build inline with existing `Section` + Tailwind utilities and a `lucide-react` `ShieldAlert` icon to match the rest of the page.
-
-## 3. Four new Knowledge Center articles
-
-Add 4 entries to `src/lib/homeowners-faqs.ts` (each gets its own `/faq/homeowners/{slug}` page via the existing `faq.homeowners.$slug.tsx` route — no new route files needed). Stage = `mofu` for #1 and #2, `tofu` for #3, `mofu` for #4.
-
-| Slug | Question | Target keyword |
-|---|---|---|
-| `water-damage-vs-flood-insurance` | What's the difference between water damage and flood insurance? | "water damage vs flood insurance" |
-| `roof-age-and-homeowners-insurance` | How does my roof's age affect my homeowners insurance? | "roof age insurance Nevada / Colorado" |
-| `wildfire-coverage-colorado-homes` | Does homeowners insurance cover wildfire damage in Colorado? | "wildfire insurance Colorado" |
-| `scheduled-personal-property-jewelry` | Do I need scheduled personal property for jewelry, watches, or art? | "schedule jewelry homeowners policy" |
-
-Each article follows the existing FAQ shape: `question`, `shortAnswer`, `paragraphs[]` (3–5 paragraphs, 400–700 words total), `bullets[]`, `stateContext` (NV + CO specifics), `metaDescription`, `goDeeper` (links to 1–2 existing FAQs), `readyToAct` (links to the policy review CTA slug). Auto-picked up by `HOMEOWNERS_FAQS` array, the `/faq/homeowners` index, sitemap, and JSON-LD.
-
-Also add the same 4 slugs to `src/lib/i18n/homeowners-faqs-es.ts` as `null` placeholders so the typing stays clean — actual ES translations happen in the next translation batch (per our agreed flow).
-
-## What does NOT change
-- No design/layout/typography changes outside the new calculator + callout
-- No changes to the existing quiz, cheat sheet, ebook, or video
-- No new routes — articles ride the existing `faq.homeowners.$slug.tsx` route
-- No ES translations in this pass (slugs added to ES dict as placeholders only)
-- No changes to lead forms, GHL, or backend
-
-## Order of work
-1. Add the "NOT covered" callout (smallest, ships value immediately)
-2. Add the 4 new FAQ entries (pure data, low risk)
-3. Build the DwellingCalculator component + rebuild-costs table + wire into the page
-
-After this ships, the homeowners EN page is locked and we translate it in one focused pass (calculator UI strings, callout copy, 4 new article bodies) plus flip `/personal/homeowners-insurance` on in the ES toggle allowlist (it's already there).
+### Rollback / expiration
+- After the configured end date, the component simply renders nothing.
+- When the holiday is past, we can either leave the component in the codebase (it will be inert) or remove it entirely in a follow-up cleanup. Recommended: leave it inert for a few days, then remove to keep the bundle clean.
