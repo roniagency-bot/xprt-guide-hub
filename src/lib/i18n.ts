@@ -313,6 +313,12 @@ export const UI = {
   teamEyebrow: { en: "The team", es: "El equipo" },
   teamLineComingSoon: { en: "Direct line coming soon", es: "Línea directa próximamente" },
   teamEmailComingSoon: { en: "Direct email coming soon", es: "Email directo próximamente" },
+  // Holiday banner
+  holidayBanner: {
+    en: "Our office will be closed Friday, July 3 for the Independence Day holiday. Emergency claims support remains available.",
+    es: "Nuestra oficina estará cerrada el viernes 3 de julio por el feriado del Día de la Independencia. El soporte de reclamos de emergencia sigue disponible.",
+  },
+  holidayBannerClose: { en: "Dismiss announcement", es: "Cerrar anuncio" },
 } as const;
 
 export function t(key: keyof typeof UI, lang: Lang): string {
