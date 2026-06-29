@@ -41,15 +41,29 @@ export function HolidayBanner() {
     }
   };
 
+  const message = UI.holidayBanner[lang];
+  // Repeat the message a few times so the marquee fills the width on wide screens.
+  const repeated = Array.from({ length: 4 }, (_, i) => (
+    <span key={i} className="mx-12 inline-flex items-center gap-3">
+      <span aria-hidden="true">★</span>
+      <span>{message}</span>
+    </span>
+  ));
+
   return (
     <div
       role="status"
       aria-live="polite"
-      className="relative z-50 border-b border-gold/30 bg-gold px-4 py-2.5 text-center"
+      className="relative z-50 border-b border-gold/30 bg-gold py-3.5"
     >
-      <p className="mx-auto max-w-4xl text-sm font-medium text-gold-foreground">
-        {UI.holidayBanner[lang]}
-      </p>
+      <div className="holiday-marquee overflow-hidden pr-12">
+        <div className="holiday-marquee-track flex whitespace-nowrap text-base font-medium text-gold-foreground">
+          <div className="flex shrink-0 items-center">{repeated}</div>
+          <div className="flex shrink-0 items-center" aria-hidden="true">
+            {repeated}
+          </div>
+        </div>
+      </div>
       <button
         type="button"
         onClick={handleDismiss}
@@ -58,6 +72,22 @@ export function HolidayBanner() {
       >
         <X className="h-4 w-4" aria-hidden="true" />
       </button>
+      <style>{`
+        .holiday-marquee-track {
+          animation: holiday-marquee-scroll 40s linear infinite;
+          width: max-content;
+        }
+        .holiday-marquee:hover .holiday-marquee-track {
+          animation-play-state: paused;
+        }
+        @keyframes holiday-marquee-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .holiday-marquee-track { animation: none; }
+        }
+      `}</style>
     </div>
   );
 }
