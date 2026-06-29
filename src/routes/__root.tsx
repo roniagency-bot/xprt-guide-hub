@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { HolidayBanner } from "@/components/site/HolidayBanner";
 import { orgJsonLd, websiteJsonLd, personJsonLd } from "@/lib/seo";
 
 function NotFoundComponent() {
