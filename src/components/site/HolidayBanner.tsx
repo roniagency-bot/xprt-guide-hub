@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { useLang, UI } from "@/lib/i18n";
 
-// Display window: June 30, 2026 00:00 UTC through July 6, 2026 23:59:59 UTC
-const SHOW_START = Date.UTC(2026, 5, 30);
+// Display window: June 29, 2026 00:00 UTC through July 6, 2026 23:59:59 UTC
+const SHOW_START = Date.UTC(2026, 5, 29);
 const SHOW_END = Date.UTC(2026, 6, 6, 23, 59, 59, 999);
 const STORAGE_KEY = "xprt-holiday-banner-2026-07-dismissed";
 
