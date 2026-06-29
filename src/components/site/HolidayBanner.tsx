@@ -45,7 +45,7 @@ export function HolidayBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="relative z-50 border-b border-gold/30 bg-gradient-to-r from-gold to-amber-300 px-4 py-2.5 text-center"
+      className="relative z-50 border-b border-gold/30 bg-gold px-4 py-2.5 text-center"
     >
       <p className="mx-auto max-w-4xl text-sm font-medium text-gold-foreground">
         {UI.holidayBanner[lang]}
