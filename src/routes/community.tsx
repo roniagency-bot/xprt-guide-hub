@@ -192,7 +192,11 @@ function CommunityPage() {
                 )}
               </ul>
             </div>
-            <EventArtwork src={ev.artwork} alt={`${ev.name} event artwork`} />
+            <EventArtwork
+              src={ev.artwork ?? beachBoujieFlyer.url}
+              alt={`${ev.name} official event flyer — Saturday, August 15 at NOVEL RiNo, Denver`}
+            />
+
           </div>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
