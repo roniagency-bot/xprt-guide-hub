@@ -33,7 +33,14 @@ export const GHL_FORMS = {
     title: "Commercial Auto Quote",
     description: "Request a commercial auto insurance quote.",
   },
+  community_giveaway: {
+    id: "MEVImf5BDjstFUCkt5P6",
+    title: "XPRT Community Giveaway",
+    description:
+      "Enter the Beach & Boujie giveaway — takes under a minute. One entry per person, no purchase necessary.",
+  },
 } as const;
+
 
 export type GhlFormKey = keyof typeof GHL_FORMS;
 

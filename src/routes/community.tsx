@@ -23,9 +23,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
+import roniPhoto from "@/assets/team/veronica.png";
+import beachBoujieFlyer from "@/assets/beach-boujie-flyer.png.asset.json";
 import {
-  COMMUNITY_FORM_ID,
-  COMMUNITY_FORM_HEIGHT,
   GIVEAWAY_TERMS,
   GIVEAWAY_PRIZES,
   PRIZE_NOTE,
@@ -34,6 +35,7 @@ import {
   upcomingEvents,
 } from "@/lib/community-events";
 import { pageHead, canonical, orgJsonLd, breadcrumbJsonLd, SITE } from "@/lib/seo";
+
 
 const PATH = "/community";
 const TITLE = "Beach & Boujie Summer Bash — XPRT Insurance Sponsor & Giveaway";
@@ -190,7 +192,11 @@ function CommunityPage() {
                 )}
               </ul>
             </div>
-            <EventArtwork src={ev.artwork} alt={`${ev.name} event artwork`} />
+            <EventArtwork
+              src={ev.artwork ?? beachBoujieFlyer.url}
+              alt={`${ev.name} official event flyer — Saturday, August 15 at NOVEL RiNo, Denver`}
+            />
+
           </div>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -401,33 +407,26 @@ function CommunityPage() {
           {PRIZE_NOTE.en} · {PRIZE_NOTE.es}
         </p>
 
-        <div className="mt-8 rounded-2xl border border-border bg-background p-3 md:p-6">
-          {COMMUNITY_FORM_ID ? (
-            <iframe
-              title="Community Events Giveaway Entry"
-              src={`https://link.xprtinsurance.com/widget/form/${COMMUNITY_FORM_ID}?utm_source=community&utm_medium=qr&utm_content=beach-boujie`}
-              loading="lazy"
-              className="block w-full rounded-xl bg-background"
-              style={{ height: COMMUNITY_FORM_HEIGHT, border: 0 }}
-            />
-          ) : (
-            <div className="grid min-h-72 place-items-center rounded-xl border border-dashed border-gold/60 bg-background p-8 text-center">
-              <div>
-                <Sparkles className="mx-auto h-6 w-6 text-gold" aria-hidden />
-                <p className="mt-3 text-base font-medium text-foreground">
-                  Giveaway form embed area
-                </p>
-                <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-                  Add your GoHighLevel “Community Events” form ID to
-                  <code className="mx-1 rounded bg-secondary px-1.5 py-0.5 text-xs">
-                    COMMUNITY_FORM_ID
-                  </code>
-                  and the live form appears here.
-                </p>
-              </div>
-            </div>
-          )}
+        <div className="mt-8 rounded-2xl border border-gold/40 bg-background p-6 text-center md:p-8">
+          <Sparkles className="mx-auto h-6 w-6 text-gold" aria-hidden />
+          <p className="mt-3 text-lg font-medium text-foreground">
+            Ready? Open the entry form and you're done in under a minute.
+          </p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+            The form opens right here in a pop-up — nothing to download, no extra tabs.
+          </p>
+          <GhlFormButton
+            form="community_giveaway"
+            size="lg"
+            className="btn-gold-shimmer mt-6 h-14 w-full bg-gold-gradient text-base text-gold-foreground hover:bg-gold-gradient sm:w-auto sm:min-w-64"
+            successMessage="You're entered — we'll reach out after the event. Good luck!"
+          >
+            <span>
+              <Gift className="mr-2 inline h-5 w-5" aria-hidden /> Enter the Giveaway
+            </span>
+          </GhlFormButton>
         </div>
+
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.en}</p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.es}</p>
       </Section>
@@ -440,10 +439,22 @@ function CommunityPage() {
           title="Can't shake our hands at the Bash? Reach us right here."
           intro="Roni is traveling and won't be on site this time — but the whole XPRT team is one tap away, today and after the show, in English and Español."
         />
-        <blockquote className="mt-8 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 text-base leading-relaxed text-primary-foreground/85">
-          <p>{RONI_NOTE.en}</p>
-          <p className="mt-4 text-primary-foreground/70">{RONI_NOTE.es}</p>
+        <blockquote className="mt-8 flex flex-col gap-5 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 text-base leading-relaxed text-primary-foreground/85 sm:flex-row sm:items-start">
+          <img
+            src={roniPhoto}
+            alt="Roni Rivers, founder of XPRT Insurance"
+            loading="lazy"
+            className="h-24 w-24 shrink-0 rounded-2xl object-cover object-top ring-1 ring-gold/40 sm:h-28 sm:w-28"
+          />
+          <div>
+            <p>{RONI_NOTE.en}</p>
+            <p className="mt-4 text-primary-foreground/70">{RONI_NOTE.es}</p>
+            <p className="mt-4 text-xs uppercase tracking-[0.18em] text-gold">
+              Roni Rivers · Founder, XPRT Insurance
+            </p>
+          </div>
         </blockquote>
+
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <ReachCard
@@ -494,10 +505,57 @@ function CommunityPage() {
       {/* MEET XPRT */}
       <Section tone="cream">
         <SectionHeading
-          eyebrow="Meet XPRT Insurance"
-          title="A local, bilingual independent agency"
-          intro="We're XPRT Insurance, A Roni Rivers Agency — an independent agency licensed in Colorado and Nevada. We compare options across carriers, explain things in plain language, and we're here in English and Español. No pressure, ever."
+          eyebrow="Meet the founder"
+          title="Hi, I'm Roni Rivers — your neighbor and your insurance agent"
+          intro="XPRT Insurance, A Roni Rivers Agency is an independent, bilingual agency licensed in Colorado and Nevada. We compare options across carriers, explain everything in plain language, and never pressure anyone."
         />
+
+        <Reveal className="mt-10 overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
+          <div className="grid gap-0 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
+            <img
+              src={roniPhoto}
+              alt="Roni Rivers, founder of XPRT Insurance, A Roni Rivers Agency in Denver and Las Vegas"
+              loading="lazy"
+              className="h-72 w-full object-cover object-top md:h-full"
+            />
+            <div className="p-6 md:p-8">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                Veronica “Roni” Rivera-Nuñez · Founder &amp; Licensed Agent
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-foreground">
+                I live right here in this neighborhood — the Bash is happening at my own community,
+                so some of you have already met me at the mailboxes, the pool, or the elevator. If
+                my face looks familiar, that's why. Come say hi to my team, and if you see me
+                around after the event, stop me.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                I built XPRT Insurance because too many families and small business owners get
+                handed a policy they don't understand. I'm a licensed advisor in Colorado and
+                Nevada, I specialize in surety bonds, dealership and commercial coverage, and my
+                team handles home, auto, renters, life and Medicare. We work in English and
+                Español, and we treat every neighbor's policy like it's our own.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Vivo en esta misma comunidad. Soy Roni Rivers, fundadora de XPRT Insurance, con
+                licencia en Colorado y Nevada. Atendemos en español y con mucho gusto le
+                explicamos su cobertura sin presión.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="lg" className="h-13 text-base">
+                  <Link to="/about">More about our team</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="h-13 text-base">
+                  <a href={`tel:${PHONE_TEL}`}>
+                    <Phone className="mr-2 h-5 w-5" aria-hidden /> {PHONE_DISPLAY}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <h3 className="mt-12 text-xl">What we can help you with</h3>
+
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICE_LINKS.map((s, i) => (
             <Reveal as="li" key={s.label} delay={i % 3 === 0 ? 0 : i % 3 === 1 ? 75 : 150}>
