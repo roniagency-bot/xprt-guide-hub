@@ -321,7 +321,7 @@ function CommunityPage() {
             <Reveal
               as="li"
               key={artist.name}
-              delay={(i % 3) * 75}
+              delay={i % 3 === 0 ? 0 : i % 3 === 1 ? 75 : 150}
               className="h-full rounded-2xl border border-border bg-background p-6 shadow-sm"
             >
               <div className="flex items-start gap-4">
