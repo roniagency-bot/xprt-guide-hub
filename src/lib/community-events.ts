@@ -42,6 +42,8 @@ export type CommunityEvent = {
     bio: string;
     /** Imported image or absolute URL. Leave undefined for a placeholder. */
     image?: string;
+    /** Optional listening link — verified profile/track only. */
+    link?: { url: string; label: "Spotify" | "YouTube" };
   }[];
   /** Event flyer / artwork. Imported image or absolute URL. */
   artwork?: string;
@@ -79,21 +81,37 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
       {
         name: "E.M.E",
         bio: "Afrobeats artist who brings an incredible live performance, backed by a dancer on stage.",
+        link: {
+          url: "https://open.spotify.com/artist/7gurbuZkjD0guRnta5nAZe",
+          label: "Spotify",
+        },
       },
       {
         name: "Jewel House",
         bio: "Denver's rising pop boy band.",
+        link: {
+          url: "https://open.spotify.com/artist/73E6xSzOkhbmHqrC1IJfZk",
+          label: "Spotify",
+        },
       },
       {
         name: "Lokana",
         bio: "Pop and R&B artist, named Denver's Best Singer at the 2025 Denver Spotlight Awards.",
+        link: {
+          url: "https://open.spotify.com/track/4EoKrbA8x2JPBNb9ji8Vlq",
+          label: "Spotify",
+        },
       },
       {
         name: "Kayla Smith",
         bio: "Soul singer with a voice that fills a room — performing with her full band.",
+        link: {
+          url: "https://open.spotify.com/artist/5qkXRhcDdrX17tmCqvN6x4",
+          label: "Spotify",
+        },
       },
       {
-        name: "Pure Artist Music co-founder (name to confirm)",
+        name: "Aaliyah Shambe",
         bio: "Pop and R&B artist and co-founder of Pure Artist Music, awarded Denver's Best Record Label 2025 by the Denver Spotlight Awards.",
       },
       {
