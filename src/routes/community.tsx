@@ -430,8 +430,9 @@ function CommunityPage() {
           </GhlFormButton>
         </div>
 
-        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.en}</p>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.es}</p>
+        <p className="mt-4 text-xs leading-relaxed text-primary-foreground/60">{GIVEAWAY_TERMS.en}</p>
+        <p className="mt-2 text-xs leading-relaxed text-primary-foreground/60">{GIVEAWAY_TERMS.es}</p>
+
       </Section>
 
 
