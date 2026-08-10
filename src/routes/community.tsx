@@ -166,7 +166,7 @@ function CommunityPage() {
           </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,320px)] md:items-center">
-            <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 backdrop-blur-sm">
+            <div className="order-2 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 backdrop-blur-sm md:order-1">
               <p className="text-xs uppercase tracking-[0.18em] text-gold">Now sponsoring</p>
               <p className="mt-2 text-xl leading-snug md:text-2xl">{ev.name}</p>
               <ul className="mt-3 space-y-1.5 text-sm text-primary-foreground/75">
@@ -192,12 +192,14 @@ function CommunityPage() {
                 )}
               </ul>
             </div>
-            <EventArtwork
-              src={ev.artwork ?? beachBoujieFlyer.url}
-              alt={`${ev.name} official event flyer — Saturday, August 15 at NOVEL RiNo, Denver`}
-            />
-
+            <div className="order-1 md:order-2">
+              <EventArtwork
+                src={ev.artwork ?? beachBoujieFlyer.url}
+                alt={`${ev.name} official event flyer — Saturday, August 15 at NOVEL RiNo, Denver`}
+              />
+            </div>
           </div>
+
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
