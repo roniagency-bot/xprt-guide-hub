@@ -630,59 +630,6 @@ function CommunityPage() {
   );
 }
 
-function ReachCard({
-  href,
-  icon,
-  label,
-  value,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="flex min-h-24 flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 transition-colors hover:border-gold"
-    >
-      {icon}
-      <span className="mt-3 block">
-        <span className="block text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
-          {label}
-        </span>
-        <span className="mt-1 block break-words text-base text-primary-foreground">{value}</span>
-      </span>
-    </a>
-  );
-}
-
-function ReachLinkCard({
-  to,
-  icon,
-  label,
-  value,
-}: {
-  to: "/book";
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <Link
-      to={to}
-      className="flex min-h-24 flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 transition-colors hover:border-gold"
-    >
-      {icon}
-      <span className="mt-3 block">
-        <span className="block text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
-          {label}
-        </span>
-        <span className="mt-1 block text-base text-primary-foreground">{value}</span>
-      </span>
-    </Link>
-  );
-}
 
 function EventArtwork({ src, alt }: { src?: string; alt: string }) {
   if (src) {
