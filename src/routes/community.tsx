@@ -401,33 +401,26 @@ function CommunityPage() {
           {PRIZE_NOTE.en} · {PRIZE_NOTE.es}
         </p>
 
-        <div className="mt-8 rounded-2xl border border-border bg-background p-3 md:p-6">
-          {COMMUNITY_FORM_ID ? (
-            <iframe
-              title="Community Events Giveaway Entry"
-              src={`https://link.xprtinsurance.com/widget/form/${COMMUNITY_FORM_ID}?utm_source=community&utm_medium=qr&utm_content=beach-boujie`}
-              loading="lazy"
-              className="block w-full rounded-xl bg-background"
-              style={{ height: COMMUNITY_FORM_HEIGHT, border: 0 }}
-            />
-          ) : (
-            <div className="grid min-h-72 place-items-center rounded-xl border border-dashed border-gold/60 bg-background p-8 text-center">
-              <div>
-                <Sparkles className="mx-auto h-6 w-6 text-gold" aria-hidden />
-                <p className="mt-3 text-base font-medium text-foreground">
-                  Giveaway form embed area
-                </p>
-                <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-                  Add your GoHighLevel “Community Events” form ID to
-                  <code className="mx-1 rounded bg-secondary px-1.5 py-0.5 text-xs">
-                    COMMUNITY_FORM_ID
-                  </code>
-                  and the live form appears here.
-                </p>
-              </div>
-            </div>
-          )}
+        <div className="mt-8 rounded-2xl border border-gold/40 bg-background p-6 text-center md:p-8">
+          <Sparkles className="mx-auto h-6 w-6 text-gold" aria-hidden />
+          <p className="mt-3 text-lg font-medium text-foreground">
+            Ready? Open the entry form and you're done in under a minute.
+          </p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+            The form opens right here in a pop-up — nothing to download, no extra tabs.
+          </p>
+          <GhlFormButton
+            form="community_giveaway"
+            size="lg"
+            className="btn-gold-shimmer mt-6 h-14 w-full bg-gold-gradient text-base text-gold-foreground hover:bg-gold-gradient sm:w-auto sm:min-w-64"
+            successMessage="You're entered — we'll reach out after the event. Good luck!"
+          >
+            <span>
+              <Gift className="mr-2 inline h-5 w-5" aria-hidden /> Enter the Giveaway
+            </span>
+          </GhlFormButton>
         </div>
+
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.en}</p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.es}</p>
       </Section>
