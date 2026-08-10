@@ -76,17 +76,32 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
     artists: [
       {
         name: "E.M.E",
-        bio: "On the Beach & Boujie stage as part of the Pure Artist Music lineup. Full bio and photo coming soon — ask us at the merch table or follow @pure_artist_music.",
+        bio: "Afrobeats artist who brings an incredible live performance, backed by a dancer on stage.",
       },
       {
         name: "Jewel House",
-        bio: "Performing live at the Summer Bash with the Pure Artist Music lineup. Full bio and photo coming soon.",
+        bio: "Denver's rising pop boy band.",
+      },
+      {
+        name: "Lokana",
+        bio: "Pop and R&B artist, named Denver's Best Singer at the 2025 Denver Spotlight Awards.",
       },
       {
         name: "Kayla Smith",
-        bio: "Part of the Beach & Boujie live lineup, presented by Pure Artist Music. Full bio and photo coming soon.",
+        bio: "Soul singer with a voice that fills a room — performing with her full band.",
+      },
+      {
+        name: "Pure Artist Music co-founder (name to confirm)",
+        bio: "Pop and R&B artist and co-founder of Pure Artist Music, awarded Denver's Best Record Label 2025 by the Denver Spotlight Awards.",
+      },
+      {
+        name: "Ekym",
+        bio: "Old-school hip hop artist and founder of Rock the Block.",
       },
     ],
+    specialGuestsNote:
+      "Plus special guest appearances announced day-of — one more reason to get there early.",
+
   },
 ];
 
