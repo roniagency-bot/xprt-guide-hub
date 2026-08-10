@@ -11,14 +11,10 @@ import {
   Sparkles,
   Ticket,
   Phone,
-  Mail,
-  MessageSquare,
-  CalendarCheck,
   Shirt,
   Trophy,
   Sun,
   ExternalLink,
-
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -30,10 +26,10 @@ import {
   GIVEAWAY_TERMS,
   GIVEAWAY_PRIZES,
   PRIZE_NOTE,
-  RONI_NOTE,
   currentEvent,
   upcomingEvents,
 } from "@/lib/community-events";
+
 import { pageHead, canonical, orgJsonLd, breadcrumbJsonLd, SITE } from "@/lib/seo";
 
 
