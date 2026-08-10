@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as BondsRouteImport } from './routes/bonds'
+import { Route as BeachRouteImport } from './routes/beach'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqIndexRouteImport } from './routes/faq.index'
@@ -95,6 +96,11 @@ const BookRoute = BookRouteImport.update({
 const BondsRoute = BondsRouteImport.update({
   id: '/bonds',
   path: '/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeachRoute = BeachRouteImport.update({
+  id: '/beach',
+  path: '/beach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -334,6 +340,7 @@ const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/beach': typeof BeachRoute
   '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
@@ -388,6 +395,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/beach': typeof BeachRoute
   '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
@@ -442,6 +450,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/beach': typeof BeachRoute
   '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
@@ -498,6 +507,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/beach'
     | '/bonds'
     | '/book'
     | '/community'
@@ -552,6 +562,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/beach'
     | '/bonds'
     | '/book'
     | '/community'
@@ -605,6 +616,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/beach'
     | '/bonds'
     | '/book'
     | '/community'
@@ -660,6 +672,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BeachRoute: typeof BeachRoute
   BondsRoute: typeof BondsRouteWithChildren
   BookRoute: typeof BookRoute
   CommunityRoute: typeof CommunityRoute
@@ -751,6 +764,13 @@ declare module '@tanstack/react-router' {
       path: '/bonds'
       fullPath: '/bonds'
       preLoaderRoute: typeof BondsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beach': {
+      id: '/beach'
+      path: '/beach'
+      fullPath: '/beach'
+      preLoaderRoute: typeof BeachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -1119,6 +1139,7 @@ const ServicesCategoryRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BeachRoute: BeachRoute,
   BondsRoute: BondsRouteWithChildren,
   BookRoute: BookRoute,
   CommunityRoute: CommunityRoute,
@@ -1163,12 +1184,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

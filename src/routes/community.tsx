@@ -4,11 +4,19 @@ import {
   Music,
   MapPin,
   CalendarDays,
+  Clock,
   Gift,
   ArrowRight,
   Heart,
   Sparkles,
   Ticket,
+  Phone,
+  Mail,
+  MessageSquare,
+  CalendarCheck,
+  Shirt,
+  Trophy,
+  Sun,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -17,22 +25,29 @@ import {
   COMMUNITY_FORM_ID,
   COMMUNITY_FORM_HEIGHT,
   GIVEAWAY_TERMS,
+  GIVEAWAY_PRIZES,
+  PRIZE_NOTE,
+  RONI_NOTE,
   currentEvent,
   upcomingEvents,
 } from "@/lib/community-events";
 import { pageHead, canonical, orgJsonLd, breadcrumbJsonLd, SITE } from "@/lib/seo";
 
 const PATH = "/community";
-const TITLE = "Community Events & Giveaways | XPRT Insurance";
+const TITLE = "Beach & Boujie Summer Bash — XPRT Insurance Sponsor & Giveaway";
 const DESCRIPTION =
-  "XPRT Insurance proudly supports Colorado local music, artists and small businesses. See our current sponsored event at Novel RiNo in Denver and enter the community giveaway.";
+  "XPRT Insurance is a proud sponsor of the Beach & Boujie Summer Bash Music Festival — Saturday, August 15, 2026 at NOVEL RiNo in Denver. Enter our community giveaway and reach our bilingual team any time.";
+
+const PHONE_DISPLAY = "(702) 766-3394";
+const PHONE_TEL = "+17027663394";
+const EMAIL = SITE.email;
 
 export const Route = createFileRoute("/community")({
   head: () => {
     const ev = currentEvent();
     const eventLd: Record<string, unknown> = {
       "@context": "https://schema.org",
-      "@type": "Event",
+      "@type": "MusicEvent",
       name: ev.name,
       description: ev.description,
       url: canonical(PATH),
@@ -43,14 +58,29 @@ export const Route = createFileRoute("/community")({
         name: ev.venue,
         address: {
           "@type": "PostalAddress",
+          streetAddress: ev.streetAddress,
           addressLocality: "Denver",
           addressRegion: "CO",
+          postalCode: "80205",
           addressCountry: "US",
         },
       },
+      performer: ev.artists.map((a) => ({ "@type": "MusicGroup", name: a.name })),
+      organizer: { "@type": "Organization", name: "Pure Artist Music" },
       sponsor: { "@id": `${SITE.url}/#org` },
     };
     if (ev.startDateIso) eventLd.startDate = ev.startDateIso;
+    if (ev.endDateIso) eventLd.endDate = ev.endDateIso;
+    if (ev.eventUrl) {
+      eventLd.offers = {
+        "@type": "Offer",
+        url: ev.eventUrl,
+        price: "20",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        validFrom: "2026-07-25T00:00:00-06:00",
+      };
+    }
     return pageHead({
       title: TITLE,
       description: DESCRIPTION,
@@ -103,12 +133,12 @@ function CommunityPage() {
       <section className="relative isolate overflow-hidden bg-ink text-primary-foreground">
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full opacity-30 blur-3xl"
+          className="pointer-events-none absolute -left-24 -top-28 h-80 w-80 rounded-full opacity-30 blur-3xl"
           style={{ background: "var(--gradient-gold)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-32 -right-20 h-80 w-80 rounded-full opacity-20 blur-3xl"
+          className="pointer-events-none absolute -bottom-32 -right-24 h-96 w-96 rounded-full opacity-20 blur-3xl"
           style={{ background: "var(--gradient-gold)" }}
         />
         <div className="container-prose relative py-14 md:py-24">
@@ -116,35 +146,48 @@ function CommunityPage() {
             XPRT Insurance · A Roni Rivers Agency
           </p>
           <Eyebrow className="mt-6 text-gold">
-            <Music className="h-3.5 w-3.5" aria-hidden /> Community Sponsor · Denver, CO
+            <Sun className="h-3.5 w-3.5" aria-hidden /> Proud Sponsor · Denver, CO
           </Eyebrow>
           <h1 className="mt-5 text-balance text-3xl leading-[1.08] md:text-5xl">
-            XPRT Insurance Proudly Supports Colorado Local Music
+            XPRT Insurance is a proud sponsor of the Beach &amp; Boujie Summer Bash
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-primary-foreground/80 md:text-lg">
-            Welcome, and thanks for scanning. We're here for the artists on stage, the small
-            businesses that host them, and the neighbors who show up. Enjoy the show — and enter our
-            community giveaway while you're here.
+            Welcome, and thanks for scanning. We back the artists on stage, the small businesses
+            that host them, and the neighbors who show up. Enjoy the music — then enter our
+            community giveaway and save us for whenever you need insurance answers.
           </p>
 
-          {/* Event artwork slot */}
           <div className="mt-8 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,320px)] md:items-center">
             <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 backdrop-blur-sm">
               <p className="text-xs uppercase tracking-[0.18em] text-gold">Now sponsoring</p>
               <p className="mt-2 text-xl leading-snug md:text-2xl">{ev.name}</p>
               <ul className="mt-3 space-y-1.5 text-sm text-primary-foreground/75">
-                <li className="flex items-center gap-2">
-                  <CalendarDays className="h-4 w-4 text-gold" aria-hidden /> {ev.dateTime}
+                <li className="flex items-start gap-2">
+                  <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />{" "}
+                  {ev.dateTime}
                 </li>
-                <li className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-gold" aria-hidden /> {ev.venue} · {ev.city}
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> {ev.venue}
+                  {ev.venueDetail ? ` · ${ev.venueDetail}` : ""} · {ev.streetAddress}, {ev.city}
                 </li>
+                {ev.ticketNote && (
+                  <li className="flex items-start gap-2">
+                    <Ticket className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />{" "}
+                    {ev.ticketNote}
+                  </li>
+                )}
+                {ev.dressCode && (
+                  <li className="flex items-start gap-2">
+                    <Shirt className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Dress code:{" "}
+                    {ev.dressCode}
+                  </li>
+                )}
               </ul>
             </div>
             <EventArtwork src={ev.artwork} alt={`${ev.name} event artwork`} />
           </div>
 
-          <div className="mt-9">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
               size="lg"
               onClick={scrollToGiveaway}
@@ -153,20 +196,28 @@ function CommunityPage() {
               <Gift className="mr-2 h-5 w-5" aria-hidden />
               Enter the Giveaway
             </Button>
-            <p className="mt-3 text-sm text-primary-foreground/60">
-              Takes under a minute · English &amp; Español
-            </p>
+            {ev.eventUrl && (
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-14 w-full border-primary-foreground/30 bg-transparent text-base text-primary-foreground hover:bg-primary-foreground/10 sm:w-auto"
+              >
+                <a href={ev.eventUrl} target="_blank" rel="noopener noreferrer">
+                  <Ticket className="mr-2 h-5 w-5" aria-hidden /> Get Tickets
+                </a>
+              </Button>
+            )}
           </div>
+          <p className="mt-3 text-sm text-primary-foreground/60">
+            Takes under a minute · English &amp; Español
+          </p>
         </div>
       </section>
 
       {/* FEATURED EVENT */}
       <Section tone="cream" id="event">
-        <SectionHeading
-          eyebrow="Featured event"
-          title={ev.name}
-          intro={ev.description}
-        />
+        <SectionHeading eyebrow="Featured event" title={ev.name} intro={ev.description} />
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <Reveal className="rounded-2xl border border-border bg-background p-6 shadow-sm">
             <h3 className="text-xl">Event details</h3>
@@ -177,12 +228,41 @@ function CommunityPage() {
               </div>
               <div>
                 <dt className="text-muted-foreground">Venue</dt>
-                <dd className="text-foreground">{ev.venue}</dd>
+                <dd className="text-foreground">
+                  {ev.venue}
+                  {ev.venueDetail ? ` — ${ev.venueDetail}` : ""}
+                </dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Location</dt>
-                <dd className="text-foreground">{ev.city}</dd>
+                <dt className="text-muted-foreground">Address</dt>
+                <dd className="text-foreground">
+                  {ev.streetAddress}, {ev.city}
+                </dd>
               </div>
+              {ev.ticketNote && (
+                <div>
+                  <dt className="text-muted-foreground">Tickets</dt>
+                  <dd className="text-foreground">{ev.ticketNote}</dd>
+                </div>
+              )}
+              {ev.dressCode && (
+                <div>
+                  <dt className="text-muted-foreground">Dress code</dt>
+                  <dd className="text-foreground">{ev.dressCode}</dd>
+                </div>
+              )}
+              {ev.afterParty && (
+                <div>
+                  <dt className="text-muted-foreground">After party</dt>
+                  <dd className="text-foreground">{ev.afterParty}</dd>
+                </div>
+              )}
+              {ev.presentedBy && ev.presentedBy.length > 0 && (
+                <div>
+                  <dt className="text-muted-foreground">Presented by</dt>
+                  <dd className="text-foreground">{ev.presentedBy.join(" · ")}</dd>
+                </div>
+              )}
             </dl>
             {ev.eventUrl && (
               <a
@@ -191,16 +271,58 @@ function CommunityPage() {
                 rel="noopener noreferrer"
                 className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground underline underline-offset-4"
               >
-                <Ticket className="h-4 w-4 text-gold" aria-hidden /> Event info
+                <Ticket className="h-4 w-4 text-gold" aria-hidden /> Tickets &amp; event info
               </a>
             )}
           </Reveal>
 
+          <Reveal
+            delay={75}
+            className="rounded-2xl border border-border bg-background p-6 shadow-sm"
+          >
+            <h3 className="text-xl">What to expect</h3>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <Music className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Live sets from
+                Colorado artists on the NOVEL RiNo backyard terrace.
+              </li>
+              <li className="flex items-start gap-2">
+                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Champagne
+                wall, local brands, and local bites and sips.
+              </li>
+              <li className="flex items-start gap-2">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> One day only,
+                11:00 AM to 3:00 PM — then the rooftop after-party.
+              </li>
+              <li className="flex items-start gap-2">
+                <Gift className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Our community
+                giveaway is open to attendees, right from your phone.
+              </li>
+            </ul>
+          </Reveal>
+        </div>
+
+        <div className="mt-10">
+          <Button size="lg" onClick={scrollToGiveaway} className="h-14 w-full text-base sm:w-auto">
+            <Gift className="mr-2 h-5 w-5" aria-hidden /> Enter the Giveaway
+          </Button>
+        </div>
+      </Section>
+
+      {/* LINEUP */}
+      <Section id="lineup">
+        <SectionHeading
+          eyebrow="The lineup"
+          title="Artists on the Beach & Boujie stage"
+          intro="Presented by Pure Artist Music. We spotlight Colorado musicians and the small businesses that keep our neighborhoods playing."
+        />
+        <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {ev.artists.map((artist, i) => (
             <Reveal
+              as="li"
               key={artist.name}
-              delay={i === 0 ? 75 : 150}
-              className="rounded-2xl border border-border bg-background p-6 shadow-sm"
+              delay={i === 0 ? 0 : i === 1 ? 75 : 150}
+              className="h-full rounded-2xl border border-border bg-background p-6 shadow-sm"
             >
               <div className="flex items-start gap-4">
                 <ArtistImage src={artist.image} alt={artist.name} />
@@ -214,31 +336,43 @@ function CommunityPage() {
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{artist.bio}</p>
             </Reveal>
           ))}
-        </div>
-
-        <div className="mt-10">
-          <Button
-            size="lg"
-            onClick={scrollToGiveaway}
-            className="h-14 w-full text-base sm:w-auto"
-          >
-            <Gift className="mr-2 h-5 w-5" aria-hidden /> Enter the Giveaway
-          </Button>
-        </div>
+        </ul>
       </Section>
 
       {/* GIVEAWAY */}
-      <Section id="giveaway" className="scroll-mt-24">
+      <Section id="giveaway" tone="cream" className="scroll-mt-24">
         <SectionHeading
           eyebrow="Giveaway"
-          title="Enter the Community Giveaway 🎶"
-          intro="Attendees can enter right here from their phone. Drop your info once, and we'll announce the winner after the event and reach out directly. One entry per person — no purchase necessary."
+          title="Enter the XPRT Community Giveaway"
+          intro="Two prizes, one quick entry. Drop your info once from your phone — we'll announce the winners after the event and reach out directly. One entry per person, no purchase necessary."
         />
-        <div className="mt-8 rounded-2xl border border-border bg-cream-gradient p-3 md:p-6">
+
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+          {GIVEAWAY_PRIZES.map((p, i) => (
+            <Reveal
+              as="li"
+              key={p.place}
+              delay={i === 0 ? 0 : 75}
+              className="h-full rounded-2xl border border-gold/40 bg-background p-6 shadow-sm"
+            >
+              <Trophy className="h-5 w-5 text-gold" aria-hidden />
+              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                {p.place}
+              </p>
+              <p className="mt-2 text-base leading-relaxed text-foreground">{p.en}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.es}</p>
+            </Reveal>
+          ))}
+        </ul>
+        <p className="mt-4 text-sm text-muted-foreground">
+          {PRIZE_NOTE.en} · {PRIZE_NOTE.es}
+        </p>
+
+        <div className="mt-8 rounded-2xl border border-border bg-background p-3 md:p-6">
           {COMMUNITY_FORM_ID ? (
             <iframe
               title="Community Events Giveaway Entry"
-              src={`https://link.xprtinsurance.com/widget/form/${COMMUNITY_FORM_ID}?utm_source=community&utm_medium=qr&utm_content=novel-rino`}
+              src={`https://link.xprtinsurance.com/widget/form/${COMMUNITY_FORM_ID}?utm_source=community&utm_medium=qr&utm_content=beach-boujie`}
               loading="lazy"
               className="block w-full rounded-xl bg-background"
               style={{ height: COMMUNITY_FORM_HEIGHT, border: 0 }}
@@ -263,6 +397,65 @@ function CommunityPage() {
         </div>
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.en}</p>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.es}</p>
+      </Section>
+
+      {/* WITH YOU, EVEN WHEN WE CAN'T BE THERE */}
+      <Section tone="ink" id="reach-us">
+        <SectionHeading
+          tone="ink"
+          eyebrow="We're with you"
+          title="Can't shake our hands at the Bash? Reach us right here."
+          intro="Roni is traveling and won't be on site this time — but the whole XPRT team is one tap away, today and after the show, in English and Español."
+        />
+        <blockquote className="mt-8 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 text-base leading-relaxed text-primary-foreground/85">
+          <p>{RONI_NOTE.en}</p>
+          <p className="mt-4 text-primary-foreground/70">{RONI_NOTE.es}</p>
+        </blockquote>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ReachCard
+            href={`tel:${PHONE_TEL}`}
+            icon={<Phone className="h-5 w-5 text-gold" aria-hidden />}
+            label="Call us"
+            value={PHONE_DISPLAY}
+          />
+          <ReachCard
+            href={`sms:${PHONE_TEL}`}
+            icon={<MessageSquare className="h-5 w-5 text-gold" aria-hidden />}
+            label="Text us"
+            value={PHONE_DISPLAY}
+          />
+          <ReachCard
+            href={`mailto:${EMAIL}`}
+            icon={<Mail className="h-5 w-5 text-gold" aria-hidden />}
+            label="Email us"
+            value={EMAIL}
+          />
+          <ReachLinkCard
+            to="/book"
+            icon={<CalendarCheck className="h-5 w-5 text-gold" aria-hidden />}
+            label="Book a review"
+            value="Pick a time online"
+          />
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button
+            asChild
+            size="lg"
+            className="btn-gold-shimmer h-14 bg-gold-gradient text-base text-gold-foreground hover:bg-gold-gradient"
+          >
+            <Link to="/contact">Request a quote</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="h-14 border-primary-foreground/30 bg-transparent text-base text-primary-foreground hover:bg-primary-foreground/10"
+          >
+            <Link to="/bonds">Surety bonds</Link>
+          </Button>
+        </div>
       </Section>
 
       {/* MEET XPRT */}
@@ -299,13 +492,13 @@ function CommunityPage() {
       </Section>
 
       {/* COMMUNITY */}
-      <Section tone="ink">
+      <Section>
         <div className="mx-auto max-w-3xl text-center">
           <Heart className="mx-auto h-6 w-6 text-gold" aria-hidden />
           <p className="mt-6 text-balance text-2xl leading-snug md:text-4xl">
             “Insurance is what we do. Community is who we serve.”
           </p>
-          <p className="mt-6 text-pretty text-base leading-relaxed text-primary-foreground/75">
+          <p className="mt-6 text-pretty text-base leading-relaxed text-muted-foreground">
             We sponsor local musicians, entrepreneurs, small businesses and neighborhood events
             across Colorado and Nevada. When the people around us grow, we all do better — so we
             show up, sponsor the night, and keep the mic on.
@@ -314,7 +507,7 @@ function CommunityPage() {
       </Section>
 
       {/* FUTURE EVENTS */}
-      <Section id="upcoming">
+      <Section tone="cream" id="upcoming">
         <SectionHeading
           eyebrow="Upcoming"
           title="More community events"
@@ -346,6 +539,60 @@ function CommunityPage() {
   );
 }
 
+function ReachCard({
+  href,
+  icon,
+  label,
+  value,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}) {
+  return (
+    <a
+      href={href}
+      className="flex min-h-24 flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 transition-colors hover:border-gold"
+    >
+      {icon}
+      <span className="mt-3 block">
+        <span className="block text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
+          {label}
+        </span>
+        <span className="mt-1 block break-words text-base text-primary-foreground">{value}</span>
+      </span>
+    </a>
+  );
+}
+
+function ReachLinkCard({
+  to,
+  icon,
+  label,
+  value,
+}: {
+  to: "/book";
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className="flex min-h-24 flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 transition-colors hover:border-gold"
+    >
+      {icon}
+      <span className="mt-3 block">
+        <span className="block text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
+          {label}
+        </span>
+        <span className="mt-1 block text-base text-primary-foreground">{value}</span>
+      </span>
+    </Link>
+  );
+}
+
 function EventArtwork({ src, alt }: { src?: string; alt: string }) {
   if (src) {
     return (
@@ -359,9 +606,12 @@ function EventArtwork({ src, alt }: { src?: string; alt: string }) {
   }
   return (
     <div className="grid aspect-[4/5] w-full place-items-center rounded-2xl border border-dashed border-gold/50 bg-primary-foreground/5 p-6 text-center">
-      <p className="text-sm text-primary-foreground/70">
-        Event flyer / artist artwork goes here
-      </p>
+      <div>
+        <Sun className="mx-auto h-7 w-7 text-gold" aria-hidden />
+        <p className="mt-3 text-sm text-primary-foreground/70">
+          Event artwork slot — add an XPRT-branded graphic or artist photo here
+        </p>
+      </div>
     </div>
   );
 }
