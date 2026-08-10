@@ -1,34 +1,54 @@
-## Temporary July 4th Office Closure Banner
+# Community Page Update — Beach & Boujie Summer Bash
 
-### Goal
-Add a short-lived, site-wide announcement banner that tells visitors the office will be closed Friday, July 3, 2026 for the Independence Day holiday. It will be bilingual, dismissible, and automatically stop showing after a configured end date so no manual redeploy is required to remove it.
+Fill the `/community` page with the real event, in XPRT brand colors (ink + gold, no purple flyer aesthetic), with two giveaway prizes and a clear "we're with you even though Roni can't attend in person" presence.
 
-### Why a top banner?
-- **Visibility**: Every page visitor sees it immediately, which is the right urgency for operational hours.
-- **Accessibility**: A static, dismissible ribbon is better than a scrolling marquee (marquees are hard to read, can violate WCAG motion guidelines, and are ignored by search engines).
-- **Non-intrusive**: Placed above the sticky header so it doesn't overlap content, and can be dismissed.
+## Event facts (pulled from the flyer + Pure Artist Music Linktree)
 
-### Proposed component behavior
-1. **Display window**: Show from a start date (e.g., June 30, 2026) through an end date (e.g., July 6, 2026 at 11:59 PM). Hide before or after those dates automatically.
-2. **Dismissible**: User can click an X to close; dismissal is remembered in `localStorage` for the current browser so repeat visits don't re-show it.
-3. **Bilingual**: English text on `/` and `/en/*` paths; Spanish text on `/es/*` paths.
-4. **Mobile safe**: Text stays readable, close button stays tappable, no horizontal scroll.
-5. **No SEO/meta changes**: A simple announcement banner should not alter page titles, descriptions, or canonical tags.
+- **Event:** Beach & Boujie Summer Bash Music Festival
+- **Presented by:** Pure Artist Music, with Eloura Hospitality Group, at NOVEL RiNo by Crescent Communities
+- **When:** Saturday, August 15, 2026 · 11:00 AM – 3:00 PM (1 day only)
+- **Where:** NOVEL RiNo — Backyard Terrace, 1350 40th St, Denver, CO
+- **Tickets:** $20 presale via Eventbrite; free for NOVEL RiNo residents
+- **Vibe:** Retro beach meets elevated Denver culture — champagne wall, live music, local brands, local bites & sips
+- **Dress code:** "Beach & Boujie"
+- **After party:** Sorry Gorgeous Cocktail Bar
+- **Featured artists:** E.M.E · Jewel House · Kayla Smith
+- **XPRT role:** proud community sponsor
 
-### Files to change
-- `src/components/site/HolidayBanner.tsx` — new reusable component with the date logic, dismissal state, and EN/ES copy.
-- `src/routes/__root.tsx` — insert `<HolidayBanner />` above `<SiteHeader />` so it appears site-wide.
-- `src/lib/i18n.ts` — add holiday banner strings (or keep them co-located in the component; we can decide during implementation).
+Artist bios: the Linktree only lists names (no bios published), so each artist gets a short, honest sponsor-voice blurb ("Denver-based artist on the Beach & Boujie stage") with room for a real bio and photo once you send them. No invented facts.
 
-### Copy
-- English: "Our office will be closed Friday, July 3 for the Independence Day holiday. Emergency claims support remains available."
-- Spanish: "Nuestra oficina estará cerrada el viernes 3 de julio por el feriado del Día de la Independencia. El soporte de reclamos de emergencia sigue disponible."
+## Page structure (mobile-first, brand colors only)
 
-### Technical notes
-- Use `new Date()` comparison with stable UTC boundaries (e.g., `Date.UTC(2026, 6, 6, 23, 59, 59)`) to avoid timezone edge cases.
-- Use `useState` + `useEffect` for `localStorage` read/write so SSR doesn't try to access `window`.
-- Style with existing tokens: gold background/gold-foreground or primary background/primary-foreground, plus a close icon from `lucide-react`.
+1. **Hero** — ink background, gold accents. "XPRT Insurance is a proud sponsor of Beach & Boujie Summer Bash." Date/time/venue chips, dress code, and two buttons: **Enter the Giveaway** (scrolls down) and **Get Tickets** (Eventbrite).
+2. **Event details** — date, time, venue + address, tickets/free-for-residents note, after-party, lineup, presented-by credits.
+3. **Lineup** — three artist cards (E.M.E, Jewel House, Kayla Smith) ready for photos.
+4. **Giveaway** — two prizes: (1) vinyl from one of the featured artists, (2) ticket to the next Pure Artist Music event. Wording marked "prizes subject to change" so you can swap later by editing one file. GoHighLevel form embed slot stays as-is until you paste the form ID.
+5. **"We're with you — even when we can't be there"** — new section. Roni is traveling and won't be on site, so this section makes XPRT present digitally: text/call/email links, book-a-call link, quote request buttons (personal, business, bonds), bilingual note, and a short personal message from Roni to attendees. This is the section your QR/Linktree traffic lands on and converts from.
+6. **Meet XPRT** — existing bilingual agency intro + service links (unchanged).
+7. **Upcoming events** — unchanged.
 
-### Rollback / expiration
-- After the configured end date, the component simply renders nothing.
-- When the holiday is past, we can either leave the component in the codebase (it will be inert) or remove it entirely in a follow-up cleanup. Recommended: leave it inert for a few days, then remove to keep the bundle clean.
+## Design notes
+
+- No purple/pink from the flyer. Ink `#`-dark base, gold gradient accents, cream sections — same tokens as the rest of the site.
+- A "beach & boujie" nod done in-brand: warm gold sun-glow gradients, subtle sand-tone texture, palm/music iconography in gold instead of the flyer's neon.
+- Optional in-brand event graphic generated in XPRT colors (gold on ink) instead of using the purple flyer. Say the word and I'll generate it; otherwise the artwork slot stays open for an image you upload.
+
+## QR code / link
+
+The page lives at `xprtinsurance.com/community` — that's the URL to give Pure Artist Music for your Linktree spot. I'll also add a short, memorable alias `xprtinsurance.com/beach` that redirects to it, so it prints small and clean on a QR code. QR image itself: I can generate a branded gold-on-ink QR PNG you can download and hand off.
+
+## What I still need from you
+
+1. **GoHighLevel form ID** for the Community Events giveaway form (the `.../widget/form/XXXX` part).
+2. Artist photos + real bios, if Pure Artist Music shares them.
+3. Confirm the two prizes once the vinyl is locked in.
+4. Your short message to attendees (or I'll draft one for your approval).
+
+## Technical section
+
+- Update `src/lib/community-events.ts`: replace the placeholder event with the Beach & Boujie data, add fields for `ticketUrl`, `endDateIso`, `address`, `dressCode`, `afterParty`, `presentedBy`, and a `prizes: string[]` array; keep the existing bilingual `GIVEAWAY_TERMS` and add prize wording.
+- Rewrite the body of `src/routes/community.tsx` to render the new sections; keep the existing `Section`, `SectionHeading`, `Reveal`, and gold/ink token usage — no new design system.
+- Add a "Reach us instantly" section using existing tel/mailto/booking patterns from `SiteFooter`/`CTASection`.
+- Extend the Event JSON-LD with `startDate`, `endDate`, `offers` (Eventbrite URL, $20 USD), `performer` entries for the three artists, `organizer` (Pure Artist Music), and `sponsor` (XPRT) — good for AI/answer-engine pickup before Aug 15.
+- Add `src/routes/beach.tsx` as a `beforeLoad` redirect to `/community`, and keep `/community` in `sitemap.xml`.
+- Spanish: add an `es` copy layer for the giveaway/terms/contact strings on this page (the page already shows bilingual terms) rather than a separate route, since it is a single QR landing page.
