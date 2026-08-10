@@ -439,10 +439,22 @@ function CommunityPage() {
           title="Can't shake our hands at the Bash? Reach us right here."
           intro="Roni is traveling and won't be on site this time — but the whole XPRT team is one tap away, today and after the show, in English and Español."
         />
-        <blockquote className="mt-8 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 text-base leading-relaxed text-primary-foreground/85">
-          <p>{RONI_NOTE.en}</p>
-          <p className="mt-4 text-primary-foreground/70">{RONI_NOTE.es}</p>
+        <blockquote className="mt-8 flex flex-col gap-5 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 text-base leading-relaxed text-primary-foreground/85 sm:flex-row sm:items-start">
+          <img
+            src={roniPhoto}
+            alt="Roni Rivers, founder of XPRT Insurance"
+            loading="lazy"
+            className="h-24 w-24 shrink-0 rounded-2xl object-cover object-top ring-1 ring-gold/40 sm:h-28 sm:w-28"
+          />
+          <div>
+            <p>{RONI_NOTE.en}</p>
+            <p className="mt-4 text-primary-foreground/70">{RONI_NOTE.es}</p>
+            <p className="mt-4 text-xs uppercase tracking-[0.18em] text-gold">
+              Roni Rivers · Founder, XPRT Insurance
+            </p>
+          </div>
         </blockquote>
+
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <ReachCard
