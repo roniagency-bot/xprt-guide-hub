@@ -23,9 +23,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
+import { GhlFormButton } from "@/components/site/GhlFormButton";
+import roniPhoto from "@/assets/team/veronica.png";
+import beachBoujieFlyer from "@/assets/beach-boujie-flyer.png.asset.json";
 import {
-  COMMUNITY_FORM_ID,
-  COMMUNITY_FORM_HEIGHT,
   GIVEAWAY_TERMS,
   GIVEAWAY_PRIZES,
   PRIZE_NOTE,
@@ -34,6 +35,7 @@ import {
   upcomingEvents,
 } from "@/lib/community-events";
 import { pageHead, canonical, orgJsonLd, breadcrumbJsonLd, SITE } from "@/lib/seo";
+
 
 const PATH = "/community";
 const TITLE = "Beach & Boujie Summer Bash — XPRT Insurance Sponsor & Giveaway";
