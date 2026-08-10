@@ -316,12 +316,12 @@ function CommunityPage() {
           title="Artists on the Beach & Boujie stage"
           intro="Presented by Pure Artist Music. We spotlight Colorado musicians and the small businesses that keep our neighborhoods playing."
         />
-        <ul className="mt-10 grid gap-4 md:grid-cols-3">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ev.artists.map((artist, i) => (
             <Reveal
               as="li"
               key={artist.name}
-              delay={i === 0 ? 0 : i === 1 ? 75 : 150}
+              delay={(i % 3) * 75}
               className="h-full rounded-2xl border border-border bg-background p-6 shadow-sm"
             >
               <div className="flex items-start gap-4">
@@ -337,7 +337,13 @@ function CommunityPage() {
             </Reveal>
           ))}
         </ul>
+        {ev.specialGuestsNote && (
+          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+            {ev.specialGuestsNote}
+          </p>
+        )}
       </Section>
+
 
       {/* GIVEAWAY */}
       <Section id="giveaway" tone="cream" className="scroll-mt-24">
