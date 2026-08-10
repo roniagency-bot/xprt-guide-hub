@@ -118,7 +118,7 @@ export const upcomingEvents = () => COMMUNITY_EVENTS.filter((e) => e.status === 
  * form replaces the placeholder box automatically.
  * Example embed src: https://link.xprtinsurance.com/widget/form/AbCdEf123456
  */
-export const COMMUNITY_FORM_ID = "";
+export const COMMUNITY_FORM_ID = "MEVImf5BDjstFUCkt5P6";
 
 /** Optional: override the iframe height if your GHL form is taller/shorter. */
 export const COMMUNITY_FORM_HEIGHT = 760;
