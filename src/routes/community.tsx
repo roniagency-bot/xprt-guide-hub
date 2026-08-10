@@ -336,10 +336,31 @@ function CommunityPage() {
                   <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                     Featured artist
                   </p>
-                  <h3 className="mt-1 text-xl leading-snug">{artist.name}</h3>
+                  <h3 className="mt-1 text-xl leading-snug">
+                    {artist.link ? (
+                      <a
+                        href={artist.link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary"
+                      >
+                        {artist.name}
+                      </a>
+                    ) : (
+                      artist.name
+                    )}
+                  </h3>
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{artist.bio}</p>
+              {artist.link && (
+                <Button asChild variant="outline" size="sm" className="mt-4">
+                  <a href={artist.link.url} target="_blank" rel="noopener noreferrer">
+                    {artist.link.label === "Spotify" ? "Listen on Spotify" : "Watch on YouTube"}
+                    <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                  </a>
+                </Button>
+              )}
             </Reveal>
           ))}
         </ul>
