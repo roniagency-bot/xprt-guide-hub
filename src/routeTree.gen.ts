@@ -13,6 +13,7 @@ import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as BondsRouteImport } from './routes/bonds'
 import { Route as AboutRouteImport } from './routes/about'
@@ -79,6 +80,11 @@ const FaqRoute = FaqRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookRoute = BookRouteImport.update({
@@ -330,6 +336,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -383,6 +390,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -436,6 +444,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/bonds': typeof BondsRouteWithChildren
   '/book': typeof BookRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -491,6 +500,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/bonds'
     | '/book'
+    | '/community'
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
@@ -544,6 +554,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/bonds'
     | '/book'
+    | '/community'
     | '/contact'
     | '/sitemap.xml'
     | '/unsubscribe'
@@ -596,6 +607,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/bonds'
     | '/book'
+    | '/community'
     | '/contact'
     | '/faq'
     | '/sitemap.xml'
@@ -650,6 +662,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BondsRoute: typeof BondsRouteWithChildren
   BookRoute: typeof BookRoute
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -717,6 +730,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/book': {
@@ -1101,6 +1121,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BondsRoute: BondsRouteWithChildren,
   BookRoute: BookRoute,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
