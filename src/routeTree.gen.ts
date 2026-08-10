@@ -9,98 +9,63 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CommunityRouteImport } from './routes/community'
-import { Route as BookRouteImport } from './routes/book'
-import { Route as BondsRouteImport } from './routes/bonds'
-import { Route as BeachRouteImport } from './routes/beach'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as FaqIndexRouteImport } from './routes/faq.index'
-import { Route as EsIndexRouteImport } from './routes/es.index'
-import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
-import { Route as StatesStateRouteImport } from './routes/states.$state'
-import { Route as ServicesBondsRouteImport } from './routes/services.bonds'
-import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
-import { Route as PersonalRentersInsuranceRouteImport } from './routes/personal.renters-insurance'
-import { Route as PersonalLandlordInsuranceRouteImport } from './routes/personal.landlord-insurance'
-import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/personal.homeowners-insurance'
-import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
-import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
-import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
-import { Route as EsContactRouteImport } from './routes/es.contact'
-import { Route as EsBookRouteImport } from './routes/es.book'
-import { Route as EsBondsRouteImport } from './routes/es.bonds'
-import { Route as EsAboutRouteImport } from './routes/es.about'
-import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
-import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BeachRouteImport } from './routes/beach'
+import { Route as BondsRouteImport } from './routes/bonds'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as BondsAutoDealerBondRouteImport } from './routes/bonds.auto-dealer-bond'
-import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
-import { Route as FaqDealershipIndexRouteImport } from './routes/faq.dealership.index'
-import { Route as FaqBondsIndexRouteImport } from './routes/faq.bonds.index'
-import { Route as EsFaqIndexRouteImport } from './routes/es.faq.index'
-import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
-import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
-import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
-import { Route as FaqDealershipSlugRouteImport } from './routes/faq.dealership.$slug'
-import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
-import { Route as EsPersonalHomeownersInsuranceRouteImport } from './routes/es.personal.homeowners-insurance'
-import { Route as EsPersonalAutoInsuranceRouteImport } from './routes/es.personal.auto-insurance'
+import { Route as BusinessInsuranceBondsRouteImport } from './routes/business-insurance.bonds'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as EsIndexRouteImport } from './routes/es.index'
+import { Route as EsAboutRouteImport } from './routes/es.about'
+import { Route as EsBondsRouteImport } from './routes/es.bonds'
+import { Route as EsBookRouteImport } from './routes/es.book'
+import { Route as EsContactRouteImport } from './routes/es.contact'
+import { Route as FaqIndexRouteImport } from './routes/faq.index'
+import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
+import { Route as OffersSlugRouteImport } from './routes/offers.$slug'
+import { Route as PersonalAutoInsuranceRouteImport } from './routes/personal.auto-insurance'
+import { Route as PersonalHomeownersInsuranceRouteImport } from './routes/personal.homeowners-insurance'
+import { Route as PersonalLandlordInsuranceRouteImport } from './routes/personal.landlord-insurance'
+import { Route as PersonalRentersInsuranceRouteImport } from './routes/personal.renters-insurance'
+import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
+import { Route as ServicesBondsRouteImport } from './routes/services.bonds'
+import { Route as StatesStateRouteImport } from './routes/states.$state'
+import { Route as ThankYouSlugRouteImport } from './routes/thank-you.$slug'
 import { Route as EsBusinessInsuranceBondsRouteImport } from './routes/es.business-insurance.bonds'
-import { Route as EsFaqHomeownersIndexRouteImport } from './routes/es.faq.homeowners.index'
-import { Route as EsFaqDealershipIndexRouteImport } from './routes/es.faq.dealership.index'
-import { Route as EsFaqBondsIndexRouteImport } from './routes/es.faq.bonds.index'
-import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
-import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
-import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
-import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
-import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
-import { Route as EsFaqHomeownersSlugRouteImport } from './routes/es.faq.homeowners.$slug'
-import { Route as EsFaqDealershipSlugRouteImport } from './routes/es.faq.dealership.$slug'
-import { Route as EsFaqBondsSlugRouteImport } from './routes/es.faq.bonds.$slug'
+import { Route as EsFaqIndexRouteImport } from './routes/es.faq.index'
+import { Route as EsPersonalAutoInsuranceRouteImport } from './routes/es.personal.auto-insurance'
+import { Route as EsPersonalHomeownersInsuranceRouteImport } from './routes/es.personal.homeowners-insurance'
+import { Route as FaqBondsIndexRouteImport } from './routes/faq.bonds.index'
+import { Route as FaqBondsSlugRouteImport } from './routes/faq.bonds.$slug'
+import { Route as FaqDealershipIndexRouteImport } from './routes/faq.dealership.index'
+import { Route as FaqDealershipSlugRouteImport } from './routes/faq.dealership.$slug'
+import { Route as FaqHomeownersIndexRouteImport } from './routes/faq.homeowners.index'
+import { Route as FaqHomeownersSlugRouteImport } from './routes/faq.homeowners.$slug'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ServicesCategorySlugRouteImport } from './routes/services.$category.$slug'
 import { Route as ApiPublicDownloadsSlugRouteImport } from './routes/api/public/downloads.$slug'
+import { Route as EsFaqBondsIndexRouteImport } from './routes/es.faq.bonds.index'
+import { Route as EsFaqBondsSlugRouteImport } from './routes/es.faq.bonds.$slug'
+import { Route as EsFaqDealershipIndexRouteImport } from './routes/es.faq.dealership.index'
+import { Route as EsFaqDealershipSlugRouteImport } from './routes/es.faq.dealership.$slug'
+import { Route as EsFaqHomeownersIndexRouteImport } from './routes/es.faq.homeowners.index'
+import { Route as EsFaqHomeownersSlugRouteImport } from './routes/es.faq.homeowners.$slug'
+import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 
-const UnsubscribeRoute = UnsubscribeRouteImport.update({
-  id: '/unsubscribe',
-  path: '/unsubscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CommunityRoute = CommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookRoute = BookRouteImport.update({
-  id: '/book',
-  path: '/book',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BondsRoute = BondsRouteImport.update({
-  id: '/bonds',
-  path: '/bonds',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BeachRoute = BeachRouteImport.update({
-  id: '/beach',
-  path: '/beach',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -108,9 +73,84 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BeachRoute = BeachRouteImport.update({
+  id: '/beach',
+  path: '/beach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BondsRoute = BondsRouteImport.update({
+  id: '/bonds',
+  path: '/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BondsAutoDealerBondRoute = BondsAutoDealerBondRouteImport.update({
+  id: '/auto-dealer-bond',
+  path: '/auto-dealer-bond',
+  getParentRoute: () => BondsRoute,
+} as any)
+const BusinessInsuranceBondsRoute = BusinessInsuranceBondsRouteImport.update({
+  id: '/business-insurance/bonds',
+  path: '/business-insurance/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsIndexRoute = EsIndexRouteImport.update({
+  id: '/es/',
+  path: '/es/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsAboutRoute = EsAboutRouteImport.update({
+  id: '/es/about',
+  path: '/es/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBondsRoute = EsBondsRouteImport.update({
+  id: '/es/bonds',
+  path: '/es/bonds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBookRoute = EsBookRouteImport.update({
+  id: '/es/book',
+  path: '/es/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsContactRoute = EsContactRouteImport.update({
+  id: '/es/contact',
+  path: '/es/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqIndexRoute = FaqIndexRouteImport.update({
@@ -118,35 +158,25 @@ const FaqIndexRoute = FaqIndexRouteImport.update({
   path: '/',
   getParentRoute: () => FaqRoute,
 } as any)
-const EsIndexRoute = EsIndexRouteImport.update({
-  id: '/es/',
-  path: '/es/',
+const FaqSlugRoute = FaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const OffersSlugRoute = OffersSlugRouteImport.update({
+  id: '/offers/$slug',
+  path: '/offers/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
-  id: '/thank-you/$slug',
-  path: '/thank-you/$slug',
+const PersonalAutoInsuranceRoute = PersonalAutoInsuranceRouteImport.update({
+  id: '/personal/auto-insurance',
+  path: '/personal/auto-insurance',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StatesStateRoute = StatesStateRouteImport.update({
-  id: '/states/$state',
-  path: '/states/$state',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesBondsRoute = ServicesBondsRouteImport.update({
-  id: '/services/bonds',
-  path: '/services/bonds',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
-  id: '/services/$category',
-  path: '/services/$category',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PersonalRentersInsuranceRoute =
-  PersonalRentersInsuranceRouteImport.update({
-    id: '/personal/renters-insurance',
-    path: '/personal/renters-insurance',
+const PersonalHomeownersInsuranceRoute =
+  PersonalHomeownersInsuranceRouteImport.update({
+    id: '/personal/homeowners-insurance',
+    path: '/personal/homeowners-insurance',
     getParentRoute: () => rootRouteImport,
   } as any)
 const PersonalLandlordInsuranceRoute =
@@ -155,116 +185,30 @@ const PersonalLandlordInsuranceRoute =
     path: '/personal/landlord-insurance',
     getParentRoute: () => rootRouteImport,
   } as any)
-const PersonalHomeownersInsuranceRoute =
-  PersonalHomeownersInsuranceRouteImport.update({
-    id: '/personal/homeowners-insurance',
-    path: '/personal/homeowners-insurance',
+const PersonalRentersInsuranceRoute =
+  PersonalRentersInsuranceRouteImport.update({
+    id: '/personal/renters-insurance',
+    path: '/personal/renters-insurance',
     getParentRoute: () => rootRouteImport,
   } as any)
-const PersonalAutoInsuranceRoute = PersonalAutoInsuranceRouteImport.update({
-  id: '/personal/auto-insurance',
-  path: '/personal/auto-insurance',
+const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
+  id: '/services/$category',
+  path: '/services/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OffersSlugRoute = OffersSlugRouteImport.update({
-  id: '/offers/$slug',
-  path: '/offers/$slug',
+const ServicesBondsRoute = ServicesBondsRouteImport.update({
+  id: '/services/bonds',
+  path: '/services/bonds',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FaqSlugRoute = FaqSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => FaqRoute,
-} as any)
-const EsContactRoute = EsContactRouteImport.update({
-  id: '/es/contact',
-  path: '/es/contact',
+const StatesStateRoute = StatesStateRouteImport.update({
+  id: '/states/$state',
+  path: '/states/$state',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EsBookRoute = EsBookRouteImport.update({
-  id: '/es/book',
-  path: '/es/book',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsBondsRoute = EsBondsRouteImport.update({
-  id: '/es/bonds',
-  path: '/es/bonds',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsAboutRoute = EsAboutRouteImport.update({
-  id: '/es/about',
-  path: '/es/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
-  id: '/email/unsubscribe',
-  path: '/email/unsubscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BusinessInsuranceBondsRoute = BusinessInsuranceBondsRouteImport.update({
-  id: '/business-insurance/bonds',
-  path: '/business-insurance/bonds',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BondsAutoDealerBondRoute = BondsAutoDealerBondRouteImport.update({
-  id: '/auto-dealer-bond',
-  path: '/auto-dealer-bond',
-  getParentRoute: () => BondsRoute,
-} as any)
-const FaqHomeownersIndexRoute = FaqHomeownersIndexRouteImport.update({
-  id: '/homeowners/',
-  path: '/homeowners/',
-  getParentRoute: () => FaqRoute,
-} as any)
-const FaqDealershipIndexRoute = FaqDealershipIndexRouteImport.update({
-  id: '/dealership/',
-  path: '/dealership/',
-  getParentRoute: () => FaqRoute,
-} as any)
-const FaqBondsIndexRoute = FaqBondsIndexRouteImport.update({
-  id: '/bonds/',
-  path: '/bonds/',
-  getParentRoute: () => FaqRoute,
-} as any)
-const EsFaqIndexRoute = EsFaqIndexRouteImport.update({
-  id: '/es/faq/',
-  path: '/es/faq/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ServicesCategoryRoute,
-} as any)
-const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
-  id: '/lovable/email/suppression',
-  path: '/lovable/email/suppression',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
-  id: '/homeowners/$slug',
-  path: '/homeowners/$slug',
-  getParentRoute: () => FaqRoute,
-} as any)
-const FaqDealershipSlugRoute = FaqDealershipSlugRouteImport.update({
-  id: '/dealership/$slug',
-  path: '/dealership/$slug',
-  getParentRoute: () => FaqRoute,
-} as any)
-const FaqBondsSlugRoute = FaqBondsSlugRouteImport.update({
-  id: '/bonds/$slug',
-  path: '/bonds/$slug',
-  getParentRoute: () => FaqRoute,
-} as any)
-const EsPersonalHomeownersInsuranceRoute =
-  EsPersonalHomeownersInsuranceRouteImport.update({
-    id: '/es/personal/homeowners-insurance',
-    path: '/es/personal/homeowners-insurance',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const EsPersonalAutoInsuranceRoute = EsPersonalAutoInsuranceRouteImport.update({
-  id: '/es/personal/auto-insurance',
-  path: '/es/personal/auto-insurance',
+const ThankYouSlugRoute = ThankYouSlugRouteImport.update({
+  id: '/thank-you/$slug',
+  path: '/thank-you/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsBusinessInsuranceBondsRoute =
@@ -273,14 +217,65 @@ const EsBusinessInsuranceBondsRoute =
     path: '/es/business-insurance/bonds',
     getParentRoute: () => rootRouteImport,
   } as any)
-const EsFaqHomeownersIndexRoute = EsFaqHomeownersIndexRouteImport.update({
-  id: '/es/faq/homeowners/',
-  path: '/es/faq/homeowners/',
+const EsFaqIndexRoute = EsFaqIndexRouteImport.update({
+  id: '/es/faq/',
+  path: '/es/faq/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EsFaqDealershipIndexRoute = EsFaqDealershipIndexRouteImport.update({
-  id: '/es/faq/dealership/',
-  path: '/es/faq/dealership/',
+const EsPersonalAutoInsuranceRoute = EsPersonalAutoInsuranceRouteImport.update({
+  id: '/es/personal/auto-insurance',
+  path: '/es/personal/auto-insurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsPersonalHomeownersInsuranceRoute =
+  EsPersonalHomeownersInsuranceRouteImport.update({
+    id: '/es/personal/homeowners-insurance',
+    path: '/es/personal/homeowners-insurance',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FaqBondsIndexRoute = FaqBondsIndexRouteImport.update({
+  id: '/bonds/',
+  path: '/bonds/',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqBondsSlugRoute = FaqBondsSlugRouteImport.update({
+  id: '/bonds/$slug',
+  path: '/bonds/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqDealershipIndexRoute = FaqDealershipIndexRouteImport.update({
+  id: '/dealership/',
+  path: '/dealership/',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqDealershipSlugRoute = FaqDealershipSlugRouteImport.update({
+  id: '/dealership/$slug',
+  path: '/dealership/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqHomeownersIndexRoute = FaqHomeownersIndexRouteImport.update({
+  id: '/homeowners/',
+  path: '/homeowners/',
+  getParentRoute: () => FaqRoute,
+} as any)
+const FaqHomeownersSlugRoute = FaqHomeownersSlugRouteImport.update({
+  id: '/homeowners/$slug',
+  path: '/homeowners/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCategorySlugRoute = ServicesCategorySlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServicesCategoryRoute,
+} as any)
+const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
+  id: '/api/public/downloads/$slug',
+  path: '/api/public/downloads/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsFaqBondsIndexRoute = EsFaqBondsIndexRouteImport.update({
@@ -288,10 +283,45 @@ const EsFaqBondsIndexRoute = EsFaqBondsIndexRouteImport.update({
   path: '/es/faq/bonds/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LovableEmailTransactionalSendRoute =
-  LovableEmailTransactionalSendRouteImport.update({
-    id: '/lovable/email/transactional/send',
-    path: '/lovable/email/transactional/send',
+const EsFaqBondsSlugRoute = EsFaqBondsSlugRouteImport.update({
+  id: '/es/faq/bonds/$slug',
+  path: '/es/faq/bonds/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqDealershipIndexRoute = EsFaqDealershipIndexRouteImport.update({
+  id: '/es/faq/dealership/',
+  path: '/es/faq/dealership/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqDealershipSlugRoute = EsFaqDealershipSlugRouteImport.update({
+  id: '/es/faq/dealership/$slug',
+  path: '/es/faq/dealership/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqHomeownersIndexRoute = EsFaqHomeownersIndexRouteImport.update({
+  id: '/es/faq/homeowners/',
+  path: '/es/faq/homeowners/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsFaqHomeownersSlugRoute = EsFaqHomeownersSlugRouteImport.update({
+  id: '/es/faq/homeowners/$slug',
+  path: '/es/faq/homeowners/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
+  id: '/lovable/email/auth/preview',
+  path: '/lovable/email/auth/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
+  id: '/lovable/email/auth/webhook',
+  path: '/lovable/email/auth/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
 const LovableEmailTransactionalPreviewRoute =
@@ -300,42 +330,12 @@ const LovableEmailTransactionalPreviewRoute =
     path: '/lovable/email/transactional/preview',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailQueueProcessRoute =
-  LovableEmailQueueProcessRouteImport.update({
-    id: '/lovable/email/queue/process',
-    path: '/lovable/email/queue/process',
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
-  id: '/lovable/email/auth/webhook',
-  path: '/lovable/email/auth/webhook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
-  id: '/lovable/email/auth/preview',
-  path: '/lovable/email/auth/preview',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsFaqHomeownersSlugRoute = EsFaqHomeownersSlugRouteImport.update({
-  id: '/es/faq/homeowners/$slug',
-  path: '/es/faq/homeowners/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsFaqDealershipSlugRoute = EsFaqDealershipSlugRouteImport.update({
-  id: '/es/faq/dealership/$slug',
-  path: '/es/faq/dealership/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EsFaqBondsSlugRoute = EsFaqBondsSlugRouteImport.update({
-  id: '/es/faq/bonds/$slug',
-  path: '/es/faq/bonds/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicDownloadsSlugRoute = ApiPublicDownloadsSlugRouteImport.update({
-  id: '/api/public/downloads/$slug',
-  path: '/api/public/downloads/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -717,60 +717,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/unsubscribe': {
-      id: '/unsubscribe'
-      path: '/unsubscribe'
-      fullPath: '/unsubscribe'
-      preLoaderRoute: typeof UnsubscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/community': {
-      id: '/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof CommunityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/book': {
-      id: '/book'
-      path: '/book'
-      fullPath: '/book'
-      preLoaderRoute: typeof BookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bonds': {
-      id: '/bonds'
-      path: '/bonds'
-      fullPath: '/bonds'
-      preLoaderRoute: typeof BondsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/beach': {
-      id: '/beach'
-      path: '/beach'
-      fullPath: '/beach'
-      preLoaderRoute: typeof BeachRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -780,137 +731,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/beach': {
+      id: '/beach'
+      path: '/beach'
+      fullPath: '/beach'
+      preLoaderRoute: typeof BeachRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/faq/': {
-      id: '/faq/'
-      path: '/'
-      fullPath: '/faq/'
-      preLoaderRoute: typeof FaqIndexRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/es/': {
-      id: '/es/'
-      path: '/es'
-      fullPath: '/es/'
-      preLoaderRoute: typeof EsIndexRouteImport
+    '/bonds': {
+      id: '/bonds'
+      path: '/bonds'
+      fullPath: '/bonds'
+      preLoaderRoute: typeof BondsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/thank-you/$slug': {
-      id: '/thank-you/$slug'
-      path: '/thank-you/$slug'
-      fullPath: '/thank-you/$slug'
-      preLoaderRoute: typeof ThankYouSlugRouteImport
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/states/$state': {
-      id: '/states/$state'
-      path: '/states/$state'
-      fullPath: '/states/$state'
-      preLoaderRoute: typeof StatesStateRouteImport
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/bonds': {
-      id: '/services/bonds'
-      path: '/services/bonds'
-      fullPath: '/services/bonds'
-      preLoaderRoute: typeof ServicesBondsRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$category': {
-      id: '/services/$category'
-      path: '/services/$category'
-      fullPath: '/services/$category'
-      preLoaderRoute: typeof ServicesCategoryRouteImport
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/personal/renters-insurance': {
-      id: '/personal/renters-insurance'
-      path: '/personal/renters-insurance'
-      fullPath: '/personal/renters-insurance'
-      preLoaderRoute: typeof PersonalRentersInsuranceRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/personal/landlord-insurance': {
-      id: '/personal/landlord-insurance'
-      path: '/personal/landlord-insurance'
-      fullPath: '/personal/landlord-insurance'
-      preLoaderRoute: typeof PersonalLandlordInsuranceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/personal/homeowners-insurance': {
-      id: '/personal/homeowners-insurance'
-      path: '/personal/homeowners-insurance'
-      fullPath: '/personal/homeowners-insurance'
-      preLoaderRoute: typeof PersonalHomeownersInsuranceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/personal/auto-insurance': {
-      id: '/personal/auto-insurance'
-      path: '/personal/auto-insurance'
-      fullPath: '/personal/auto-insurance'
-      preLoaderRoute: typeof PersonalAutoInsuranceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/offers/$slug': {
-      id: '/offers/$slug'
-      path: '/offers/$slug'
-      fullPath: '/offers/$slug'
-      preLoaderRoute: typeof OffersSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq/$slug': {
-      id: '/faq/$slug'
-      path: '/$slug'
-      fullPath: '/faq/$slug'
-      preLoaderRoute: typeof FaqSlugRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/es/contact': {
-      id: '/es/contact'
-      path: '/es/contact'
-      fullPath: '/es/contact'
-      preLoaderRoute: typeof EsContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/book': {
-      id: '/es/book'
-      path: '/es/book'
-      fullPath: '/es/book'
-      preLoaderRoute: typeof EsBookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/bonds': {
-      id: '/es/bonds'
-      path: '/es/bonds'
-      fullPath: '/es/bonds'
-      preLoaderRoute: typeof EsBondsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/about': {
-      id: '/es/about'
-      path: '/es/about'
-      fullPath: '/es/about'
-      preLoaderRoute: typeof EsAboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/email/unsubscribe': {
-      id: '/email/unsubscribe'
-      path: '/email/unsubscribe'
-      fullPath: '/email/unsubscribe'
-      preLoaderRoute: typeof EmailUnsubscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/business-insurance/bonds': {
-      id: '/business-insurance/bonds'
-      path: '/business-insurance/bonds'
-      fullPath: '/business-insurance/bonds'
-      preLoaderRoute: typeof BusinessInsuranceBondsRouteImport
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bonds/auto-dealer-bond': {
@@ -920,81 +794,130 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BondsAutoDealerBondRouteImport
       parentRoute: typeof BondsRoute
     }
-    '/faq/homeowners/': {
-      id: '/faq/homeowners/'
-      path: '/homeowners'
-      fullPath: '/faq/homeowners/'
-      preLoaderRoute: typeof FaqHomeownersIndexRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/faq/dealership/': {
-      id: '/faq/dealership/'
-      path: '/dealership'
-      fullPath: '/faq/dealership/'
-      preLoaderRoute: typeof FaqDealershipIndexRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/faq/bonds/': {
-      id: '/faq/bonds/'
-      path: '/bonds'
-      fullPath: '/faq/bonds/'
-      preLoaderRoute: typeof FaqBondsIndexRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/es/faq/': {
-      id: '/es/faq/'
-      path: '/es/faq'
-      fullPath: '/es/faq/'
-      preLoaderRoute: typeof EsFaqIndexRouteImport
+    '/business-insurance/bonds': {
+      id: '/business-insurance/bonds'
+      path: '/business-insurance/bonds'
+      fullPath: '/business-insurance/bonds'
+      preLoaderRoute: typeof BusinessInsuranceBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$category/$slug': {
-      id: '/services/$category/$slug'
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/': {
+      id: '/es/'
+      path: '/es'
+      fullPath: '/es/'
+      preLoaderRoute: typeof EsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/about': {
+      id: '/es/about'
+      path: '/es/about'
+      fullPath: '/es/about'
+      preLoaderRoute: typeof EsAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/bonds': {
+      id: '/es/bonds'
+      path: '/es/bonds'
+      fullPath: '/es/bonds'
+      preLoaderRoute: typeof EsBondsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/book': {
+      id: '/es/book'
+      path: '/es/book'
+      fullPath: '/es/book'
+      preLoaderRoute: typeof EsBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/contact': {
+      id: '/es/contact'
+      path: '/es/contact'
+      fullPath: '/es/contact'
+      preLoaderRoute: typeof EsContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/': {
+      id: '/faq/'
+      path: '/'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof FaqIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/$slug': {
+      id: '/faq/$slug'
       path: '/$slug'
-      fullPath: '/services/$category/$slug'
-      preLoaderRoute: typeof ServicesCategorySlugRouteImport
-      parentRoute: typeof ServicesCategoryRoute
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof FaqSlugRouteImport
+      parentRoute: typeof FaqRoute
     }
-    '/lovable/email/suppression': {
-      id: '/lovable/email/suppression'
-      path: '/lovable/email/suppression'
-      fullPath: '/lovable/email/suppression'
-      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+    '/offers/$slug': {
+      id: '/offers/$slug'
+      path: '/offers/$slug'
+      fullPath: '/offers/$slug'
+      preLoaderRoute: typeof OffersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/faq/homeowners/$slug': {
-      id: '/faq/homeowners/$slug'
-      path: '/homeowners/$slug'
-      fullPath: '/faq/homeowners/$slug'
-      preLoaderRoute: typeof FaqHomeownersSlugRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/faq/dealership/$slug': {
-      id: '/faq/dealership/$slug'
-      path: '/dealership/$slug'
-      fullPath: '/faq/dealership/$slug'
-      preLoaderRoute: typeof FaqDealershipSlugRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/faq/bonds/$slug': {
-      id: '/faq/bonds/$slug'
-      path: '/bonds/$slug'
-      fullPath: '/faq/bonds/$slug'
-      preLoaderRoute: typeof FaqBondsSlugRouteImport
-      parentRoute: typeof FaqRoute
-    }
-    '/es/personal/homeowners-insurance': {
-      id: '/es/personal/homeowners-insurance'
-      path: '/es/personal/homeowners-insurance'
-      fullPath: '/es/personal/homeowners-insurance'
-      preLoaderRoute: typeof EsPersonalHomeownersInsuranceRouteImport
+    '/personal/auto-insurance': {
+      id: '/personal/auto-insurance'
+      path: '/personal/auto-insurance'
+      fullPath: '/personal/auto-insurance'
+      preLoaderRoute: typeof PersonalAutoInsuranceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/es/personal/auto-insurance': {
-      id: '/es/personal/auto-insurance'
-      path: '/es/personal/auto-insurance'
-      fullPath: '/es/personal/auto-insurance'
-      preLoaderRoute: typeof EsPersonalAutoInsuranceRouteImport
+    '/personal/homeowners-insurance': {
+      id: '/personal/homeowners-insurance'
+      path: '/personal/homeowners-insurance'
+      fullPath: '/personal/homeowners-insurance'
+      preLoaderRoute: typeof PersonalHomeownersInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personal/landlord-insurance': {
+      id: '/personal/landlord-insurance'
+      path: '/personal/landlord-insurance'
+      fullPath: '/personal/landlord-insurance'
+      preLoaderRoute: typeof PersonalLandlordInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personal/renters-insurance': {
+      id: '/personal/renters-insurance'
+      path: '/personal/renters-insurance'
+      fullPath: '/personal/renters-insurance'
+      preLoaderRoute: typeof PersonalRentersInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$category': {
+      id: '/services/$category'
+      path: '/services/$category'
+      fullPath: '/services/$category'
+      preLoaderRoute: typeof ServicesCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/bonds': {
+      id: '/services/bonds'
+      path: '/services/bonds'
+      fullPath: '/services/bonds'
+      preLoaderRoute: typeof ServicesBondsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/states/$state': {
+      id: '/states/$state'
+      path: '/states/$state'
+      fullPath: '/states/$state'
+      preLoaderRoute: typeof StatesStateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thank-you/$slug': {
+      id: '/thank-you/$slug'
+      path: '/thank-you/$slug'
+      fullPath: '/thank-you/$slug'
+      preLoaderRoute: typeof ThankYouSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/business-insurance/bonds': {
@@ -1004,18 +927,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsBusinessInsuranceBondsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/es/faq/homeowners/': {
-      id: '/es/faq/homeowners/'
-      path: '/es/faq/homeowners'
-      fullPath: '/es/faq/homeowners/'
-      preLoaderRoute: typeof EsFaqHomeownersIndexRouteImport
+    '/es/faq/': {
+      id: '/es/faq/'
+      path: '/es/faq'
+      fullPath: '/es/faq/'
+      preLoaderRoute: typeof EsFaqIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/es/faq/dealership/': {
-      id: '/es/faq/dealership/'
-      path: '/es/faq/dealership'
-      fullPath: '/es/faq/dealership/'
-      preLoaderRoute: typeof EsFaqDealershipIndexRouteImport
+    '/es/personal/auto-insurance': {
+      id: '/es/personal/auto-insurance'
+      path: '/es/personal/auto-insurance'
+      fullPath: '/es/personal/auto-insurance'
+      preLoaderRoute: typeof EsPersonalAutoInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/personal/homeowners-insurance': {
+      id: '/es/personal/homeowners-insurance'
+      path: '/es/personal/homeowners-insurance'
+      fullPath: '/es/personal/homeowners-insurance'
+      preLoaderRoute: typeof EsPersonalHomeownersInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/bonds/': {
+      id: '/faq/bonds/'
+      path: '/bonds'
+      fullPath: '/faq/bonds/'
+      preLoaderRoute: typeof FaqBondsIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/bonds/$slug': {
+      id: '/faq/bonds/$slug'
+      path: '/bonds/$slug'
+      fullPath: '/faq/bonds/$slug'
+      preLoaderRoute: typeof FaqBondsSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/dealership/': {
+      id: '/faq/dealership/'
+      path: '/dealership'
+      fullPath: '/faq/dealership/'
+      preLoaderRoute: typeof FaqDealershipIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/dealership/$slug': {
+      id: '/faq/dealership/$slug'
+      path: '/dealership/$slug'
+      fullPath: '/faq/dealership/$slug'
+      preLoaderRoute: typeof FaqDealershipSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/homeowners/': {
+      id: '/faq/homeowners/'
+      path: '/homeowners'
+      fullPath: '/faq/homeowners/'
+      preLoaderRoute: typeof FaqHomeownersIndexRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/faq/homeowners/$slug': {
+      id: '/faq/homeowners/$slug'
+      path: '/homeowners/$slug'
+      fullPath: '/faq/homeowners/$slug'
+      preLoaderRoute: typeof FaqHomeownersSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$category/$slug': {
+      id: '/services/$category/$slug'
+      path: '/$slug'
+      fullPath: '/services/$category/$slug'
+      preLoaderRoute: typeof ServicesCategorySlugRouteImport
+      parentRoute: typeof ServicesCategoryRoute
+    }
+    '/api/public/downloads/$slug': {
+      id: '/api/public/downloads/$slug'
+      path: '/api/public/downloads/$slug'
+      fullPath: '/api/public/downloads/$slug'
+      preLoaderRoute: typeof ApiPublicDownloadsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/faq/bonds/': {
@@ -1025,46 +1018,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsFaqBondsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/send': {
-      id: '/lovable/email/transactional/send'
-      path: '/lovable/email/transactional/send'
-      fullPath: '/lovable/email/transactional/send'
-      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+    '/es/faq/bonds/$slug': {
+      id: '/es/faq/bonds/$slug'
+      path: '/es/faq/bonds/$slug'
+      fullPath: '/es/faq/bonds/$slug'
+      preLoaderRoute: typeof EsFaqBondsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/preview': {
-      id: '/lovable/email/transactional/preview'
-      path: '/lovable/email/transactional/preview'
-      fullPath: '/lovable/email/transactional/preview'
-      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lovable/email/queue/process': {
-      id: '/lovable/email/queue/process'
-      path: '/lovable/email/queue/process'
-      fullPath: '/lovable/email/queue/process'
-      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lovable/email/auth/webhook': {
-      id: '/lovable/email/auth/webhook'
-      path: '/lovable/email/auth/webhook'
-      fullPath: '/lovable/email/auth/webhook'
-      preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lovable/email/auth/preview': {
-      id: '/lovable/email/auth/preview'
-      path: '/lovable/email/auth/preview'
-      fullPath: '/lovable/email/auth/preview'
-      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/es/faq/homeowners/$slug': {
-      id: '/es/faq/homeowners/$slug'
-      path: '/es/faq/homeowners/$slug'
-      fullPath: '/es/faq/homeowners/$slug'
-      preLoaderRoute: typeof EsFaqHomeownersSlugRouteImport
+    '/es/faq/dealership/': {
+      id: '/es/faq/dealership/'
+      path: '/es/faq/dealership'
+      fullPath: '/es/faq/dealership/'
+      preLoaderRoute: typeof EsFaqDealershipIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/faq/dealership/$slug': {
@@ -1074,18 +1039,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsFaqDealershipSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/es/faq/bonds/$slug': {
-      id: '/es/faq/bonds/$slug'
-      path: '/es/faq/bonds/$slug'
-      fullPath: '/es/faq/bonds/$slug'
-      preLoaderRoute: typeof EsFaqBondsSlugRouteImport
+    '/es/faq/homeowners/': {
+      id: '/es/faq/homeowners/'
+      path: '/es/faq/homeowners'
+      fullPath: '/es/faq/homeowners/'
+      preLoaderRoute: typeof EsFaqHomeownersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/downloads/$slug': {
-      id: '/api/public/downloads/$slug'
-      path: '/api/public/downloads/$slug'
-      fullPath: '/api/public/downloads/$slug'
-      preLoaderRoute: typeof ApiPublicDownloadsSlugRouteImport
+    '/es/faq/homeowners/$slug': {
+      id: '/es/faq/homeowners/$slug'
+      path: '/es/faq/homeowners/$slug'
+      fullPath: '/es/faq/homeowners/$slug'
+      preLoaderRoute: typeof EsFaqHomeownersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/auth/preview': {
+      id: '/lovable/email/auth/preview'
+      path: '/lovable/email/auth/preview'
+      fullPath: '/lovable/email/auth/preview'
+      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/auth/webhook': {
+      id: '/lovable/email/auth/webhook'
+      path: '/lovable/email/auth/webhook'
+      fullPath: '/lovable/email/auth/webhook'
+      preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
