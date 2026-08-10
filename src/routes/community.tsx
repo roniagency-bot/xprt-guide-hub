@@ -515,8 +515,9 @@ function CommunityPage() {
       </Section>
 
       {/* COMMUNITY */}
-      <Section>
+      <Section tone="ink">
         <div className="mx-auto max-w-3xl text-center">
+
           <Heart className="mx-auto h-6 w-6 text-gold" aria-hidden />
           <p className="mt-6 text-balance text-2xl leading-snug md:text-4xl">
             “Insurance is what we do. Community is who we serve.”
