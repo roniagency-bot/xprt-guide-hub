@@ -17,6 +17,8 @@ import {
   Shirt,
   Trophy,
   Sun,
+  ExternalLink,
+
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -65,7 +67,11 @@ export const Route = createFileRoute("/community")({
           addressCountry: "US",
         },
       },
-      performer: ev.artists.map((a) => ({ "@type": "MusicGroup", name: a.name })),
+      performer: ev.artists.map((a) => ({
+        "@type": "MusicGroup",
+        name: a.name,
+        ...(a.link ? { sameAs: a.link.url } : {}),
+      })),
       organizer: { "@type": "Organization", name: "Pure Artist Music" },
       sponsor: { "@id": `${SITE.url}/#org` },
     };
