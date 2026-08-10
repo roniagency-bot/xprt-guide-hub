@@ -493,10 +493,57 @@ function CommunityPage() {
       {/* MEET XPRT */}
       <Section tone="cream">
         <SectionHeading
-          eyebrow="Meet XPRT Insurance"
-          title="A local, bilingual independent agency"
-          intro="We're XPRT Insurance, A Roni Rivers Agency — an independent agency licensed in Colorado and Nevada. We compare options across carriers, explain things in plain language, and we're here in English and Español. No pressure, ever."
+          eyebrow="Meet the founder"
+          title="Hi, I'm Roni Rivers — your neighbor and your insurance agent"
+          intro="XPRT Insurance, A Roni Rivers Agency is an independent, bilingual agency licensed in Colorado and Nevada. We compare options across carriers, explain everything in plain language, and never pressure anyone."
         />
+
+        <Reveal className="mt-10 overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
+          <div className="grid gap-0 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
+            <img
+              src={roniPhoto}
+              alt="Roni Rivers, founder of XPRT Insurance, A Roni Rivers Agency in Denver and Las Vegas"
+              loading="lazy"
+              className="h-72 w-full object-cover object-top md:h-full"
+            />
+            <div className="p-6 md:p-8">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                Veronica “Roni” Rivera-Nuñez · Founder &amp; Licensed Agent
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-foreground">
+                I live right here in this neighborhood — the Bash is happening at my own community,
+                so some of you have already met me at the mailboxes, the pool, or the elevator. If
+                my face looks familiar, that's why. Come say hi to my team, and if you see me
+                around after the event, stop me.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                I built XPRT Insurance because too many families and small business owners get
+                handed a policy they don't understand. I'm a licensed advisor in Colorado and
+                Nevada, I specialize in surety bonds, dealership and commercial coverage, and my
+                team handles home, auto, renters, life and Medicare. We work in English and
+                Español, and we treat every neighbor's policy like it's our own.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Vivo en esta misma comunidad. Soy Roni Rivers, fundadora de XPRT Insurance, con
+                licencia en Colorado y Nevada. Atendemos en español y con mucho gusto le
+                explicamos su cobertura sin presión.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="lg" className="h-13 text-base">
+                  <Link to="/about">More about our team</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="h-13 text-base">
+                  <a href={`tel:${PHONE_TEL}`}>
+                    <Phone className="mr-2 h-5 w-5" aria-hidden /> {PHONE_DISPLAY}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <h3 className="mt-12 text-xl">What we can help you with</h3>
+
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICE_LINKS.map((s, i) => (
             <Reveal as="li" key={s.label} delay={i % 3 === 0 ? 0 : i % 3 === 1 ? 75 : 150}>
