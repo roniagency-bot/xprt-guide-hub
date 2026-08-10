@@ -522,7 +522,7 @@ function CommunityPage() {
           <p className="mt-6 text-balance text-2xl leading-snug md:text-4xl">
             “Insurance is what we do. Community is who we serve.”
           </p>
-          <p className="mt-6 text-pretty text-base leading-relaxed text-muted-foreground">
+          <p className="mt-6 text-pretty text-base leading-relaxed text-primary-foreground/75">
             We sponsor local musicians, entrepreneurs, small businesses and neighborhood events
             across Colorado and Nevada. When the people around us grow, we all do better — so we
             show up, sponsor the night, and keep the mic on.
