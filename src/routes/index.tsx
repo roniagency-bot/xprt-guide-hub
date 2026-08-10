@@ -134,6 +134,55 @@ function HomePage() {
 
       <Reveal><TrustBar /></Reveal>
 
+      {/* TEMPORARY COMMUNITY EVENT SPOTLIGHT — remove after Aug 15, 2026 */}
+      <section className="relative overflow-hidden bg-ink py-5 text-primary-foreground">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full opacity-25 blur-3xl"
+          style={{ background: "var(--gradient-gold)" }}
+        />
+        <div className="container-prose relative">
+          <div className="flex flex-col items-start gap-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between md:p-6">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-gold">
+                <Music className="h-3.5 w-3.5" aria-hidden /> Community sponsor · Aug 15, 2026
+              </div>
+              <p className="mt-1.5 text-base font-medium leading-snug md:text-lg">
+                Beach &amp; Boujie Summer Bash Music Festival — NOVEL RiNo, Denver
+              </p>
+              <p className="mt-1 text-sm text-primary-foreground/70">
+                Live music, local brands, and an XPRT giveaway. Roni is traveling, but we're still with you.
+              </p>
+            </div>
+            <div className="flex w-full shrink-0 flex-col gap-2 sm:w-auto sm:flex-row">
+              <Button
+                asChild
+                size="sm"
+                className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90"
+              >
+                <Link to="/community">
+                  <Gift className="mr-1.5 h-4 w-4" aria-hidden /> Enter giveaway
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                <a
+                  href="https://www.eventbrite.com/e/beach-bougie-summer-bash-music-festival-tickets-1993710990241?aff=oddtdtcreator"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Ticket className="mr-1.5 h-4 w-4" aria-hidden /> Get tickets
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SERVICES */}
       <Section>
         <Reveal>
