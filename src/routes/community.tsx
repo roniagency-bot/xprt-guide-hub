@@ -21,7 +21,6 @@ import {
   upcomingEvents,
 } from "@/lib/community-events";
 import { pageHead, canonical, orgJsonLd, breadcrumbJsonLd, SITE } from "@/lib/seo";
-import logo from "@/assets/xprt-logo.png";
 
 const PATH = "/community";
 const TITLE = "Community Events & Giveaways | XPRT Insurance";
@@ -113,8 +112,10 @@ function CommunityPage() {
           style={{ background: "var(--gradient-gold)" }}
         />
         <div className="container-prose relative py-14 md:py-24">
-          <img src={logo} alt="XPRT Insurance, A Roni Rivers Agency" className="h-10 w-auto md:h-12" />
-          <Eyebrow className="mt-8 text-gold">
+          <p className="text-sm font-medium tracking-wide text-primary-foreground/70">
+            XPRT Insurance · A Roni Rivers Agency
+          </p>
+          <Eyebrow className="mt-6 text-gold">
             <Music className="h-3.5 w-3.5" aria-hidden /> Community Sponsor · Denver, CO
           </Eyebrow>
           <h1 className="mt-5 text-balance text-3xl leading-[1.08] md:text-5xl">
