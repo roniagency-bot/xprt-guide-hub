@@ -8,7 +8,11 @@ import {
   GraduationCap,
   ShieldCheck,
   Sparkles,
-  
+  Music,
+  CalendarDays,
+  Ticket,
+  MapPin,
+  Gift,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
