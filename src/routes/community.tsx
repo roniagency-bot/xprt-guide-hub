@@ -11,14 +11,10 @@ import {
   Sparkles,
   Ticket,
   Phone,
-  Mail,
-  MessageSquare,
-  CalendarCheck,
   Shirt,
   Trophy,
   Sun,
   ExternalLink,
-
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -30,10 +26,10 @@ import {
   GIVEAWAY_TERMS,
   GIVEAWAY_PRIZES,
   PRIZE_NOTE,
-  RONI_NOTE,
   currentEvent,
   upcomingEvents,
 } from "@/lib/community-events";
+
 import { pageHead, canonical, orgJsonLd, breadcrumbJsonLd, SITE } from "@/lib/seo";
 
 
@@ -166,7 +162,7 @@ function CommunityPage() {
           </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,320px)] md:items-center">
-            <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 backdrop-blur-sm">
+            <div className="order-2 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 backdrop-blur-sm md:order-1">
               <p className="text-xs uppercase tracking-[0.18em] text-gold">Now sponsoring</p>
               <p className="mt-2 text-xl leading-snug md:text-2xl">{ev.name}</p>
               <ul className="mt-3 space-y-1.5 text-sm text-primary-foreground/75">
@@ -192,12 +188,14 @@ function CommunityPage() {
                 )}
               </ul>
             </div>
-            <EventArtwork
-              src={ev.artwork ?? beachBoujieFlyer.url}
-              alt={`${ev.name} official event flyer — Saturday, August 15 at NOVEL RiNo, Denver`}
-            />
-
+            <div className="order-1 md:order-2">
+              <EventArtwork
+                src={ev.artwork ?? beachBoujieFlyer.url}
+                alt={`${ev.name} official event flyer — Saturday, August 15 at NOVEL RiNo, Denver`}
+              />
+            </div>
           </div>
+
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
@@ -379,12 +377,14 @@ function CommunityPage() {
 
 
       {/* GIVEAWAY */}
-      <Section id="giveaway" tone="cream" className="scroll-mt-24">
+      <Section id="giveaway" tone="ink" className="scroll-mt-24">
         <SectionHeading
+          tone="ink"
           eyebrow="Giveaway"
           title="Enter the XPRT Community Giveaway"
           intro="Two prizes, one quick entry. Drop your info once from your phone — we'll announce the winners after the event and reach out directly. One entry per person, no purchase necessary."
         />
+
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {GIVEAWAY_PRIZES.map((p, i) => (
@@ -403,9 +403,10 @@ function CommunityPage() {
             </Reveal>
           ))}
         </ul>
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="mt-4 text-sm text-primary-foreground/70">
           {PRIZE_NOTE.en} · {PRIZE_NOTE.es}
         </p>
+
 
         <div className="mt-8 rounded-2xl border border-gold/40 bg-background p-6 text-center md:p-8">
           <Sparkles className="mx-auto h-6 w-6 text-gold" aria-hidden />
@@ -427,80 +428,13 @@ function CommunityPage() {
           </GhlFormButton>
         </div>
 
-        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.en}</p>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{GIVEAWAY_TERMS.es}</p>
+        <p className="mt-4 text-xs leading-relaxed text-primary-foreground/60">{GIVEAWAY_TERMS.en}</p>
+        <p className="mt-2 text-xs leading-relaxed text-primary-foreground/60">{GIVEAWAY_TERMS.es}</p>
+
       </Section>
 
-      {/* WITH YOU, EVEN WHEN WE CAN'T BE THERE */}
-      <Section tone="ink" id="reach-us">
-        <SectionHeading
-          tone="ink"
-          eyebrow="We're with you"
-          title="Can't shake our hands at the Bash? Reach us right here."
-          intro="Roni is traveling and won't be on site this time — but the whole XPRT team is one tap away, today and after the show, in English and Español."
-        />
-        <blockquote className="mt-8 flex flex-col gap-5 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 text-base leading-relaxed text-primary-foreground/85 sm:flex-row sm:items-start">
-          <img
-            src={roniPhoto}
-            alt="Roni Rivers, founder of XPRT Insurance"
-            loading="lazy"
-            className="h-24 w-24 shrink-0 rounded-2xl object-cover object-top ring-1 ring-gold/40 sm:h-28 sm:w-28"
-          />
-          <div>
-            <p>{RONI_NOTE.en}</p>
-            <p className="mt-4 text-primary-foreground/70">{RONI_NOTE.es}</p>
-            <p className="mt-4 text-xs uppercase tracking-[0.18em] text-gold">
-              Roni Rivers · Founder, XPRT Insurance
-            </p>
-          </div>
-        </blockquote>
 
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <ReachCard
-            href={`tel:${PHONE_TEL}`}
-            icon={<Phone className="h-5 w-5 text-gold" aria-hidden />}
-            label="Call us"
-            value={PHONE_DISPLAY}
-          />
-          <ReachCard
-            href={`sms:${PHONE_TEL}`}
-            icon={<MessageSquare className="h-5 w-5 text-gold" aria-hidden />}
-            label="Text us"
-            value={PHONE_DISPLAY}
-          />
-          <ReachCard
-            href={`mailto:${EMAIL}`}
-            icon={<Mail className="h-5 w-5 text-gold" aria-hidden />}
-            label="Email us"
-            value={EMAIL}
-          />
-          <ReachLinkCard
-            to="/book"
-            icon={<CalendarCheck className="h-5 w-5 text-gold" aria-hidden />}
-            label="Book a review"
-            value="Pick a time online"
-          />
-        </div>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button
-            asChild
-            size="lg"
-            className="btn-gold-shimmer h-14 bg-gold-gradient text-base text-gold-foreground hover:bg-gold-gradient"
-          >
-            <Link to="/contact">Request a quote</Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="h-14 border-primary-foreground/30 bg-transparent text-base text-primary-foreground hover:bg-primary-foreground/10"
-          >
-            <Link to="/bonds">Surety bonds</Link>
-          </Button>
-        </div>
-      </Section>
 
       {/* MEET XPRT */}
       <Section tone="cream">
@@ -583,13 +517,14 @@ function CommunityPage() {
       </Section>
 
       {/* COMMUNITY */}
-      <Section>
+      <Section tone="ink">
         <div className="mx-auto max-w-3xl text-center">
+
           <Heart className="mx-auto h-6 w-6 text-gold" aria-hidden />
           <p className="mt-6 text-balance text-2xl leading-snug md:text-4xl">
             “Insurance is what we do. Community is who we serve.”
           </p>
-          <p className="mt-6 text-pretty text-base leading-relaxed text-muted-foreground">
+          <p className="mt-6 text-pretty text-base leading-relaxed text-primary-foreground/75">
             We sponsor local musicians, entrepreneurs, small businesses and neighborhood events
             across Colorado and Nevada. When the people around us grow, we all do better — so we
             show up, sponsor the night, and keep the mic on.
@@ -630,59 +565,6 @@ function CommunityPage() {
   );
 }
 
-function ReachCard({
-  href,
-  icon,
-  label,
-  value,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="flex min-h-24 flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 transition-colors hover:border-gold"
-    >
-      {icon}
-      <span className="mt-3 block">
-        <span className="block text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
-          {label}
-        </span>
-        <span className="mt-1 block break-words text-base text-primary-foreground">{value}</span>
-      </span>
-    </a>
-  );
-}
-
-function ReachLinkCard({
-  to,
-  icon,
-  label,
-  value,
-}: {
-  to: "/book";
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <Link
-      to={to}
-      className="flex min-h-24 flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-5 transition-colors hover:border-gold"
-    >
-      {icon}
-      <span className="mt-3 block">
-        <span className="block text-xs uppercase tracking-[0.18em] text-primary-foreground/60">
-          {label}
-        </span>
-        <span className="mt-1 block text-base text-primary-foreground">{value}</span>
-      </span>
-    </Link>
-  );
-}
 
 function EventArtwork({ src, alt }: { src?: string; alt: string }) {
   if (src) {
