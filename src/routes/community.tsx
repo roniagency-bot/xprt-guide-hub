@@ -405,9 +405,10 @@ function CommunityPage() {
             </Reveal>
           ))}
         </ul>
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="mt-4 text-sm text-primary-foreground/70">
           {PRIZE_NOTE.en} · {PRIZE_NOTE.es}
         </p>
+
 
         <div className="mt-8 rounded-2xl border border-gold/40 bg-background p-6 text-center md:p-8">
           <Sparkles className="mx-auto h-6 w-6 text-gold" aria-hidden />
