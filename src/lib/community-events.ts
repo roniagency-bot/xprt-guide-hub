@@ -47,6 +47,8 @@ export type CommunityEvent = {
   artwork?: string;
   /** Optional external ticket / event link. */
   eventUrl?: string;
+  /** Note rendered under the lineup grid, e.g. special guests. */
+  specialGuestsNote?: string;
 };
 
 export const COMMUNITY_EVENTS: CommunityEvent[] = [
