@@ -379,12 +379,14 @@ function CommunityPage() {
 
 
       {/* GIVEAWAY */}
-      <Section id="giveaway" tone="cream" className="scroll-mt-24">
+      <Section id="giveaway" tone="ink" className="scroll-mt-24">
         <SectionHeading
+          tone="ink"
           eyebrow="Giveaway"
           title="Enter the XPRT Community Giveaway"
           intro="Two prizes, one quick entry. Drop your info once from your phone — we'll announce the winners after the event and reach out directly. One entry per person, no purchase necessary."
         />
+
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {GIVEAWAY_PRIZES.map((p, i) => (
