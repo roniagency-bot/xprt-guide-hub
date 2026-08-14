@@ -22,7 +22,9 @@ import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import roniPhoto from "@/assets/team/veronica.png";
+import aaliyahPhoto from "@/assets/artists/aaliyah-shambe.png.asset.json";
 import beachBoujieFlyer from "@/assets/beach-boujie-flyer.png.asset.json";
+
 import {
   GIVEAWAY_TERMS,
   GIVEAWAY_PRIZES,
