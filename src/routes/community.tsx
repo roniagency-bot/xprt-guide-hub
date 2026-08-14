@@ -587,20 +587,24 @@ function EventArtwork({ src, alt }: { src?: string; alt: string }) {
   );
 }
 
-function ArtistImage({ src, alt }: { src?: string; alt: string }) {
+function ArtistImage({ src, alt, eager }: { src?: string; alt: string; eager?: boolean }) {
   if (src) {
     return (
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className="h-20 w-20 shrink-0 rounded-xl object-cover"
-      />
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-secondary">
+        <img
+          src={src}
+          alt={`${alt} performing at the Beach & Boujie Summer Bash`}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/60 to-transparent" />
+      </div>
     );
   }
   return (
-    <div className="grid h-20 w-20 shrink-0 place-items-center rounded-xl border border-dashed border-gold/50 bg-secondary">
-      <Music className="h-5 w-5 text-gold" aria-hidden />
+    <div className="grid aspect-[4/5] w-full place-items-center border-b border-dashed border-gold/50 bg-secondary">
+      <Music className="h-8 w-8 text-gold" aria-hidden />
     </div>
   );
 }
