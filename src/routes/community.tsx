@@ -297,6 +297,85 @@ function CommunityPage() {
         )}
       </Section>
 
+      {/* FOLLOW THE HOSTS */}
+      <Section tone="ink" id="follow">
+        <SectionHeading
+          tone="ink"
+          eyebrow="Follow the hosts"
+          title="Stay connected after the Bash"
+          intro="Follow Roni for insurance tips and community updates, and follow Aaliyah for more Pure Artist Music events, artists, and behind-the-scenes content."
+        />
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <Reveal className="overflow-hidden rounded-2xl border border-gold/40 bg-background text-foreground shadow-sm">
+            <img
+              src={roniPhoto}
+              alt="Roni Rivers, founder of XPRT Insurance"
+              loading="lazy"
+              className="h-56 w-full object-cover object-top"
+            />
+            <div className="p-6">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">XPRT Insurance</p>
+              <h3 className="mt-1 text-xl leading-snug">Roni Rivers</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Community updates, insurance tips, and local events from Denver and Las Vegas.
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Actualizaciones de la comunidad, consejos de seguros y eventos locales.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="mt-4 border-gold/50 text-foreground hover:bg-gold/10 hover:text-foreground"
+              >
+                <a href={RONI_INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                  <InstagramIcon className="mr-2 h-4 w-4" aria-hidden />
+                  @xprtinsurance
+                  <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                </a>
+              </Button>
+            </div>
+          </Reveal>
+
+          <Reveal
+            delay={75}
+            className="overflow-hidden rounded-2xl border border-gold/40 bg-background text-foreground shadow-sm"
+          >
+            <img
+              src={aaliyahImg.url}
+              alt="Aaliyah Shambe, co-founder of Pure Artist Music"
+              loading="lazy"
+              className="h-56 w-full object-cover"
+            />
+            <div className="p-6">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Pure Artist Music</p>
+              <h3 className="mt-1 text-xl leading-snug">Aaliyah Shambe</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Pop/R&B artist, co-founder, and the producer behind the Beach & Boujie Bash.
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Artista pop/R&B, cofundadora y productora del Beach & Boujie Bash.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="mt-4 border-gold/50 text-foreground hover:bg-gold/10 hover:text-foreground"
+              >
+                <a href={AALIYAH_INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                  <InstagramIcon className="mr-2 h-4 w-4" aria-hidden />
+                  @pure_artist_music
+                  <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                </a>
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+
+
 
       {/* FEATURED EVENT */}
       <Section tone="cream" id="event">
