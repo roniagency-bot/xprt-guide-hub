@@ -15,9 +15,8 @@ import {
   Trophy,
   Sun,
   ExternalLink,
-  Instagram,
-
 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
