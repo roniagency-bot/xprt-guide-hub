@@ -277,6 +277,15 @@ function CommunityPage() {
                     </a>
                   </Button>
                 )}
+                {artist.social?.instagram && (
+                  <Button asChild variant="outline" size="sm" className="mt-2 self-start">
+                    <a href={artist.social.instagram} target="_blank" rel="noopener noreferrer">
+                      <InstagramIcon className="mr-2 h-3.5 w-3.5" aria-hidden />
+                      Follow on Instagram
+                      <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                    </a>
+                  </Button>
+                )}
               </div>
             </Reveal>
           ))}
