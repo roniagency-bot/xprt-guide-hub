@@ -225,100 +225,6 @@ function CommunityPage() {
         </div>
       </section>
 
-      {/* FEATURED EVENT */}
-      <Section tone="cream" id="event">
-        <SectionHeading eyebrow="Featured event" title={ev.name} intro={ev.description} />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <Reveal className="rounded-2xl border border-border bg-background p-6 shadow-sm">
-            <h3 className="text-xl">Event details</h3>
-            <dl className="mt-4 space-y-3 text-sm">
-              <div>
-                <dt className="text-muted-foreground">Date &amp; time</dt>
-                <dd className="text-foreground">{ev.dateTime}</dd>
-              </div>
-              <div>
-                <dt className="text-muted-foreground">Venue</dt>
-                <dd className="text-foreground">
-                  {ev.venue}
-                  {ev.venueDetail ? ` — ${ev.venueDetail}` : ""}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-muted-foreground">Address</dt>
-                <dd className="text-foreground">
-                  {ev.streetAddress}, {ev.city}
-                </dd>
-              </div>
-              {ev.ticketNote && (
-                <div>
-                  <dt className="text-muted-foreground">Tickets</dt>
-                  <dd className="text-foreground">{ev.ticketNote}</dd>
-                </div>
-              )}
-              {ev.dressCode && (
-                <div>
-                  <dt className="text-muted-foreground">Dress code</dt>
-                  <dd className="text-foreground">{ev.dressCode}</dd>
-                </div>
-              )}
-              {ev.afterParty && (
-                <div>
-                  <dt className="text-muted-foreground">After party</dt>
-                  <dd className="text-foreground">{ev.afterParty}</dd>
-                </div>
-              )}
-              {ev.presentedBy && ev.presentedBy.length > 0 && (
-                <div>
-                  <dt className="text-muted-foreground">Presented by</dt>
-                  <dd className="text-foreground">{ev.presentedBy.join(" · ")}</dd>
-                </div>
-              )}
-            </dl>
-            {ev.eventUrl && (
-              <a
-                href={ev.eventUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground underline underline-offset-4"
-              >
-                <Ticket className="h-4 w-4 text-gold" aria-hidden /> Tickets &amp; event info
-              </a>
-            )}
-          </Reveal>
-
-          <Reveal
-            delay={75}
-            className="rounded-2xl border border-border bg-background p-6 shadow-sm"
-          >
-            <h3 className="text-xl">What to expect</h3>
-            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <Music className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Live sets from
-                Colorado artists on the NOVEL RiNo backyard terrace.
-              </li>
-              <li className="flex items-start gap-2">
-                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Champagne
-                wall, local brands, and local bites and sips.
-              </li>
-              <li className="flex items-start gap-2">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> One day only,
-                11:00 AM to 3:00 PM — then the rooftop after-party.
-              </li>
-              <li className="flex items-start gap-2">
-                <Gift className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Our community
-                giveaway is open to attendees, right from your phone.
-              </li>
-            </ul>
-          </Reveal>
-        </div>
-
-        <div className="mt-10">
-          <Button size="lg" onClick={scrollToGiveaway} className="h-14 w-full text-base sm:w-auto">
-            <Gift className="mr-2 h-5 w-5" aria-hidden /> Enter the Giveaway
-          </Button>
-        </div>
-      </Section>
-
       {/* LINEUP */}
       <Section id="lineup">
         <SectionHeading
@@ -373,6 +279,70 @@ function CommunityPage() {
         )}
       </Section>
 
+
+      {/* FEATURED EVENT */}
+      <Section tone="cream" id="event">
+        <SectionHeading eyebrow="Featured event" title={ev.name} intro={ev.description} />
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <Reveal className="rounded-2xl border border-border bg-background p-6 shadow-sm">
+            <h3 className="text-xl">What to expect</h3>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <Music className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Live sets from
+                Colorado artists on the NOVEL RiNo backyard terrace.
+              </li>
+              <li className="flex items-start gap-2">
+                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Champagne
+                wall, local brands, and local bites and sips.
+              </li>
+              <li className="flex items-start gap-2">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> One day only,
+                11:00 AM to 3:00 PM — then the rooftop after-party.
+              </li>
+              <li className="flex items-start gap-2">
+                <Gift className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden /> Our community
+                giveaway is open to attendees, right from your phone.
+              </li>
+            </ul>
+          </Reveal>
+
+          <Reveal
+            delay={75}
+            className="rounded-2xl border border-border bg-background p-6 shadow-sm"
+          >
+            <h3 className="text-xl">Credits & after-party</h3>
+            <dl className="mt-4 space-y-3 text-sm">
+              {ev.presentedBy && ev.presentedBy.length > 0 && (
+                <div>
+                  <dt className="text-muted-foreground">Presented by</dt>
+                  <dd className="text-foreground">{ev.presentedBy.join(" · ")}</dd>
+                </div>
+              )}
+              {ev.afterParty && (
+                <div>
+                  <dt className="text-muted-foreground">After party</dt>
+                  <dd className="text-foreground">{ev.afterParty}</dd>
+                </div>
+              )}
+              {ev.eventUrl && (
+                <div>
+                  <dt className="text-muted-foreground">Tickets</dt>
+                  <dd>
+                    <a
+                      href={ev.eventUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground underline underline-offset-4"
+                    >
+                      <Ticket className="h-4 w-4 text-gold" aria-hidden /> Get tickets on Eventbrite
+                    </a>
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </Reveal>
+        </div>
+      </Section>
 
       {/* GIVEAWAY */}
       <Section id="giveaway" tone="ink" className="scroll-mt-24">
