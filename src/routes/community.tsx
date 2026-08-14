@@ -15,6 +15,8 @@ import {
   Trophy,
   Sun,
   ExternalLink,
+  Instagram,
+
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
@@ -41,6 +43,9 @@ const DESCRIPTION =
 const PHONE_DISPLAY = "(702) 766-3394";
 const PHONE_TEL = "+17027663394";
 const EMAIL = SITE.email;
+const RONI_INSTAGRAM = "https://www.instagram.com/xprtinsurance/";
+const AALIYAH_INSTAGRAM = "https://www.instagram.com/pure_artist_music/";
+
 
 export const Route = createFileRoute("/community")({
   head: () => {
@@ -70,8 +75,13 @@ export const Route = createFileRoute("/community")({
         name: a.name,
         ...(a.link ? { sameAs: a.link.url } : {}),
       })),
-      organizer: { "@type": "Organization", name: "Pure Artist Music" },
-      sponsor: { "@id": `${SITE.url}/#org` },
+      organizer: {
+        "@type": "Organization",
+        name: "Pure Artist Music",
+        sameAs: AALIYAH_INSTAGRAM,
+      },
+      sponsor: { "@id": `${SITE.url}/#org`, sameAs: RONI_INSTAGRAM },
+
     };
     if (ev.startDateIso) eventLd.startDate = ev.startDateIso;
     if (ev.endDateIso) eventLd.endDate = ev.endDateIso;
