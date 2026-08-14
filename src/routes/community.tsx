@@ -542,7 +542,7 @@ function CommunityPage() {
                 licencia en Colorado y Nevada. Atendemos en español y con mucho gusto le
                 explicamos su cobertura sin presión.
               </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button asChild size="lg" className="h-13 text-base">
                   <Link to="/about">More about our team</Link>
                 </Button>
@@ -551,7 +551,13 @@ function CommunityPage() {
                     <Phone className="mr-2 h-5 w-5" aria-hidden /> {PHONE_DISPLAY}
                   </a>
                 </Button>
+                <Button asChild size="lg" variant="outline" className="h-13 text-base">
+                  <a href={RONI_INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                    <InstagramIcon className="mr-2 h-5 w-5" aria-hidden /> @xprtinsurance
+                  </a>
+                </Button>
               </div>
+
             </div>
           </div>
         </Reveal>
