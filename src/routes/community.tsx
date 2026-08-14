@@ -345,11 +345,12 @@ function CommunityPage() {
             className="overflow-hidden rounded-2xl border border-gold/40 bg-background text-foreground shadow-sm"
           >
             <img
-              src={aaliyahImg.url}
+              src={aaliyahPhoto.url}
               alt="Aaliyah Shambe, co-founder of Pure Artist Music"
               loading="lazy"
               className="h-56 w-full object-cover"
             />
+
             <div className="p-6">
               <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Pure Artist Music</p>
               <h3 className="mt-1 text-xl leading-snug">Aaliyah Shambe</h3>
