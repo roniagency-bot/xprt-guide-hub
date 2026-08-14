@@ -1,3 +1,10 @@
+import emeImg from "@/assets/artists/eme.jpg.asset.json";
+import jewelHouseImg from "@/assets/artists/jewel-house.jpg.asset.json";
+import lokanaImg from "@/assets/artists/lokana.jpg.asset.json";
+import kaylaSmithImg from "@/assets/artists/kayla-smith.jpg.asset.json";
+import aaliyahImg from "@/assets/artists/aaliyah-shambe.png.asset.json";
+import ekymImg from "@/assets/artists/ekym.jpg.asset.json";
+
 /**
  * Community Events config — edit this file to update the /community page.
  *
@@ -80,6 +87,7 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
     artists: [
       {
         name: "E.M.E",
+        image: emeImg.url,
         bio: "Afrobeats artist who brings an incredible live performance, backed by a dancer on stage.",
         link: {
           url: "https://open.spotify.com/artist/7gurbuZkjD0guRnta5nAZe",
@@ -88,6 +96,7 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
       },
       {
         name: "Jewel House",
+        image: jewelHouseImg.url,
         bio: "Denver's rising pop boy band.",
         link: {
           url: "https://open.spotify.com/artist/73E6xSzOkhbmHqrC1IJfZk",
@@ -96,6 +105,7 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
       },
       {
         name: "Lokana",
+        image: lokanaImg.url,
         bio: "Pop and R&B artist, named Denver's Best Singer at the 2025 Denver Spotlight Awards.",
         link: {
           url: "https://open.spotify.com/track/4EoKrbA8x2JPBNb9ji8Vlq",
@@ -104,6 +114,7 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
       },
       {
         name: "Kayla Smith",
+        image: kaylaSmithImg.url,
         bio: "Soul singer with a voice that fills a room — performing with her full band.",
         link: {
           url: "https://open.spotify.com/artist/5qkXRhcDdrX17tmCqvN6x4",
@@ -112,10 +123,12 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
       },
       {
         name: "Aaliyah Shambe",
+        image: aaliyahImg.url,
         bio: "Pop and R&B artist and co-founder of Pure Artist Music, awarded Denver's Best Record Label 2025 by the Denver Spotlight Awards.",
       },
       {
         name: "Ekym",
+        image: ekymImg.url,
         bio: "Old-school hip hop artist and founder of Rock the Block.",
       },
     ],
