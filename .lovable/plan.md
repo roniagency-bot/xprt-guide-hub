@@ -1,42 +1,36 @@
-# Artist Photos + Instagram Links on the Event Landing Page
+# Artist Photos on the Event Landing Page
 
-Both things you asked for are possible, and the page is already built to accept them.
+All six photos match an artist on the lineup — nothing missing:
 
-## 1. Artist photos
+| File | Artist |
+| --- | --- |
+| E.M.E._picture.jpg | E.M.E |
+| jewel_pic.jpg | Jewel House |
+| Lokana_picture.jpg | Lokana |
+| Kayla_Smith_pic.jpg | Kayla Smith |
+| Aaliyah_picture.png | Aaliyah Shambe |
+| Ekym_picture.jpg | Ekym |
 
-Each artist card already has a photo slot (currently a gold placeholder). Send me the images and I drop them in — the cards fill with real faces, same rounded frame, no layout change.
+## How they'll look
 
-- Format: JPG or PNG, square-ish crop works best (roughly 800x800), one file per artist.
-- Name them by artist (`eme.jpg`, `jewel-house.jpg`, etc.) so nothing gets mismatched.
-- If some artists arrive and others don't, the missing ones keep the current placeholder — the grid stays even.
+- Photos become the top of each artist card, big and full-width — a tall 4:5 portrait frame instead of the small placeholder circle, so faces read clearly on a phone.
+- Names and bios sit under the photo; the Spotify/YouTube buttons stay where they are.
+- Cards stay 1 column on phone, 2 on tablet, 3 on desktop. On phone that means a scroll of large artist portraits, which is the "see the artists" effect you want from a QR scan.
+- Subtle dark-to-transparent gradient at the bottom of each photo so the gold name text stays readable over any image.
+- Since this is scanned on phones at the event, images load lazily below the fold and the first two load eagerly — fast on venue wifi.
 
-## 2. Social / video links
+## Placement on the page
 
-Yes, and we can have more than one link per artist. Right now each card supports a single Spotify/YouTube button. I'll widen that so a card can show a small row of links:
+The lineup section stays where it is (right after the event details), so the flow is: sponsor hero → flyer → event details → **artists with photos** → giveaway form → about you. Once you see it, we can move the lineup higher if you want the artists to be the very first thing after the hero.
 
-- Instagram (profile or a specific post/reel)
-- Spotify (already in place for E.M.E, Jewel House, Lokana, Kayla Smith)
-- YouTube for Aaliyah
+## Next steps after this (not in this change)
 
-Wording on the buttons stays short: "Instagram", "Listen on Spotify", "Watch on YouTube".
-
-I'll only add Instagram handles you confirm — I won't guess at accounts and risk linking the wrong person.
-
-## 3. Your Instagram as the hub
-
-Since a lot of the promo posting lives on your account, I'll add one line under the lineup: "Follow @your-handle for artist videos and event clips" linking to your Instagram. Send me the handle you want used (XPRT's or your personal).
-
-## What I need from you
-
-1. The artist photos (any order, whatever you have).
-2. Instagram handles/links per artist — as many as you have confirmed.
-3. Your Instagram handle for the follow line.
-
-Since the event is tomorrow, I can ship the link changes as soon as you send handles, and add photos in a second pass the moment the images land.
+- Social links per artist / your Instagram follow line.
+- Final prize photos when you send them.
 
 ## Technical notes
 
-- `src/lib/community-events.ts`: change the artist `link` field to `links?: { url: string; label: "Spotify" | "YouTube" | "Instagram" }[]` and add each artist's `image` import; add an `INSTAGRAM_HANDLE` constant for the follow line.
-- `src/routes/community.tsx`: render a wrapped row of link buttons instead of one; keep the artist name linking to the first link; map all link URLs into the performer JSON-LD `sameAs` array.
-- Photos go in `src/assets/artists/` and are imported as ES6 image imports.
-- No design token, color, or layout changes; other routes untouched.
+- Upload the six photos as CDN assets (`lovable-assets create` from the uploads mount) and write `.asset.json` pointers into `src/assets/artists/`.
+- `src/lib/community-events.ts`: set each artist's `image` to the imported pointer URL.
+- `src/routes/community.tsx`: enlarge the `ArtistImage` frame to an `aspect-[4/5]` cover image with gradient overlay; keep existing tokens, no new colors.
+- Placeholder branch stays intact in case a future artist has no photo.
