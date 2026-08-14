@@ -326,45 +326,43 @@ function CommunityPage() {
           title="Artists on the Beach & Boujie stage"
           intro="Presented by Pure Artist Music. We spotlight Colorado musicians and the small businesses that keep our neighborhoods playing."
         />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ev.artists.map((artist, i) => (
             <Reveal
               as="li"
               key={artist.name}
               delay={i % 3 === 0 ? 0 : i % 3 === 1 ? 75 : 150}
-              className="h-full rounded-2xl border border-border bg-background p-6 shadow-sm"
+              className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-sm"
             >
-              <div className="flex items-start gap-4">
-                <ArtistImage src={artist.image} alt={artist.name} />
-                <div className="min-w-0">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Featured artist
-                  </p>
-                  <h3 className="mt-1 text-xl leading-snug">
-                    {artist.link ? (
-                      <a
-                        href={artist.link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary"
-                      >
-                        {artist.name}
-                      </a>
-                    ) : (
-                      artist.name
-                    )}
-                  </h3>
-                </div>
+              <ArtistImage src={artist.image} alt={artist.name} eager={i < 2} />
+              <div className="flex flex-1 flex-col p-6">
+                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  Featured artist
+                </p>
+                <h3 className="mt-1 text-2xl leading-snug">
+                  {artist.link ? (
+                    <a
+                      href={artist.link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary"
+                    >
+                      {artist.name}
+                    </a>
+                  ) : (
+                    artist.name
+                  )}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{artist.bio}</p>
+                {artist.link && (
+                  <Button asChild variant="outline" size="sm" className="mt-4 self-start">
+                    <a href={artist.link.url} target="_blank" rel="noopener noreferrer">
+                      {artist.link.label === "Spotify" ? "Listen on Spotify" : "Watch on YouTube"}
+                      <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                    </a>
+                  </Button>
+                )}
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{artist.bio}</p>
-              {artist.link && (
-                <Button asChild variant="outline" size="sm" className="mt-4">
-                  <a href={artist.link.url} target="_blank" rel="noopener noreferrer">
-                    {artist.link.label === "Spotify" ? "Listen on Spotify" : "Watch on YouTube"}
-                    <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
-                  </a>
-                </Button>
-              )}
             </Reveal>
           ))}
         </ul>
