@@ -16,12 +16,15 @@ import {
   Sun,
   ExternalLink,
 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading, Eyebrow } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { GhlFormButton } from "@/components/site/GhlFormButton";
 import roniPhoto from "@/assets/team/veronica.png";
+import aaliyahPhoto from "@/assets/artists/aaliyah-shambe.png.asset.json";
 import beachBoujieFlyer from "@/assets/beach-boujie-flyer.png.asset.json";
+
 import {
   GIVEAWAY_TERMS,
   GIVEAWAY_PRIZES,
@@ -41,6 +44,9 @@ const DESCRIPTION =
 const PHONE_DISPLAY = "(702) 766-3394";
 const PHONE_TEL = "+17027663394";
 const EMAIL = SITE.email;
+const RONI_INSTAGRAM = "https://www.instagram.com/xprtinsurance/";
+const AALIYAH_INSTAGRAM = "https://www.instagram.com/pure_artist_music/";
+
 
 export const Route = createFileRoute("/community")({
   head: () => {
@@ -70,8 +76,13 @@ export const Route = createFileRoute("/community")({
         name: a.name,
         ...(a.link ? { sameAs: a.link.url } : {}),
       })),
-      organizer: { "@type": "Organization", name: "Pure Artist Music" },
-      sponsor: { "@id": `${SITE.url}/#org` },
+      organizer: {
+        "@type": "Organization",
+        name: "Pure Artist Music",
+        sameAs: AALIYAH_INSTAGRAM,
+      },
+      sponsor: { "@id": `${SITE.url}/#org`, sameAs: RONI_INSTAGRAM },
+
     };
     if (ev.startDateIso) eventLd.startDate = ev.startDateIso;
     if (ev.endDateIso) eventLd.endDate = ev.endDateIso;
@@ -268,6 +279,15 @@ function CommunityPage() {
                     </a>
                   </Button>
                 )}
+                {artist.social?.instagram && (
+                  <Button asChild variant="outline" size="sm" className="mt-2 self-start">
+                    <a href={artist.social.instagram} target="_blank" rel="noopener noreferrer">
+                      <InstagramIcon className="mr-2 h-3.5 w-3.5" aria-hidden />
+                      Follow on Instagram
+                      <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                    </a>
+                  </Button>
+                )}
               </div>
             </Reveal>
           ))}
@@ -278,6 +298,86 @@ function CommunityPage() {
           </p>
         )}
       </Section>
+
+      {/* FOLLOW THE HOSTS */}
+      <Section tone="ink" id="follow">
+        <SectionHeading
+          tone="ink"
+          eyebrow="Follow the hosts"
+          title="Stay connected after the Bash"
+          intro="Follow Roni for insurance tips and community updates, and follow Aaliyah for more Pure Artist Music events, artists, and behind-the-scenes content."
+        />
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <Reveal className="overflow-hidden rounded-2xl border border-gold/40 bg-background text-foreground shadow-sm">
+            <img
+              src={roniPhoto}
+              alt="Roni Rivers, founder of XPRT Insurance"
+              loading="lazy"
+              className="h-56 w-full object-cover object-top"
+            />
+            <div className="p-6">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">XPRT Insurance</p>
+              <h3 className="mt-1 text-xl leading-snug">Roni Rivers</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Community updates, insurance tips, and local events from Denver and Las Vegas.
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Actualizaciones de la comunidad, consejos de seguros y eventos locales.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="mt-4 border-gold/50 text-foreground hover:bg-gold/10 hover:text-foreground"
+              >
+                <a href={RONI_INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                  <InstagramIcon className="mr-2 h-4 w-4" aria-hidden />
+                  @xprtinsurance
+                  <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                </a>
+              </Button>
+            </div>
+          </Reveal>
+
+          <Reveal
+            delay={75}
+            className="overflow-hidden rounded-2xl border border-gold/40 bg-background text-foreground shadow-sm"
+          >
+            <img
+              src={aaliyahPhoto.url}
+              alt="Aaliyah Shambe, co-founder of Pure Artist Music"
+              loading="lazy"
+              className="h-56 w-full object-cover"
+            />
+
+            <div className="p-6">
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Pure Artist Music</p>
+              <h3 className="mt-1 text-xl leading-snug">Aaliyah Shambe</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Pop/R&B artist, co-founder, and the producer behind the Beach & Boujie Bash.
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Artista pop/R&B, cofundadora y productora del Beach & Boujie Bash.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="mt-4 border-gold/50 text-foreground hover:bg-gold/10 hover:text-foreground"
+              >
+                <a href={AALIYAH_INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                  <InstagramIcon className="mr-2 h-4 w-4" aria-hidden />
+                  @pure_artist_music
+                  <ExternalLink className="ml-2 h-3.5 w-3.5" aria-hidden />
+                </a>
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+
 
 
       {/* FEATURED EVENT */}
@@ -442,7 +542,7 @@ function CommunityPage() {
                 licencia en Colorado y Nevada. Atendemos en español y con mucho gusto le
                 explicamos su cobertura sin presión.
               </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button asChild size="lg" className="h-13 text-base">
                   <Link to="/about">More about our team</Link>
                 </Button>
@@ -451,7 +551,13 @@ function CommunityPage() {
                     <Phone className="mr-2 h-5 w-5" aria-hidden /> {PHONE_DISPLAY}
                   </a>
                 </Button>
+                <Button asChild size="lg" variant="outline" className="h-13 text-base">
+                  <a href={RONI_INSTAGRAM} target="_blank" rel="noopener noreferrer">
+                    <InstagramIcon className="mr-2 h-5 w-5" aria-hidden /> @xprtinsurance
+                  </a>
+                </Button>
               </div>
+
             </div>
           </div>
         </Reveal>
@@ -578,3 +684,23 @@ function ArtistImage({ src, alt, eager }: { src?: string; alt: string; eager?: b
     </div>
   );
 }
+
+function InstagramIcon({ className, "aria-hidden": ariaHidden }: { className?: string; "aria-hidden"?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden={ariaHidden}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+

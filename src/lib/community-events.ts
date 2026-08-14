@@ -51,6 +51,8 @@ export type CommunityEvent = {
     image?: string;
     /** Optional listening link — verified profile/track only. */
     link?: { url: string; label: "Spotify" | "YouTube" };
+    /** Optional social profile (e.g., Instagram) for the host or artist. */
+    social?: { instagram?: string };
   }[];
   /** Event flyer / artwork. Imported image or absolute URL. */
   artwork?: string;
@@ -125,6 +127,7 @@ export const COMMUNITY_EVENTS: CommunityEvent[] = [
         name: "Aaliyah Shambe",
         image: aaliyahImg.url,
         bio: "Pop and R&B artist and co-founder of Pure Artist Music, awarded Denver's Best Record Label 2025 by the Denver Spotlight Awards.",
+        social: { instagram: "https://www.instagram.com/pure_artist_music/" },
       },
       {
         name: "Ekym",
