@@ -19,8 +19,10 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { DwellingCalculator } from "@/components/site/DwellingCalculator";
-import { GhlFormButton } from "@/components/site/GhlFormButton";
-import { HouseScrollAnimationFrames } from "@/components/site/HouseScrollAnimationFrames";
+import {
+  HouseScrollExperience,
+  HouseScrollExperienceContinuation,
+} from "@/components/site/HouseScrollExperience";
 import { getServicePage, getLeadMagnet } from "@/lib/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/homeowners-hero.jpg";
@@ -96,9 +98,13 @@ function HomeownersHub() {
 
   return (
     <>
-      {/* HERO */}
+      {/* BREADCRUMBS + SEO/A11Y HEADING */}
+      {/* The page's real, visible "hero" is the cinematic opener below.
+          The <h1> is kept in the document (visually hidden) so the page
+          still has the correct heading structure for SEO and screen
+          readers - its text is unchanged from the previous static hero. */}
       <section className="relative isolate overflow-hidden bg-cream-gradient">
-        <div className="container-prose pt-10 md:pt-14">
+        <div className="container-prose pb-6 pt-10 md:pb-8 md:pt-14">
           <Breadcrumbs
             items={[
               { name: "Home", path: "/" },
@@ -107,47 +113,14 @@ function HomeownersHub() {
             ]}
           />
         </div>
-        <div className="container-prose grid gap-12 pb-20 pt-8 md:pb-28 md:pt-12 lg:grid-cols-12 lg:gap-16">
-          <div className="flex flex-col justify-center lg:col-span-6 fade-in-up">
-            <Eyebrow>Personal · Homeowners</Eyebrow>
-            <h1 className="mt-5 text-balance text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-              Homeowners Insurance in Nevada & Colorado — know what your policy covers before it matters.
-            </h1>
-            <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Practical, educational homeowners insurance guidance for Nevada and Colorado homeowners —
-              from Las Vegas and Reno to Denver and the Front Range. Understand your coverage, identify
-              gaps, and know what to review before renewal or a claim.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <GhlFormButton
-                form="personal_quote"
-                size="lg"
-                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
-              >
-                Get a Homeowners Quote
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </GhlFormButton>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/book">Book a Free Coverage Review</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative lg:col-span-6">
-            <div className="relative overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
-              <img
-                src={heroHome}
-                alt="Modern home in Nevada at golden hour with mountain backdrop"
-                width={1920}
-                height={1080}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
       </section>
+      <h1 className="sr-only">
+        Homeowners Insurance in Nevada & Colorado — know what your policy covers before it matters.
+      </h1>
 
-      {/* SCROLL-SCRUBBED HOUSE ANIMATION */}
-      <HouseScrollAnimationFrames />
+      {/* CINEMATIC OPENER - front door of the homeowners experience */}
+      <HouseScrollExperience />
+      <HouseScrollExperienceContinuation />
 
       {/* TRUST STRIP */}
       <section className="border-y border-border bg-background">
