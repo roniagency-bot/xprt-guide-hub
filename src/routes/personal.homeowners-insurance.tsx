@@ -19,10 +19,8 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { HomeownersLeadForm } from "@/components/site/HomeownersLeadForm";
 import { HomeownersQuiz } from "@/components/site/HomeownersQuiz";
 import { DwellingCalculator } from "@/components/site/DwellingCalculator";
-import {
-  HouseScrollExperience,
-  HouseScrollExperienceContinuation,
-} from "@/components/site/HouseScrollExperience";
+import { HouseScrollExperienceContinuation } from "@/components/site/HouseScrollExperience";
+import { HomeFlythroughExperience } from "@/components/site/HomeFlythroughExperience";
 import { getServicePage, getLeadMagnet } from "@/lib/content.functions";
 import { pageHead, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, orgJsonLd, canonical } from "@/lib/seo";
 import heroHome from "@/assets/homeowners-hero.jpg";
@@ -118,8 +116,9 @@ function HomeownersHub() {
         Homeowners Insurance in Nevada & Colorado — know what your policy covers before it matters.
       </h1>
 
-      {/* CINEMATIC OPENER - front door of the homeowners experience */}
-      <HouseScrollExperience />
+      {/* CINEMATIC OPENER - drone flythrough of the home (replaces the
+          earlier "house being built" sequence; that component is kept on disk). */}
+      <HomeFlythroughExperience />
       <HouseScrollExperienceContinuation />
 
       {/* TRUST STRIP */}

@@ -26,7 +26,7 @@ import {
   orgJsonLd,
   canonical,
 } from "@/lib/seo";
-import heroHome from "@/assets/homeowners-hero.jpg";
+import { HomeFlythroughExperience, FLYTHROUGH_COPY_ES } from "@/components/site/HomeFlythroughExperience";
 
 const EN_PATH = "/personal/homeowners-insurance";
 const ES_PATH = "/es/personal/homeowners-insurance";
@@ -100,9 +100,11 @@ function HomeownersHubEs() {
 
   return (
     <>
-      {/* HERO */}
+      {/* BREADCRUMBS + SEO/A11Y HEADING - the visible "hero" is the cinematic
+          opener below; the <h1> stays in the document (visually hidden) so the
+          heading structure is unchanged for SEO and screen readers. */}
       <section className="relative isolate overflow-hidden bg-cream-gradient">
-        <div className="container-prose pt-10 md:pt-14 flex items-center justify-between gap-4">
+        <div className="container-prose flex items-center justify-between gap-4 pb-6 pt-10 md:pb-8 md:pt-14">
           <Breadcrumbs
             items={[
               { name: "Inicio", path: "/es" },
@@ -112,46 +114,41 @@ function HomeownersHubEs() {
           />
           <LanguageToggle current="es" />
         </div>
-        <div className="container-prose grid gap-12 pb-20 pt-8 md:pb-28 md:pt-12 lg:grid-cols-12 lg:gap-16">
-          <div className="flex flex-col justify-center lg:col-span-6 fade-in-up">
-            <Eyebrow>Personal · Vivienda</Eyebrow>
-            <h1 className="mt-5 text-balance text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-              Seguro de Vivienda en Nevada y Colorado — entiende lo que cubre tu
-              póliza antes de necesitarla.
-            </h1>
-            <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Guía educativa y práctica del seguro de vivienda para propietarios
-              en Nevada y Colorado — desde Las Vegas y Reno hasta Denver y el
-              Front Range. Comprende tu cobertura, identifica vacíos y sabe qué
-              revisar antes de la renovación o un reclamo.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <GhlFormButton
-                form="personal_quote"
-                size="lg"
-                className="bg-gold text-gold-foreground shadow-lift hover:bg-gold/90"
-              >
-                Solicitar Cotización
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </GhlFormButton>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/book">Agenda una revisión gratuita</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative lg:col-span-6">
-            <div className="relative overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
-              <img
-                src={heroHome}
-                alt="Casa moderna en Nevada al atardecer con montañas de fondo"
-                width={1920}
-                height={1080}
-                className="h-full w-full object-cover"
-              />
-            </div>
+      </section>
+      <h1 className="sr-only">
+        Seguro de Vivienda en Nevada y Colorado — entiende lo que cubre tu póliza antes de necesitarla.
+      </h1>
+
+      {/* CINEMATIC OPENER - drone flythrough of the home, Spanish captions */}
+      <HomeFlythroughExperience copy={FLYTHROUGH_COPY_ES} />
+
+      {/* Continuation - keeps the quote / review buttons from the previous static hero */}
+      <div className="bg-ink px-6 pb-24 pt-4 text-center">
+        <div className="mx-auto flex max-w-xl flex-col items-center gap-6">
+          <span className="h-px w-16 bg-gold/60" aria-hidden="true" />
+          <p className="text-pretty text-lg text-primary-foreground/85 md:text-xl">
+            Esto es lo que una póliza de vivienda realmente necesita cubrir — y dónde suelen esconderse los vacíos.
+          </p>
+          <div className="flex flex-col items-center gap-3 sm:flex-row">
+            <GhlFormButton
+              form="personal_quote"
+              size="lg"
+              className="btn-gold-shimmer bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold"
+            >
+              Solicitar Cotización
+              <ArrowRight className="ml-1.5 h-4 w-4" />
+            </GhlFormButton>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+            >
+              <Link to="/book">Agenda una revisión gratuita</Link>
+            </Button>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* TRUST STRIP */}
       <section className="border-y border-border bg-background">
