@@ -27,13 +27,24 @@ import heroHome from "@/assets/homeowners-hero.jpg";
 
 export const Route = createFileRoute("/personal/homeowners-insurance")({
   loader: async () => {
+  try {
     const [page, cheatSheet, ebook] = await Promise.all([
       getServicePage({ data: { slug: "homeowners-insurance" } }),
       getLeadMagnet({ data: { slug: "homeowners-cheat-sheet" } }),
       getLeadMagnet({ data: { slug: "homeowners-ebook" } }),
     ]);
+
     return { page, cheatSheet, ebook };
-  },
+  } catch (error) {
+    console.warn("[Homeowners] Supabase content unavailable; using static fallbacks.", error);
+
+    return {
+      page: null,
+      cheatSheet: null,
+      ebook: null,
+    };
+  }
+},
   head: ({ loaderData }) => {
     const path = "/personal/homeowners-insurance";
     const title = "Homeowners Insurance in Nevada & Colorado | XPRT Insurance";

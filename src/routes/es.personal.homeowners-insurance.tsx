@@ -33,13 +33,24 @@ const ES_PATH = "/es/personal/homeowners-insurance";
 
 export const Route = createFileRoute("/es/personal/homeowners-insurance")({
   loader: async () => {
+  try {
     const [page, cheatSheet, ebook] = await Promise.all([
       getServicePage({ data: { slug: "homeowners-insurance" } }),
       getLeadMagnet({ data: { slug: "homeowners-cheat-sheet" } }),
       getLeadMagnet({ data: { slug: "homeowners-ebook" } }),
     ]);
+
     return { page, cheatSheet, ebook };
-  },
+  } catch (error) {
+    console.warn("[Homeowners ES] Supabase content unavailable; using static fallbacks.", error);
+
+    return {
+      page: null,
+      cheatSheet: null,
+      ebook: null,
+    };
+  }
+},
   head: ({ loaderData }) => {
     const title =
       "Seguro de Vivienda en Nevada y Colorado | XPRT Insurance";
