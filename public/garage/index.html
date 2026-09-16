@@ -590,7 +590,116 @@ body{padding-bottom:0}
   .card--audience:hover .card__icon,.card--audience:hover h3,.cov:hover h3{transform:none !important}
 }
 
-@media print{.header,.mobilebar,.hero__media,.progress{display:none}}
+/* =========================================================
+   CINEMATIC OPENER (Step 1) — scroll-driven frame sequence.
+   Everything below is inert until JS adds .cine--on to the
+   section, so without JS / with reduced motion / Save-Data /
+   a frame-load failure the hero renders exactly as before.
+   ========================================================= */
+.cine__canvas,.cine__vignette,.cine__logo,.cine__caption,.cine__final,.cine__cue{display:none}
+.cine__track,.cine__stage{position:relative; width:100%}
+@media (min-width:900px){.hero.cine .cine__stage{min-height:74vh; display:flex; align-items:center}}   /* static hero keeps today's 74vh full-bleed layout */
+.cine--on{display:block; min-height:0; overflow:visible; background:var(--navy-deep)}   /* overflow must be visible or position:sticky cannot pin */
+.cine--on .cine__stage{position:sticky; top:0; display:block; min-height:0; height:100vh; height:100svh; overflow:hidden; background:var(--navy-deep)}
+.cine--on .hero__media{position:absolute; inset:0; z-index:0; height:auto; min-height:0; max-height:none; transform:none !important}
+.cine--on .hero__media img{animation:none !important; object-position:50% 50%; transition:opacity .5s ease}
+.cine--on .hero__media.is-live img{opacity:0}
+.cine--on .cine__canvas{display:block; position:absolute; inset:0; width:100%; height:100%}
+.cine--on .hero__scrim{z-index:1; will-change:opacity}
+.cine--on .cine__vignette{display:block; position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0;
+  background:linear-gradient(180deg, rgba(8,26,49,.42) 0%, rgba(8,26,49,0) 26%, rgba(8,26,49,0) 58%, rgba(8,26,49,.74) 100%)}
+.cine--on .cine__logo{display:block; position:absolute; left:18px; top:14px; z-index:5; pointer-events:none; opacity:0; transition:opacity .25s ease}
+.cine--on .cine__logo img{height:44px; width:auto; filter:drop-shadow(0 2px 12px rgba(0,0,0,.55))}
+.cine--on .cine__open{position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; justify-content:flex-end;
+  padding-top:0; padding-bottom:clamp(18px,4vh,40px); will-change:opacity,transform}
+.cine--on .cine__cue{display:block; margin:16px 0 0; font-size:.72rem; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--navy)}
+.cine--on .cine__cue span{display:inline-block; animation:cueNudge 2.2s ease-in-out infinite}
+@keyframes cueNudge{0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)}}
+/* phone: film on top, copy on the ivory band below — same idea as today's mobile hero, packed a little tighter so it fits one screen */
+.cine--on .hero__scrim{background:linear-gradient(180deg,
+   rgba(251,246,235,0) 0%, rgba(251,246,235,0) 12%, rgba(251,246,235,.5) 19%, rgba(251,246,235,.92) 25%, var(--ivory) 30%, var(--ivory) 100%)}
+@media (max-width:899px){
+  .cine--on .cine__open{padding-bottom:88px}   /* keeps the CTAs above the fold while the site header is still showing */
+  .cine--on .eyebrow{margin-bottom:8px}
+  .cine--on .rule{margin-top:10px}
+  .cine--on .hero__sub{margin-top:10px}
+  .cine--on .cats{margin-top:14px; font-size:.68rem; letter-spacing:.08em; gap:6px 8px}
+  .cine--on .hero__cta{margin-top:16px; gap:10px}
+  .cine--on .hero__cta .btn{min-height:50px; padding:13px 20px}
+  .cine--on .trustline{margin-top:12px; padding:9px 12px; font-size:.86rem}
+  .cine--on .cine__cue{margin-top:10px}
+}
+@media (max-width:899px) and (max-height:720px){
+  .cine--on .trustline{display:none}
+  .cine--on .hero h1{font-size:clamp(2rem,7.6vw,3rem)}
+}
+@media (min-width:900px){
+  .cine--on .cine__open{justify-content:center; padding-bottom:0}
+  .cine--on .hero__scrim{background:linear-gradient(96deg,
+     var(--ivory) 0%, var(--ivory) 30%, rgba(251,246,235,.90) 43%,
+     rgba(251,246,235,.55) 55%, rgba(251,246,235,.16) 72%, rgba(251,246,235,.02) 100%)}
+  .cine--on .cine__logo{left:28px; top:22px}
+  .cine--on .cine__logo img{height:60px}
+}
+
+/* captions */
+.cine--on .cine__caption{display:block; position:absolute; z-index:4; left:clamp(20px,6vw,90px); right:20px;
+  bottom:clamp(96px,17vh,180px); max-width:min(620px,84vw); opacity:0; pointer-events:none; transform:translateY(18px); will-change:opacity,transform}
+.cine__kicker{margin:0 0 10px; font-family:var(--sans); font-size:.72rem; font-weight:700; letter-spacing:.34em; text-transform:uppercase; color:var(--gold-bright)}
+.cine__title{margin:0; font-family:var(--serif); font-weight:700; color:#fff; font-size:clamp(1.65rem,4.2vw,3rem); line-height:1.06; letter-spacing:-.005em; text-shadow:0 2px 26px rgba(0,0,0,.7)}
+.cine__text{margin:12px 0 0; color:rgba(255,255,255,.93); font-size:clamp(.95rem,1.5vw,1.08rem); line-height:1.5; max-width:54ch; text-shadow:0 1px 14px rgba(0,0,0,.65)}
+.cine__explore{margin:16px 0 0; padding:10px 0 4px; background:none; border:0; border-bottom:1.5px solid var(--gold-bright); cursor:pointer;
+  font-family:var(--sans); font-size:.8rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-light);
+  text-shadow:0 1px 10px rgba(0,0,0,.6); transition:color .18s ease, border-color .18s ease}
+.cine__explore:hover{color:#fff; border-bottom-color:#fff}
+
+/* final reveal */
+.cine--on .cine__final{display:flex; position:absolute; inset:0; z-index:4; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:0 22px; opacity:0; pointer-events:none; will-change:opacity,transform}
+.cine--on .cine__final::before{content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(62% 58% at 50% 52%, rgba(8,26,49,.62) 0%, rgba(8,26,49,.35) 45%, rgba(8,26,49,0) 72%)}
+.cine__final__eyebrow{margin:0 0 14px; font-size:.74rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:var(--gold-bright)}
+.cine__final__title{margin:0; font-family:var(--serif); font-weight:700; color:#fff; font-size:clamp(2rem,6vw,3.6rem); line-height:1.1; letter-spacing:-.01em; text-shadow:0 2px 30px rgba(0,0,0,.7)}
+.cine__final__title .script{display:block; font-size:clamp(2.4rem,7.6vw,4.4rem); margin-top:.04em; padding-bottom:.06em; color:var(--gold-bright);
+  background:linear-gradient(168deg,#E6C65A 0%,#F0D97A 26%,#C9A126 54%,#E6C65A 76%,#B08715 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+@supports not ((background-clip:text) or (-webkit-background-clip:text)){.cine__final__title .script{color:var(--gold-bright); -webkit-text-fill-color:var(--gold-bright)}}
+.cine__final__cta{display:flex; flex-direction:column; gap:12px; margin:28px 0 0; width:100%; max-width:560px}
+@media (min-width:560px){.cine__final__cta{flex-direction:row} .cine__final__cta .btn{flex:1}}
+
+/* coverage panels */
+.cpanel[hidden]{display:none}
+.cpanel{position:fixed; inset:0; z-index:80; display:flex; justify-content:flex-end; align-items:stretch}
+.cpanel__backdrop{position:absolute; inset:0; background:rgba(8,26,49,.46); backdrop-filter:blur(2px)}
+.cpanel__sheet{position:relative; z-index:1; width:min(540px,100%); height:100%; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  background:var(--ivory); border-left:4px solid var(--gold); box-shadow:var(--shadow-lg);
+  padding:30px 28px 34px; animation:panelIn .28s cubic-bezier(.2,.7,.3,1)}
+@keyframes panelIn{from{opacity:0; transform:translateX(24px)} to{opacity:1; transform:none}}
+.cpanel__sheet .eyebrow{margin-bottom:10px; padding-right:48px}
+.cpanel__sheet h2{font-size:clamp(1.5rem,3.2vw,2rem); padding-right:48px}
+.cpanel__sheet .rule{margin:14px 0 20px}
+.cpanel__close{top:18px; right:18px}
+.cpanel__cards{display:grid; gap:12px}
+.cpanel__cards .cov{background:var(--white); border:1px solid rgba(22,57,97,.10); border-left:3px solid var(--gold); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm)}
+.cpanel__cards .cov h3{font-size:1.08rem; margin:0 0 6px}
+.cpanel__cards .cov p{margin:0; font-size:.92rem; color:var(--muted); line-height:1.55}
+.cpanel__note{margin:16px 0 0}
+.cpanel__selfserve{margin:14px 0 0}
+.cpanel__cta{margin:22px 0 0; display:flex; flex-direction:column; gap:12px; align-items:center}
+.cpanel__back{background:none; border:0; cursor:pointer; font-family:var(--sans); font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--navy); padding:8px 4px}
+.cpanel__back:hover{color:var(--gold-dark)}
+body.panel-open{overflow:hidden}
+@media (max-width:719px){
+  .cpanel{align-items:flex-end}
+  .cpanel__sheet{width:100%; height:auto; max-height:88vh; max-height:88svh; border-left:0; border-top:4px solid var(--gold); border-radius:14px 14px 0 0;
+    padding:26px 20px calc(24px + env(safe-area-inset-bottom)); animation-name:panelUp}
+  @keyframes panelUp{from{opacity:0; transform:translateY(28px)} to{opacity:1; transform:none}}
+}
+@media (prefers-reduced-motion:reduce){
+  .cpanel__sheet{animation:none !important}
+  .cine--on .cine__cue span{animation:none !important}
+}
+
+@media print{.header,.mobilebar,.hero__media,.progress,.cine__caption,.cine__final,.cpanel{display:none}}
 </style>
 </head>
 <body>
@@ -622,104 +731,222 @@ body{padding-bottom:0}
 
 <!-- ============================ HERO ============================ -->
 <main id="top">
-<section class="hero">
-  <div class="hero__media" aria-hidden="true">
-    <picture><source srcset="assets/hero-nevada-dealership.webp" type="image/webp"><img src="assets/hero-nevada-dealership.jpg" alt="" width="1536" height="1024" fetchpriority="high" decoding="async"></picture>
-    <div class="hero__scrim"></div>
-  </div>
-
-  <div class="wrap hero__inner">
-    <div class="hero__grid">
-
-      <div class="hero__copy">
-        <p class="eyebrow" data-reveal data-en="Garage Insurance • Surety Bonds" data-es="Seguro de Garage • Fianzas">Garage Insurance • Surety Bonds</p>
-        <hr class="rule">
-        <h1 data-reveal>
-          <span class="h1-line" data-en="PROTECT WHAT KEEPS" data-es="PROTEJA LO QUE MANTIENE A">PROTECT WHAT KEEPS</span>
-          <span class="script" data-en="Nevada Moving." data-es="Nevada en Movimiento.">Nevada Moving.</span>
-        </h1>
-        <p class="hero__sub" data-reveal data-en="Specialized protection for Nevada's automotive industry."
-           data-es="Protección especializada para la industria automotriz de Nevada.">Specialized protection for Nevada's automotive industry.</p>
-
-        <p class="cats" data-reveal>
-          <span data-en="Auto Dealers" data-es="Concesionarios">Auto Dealers</span><span class="dot" aria-hidden="true">◆</span>
-          <span data-en="Repair Shops" data-es="Talleres Mecánicos">Repair Shops</span><span class="dot" aria-hidden="true">◆</span>
-          <span data-en="Body Shops" data-es="Talleres de Carrocería">Body Shops</span>
-        </p>
-
-        <div class="hero__cta" data-reveal>
-          <button type="button" class="btn btn--primary" data-open-form
-             data-en="Request a Free Coverage Review" data-es="Solicite una Revisión Gratuita">Request a Free Coverage Review</button>
-          <a class="btn btn--ghost" href="tel:+17027663394" data-track="call-hero">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.6 2.8a2 2 0 0 1-.4 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.8 2.1z"/></svg>
-            <span data-en="Call 702-766-3394" data-es="Llame al 702-766-3394">Call 702-766-3394</span>
-          </a>
-        </div>
-
-        <p class="trustline" data-reveal>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8830F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5.5v5.8c0 5 3.4 9.6 8 10.7 4.6-1.1 8-5.7 8-10.7V5.5z"/><path d="m9 12 2 2 4-4"/></svg>
-          <span data-en="Insurance and bonds in one place. Personalized service in English and Spanish."
-                data-es="Seguros y fianzas en un solo lugar. Atención personalizada en inglés y español.">Insurance and bonds in one place. Personalized service in English and Spanish.</span>
-        </p>
+<section class="hero cine" id="cine">
+  <div class="cine__track" id="cineTrack">
+    <div class="cine__stage" id="cineStage">
+      <div class="hero__media" aria-hidden="true">
+        <picture><source srcset="assets/garage-flythrough-poster.webp" type="image/webp"><img src="assets/garage-flythrough-poster.jpg" alt="" width="1536" height="864" fetchpriority="high" decoding="async" id="cinePoster"></picture>
+        <canvas class="cine__canvas" id="cineCanvas"></canvas>
+        <div class="hero__scrim" id="cineScrim"></div>
+        <div class="cine__vignette" id="cineVignette"></div>
       </div>
 
+      <div class="cine__logo" id="cineLogo" aria-hidden="true"><img src="assets/xprt-logo.png" alt="" width="460" height="312"></div>
+
+      <div class="wrap hero__inner cine__open" id="cineOpen">
+        <div class="hero__grid">
+
+          <div class="hero__copy">
+            <p class="eyebrow" data-reveal data-en="Garage Insurance • Surety Bonds" data-es="Seguro de Garage • Fianzas">Garage Insurance • Surety Bonds</p>
+            <hr class="rule">
+            <h1 data-reveal>
+              <span class="h1-line" data-en="PROTECT WHAT KEEPS" data-es="PROTEJA LO QUE MANTIENE A">PROTECT WHAT KEEPS</span>
+              <span class="script" data-en="Nevada Moving." data-es="Nevada en Movimiento.">Nevada Moving.</span>
+            </h1>
+            <p class="hero__sub" data-reveal data-en="Specialized protection for Nevada's automotive industry."
+               data-es="Protección especializada para la industria automotriz de Nevada.">Specialized protection for Nevada's automotive industry.</p>
+
+            <p class="cats" data-reveal>
+              <span data-en="Auto Dealers" data-es="Concesionarios">Auto Dealers</span><span class="dot" aria-hidden="true">◆</span>
+              <span data-en="Repair Shops" data-es="Talleres Mecánicos">Repair Shops</span><span class="dot" aria-hidden="true">◆</span>
+              <span data-en="Body Shops" data-es="Talleres de Carrocería">Body Shops</span>
+            </p>
+
+            <div class="hero__cta" data-reveal>
+              <button type="button" class="btn btn--primary" data-open-form
+                 data-en="Request a Free Coverage Review" data-es="Solicite una Revisión Gratuita">Request a Free Coverage Review</button>
+              <a class="btn btn--ghost" href="tel:+17027663394" data-track="call-hero">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.6 2.8a2 2 0 0 1-.4 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.8 2.1z"/></svg>
+                <span data-en="Call 702-766-3394" data-es="Llame al 702-766-3394">Call 702-766-3394</span>
+              </a>
+            </div>
+
+            <p class="trustline" data-reveal>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8830F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5.5v5.8c0 5 3.4 9.6 8 10.7 4.6-1.1 8-5.7 8-10.7V5.5z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span data-en="Insurance and bonds in one place. Personalized service in English and Spanish."
+                    data-es="Seguros y fianzas en un solo lugar. Atención personalizada en inglés y español.">Insurance and bonds in one place. Personalized service in English and Spanish.</span>
+            </p>
+
+            <p class="cine__cue" id="cineCue" aria-hidden="true"><span data-en="Scroll to walk the lot ↓" data-es="Deslice para recorrer el lote ↓">Scroll to walk the lot ↓</span></p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Coverage moments: captions tied to scroll progress (only shown when the cinematic is active) -->
+      <div class="cine__caption" data-cap="m1" aria-hidden="true">
+        <p class="cine__kicker" data-en="Dealers" data-es="Concesionarios">Dealers</p>
+        <p class="cine__title" data-en="Every unit on the lot, covered." data-es="Cada unidad en el lote, cubierta.">Every unit on the lot, covered.</p>
+        <p class="cine__text" data-en="Physical damage protection for the inventory you have for sale — and the loaners, shuttles and parts runners the business owns."
+           data-es="Protección contra daños físicos para el inventario que tiene a la venta — y los autos de préstamo, transporte y reparto de partes que son del negocio.">Physical damage protection for the inventory you have for sale — and the loaners, shuttles and parts runners the business owns.</p>
+        <button type="button" class="cine__explore" data-panel="m1" data-track="explore-m1" data-en="Explore coverage →" data-es="Ver coberturas →">Explore coverage →</button>
+      </div>
+
+      <div class="cine__caption" data-cap="m2" aria-hidden="true">
+        <p class="cine__kicker" data-en="Licensing" data-es="Licencias">Licensing</p>
+        <p class="cine__title" data-en="Licensed to sell. Bonded to stay that way." data-es="Con licencia para vender. Afianzado para conservarla.">Licensed to sell. Bonded to stay that way.</p>
+        <p class="cine__text" data-en="Nevada requires a surety bond to hold a dealer license. We handle the bond and the insurance together."
+           data-es="Nevada exige una fianza para mantener la licencia de concesionario. Nosotros gestionamos la fianza y el seguro juntos.">Nevada requires a surety bond to hold a dealer license. We handle the bond and the insurance together.</p>
+        <button type="button" class="cine__explore" data-panel="m2" data-track="explore-m2" data-en="Explore coverage →" data-es="Ver coberturas →">Explore coverage →</button>
+      </div>
+
+      <div class="cine__caption" data-cap="m3" aria-hidden="true">
+        <p class="cine__kicker" data-en="Repair &amp; Collision" data-es="Mecánica y Carrocería">Repair &amp; Collision</p>
+        <p class="cine__title" data-en="Their vehicle. Your care. Your responsibility." data-es="El vehículo del cliente. Bajo su cuidado. Su responsabilidad.">Their vehicle. Your care. Your responsibility.</p>
+        <p class="cine__text" data-en="Garage Liability covers your operations. Garagekeepers covers the customer's car while it's in your hands. They are not the same policy."
+           data-es="Garage Liability cubre sus operaciones. Garagekeepers cubre el auto del cliente mientras está en sus manos. No son la misma póliza.">Garage Liability covers your operations. Garagekeepers covers the customer's car while it's in your hands. They are not the same policy.</p>
+        <button type="button" class="cine__explore" data-panel="m3" data-track="explore-m3" data-en="Explore coverage →" data-es="Ver coberturas →">Explore coverage →</button>
+      </div>
+
+      <div class="cine__caption" data-cap="m4" aria-hidden="true">
+        <p class="cine__kicker" data-en="Your Team" data-es="Su Equipo">Your Team</p>
+        <p class="cine__title" data-en="The people who keep it running." data-es="Las personas que lo mantienen en marcha.">The people who keep it running.</p>
+        <p class="cine__text" data-en="Workers' Compensation is required for most Nevada employers. We make sure the whole operation is protected — not just the cars."
+           data-es="La Compensación al Trabajador es obligatoria para la mayoría de los empleadores en Nevada. Nos aseguramos de que toda la operación esté protegida — no solo los autos.">Workers' Compensation is required for most Nevada employers. We make sure the whole operation is protected — not just the cars.</p>
+        <button type="button" class="cine__explore" data-panel="m4" data-track="explore-m4" data-en="Explore coverage →" data-es="Ver coberturas →">Explore coverage →</button>
+      </div>
+
+      <!-- Final reveal: release point back into the normal page -->
+      <div class="cine__final" id="cineFinal" aria-hidden="true">
+        <p class="cine__final__eyebrow" data-en="Garage Insurance • Surety Bonds" data-es="Seguro de Garage • Fianzas">Garage Insurance • Surety Bonds</p>
+        <p class="cine__final__title">
+          <span class="h1-line" data-en="PROTECT WHAT KEEPS" data-es="PROTEJA LO QUE MANTIENE A">PROTECT WHAT KEEPS</span>
+          <span class="script" data-en="Nevada Moving." data-es="Nevada en Movimiento.">Nevada Moving.</span>
+        </p>
+        <div class="cine__final__cta">
+          <button type="button" class="btn btn--gold" data-open-form data-en="Request a Free Coverage Review" data-es="Solicite una Revisión Gratuita">Request a Free Coverage Review</button>
+          <a class="btn btn--onnavy" href="tel:+17027663394" data-track="call-reveal" data-en="Call 702-766-3394" data-es="Llame al 702-766-3394">Call 702-766-3394</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== SECTION 2 — WHO WE HELP ==================== -->
-<section class="section section--white" id="who-we-help">
-  <div class="wrap">
-    <div class="section-head center" data-reveal>
-      <p class="eyebrow" data-en="Who We Help" data-es="A Quién Servimos">Who We Help</p>
-      <h2 data-en="Coverage Designed Around Your Automotive Business"
-          data-es="Cobertura Diseñada para su Negocio Automotriz">Coverage Designed Around Your Automotive Business</h2>
-      <hr class="rule center">
+<!-- ==================== COVERAGE PANELS (opened from the cinematic moments) ==================== -->
+<aside class="cpanel" id="cpanel-m1" role="dialog" aria-modal="true" aria-labelledby="cpanel-m1-title" hidden>
+  <div class="cpanel__backdrop" data-close-panel></div>
+  <div class="cpanel__sheet">
+    <button type="button" class="modal__close cpanel__close" data-close-panel aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <p class="eyebrow" data-en="Dealers" data-es="Concesionarios">Dealers</p>
+    <h2 id="cpanel-m1-title" data-en="Every unit on the lot, covered." data-es="Cada unidad en el lote, cubierta.">Every unit on the lot, covered.</h2>
+    <hr class="rule">
+    <div class="cpanel__cards">
+      <article class="cov"><h3 data-en="Dealer's Open Lot" data-es="Dealer's Open Lot (Lote Abierto)">Dealer's Open Lot</h3>
+        <p data-en="Physical damage protection for the vehicle inventory you have for sale — hail, wind, fire, theft and collision while the units sit on your lot."
+           data-es="Protección contra daños físicos para el inventario de vehículos que tiene a la venta: granizo, viento, incendio, robo y colisión mientras las unidades están en su lote.">Physical damage protection for the vehicle inventory you have for sale — hail, wind, fire, theft and collision while the units sit on your lot.</p></article>
+      <article class="cov"><h3 data-en="Commercial Auto" data-es="Auto Comercial">Commercial Auto</h3>
+        <p data-en="For the vehicles titled to the business — parts runners, tow and service trucks, loaners and shuttles — including liability and physical damage."
+           data-es="Para los vehículos a nombre del negocio: vehículos de reparto de partes, grúas y camiones de servicio, autos de préstamo y transporte, incluyendo responsabilidad civil y daños físicos.">For the vehicles titled to the business — parts runners, tow and service trucks, loaners and shuttles — including liability and physical damage.</p></article>
+      <article class="cov"><h3 data-en="Garage Liability" data-es="Garage Liability">Garage Liability</h3>
+        <p data-en="Covers bodily injury and property damage that come out of running your garage business — your premises, your operations, and the vehicles your business owns and uses."
+           data-es="Cubre lesiones corporales y daños a la propiedad que surgen de la operación de su negocio automotriz: su local, sus operaciones y los vehículos que su negocio posee y utiliza.">Covers bodily injury and property damage that come out of running your garage business — your premises, your operations, and the vehicles your business owns and uses.</p></article>
     </div>
-    <div class="cards">
-
-      <article class="card card--audience" data-reveal>
-        <div class="card__icon" aria-hidden="true">
-          <svg width="46" height="46" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 40h40"/><path d="M7 40V19l13-8 13 8v21"/><path d="M20 40V29h6v11"/>
-            <path d="M12 24h4M12 30h4M30 24h4M30 30h4"/><path d="M33 19h9a2 2 0 0 1 2 2v19"/><path d="M37 26h4v6h-4z"/>
-          </svg>
-        </div>
-        <h3 data-en="Auto Dealers" data-es="Concesionarios de Autos">Auto Dealers</h3>
-        <p data-en="Protection for vehicle inventory, dealership operations, customers and employees."
-           data-es="Protección para el inventario de vehículos, las operaciones del concesionario, los clientes y los empleados.">Protection for vehicle inventory, dealership operations, customers and employees.</p>
-      </article>
-
-      <article class="card card--audience" data-reveal>
-        <div class="card__icon" aria-hidden="true">
-          <svg width="46" height="46" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M31.5 8.5a7.5 7.5 0 0 0-9.9 9.4L8.6 30.9a3.2 3.2 0 0 0 4.5 4.5l13-13a7.5 7.5 0 0 0 9.4-9.9l-4.6 4.6-4.2-1-1-4.2z"/>
-            <path d="M28 28.5 39.5 40a3.2 3.2 0 0 1-4.5 4.5L25 33.5"/><circle cx="11" cy="33" r="1"/>
-          </svg>
-        </div>
-        <h3 data-en="Repair Shops" data-es="Talleres Mecánicos">Repair Shops</h3>
-        <p data-en="Coverage for customer vehicles, business operations, equipment and liability exposures."
-           data-es="Cobertura para los vehículos de los clientes, las operaciones del negocio, el equipo y las exposiciones de responsabilidad civil.">Coverage for customer vehicles, business operations, equipment and liability exposures.</p>
-      </article>
-
-      <article class="card card--audience" data-reveal>
-        <div class="card__icon" aria-hidden="true">
-          <svg width="46" height="46" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 34h6l4-9h14a4 4 0 0 1 4 4v5"/><path d="M4 34v4h28v-4"/>
-            <circle cx="11" cy="38" r="3"/><circle cx="26" cy="38" r="3"/>
-            <path d="M17 25l2-6h8l2 6"/>
-            <path d="M38 10l1.6 3.4L43 15l-3.4 1.6L38 20l-1.6-3.4L33 15l3.4-1.6z"/>
-            <path d="M43 24l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z"/>
-          </svg>
-        </div>
-        <h3 data-en="Body Shops" data-es="Talleres de Carrocería">Body Shops</h3>
-        <p data-en="Protection designed for collision repair, customer vehicles, property, equipment and employees."
-           data-es="Protección diseñada para la reparación de colisiones, los vehículos de los clientes, la propiedad, el equipo y los empleados.">Protection designed for collision repair, customer vehicles, property, equipment and employees.</p>
-      </article>
-
+    <div class="cpanel__cta">
+      <button type="button" class="btn btn--primary btn--block" data-open-form data-en="Request a Free Coverage Review" data-es="Solicite una Revisión Gratuita">Request a Free Coverage Review</button>
+      <button type="button" class="cpanel__back" data-close-panel data-en="← Back to the tour" data-es="← Volver al recorrido">← Back to the tour</button>
     </div>
   </div>
-</section>
+</aside>
+
+<aside class="cpanel" id="cpanel-m2" role="dialog" aria-modal="true" aria-labelledby="cpanel-m2-title" hidden>
+  <div class="cpanel__backdrop" data-close-panel></div>
+  <div class="cpanel__sheet">
+    <button type="button" class="modal__close cpanel__close" data-close-panel aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <p class="eyebrow" data-en="Licensing &amp; Bonds" data-es="Licencias y Fianzas">Licensing &amp; Bonds</p>
+    <h2 id="cpanel-m2-title" data-en="Licensed to sell. Bonded to stay that way." data-es="Con licencia para vender. Afianzado para conservarla.">Licensed to sell. Bonded to stay that way.</h2>
+    <hr class="rule">
+    <div class="cpanel__cards">
+      <article class="cov"><h3 data-en="Nevada Auto Dealer Bonds" data-es="Fianzas para Concesionarios de Autos de Nevada">Nevada Auto Dealer Bonds</h3>
+        <p data-en="The surety bond the Nevada DMV requires to obtain and keep a dealer license."
+           data-es="La fianza que el DMV de Nevada exige para obtener y mantener la licencia de concesionario.">The surety bond the Nevada DMV requires to obtain and keep a dealer license.</p></article>
+      <article class="cov"><h3 data-en="License and Permit Bonds" data-es="Fianzas de Licencia y Permiso">License and Permit Bonds</h3>
+        <p data-en="Bonds required by a city, county or licensing board before a permit or license is issued."
+           data-es="Fianzas que exige una ciudad, un condado o una junta de licencias antes de emitir un permiso o una licencia.">Bonds required by a city, county or licensing board before a permit or license is issued.</p></article>
+      <article class="cov"><h3 data-en="Applicable Commercial Surety Bonds" data-es="Fianzas Comerciales Aplicables">Applicable Commercial Surety Bonds</h3>
+        <p data-en="Other bonds your automotive business may be asked for — by a landlord, a lender or a contract."
+           data-es="Otras fianzas que le pueden pedir a su negocio automotriz: el arrendador, un prestamista o un contrato.">Other bonds your automotive business may be asked for — by a landlord, a lender or a contract.</p></article>
+    </div>
+    <div class="callout cpanel__note">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5"/><path d="M12 8h.01"/></svg>
+      <p data-en="&lt;strong&gt;A dealer bond is not insurance for the dealer.&lt;/strong&gt; It is a guarantee to the State of Nevada and to your customers that the dealership will operate within Nevada dealer law. If a valid claim is paid, the dealer repays the surety."
+         data-es="&lt;strong&gt;Una fianza de concesionario no es un seguro para el concesionario.&lt;/strong&gt; Es una garantía ante el Estado de Nevada y sus clientes de que el concesionario operará conforme a la ley de concesionarios de Nevada. Si se paga un reclamo válido, el concesionario reembolsa a la afianzadora."><strong>A dealer bond is not insurance for the dealer.</strong> It is a guarantee to the State of Nevada and to your customers that the dealership will operate within Nevada dealer law. If a valid claim is paid, the dealer repays the surety.</p>
+    </div>
+    <p class="selfserve cpanel__selfserve">
+      <span data-en="Already know which bond you need?" data-es="¿Ya sabe qué fianza necesita?">Already know which bond you need?</span>
+      <a href="https://bondquote.xprtinsurance.com/" target="_blank" rel="noopener" data-en="Start your bond online" data-es="Comience su fianza en línea">Start your bond online</a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+    </p>
+    <div class="cpanel__cta">
+      <button type="button" class="btn btn--primary btn--block" data-open-form data-en="Request Insurance, a Bond, or Both" data-es="Solicite Seguro, Fianza o Ambos">Request Insurance, a Bond, or Both</button>
+      <button type="button" class="cpanel__back" data-close-panel data-en="← Back to the tour" data-es="← Volver al recorrido">← Back to the tour</button>
+    </div>
+  </div>
+</aside>
+
+<aside class="cpanel" id="cpanel-m3" role="dialog" aria-modal="true" aria-labelledby="cpanel-m3-title" hidden>
+  <div class="cpanel__backdrop" data-close-panel></div>
+  <div class="cpanel__sheet">
+    <button type="button" class="modal__close cpanel__close" data-close-panel aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <p class="eyebrow" data-en="Repair &amp; Collision" data-es="Mecánica y Carrocería">Repair &amp; Collision</p>
+    <h2 id="cpanel-m3-title" data-en="Their vehicle. Your care. Your responsibility." data-es="El vehículo del cliente. Bajo su cuidado. Su responsabilidad.">Their vehicle. Your care. Your responsibility.</h2>
+    <hr class="rule">
+    <div class="cpanel__cards">
+      <article class="cov"><h3 data-en="Garage Liability" data-es="Garage Liability">Garage Liability</h3>
+        <p data-en="Covers bodily injury and property damage that come out of running your garage business — your premises, your operations, and the vehicles your business owns and uses."
+           data-es="Cubre lesiones corporales y daños a la propiedad que surgen de la operación de su negocio automotriz: su local, sus operaciones y los vehículos que su negocio posee y utiliza.">Covers bodily injury and property damage that come out of running your garage business — your premises, your operations, and the vehicles your business owns and uses.</p></article>
+      <article class="cov"><h3 data-en="Garagekeepers Coverage" data-es="Garagekeepers (Custodia de Vehículos)">Garagekeepers Coverage</h3>
+        <p data-en="Covers damage to your customers' vehicles while they are in your care — parked on your lot, in your bays, or being test driven. Typically fire, theft, vandalism and collision."
+           data-es="Cubre los daños a los vehículos de sus clientes mientras están bajo su cuidado: estacionados en su lote, en sus bahías o durante una prueba de manejo. Generalmente incendio, robo, vandalismo y colisión.">Covers damage to your customers' vehicles while they are in your care — parked on your lot, in your bays, or being test driven. Typically fire, theft, vandalism and collision.</p></article>
+      <article class="cov"><h3 data-en="Commercial Property" data-es="Propiedad Comercial">Commercial Property</h3>
+        <p data-en="Your building or tenant improvements, lifts, alignment racks, paint booths, diagnostic equipment, tools, parts and signage."
+           data-es="Su edificio o las mejoras del local arrendado, elevadores, alineadoras, cabinas de pintura, equipo de diagnóstico, herramientas, partes y rótulos.">Your building or tenant improvements, lifts, alignment racks, paint booths, diagnostic equipment, tools, parts and signage.</p></article>
+    </div>
+    <div class="callout cpanel__note">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5"/><path d="M12 8h.01"/></svg>
+      <p data-en="&lt;strong&gt;Garage Liability and Garagekeepers are not the same coverage.&lt;/strong&gt; We will help identify what your operation actually needs."
+         data-es="&lt;strong&gt;Garage Liability y Garagekeepers no son la misma cobertura.&lt;/strong&gt; Le ayudaremos a identificar lo que realmente necesita su negocio."><strong>Garage Liability and Garagekeepers are not the same coverage.</strong> We will help identify what your operation actually needs.</p>
+    </div>
+    <div class="cpanel__cta">
+      <button type="button" class="btn btn--primary btn--block" data-open-form data-en="Request a Free Coverage Review" data-es="Solicite una Revisión Gratuita">Request a Free Coverage Review</button>
+      <button type="button" class="cpanel__back" data-close-panel data-en="← Back to the tour" data-es="← Volver al recorrido">← Back to the tour</button>
+    </div>
+  </div>
+</aside>
+
+<aside class="cpanel" id="cpanel-m4" role="dialog" aria-modal="true" aria-labelledby="cpanel-m4-title" hidden>
+  <div class="cpanel__backdrop" data-close-panel></div>
+  <div class="cpanel__sheet">
+    <button type="button" class="modal__close cpanel__close" data-close-panel aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <p class="eyebrow" data-en="Your Team" data-es="Su Equipo">Your Team</p>
+    <h2 id="cpanel-m4-title" data-en="The people who keep it running." data-es="Las personas que lo mantienen en marcha.">The people who keep it running.</h2>
+    <hr class="rule">
+    <div class="cpanel__cards">
+      <article class="cov"><h3 data-en="Workers' Compensation" data-es="Compensación al Trabajador">Workers' Compensation</h3>
+        <p data-en="Medical care and lost wages when an employee is injured on the job. Required for most Nevada employers."
+           data-es="Atención médica y salarios perdidos cuando un empleado se lesiona en el trabajo. Requerido para la mayoría de los empleadores en Nevada.">Medical care and lost wages when an employee is injured on the job. Required for most Nevada employers.</p></article>
+      <article class="cov"><h3 data-en="General Liability" data-es="Responsabilidad Civil General">General Liability</h3>
+        <p data-en="Broader business liability beyond the garage exposure — customers in your waiting area, your advertising, and the work you have completed."
+           data-es="Responsabilidad civil más amplia, más allá de la exposición del taller: clientes en su sala de espera, su publicidad y los trabajos ya completados.">Broader business liability beyond the garage exposure — customers in your waiting area, your advertising, and the work you have completed.</p></article>
+      <article class="cov"><h3 data-en="Business Umbrella" data-es="Póliza Paraguas Comercial">Business Umbrella</h3>
+        <p data-en="Extra limits that sit on top of your other policies for the large, unexpected claim that goes past what the underlying coverage will pay."
+           data-es="Límites adicionales que se colocan sobre sus otras pólizas para el reclamo grande e inesperado que excede lo que la cobertura subyacente pagaría.">Extra limits that sit on top of your other policies for the large, unexpected claim that goes past what the underlying coverage will pay.</p></article>
+    </div>
+    <div class="cpanel__cta">
+      <button type="button" class="btn btn--primary btn--block" data-open-form data-en="Request a Free Coverage Review" data-es="Solicite una Revisión Gratuita">Request a Free Coverage Review</button>
+      <button type="button" class="cpanel__back" data-close-panel data-en="← Back to the tour" data-es="← Volver al recorrido">← Back to the tour</button>
+    </div>
+  </div>
+</aside>
+
 
 <!-- ==================== SECTION 3 — COVERAGES ==================== -->
 <section class="section section--champagne" id="coverages">
@@ -855,27 +1082,7 @@ body{padding-bottom:0}
   </div>
 </section>
 
-<!-- ==================== FINAL CTA ==================== -->
-<section class="section finalcta">
-  <div class="wrap">
-    <p class="eyebrow" data-en="Garage Insurance • Surety Bonds" data-es="Seguro de Garage • Fianzas">Garage Insurance • Surety Bonds</p>
-    <hr class="rule center">
-    <h2 data-reveal>
-      <span data-en="Let's Protect the Business That Keeps" data-es="Protejamos el Negocio que Mantiene a">Let's Protect the Business That Keeps</span>
-      <span class="script" data-en="Nevada Moving." data-es="Nevada en Movimiento.">Nevada Moving.</span>
-    </h2>
-    <ul class="trustrow" data-reveal>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span data-en="Nevada-licensed insurance agency" data-es="Agencia de seguros licenciada en Nevada">Nevada-licensed insurance agency</span></li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span data-en="Insurance and surety bonds in one place" data-es="Seguros y fianzas en un solo lugar">Insurance and surety bonds in one place</span></li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span data-en="Bilingual service in English and Spanish" data-es="Servicio bilingüe en inglés y español">Bilingual service in English and Spanish</span></li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span data-en="Real assistance from an experienced agency — not just an online form" data-es="Asistencia real de una agencia con experiencia, no solo un formulario en línea">Real assistance from an experienced agency — not just an online form</span></li>
-    </ul>
-    <div class="btnrow" data-reveal>
-      <button type="button" class="btn btn--primary" data-open-form data-en="Request a Free Review" data-es="Solicite una Revisión Gratuita">Request a Free Review</button>
-      <a class="btn btn--ghost" href="tel:+17027663394" data-track="call-final" data-en="Call 702-766-3394" data-es="Llame al 702-766-3394">Call 702-766-3394</a>
-    </div>
-  </div>
-</section>
+
 </main>
 
 <!-- ==================== FOOTER ==================== -->
@@ -1456,6 +1663,7 @@ var XPRT_CONFIG = {
   });
 
   /* ---------- 6. MOTION ---------- */
+  var cinePinned = false, cineActive = false;   // set by the cinematic opener (section 8)
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // stagger siblings inside each group so rows arrive one after another
@@ -1513,14 +1721,14 @@ var XPRT_CONFIG = {
     requestAnimationFrame(function () {
       var y = window.pageYOffset || document.documentElement.scrollTop;
       header.classList.toggle("is-scrolled", y > 90);
-      if (bar) bar.classList.toggle("is-in", y > 260);
+      if (bar) bar.classList.toggle("is-in", y > 260 && !cinePinned);
       if (progress) {
         var max = document.documentElement.scrollHeight - window.innerHeight;
         progress.style.transform = "scaleX(" + (max > 0 ? Math.min(y / max, 1) : 0) + ")";
       }
       if (!reduce) {
         var media = document.querySelector(".hero__media");
-        if (media && y < window.innerHeight * 1.2) {
+        if (media && !cineActive && y < window.innerHeight * 1.2) {
           media.style.transform = "translate3d(0," + (y * 0.16).toFixed(1) + "px,0)";
         }
       }
@@ -1529,6 +1737,332 @@ var XPRT_CONFIG = {
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  /* ---------- 8. CINEMATIC OPENER (Step 1) ----------
+     Scroll-driven frame sequence ported from the Homeowners flythrough
+     (sticky stage + DPR canvas + progressive frame loading + poster
+     fallback). Gated: without JS, with prefers-reduced-motion, with
+     Save-Data, without canvas, or if the first frame fails to load, the
+     section stays exactly as the static hero above. */
+  (function () {
+    var section = document.getElementById("cine");
+    var track = document.getElementById("cineTrack");
+    var stage = document.getElementById("cineStage");
+    var canvas = document.getElementById("cineCanvas");
+    var media = section ? section.querySelector(".hero__media") : null;
+    var scrim = document.getElementById("cineScrim");
+    var vignette = document.getElementById("cineVignette");
+    var logo = document.getElementById("cineLogo");
+    var open = document.getElementById("cineOpen");
+    var cue = document.getElementById("cineCue");
+    var finalEl = document.getElementById("cineFinal");
+    if (!section || !track || !stage || !canvas || !media || !open) return;
+
+    var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    var saveData = !!(conn && conn.saveData);
+    if (reduce || saveData || !canvas.getContext) return;
+    var ctx = canvas.getContext("2d", { alpha: false });
+    if (!ctx) return;
+
+    // The opening is trimmed: the film starts at the 41st extracted frame, so the
+    // building/couple dissolve in the first four seconds is never shown. The files
+    // keep their original numbering (frame-0041 … frame-0420) and FRAME_OFFSET maps
+    // scroll position 0 onto frame-0041. frame-0001 … frame-0040 are simply unused.
+    var FRAME_COUNT = 380;
+    var FRAME_OFFSET = 40;
+    var FRAME_BASE = "frames/";
+    var PIN_VH_DESKTOP = 700, PIN_VH_MOBILE = 500;
+    var EAGER_FRAMES = 30, COARSE_STRIDE = 10, LOOKAHEAD = 8;
+    var HEADLINE_FADE_END = 0.05;
+    var mobileMQ = window.matchMedia("(max-width:767px)");
+
+    // Caption windows as fractions of the pinned scroll (master v2 timeline).
+    var CAPTIONS = [
+      { key: "m1", from: 0.127, to: 0.214 },
+      { key: "m2", from: 0.336, to: 0.437 },
+      { key: "m3", from: 0.503, to: 0.609 },
+      { key: "m4", from: 0.646, to: 0.730 }
+    ];
+    var FINAL_FROM = 0.889;
+
+    // Portrait focal point: where (0..1 across the frame width) the crop
+    // should centre when the viewport is narrower than the 16:9 frame, so
+    // the subject of each moment stays on a phone screen. Linear
+    // interpolation between keyframes (frame index, x). 0.5 = centred.
+    var FOCAL = [
+      [0, 0.5], [35, 0.5], [55, 0.42], [75, 0.34], [95, 0.3], [101, 0.27], [112, 0.3], [121, 0.5],     // key handoff: SUV + couple drift left
+      [128, 0.72], [140, 0.82], [166, 0.86], [188, 0.5],                                              // paperwork desk on the right
+      [196, 0.62], [212, 0.62], [222, 0.55], [232, 0.5],                                              // car on the lift
+      [248, 0.18], [262, 0.12], [274, 0.5], [379, 0.5]                                                // body tech on the left, then centred
+    ];
+    function focalX(i) {
+      for (var k = 1; k < FOCAL.length; k++) {
+        if (i <= FOCAL[k][0]) {
+          var a = FOCAL[k - 1], b = FOCAL[k];
+          var t = b[0] === a[0] ? 0 : (i - a[0]) / (b[0] - a[0]);
+          return a[1] + (b[1] - a[1]) * t;
+        }
+      }
+      return 0.5;
+    }
+
+    var captionEls = {};
+    var caps = section.querySelectorAll(".cine__caption");
+    for (var c = 0; c < caps.length; c++) captionEls[caps[c].getAttribute("data-cap")] = caps[c];
+
+    var isMobile = mobileMQ.matches;
+    var images = [], loading = {}, current = 0, drawn = -1, live = false, active = false, gen = 0;
+    var progress = 0, lastIndex = -1, raf = false;
+
+    function frameSrc(i, mobile) {
+      var n = String(i + 1 + FRAME_OFFSET);
+      while (n.length < 4) n = "0" + n;
+      return FRAME_BASE + (mobile ? "mobile" : "desktop") + "/frame-" + n + ".webp";
+    }
+    function nearestLoaded(i) {
+      if (images[i]) return images[i];
+      for (var d = 1; d < FRAME_COUNT; d++) {
+        if (i - d >= 0 && images[i - d]) return images[i - d];
+        if (i + d < FRAME_COUNT && images[i + d]) return images[i + d];
+      }
+      return null;
+    }
+    function drawFrame(i, force) {
+      if (!active) return;
+      if (!force && drawn === i) return;
+      var img = nearestLoaded(i);
+      if (!img) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var cssW = canvas.clientWidth, cssH = canvas.clientHeight;
+      if (!cssW || !cssH) return;
+      var pxW = Math.round(cssW * dpr), pxH = Math.round(cssH * dpr);
+      if (canvas.width !== pxW || canvas.height !== pxH) { canvas.width = pxW; canvas.height = pxH; }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var scale = Math.max(cssW / img.naturalWidth, cssH / img.naturalHeight);
+      var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+      var fx = (cssW / cssH) < (img.naturalWidth / img.naturalHeight) ? focalX(i) : 0.5;
+      ctx.drawImage(img, (cssW - dw) * fx, (cssH - dh) / 2, dw, dh);
+      drawn = i;
+    }
+
+    function deactivate() {
+      active = false; cineActive = false;
+      section.classList.remove("cine--on");
+      media.classList.remove("is-live");
+      track.style.height = "";
+      open.style.opacity = ""; open.style.transform = ""; open.style.pointerEvents = "";
+      if (scrim) scrim.style.opacity = "";
+      var header = document.querySelector(".header");
+      if (header) header.style.display = "";
+      cinePinned = false;
+    }
+
+    function load(i, myGen) {
+      return new Promise(function (resolve) {
+        if (i < 0 || i >= FRAME_COUNT || images[i] || loading[i]) { resolve(false); return; }
+        loading[i] = true;
+        var img = new Image();
+        img.decoding = "async";
+        img.onload = function () {
+          delete loading[i];
+          if (myGen !== gen) { resolve(false); return; }
+          images[i] = img;
+          if (i === 0 && !live) {
+            live = true;
+            media.classList.add("is-live");
+          }
+          if (i === current || drawn === -1) drawFrame(current, true);
+          resolve(true);
+        };
+        img.onerror = function () { delete loading[i]; resolve(false); };
+        img.src = frameSrc(i, isMobile);
+      });
+    }
+
+    function startLoading() {
+      var myGen = ++gen;
+      images = []; loading = {}; drawn = -1; live = false;
+      media.classList.remove("is-live");
+      load(0, myGen).then(function (ok) {
+        if (myGen !== gen) return;
+        if (!ok) {
+          // one retry, then fall back to the static hero
+          return load(0, myGen).then(function (ok2) {
+            if (myGen !== gen) return;
+            if (!ok2) { deactivate(); return; }
+            return continueLoading(myGen);
+          });
+        }
+        return continueLoading(myGen);
+      });
+    }
+    function continueLoading(myGen) {
+      var eager = [];
+      for (var i = 1; i < Math.min(EAGER_FRAMES, FRAME_COUNT); i++) eager.push(load(i, myGen));
+      return Promise.all(eager).then(function () {
+        if (myGen !== gen) return;
+        var coarse = [];
+        for (var i = EAGER_FRAMES; i < FRAME_COUNT; i += COARSE_STRIDE) coarse.push(load(i, myGen));
+        return Promise.all(coarse);
+      }).then(function () {
+        if (myGen !== gen) return;
+        var queue = [];
+        for (var i = EAGER_FRAMES; i < FRAME_COUNT; i++) if (!images[i]) queue.push(i);
+        function next() {
+          if (myGen !== gen || !queue.length) return;
+          var cur = current;
+          queue.sort(function (a, b) { return Math.abs(a - cur) - Math.abs(b - cur); });
+          return Promise.all(queue.splice(0, 6).map(function (i) { return load(i, myGen); })).then(next);
+        }
+        return next();
+      });
+    }
+
+    function setTrackHeight() {
+      track.style.height = (isMobile ? PIN_VH_MOBILE : PIN_VH_DESKTOP) + "vh";
+    }
+
+    function setInert(el, off) {
+      if ("inert" in el) el.inert = !!off;
+    }
+    function fadeFor(p, from, to) {
+      var fade = Math.min(0.04, (to - from) / 3), o = 0;
+      if (p >= from && p <= to) {
+        if (p < from + fade) o = (p - from) / fade;
+        else if (p > to - fade) o = (to - p) / fade;
+        else o = 1;
+      }
+      return Math.max(0, Math.min(1, o));
+    }
+
+    var header = document.querySelector(".header");
+    function update() {
+      raf = false;
+      if (!active) return;
+      // un-hide the header before measuring so its height can't feed back into the track position
+      if (header && header.style.display === "none") header.style.display = "";
+      var rect = track.getBoundingClientRect();
+      var pinned = rect.top <= 1 && rect.bottom >= window.innerHeight - 1;
+      if (header) header.style.display = pinned ? "none" : "";
+      cinePinned = pinned;
+
+      var total = track.offsetHeight - window.innerHeight;
+      var p = total > 0 ? (-rect.top) / total : 0;
+      p = Math.min(1, Math.max(0, p));
+      progress = p;
+
+      var index = Math.round(p * (FRAME_COUNT - 1));
+      if (index !== current) {
+        current = index;
+        for (var k = 1; k <= LOOKAHEAD; k++) { load(index + k, gen); load(index - k, gen); }
+        drawFrame(index);
+      }
+
+      var h = Math.max(0, 1 - p / HEADLINE_FADE_END);
+      open.style.opacity = h;
+      open.style.transform = "translateY(" + (-30 * (1 - h)).toFixed(1) + "px)";
+      open.style.pointerEvents = h > 0.05 ? "" : "none";
+      open.setAttribute("aria-hidden", h === 0 ? "true" : "false");
+      setInert(open, h === 0);
+      if (scrim) scrim.style.opacity = h;
+      if (vignette) vignette.style.opacity = 1 - h;
+      if (logo) logo.style.opacity = (pinned && h < 0.5) ? 1 : 0;
+
+      for (var i = 0; i < CAPTIONS.length; i++) {
+        var cap = CAPTIONS[i], el = captionEls[cap.key];
+        if (!el) continue;
+        var o = fadeFor(p, cap.from, cap.to);
+        el.style.opacity = o;
+        el.style.transform = "translateY(" + ((1 - o) * 18).toFixed(1) + "px)";
+        el.style.pointerEvents = o > 0.6 ? "auto" : "none";
+        el.setAttribute("aria-hidden", o === 0 ? "true" : "false");
+        setInert(el, o < 0.6);
+      }
+      if (finalEl) {
+        var fo = 0;
+        if (p >= FINAL_FROM) fo = Math.min(1, (p - FINAL_FROM) / 0.04);
+        finalEl.style.opacity = fo;
+        finalEl.style.transform = "translateY(" + ((1 - fo) * 18).toFixed(1) + "px)";
+        finalEl.style.pointerEvents = fo > 0.6 ? "auto" : "none";
+        finalEl.setAttribute("aria-hidden", fo === 0 ? "true" : "false");
+        setInert(finalEl, fo < 0.6);
+      }
+    }
+    function schedule() {
+      if (raf) return;
+      raf = true;
+      requestAnimationFrame(update);
+    }
+
+    // ---- activate ----
+    active = true; cineActive = true;
+    section.classList.add("cine--on");
+    setTrackHeight();
+    startLoading();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", function () {
+      var m = mobileMQ.matches;
+      if (m !== isMobile) { isMobile = m; setTrackHeight(); startLoading(); }
+      drawFrame(current, true);
+      schedule();
+    });
+    update();
+
+    /* ---- coverage panels ---- */
+    var openPanelEl = null, panelLastFocus = null, panelScrollY = 0;
+    function panelFocusables() {
+      return openPanelEl.querySelectorAll('button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])');
+    }
+    function preventTouch(e) {
+      if (!openPanelEl) return;
+      var m = document.getElementById("requestModal");
+      if (m && !m.hidden) return;
+      var sheet = openPanelEl.querySelector(".cpanel__sheet");
+      if (!sheet.contains(e.target)) e.preventDefault();
+    }
+    function openPanel(key, trigger) {
+      var el = document.getElementById("cpanel-" + key);
+      if (!el) return;
+      panelLastFocus = trigger || document.activeElement;
+      panelScrollY = window.pageYOffset || document.documentElement.scrollTop;
+      openPanelEl = el;
+      el.hidden = false;
+      document.body.classList.add("panel-open");
+      document.addEventListener("touchmove", preventTouch, { passive: false });
+      var close = el.querySelector(".cpanel__close");
+      if (close) close.focus({ preventScroll: true });
+    }
+    function closePanel() {
+      if (!openPanelEl) return;
+      var el = openPanelEl;
+      openPanelEl = null;
+      el.hidden = true;
+      document.body.classList.remove("panel-open");
+      document.removeEventListener("touchmove", preventTouch);
+      // resume on the exact frame the visitor left
+      window.scrollTo(0, panelScrollY);
+      if (panelLastFocus && panelLastFocus.focus) panelLastFocus.focus({ preventScroll: true });
+      schedule();
+    }
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest ? e.target.closest("[data-panel]") : null;
+      if (t) { e.preventDefault(); openPanel(t.getAttribute("data-panel"), t); return; }
+      var x = e.target.closest ? e.target.closest("[data-close-panel]") : null;
+      if (x && openPanelEl && openPanelEl.contains(x)) { e.preventDefault(); closePanel(); }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!openPanelEl) return;
+      var m = document.getElementById("requestModal");
+      if (m && !m.hidden) return;                // the quote modal is on top: let it handle keys
+      if (e.key === "Escape") { closePanel(); return; }
+      if (e.key !== "Tab") return;
+      var f = panelFocusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }, true);   // capture phase: runs before the quote modal's own handler, so one ESC closes only the top layer
+  })();
 
   /* ---------- 7. MISC ---------- */
   var y = document.getElementById("year");
