@@ -113,7 +113,12 @@ export const Route = createFileRoute("/community")({
   component: CommunityPage,
 });
 
-const SERVICE_LINKS = [
+type ServiceLink =
+  | { label: string; blurb: string; to: "/services/$category"; params: { category: "personal" | "commercial" } }
+  | { label: string; blurb: string; to: "/bonds" | "/contact" }
+  | { label: string; blurb: string; href: string };
+
+const SERVICE_LINKS: readonly ServiceLink[] = [
   {
     label: "Personal Insurance",
     blurb: "Home, auto, renters, landlord.",
