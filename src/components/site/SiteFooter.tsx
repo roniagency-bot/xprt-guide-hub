@@ -49,6 +49,14 @@ export function SiteFooter() {
             <li><Link to="/services/$category" params={{ category: "commercial" }} className="hover:text-gold">{UI.navCommercial[lang]}</Link></li>
             <li><Link to="/services/$category" params={{ category: "bonds" }} className="hover:text-gold">{UI.navBonds[lang]}</Link></li>
             <li><Link to="/services/$category" params={{ category: "dealership" }} className="hover:text-gold">{UI.footerNvDealership[lang]}</Link></li>
+            <li>
+              <a
+                href={lang === "es" ? "/medicare/index.html?lang=es" : "/medicare/index.html"}
+                className="hover:text-gold"
+              >
+                Medicare
+              </a>
+            </li>
           </ul>
         </div>
 

@@ -11,6 +11,7 @@ type SubItem = { to: string; label: string; description?: string; external?: boo
 
 type NavItem =
   | { kind: "static"; to: string; label: string }
+  | { kind: "plain"; href: string; label: string }
   | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string };
 
 
@@ -60,6 +61,11 @@ function buildNav(lang: Lang): readonly NavItem[] {
         { to: "/services/commercial/commercial-auto", label: UI.subCommAuto[lang] },
         { to: "/services/commercial/business-owners-policy", label: UI.subBOP[lang] },
       ],
+    },
+    {
+      kind: "plain",
+      href: lang === "es" ? "/medicare/index.html?lang=es" : "/medicare/index.html",
+      label: "Medicare",
     },
     { kind: "static", to: lang === "es" ? "/es/faq" : "/faq", label: UI.navKnowledgeBase[lang] },
     { kind: "static", to: lang === "es" ? "/es/about" : "/about", label: UI.navMeetTheXprts[lang] },
@@ -230,6 +236,14 @@ export function SiteHeader() {
           {NAV.map((item) =>
             item.kind === "category" ? (
               <CategoryDropdown key={item.label} item={item} lang={lang} />
+            ) : item.kind === "plain" ? (
+              <a
+                key={item.label}
+                href={item.href}
+                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
+                {item.label}
+              </a>
             ) : (
               <Link
                 key={item.label}
@@ -271,6 +285,15 @@ export function SiteHeader() {
             {NAV.map((item) =>
               item.kind === "category" ? (
                 <MobileCategory key={item.label} item={item} lang={lang} onNavigate={() => setOpen(false)} />
+              ) : item.kind === "plain" ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2.5 text-base text-foreground hover:bg-accent"
+                >
+                  {item.label}
+                </a>
               ) : (
                 <Link
                   key={item.label}

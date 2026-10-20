@@ -113,7 +113,12 @@ export const Route = createFileRoute("/community")({
   component: CommunityPage,
 });
 
-const SERVICE_LINKS = [
+type ServiceLink =
+  | { label: string; blurb: string; to: "/services/$category"; params: { category: "personal" | "commercial" } }
+  | { label: string; blurb: string; to: "/bonds" | "/contact" }
+  | { label: string; blurb: string; href: string };
+
+const SERVICE_LINKS: readonly ServiceLink[] = [
   {
     label: "Personal Insurance",
     blurb: "Home, auto, renters, landlord.",
@@ -128,7 +133,7 @@ const SERVICE_LINKS = [
   },
   { label: "Surety Bonds", blurb: "Dealer, license & permit, notary, title.", to: "/bonds" as const },
   { label: "Life Insurance", blurb: "Protect the people who count on you.", to: "/contact" as const },
-  { label: "Health / Medicare", blurb: "Coverage guidance, no pressure.", to: "/contact" as const },
+  { label: "Health / Medicare", blurb: "Coverage guidance, no pressure.", href: "/medicare/index.html" },
 ];
 
 function CommunityPage() {
@@ -565,21 +570,36 @@ function CommunityPage() {
         <h3 className="mt-12 text-xl">What we can help you with</h3>
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICE_LINKS.map((s, i) => (
-            <Reveal as="li" key={s.label} delay={i % 3 === 0 ? 0 : i % 3 === 1 ? 75 : 150}>
-              <Link
-                to={s.to}
-                params={"params" in s ? (s.params as never) : undefined}
-                className="flex min-h-24 items-start justify-between gap-4 rounded-2xl border border-border bg-background p-5 transition-colors hover:border-gold"
-              >
+          {SERVICE_LINKS.map((s, i) => {
+            const cardCls =
+              "flex min-h-24 items-start justify-between gap-4 rounded-2xl border border-border bg-background p-5 transition-colors hover:border-gold";
+            const cardBody = (
+              <>
                 <span>
                   <span className="block text-base font-medium text-foreground">{s.label}</span>
                   <span className="mt-1 block text-sm text-muted-foreground">{s.blurb}</span>
                 </span>
                 <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-gold" aria-hidden />
-              </Link>
-            </Reveal>
-          ))}
+              </>
+            );
+            return (
+              <Reveal as="li" key={s.label} delay={i % 3 === 0 ? 0 : i % 3 === 1 ? 75 : 150}>
+                {"href" in s ? (
+                  <a href={s.href} className={cardCls}>
+                    {cardBody}
+                  </a>
+                ) : (
+                  <Link
+                    to={s.to}
+                    params={"params" in s ? (s.params as never) : undefined}
+                    className={cardCls}
+                  >
+                    {cardBody}
+                  </Link>
+                )}
+              </Reveal>
+            );
+          })}
         </ul>
         <p className="mt-6 text-sm text-muted-foreground">
           Hablamos español —{" "}
