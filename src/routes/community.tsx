@@ -128,7 +128,7 @@ const SERVICE_LINKS = [
   },
   { label: "Surety Bonds", blurb: "Dealer, license & permit, notary, title.", to: "/bonds" as const },
   { label: "Life Insurance", blurb: "Protect the people who count on you.", to: "/contact" as const },
-  { label: "Health / Medicare", blurb: "Coverage guidance, no pressure.", to: "/contact" as const },
+  { label: "Health / Medicare", blurb: "Coverage guidance, no pressure.", href: "/medicare/index.html" },
 ];
 
 function CommunityPage() {
