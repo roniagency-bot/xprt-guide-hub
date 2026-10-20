@@ -17,6 +17,8 @@ import { Route as BookRouteImport } from './routes/book'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as GarageRouteImport } from './routes/garage'
+import { Route as MedicareRouteImport } from './routes/medicare'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as BondsAutoDealerBondRouteImport } from './routes/bonds.auto-dealer-bond'
@@ -101,6 +103,16 @@ const ContactRoute = ContactRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GarageRoute = GarageRouteImport.update({
+  id: '/garage',
+  path: '/garage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MedicareRoute = MedicareRouteImport.update({
+  id: '/medicare',
+  path: '/medicare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -346,6 +358,8 @@ export interface FileRoutesByFullPath {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
+  '/garage': typeof GarageRoute
+  '/medicare': typeof MedicareRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/bonds/auto-dealer-bond': typeof BondsAutoDealerBondRoute
@@ -400,6 +414,8 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/garage': typeof GarageRoute
+  '/medicare': typeof MedicareRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/bonds/auto-dealer-bond': typeof BondsAutoDealerBondRoute
@@ -456,6 +472,8 @@ export interface FileRoutesById {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
+  '/garage': typeof GarageRoute
+  '/medicare': typeof MedicareRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/bonds/auto-dealer-bond': typeof BondsAutoDealerBondRoute
@@ -513,6 +531,8 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/faq'
+    | '/garage'
+    | '/medicare'
     | '/sitemap.xml'
     | '/unsubscribe'
     | '/bonds/auto-dealer-bond'
@@ -567,6 +587,8 @@ export interface FileRouteTypes {
     | '/book'
     | '/community'
     | '/contact'
+    | '/garage'
+    | '/medicare'
     | '/sitemap.xml'
     | '/unsubscribe'
     | '/bonds/auto-dealer-bond'
@@ -622,6 +644,8 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/faq'
+    | '/garage'
+    | '/medicare'
     | '/sitemap.xml'
     | '/unsubscribe'
     | '/bonds/auto-dealer-bond'
@@ -678,6 +702,8 @@ export interface RootRouteChildren {
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
+  GarageRoute: typeof GarageRoute
+  MedicareRoute: typeof MedicareRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   BusinessInsuranceBondsRoute: typeof BusinessInsuranceBondsRoute
@@ -771,6 +797,20 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/garage': {
+      id: '/garage'
+      path: '/garage'
+      fullPath: '/garage'
+      preLoaderRoute: typeof GarageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/medicare': {
+      id: '/medicare'
+      path: '/medicare'
+      fullPath: '/medicare'
+      preLoaderRoute: typeof MedicareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -1145,6 +1185,8 @@ const rootRouteChildren: RootRouteChildren = {
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,
+  GarageRoute: GarageRoute,
+  MedicareRoute: MedicareRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   BusinessInsuranceBondsRoute: BusinessInsuranceBondsRoute,
