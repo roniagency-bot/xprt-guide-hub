@@ -12,7 +12,8 @@ type SubItem = { to: string; label: string; description?: string; external?: boo
 type NavItem =
   | { kind: "static"; to: string; label: string }
   | { kind: "plain"; href: string; label: string }
-  | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string };
+  | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string }
+  | { kind: "more"; label: string; items: SubItem[] };
 
 
 function buildNav(lang: Lang): readonly NavItem[] {
@@ -72,8 +73,14 @@ function buildNav(lang: Lang): readonly NavItem[] {
       href: lang === "es" ? "/aca/index.html?lang=es" : "/aca/index.html",
       label: lang === "es" ? "Salud ACA" : "ACA Health",
     },
-    { kind: "static", to: lang === "es" ? "/es/faq" : "/faq", label: UI.navKnowledgeBase[lang] },
-    { kind: "static", to: lang === "es" ? "/es/about" : "/about", label: UI.navMeetTheXprts[lang] },
+    {
+      kind: "more",
+      label: lang === "es" ? "Más" : "More",
+      items: [
+        { to: lang === "es" ? "/es/faq" : "/faq", label: UI.navKnowledgeBase[lang] },
+        { to: lang === "es" ? "/es/about" : "/about", label: UI.navMeetTheXprts[lang] },
+      ],
+    },
   ];
 }
 
@@ -226,7 +233,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="container-prose flex h-24 items-center justify-between gap-8 md:h-28">
+      <div className="mx-auto flex h-24 w-full max-w-[1400px] items-center justify-between gap-6 px-5 md:h-28">
         <Link to={lang === "es" ? "/es" : "/"} className="-my-2 flex shrink-0 items-center" aria-label="XPRT Insurance — A Roni Rivers Agency">
           <img
             src={xprtLogo}
@@ -237,7 +244,7 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
           {NAV.map((item) =>
             item.kind === "category" ? (
               <CategoryDropdown key={item.label} item={item} lang={lang} />
@@ -262,7 +269,7 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <LanguageToggle current={lang} />
           <GhlFormButton form="contact" variant="ghost" size="sm">
             {UI.btnContactUs[lang]}
@@ -275,7 +282,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center rounded-md border border-border lg:hidden"
+          className="grid h-10 w-10 place-items-center rounded-md border border-border xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -285,7 +292,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
+        <div className="border-t border-border bg-background xl:hidden">
           <nav className="container-prose flex flex-col gap-1 py-4" aria-label="Mobile">
             {NAV.map((item) =>
               item.kind === "category" ? (
