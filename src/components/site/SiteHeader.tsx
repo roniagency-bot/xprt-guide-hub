@@ -12,7 +12,8 @@ type SubItem = { to: string; label: string; description?: string; external?: boo
 type NavItem =
   | { kind: "static"; to: string; label: string }
   | { kind: "plain"; href: string; label: string }
-  | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string };
+  | { kind: "category"; category: string; label: string; subitems: SubItem[]; hubTo?: string }
+  | { kind: "more"; label: string; items: SubItem[] };
 
 
 function buildNav(lang: Lang): readonly NavItem[] {
@@ -72,8 +73,14 @@ function buildNav(lang: Lang): readonly NavItem[] {
       href: lang === "es" ? "/aca/index.html?lang=es" : "/aca/index.html",
       label: lang === "es" ? "Salud ACA" : "ACA Health",
     },
-    { kind: "static", to: lang === "es" ? "/es/faq" : "/faq", label: UI.navKnowledgeBase[lang] },
-    { kind: "static", to: lang === "es" ? "/es/about" : "/about", label: UI.navMeetTheXprts[lang] },
+    {
+      kind: "more",
+      label: lang === "es" ? "Más" : "More",
+      items: [
+        { to: lang === "es" ? "/es/faq" : "/faq", label: UI.navKnowledgeBase[lang] },
+        { to: lang === "es" ? "/es/about" : "/about", label: UI.navMeetTheXprts[lang] },
+      ],
+    },
   ];
 }
 
@@ -123,7 +130,7 @@ function CategoryDropdown({ item, lang }: { item: Extract<NavItem, { kind: "cate
       {hubIsCustom ? (
         <a
           href={item.hubTo!}
-          className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          className="inline-flex shrink-0 items-center gap-1 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         >
           {item.label}
           <ChevronDown className="h-3.5 w-3.5" aria-hidden />
@@ -132,7 +139,7 @@ function CategoryDropdown({ item, lang }: { item: Extract<NavItem, { kind: "cate
         <Link
           to="/services/$category"
           params={{ category: item.category }}
-          className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          className="inline-flex shrink-0 items-center gap-1 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           activeProps={{ className: "text-foreground bg-accent" }}
         >
           {item.label}
@@ -218,6 +225,75 @@ function MobileCategory({
 }
 
 
+function MoreDropdown({ item }: { item: Extract<NavItem, { kind: "more" }> }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex shrink-0 items-center gap-1 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+      >
+        {item.label}
+        <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full z-50 w-64 pt-2">
+          <div className="overflow-hidden rounded-xl border border-border bg-popover shadow-lift">
+            <ul className="py-2">
+              {item.items.map((s) => (
+                <li key={s.to}>
+                  <SubItemLink s={s} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MoreGroup({
+  item,
+  onNavigate,
+}: {
+  item: Extract<NavItem, { kind: "more" }>;
+  onNavigate: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="py-1">
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        aria-expanded={expanded}
+        className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-base font-medium text-foreground hover:bg-accent"
+      >
+        <span>{item.label}</span>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+          aria-hidden
+        />
+      </button>
+      {expanded && (
+        <ul className="ml-3 border-l border-border pl-3">
+          {item.items.map((s) => (
+            <li key={s.to}>
+              <SubItemLink s={s} onNavigate={onNavigate} mobile />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const lang = useLang();
@@ -226,7 +302,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="container-prose flex h-24 items-center justify-between gap-8 md:h-28">
+      <div className="mx-auto flex h-24 w-full max-w-[1400px] items-center justify-between gap-4 px-5 md:h-28">
         <Link to={lang === "es" ? "/es" : "/"} className="-my-2 flex shrink-0 items-center" aria-label="XPRT Insurance — A Roni Rivers Agency">
           <img
             src={xprtLogo}
@@ -237,7 +313,7 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
           {NAV.map((item) =>
             item.kind === "category" ? (
               <CategoryDropdown key={item.label} item={item} lang={lang} />
@@ -245,15 +321,17 @@ export function SiteHeader() {
               <a
                 key={item.label}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="shrink-0 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 {item.label}
               </a>
+            ) : item.kind === "more" ? (
+              <MoreDropdown key={item.label} item={item} />
             ) : (
               <Link
                 key={item.label}
                 to={item.to as any}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="shrink-0 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 activeProps={{ className: "text-foreground bg-accent" }}
               >
                 {item.label}
@@ -262,7 +340,7 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <LanguageToggle current={lang} />
           <GhlFormButton form="contact" variant="ghost" size="sm">
             {UI.btnContactUs[lang]}
@@ -275,7 +353,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center rounded-md border border-border lg:hidden"
+          className="grid h-10 w-10 place-items-center rounded-md border border-border xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -285,7 +363,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
+        <div className="border-t border-border bg-background xl:hidden">
           <nav className="container-prose flex flex-col gap-1 py-4" aria-label="Mobile">
             {NAV.map((item) =>
               item.kind === "category" ? (
@@ -299,6 +377,8 @@ export function SiteHeader() {
                 >
                   {item.label}
                 </a>
+              ) : item.kind === "more" ? (
+                <MoreGroup key={item.label} item={item} onNavigate={() => setOpen(false)} />
               ) : (
                 <Link
                   key={item.label}
