@@ -67,6 +67,11 @@ function buildNav(lang: Lang): readonly NavItem[] {
       href: lang === "es" ? "/medicare/index.html?lang=es" : "/medicare/index.html",
       label: "Medicare",
     },
+    {
+      kind: "plain",
+      href: lang === "es" ? "/aca/index.html?lang=es" : "/aca/index.html",
+      label: lang === "es" ? "Salud ACA" : "ACA Health",
+    },
     { kind: "static", to: lang === "es" ? "/es/faq" : "/faq", label: UI.navKnowledgeBase[lang] },
     { kind: "static", to: lang === "es" ? "/es/about" : "/about", label: UI.navMeetTheXprts[lang] },
   ];

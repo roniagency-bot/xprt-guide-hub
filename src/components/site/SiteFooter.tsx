@@ -57,6 +57,14 @@ export function SiteFooter() {
                 Medicare
               </a>
             </li>
+            <li>
+              <a
+                href={lang === "es" ? "/aca/index.html?lang=es" : "/aca/index.html"}
+                className="hover:text-gold"
+              >
+                {lang === "es" ? "Salud ACA" : "ACA Health"}
+              </a>
+            </li>
           </ul>
         </div>
 
