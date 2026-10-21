@@ -225,6 +225,75 @@ function MobileCategory({
 }
 
 
+function MoreDropdown({ item }: { item: Extract<NavItem, { kind: "more" }> }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+      >
+        {item.label}
+        <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full z-50 w-64 pt-2">
+          <div className="overflow-hidden rounded-xl border border-border bg-popover shadow-lift">
+            <ul className="py-2">
+              {item.items.map((s) => (
+                <li key={s.to}>
+                  <SubItemLink s={s} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MoreGroup({
+  item,
+  onNavigate,
+}: {
+  item: Extract<NavItem, { kind: "more" }>;
+  onNavigate: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="py-1">
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        aria-expanded={expanded}
+        className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-base font-medium text-foreground hover:bg-accent"
+      >
+        <span>{item.label}</span>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+          aria-hidden
+        />
+      </button>
+      {expanded && (
+        <ul className="ml-3 border-l border-border pl-3">
+          {item.items.map((s) => (
+            <li key={s.to}>
+              <SubItemLink s={s} onNavigate={onNavigate} mobile />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const lang = useLang();
@@ -256,6 +325,8 @@ export function SiteHeader() {
               >
                 {item.label}
               </a>
+            ) : item.kind === "more" ? (
+              <MoreDropdown key={item.label} item={item} />
             ) : (
               <Link
                 key={item.label}
@@ -306,6 +377,8 @@ export function SiteHeader() {
                 >
                   {item.label}
                 </a>
+              ) : item.kind === "more" ? (
+                <MoreGroup key={item.label} item={item} onNavigate={() => setOpen(false)} />
               ) : (
                 <Link
                   key={item.label}
