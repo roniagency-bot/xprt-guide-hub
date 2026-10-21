@@ -130,7 +130,7 @@ function CategoryDropdown({ item, lang }: { item: Extract<NavItem, { kind: "cate
       {hubIsCustom ? (
         <a
           href={item.hubTo!}
-          className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          className="inline-flex shrink-0 items-center gap-1 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         >
           {item.label}
           <ChevronDown className="h-3.5 w-3.5" aria-hidden />
@@ -139,7 +139,7 @@ function CategoryDropdown({ item, lang }: { item: Extract<NavItem, { kind: "cate
         <Link
           to="/services/$category"
           params={{ category: item.category }}
-          className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          className="inline-flex shrink-0 items-center gap-1 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           activeProps={{ className: "text-foreground bg-accent" }}
         >
           {item.label}
@@ -237,7 +237,7 @@ function MoreDropdown({ item }: { item: Extract<NavItem, { kind: "more" }> }) {
         type="button"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        className="inline-flex shrink-0 items-center gap-1 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
       >
         {item.label}
         <ChevronDown className="h-3.5 w-3.5" aria-hidden />
@@ -302,7 +302,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-24 w-full max-w-[1400px] items-center justify-between gap-6 px-5 md:h-28">
+      <div className="mx-auto flex h-24 w-full max-w-[1400px] items-center justify-between gap-4 px-5 md:h-28">
         <Link to={lang === "es" ? "/es" : "/"} className="-my-2 flex shrink-0 items-center" aria-label="XPRT Insurance — A Roni Rivers Agency">
           <img
             src={xprtLogo}
@@ -321,7 +321,7 @@ export function SiteHeader() {
               <a
                 key={item.label}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="shrink-0 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 {item.label}
               </a>
@@ -331,7 +331,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 to={item.to as any}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="shrink-0 rounded-md px-2.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 activeProps={{ className: "text-foreground bg-accent" }}
               >
                 {item.label}
